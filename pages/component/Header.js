@@ -7,11 +7,11 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Col, Row } from "react-bootstrap";
 import { Mail, Phone } from "react-feather";
-import { env } from '../../util/constants/common';
 import { useRouter } from 'next/router';
+import { env } from '../../util/constants/common';
+import Image from 'next/image';
 
-
-export default function Header({homeData}) {
+const Header = ({homeData}) => {
   const router = useRouter();
   const casestudy = Array.isArray(homeData?.projects) ? homeData.projects?.[0] : [];
   return (
@@ -25,13 +25,13 @@ export default function Header({homeData}) {
             <Col xs={12} md={6} className="d-none d-md-block">
               <ul className="d-flex justify-content-md-end gap-4 m-0 p-0">
                 <li>
-                  <a href="mailto:beas@beas.co.in" className="text-white d-flex align-items-center gap-2 text-decoration-none">
-                    <Mail size={16} /> beas@beas.co.in
+                  <a href={`mailto:${homeData.contactus.email}`} className="text-white d-flex align-items-center gap-2 text-decoration-none">
+                    <Mail size={16} /> {homeData.contactus.email}
                   </a>
                 </li>
                 <li>
-                  <a href="tel:+913323211380" className="text-white d-flex align-items-center gap-2 text-decoration-none">
-                    <Phone size={16} /> +91-33-2321-1380
+                  <a href={`tel:${homeData.contactus.mobile}`} className="text-white d-flex align-items-center gap-2 text-decoration-none">
+                    <Phone size={16} /> {homeData.contactus.mobile}
                   </a>
                 </li>
               </ul>
@@ -43,7 +43,15 @@ export default function Header({homeData}) {
       <Navbar expand="lg" className="bg-white p-4">
         <Container>
           <Navbar.Brand href="#">
-            <img src="/assets/images/logo.png" alt="logo" className='img-fluid' />
+            <Image
+                src={`${env.BACKEND_BASE_URL}${homeData?.logo?.image}`}
+                alt="Logo"
+                width={300}
+                height={50}
+                priority
+                fetchPriority="high"
+                className="img-fluid"
+              />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
@@ -99,11 +107,12 @@ export default function Header({homeData}) {
                 })}
             </Nav>
             <Form className="d-flex">
-              <Button variant="outline-primary">Request A Quote</Button>
+              <Button variant="outline-primary" onClick={() => router.push('/contact')}>Request A Quote</Button>
             </Form>
           </Navbar.Collapse>
         </Container>
       </Navbar>
     </>
   );
-};
+}
+export default React.memo(Header);

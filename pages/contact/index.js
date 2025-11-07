@@ -217,7 +217,7 @@ const ContactUs = ({contactus}) => {
                     <span><PhoneCall /></span>
                     <div>
                       <p className="contact_popup_text__6IJDd"><b>Sales Inquiries</b> 
-                      <a class="contact_popup_link__IFKEk" href="tel:+91-33-2321-1380">+91-33-2321-1380</a>
+                      <a className="contact_popup_link__IFKEk" href="tel:+91-33-2321-1380">+91-33-2321-1380</a>
                       </p>
                     </div>
                   </div>
@@ -228,7 +228,7 @@ const ContactUs = ({contactus}) => {
                       <span><Mail /></span>
                       <div>
                         <p className="contact_popup_text__6IJDd"><b>Customer Support</b> 
-                        <a class="contact_popup_link__IFKEk" href="mailto:beas@beas.co.in">beas@beas.co.in</a>
+                        <a className="contact_popup_link__IFKEk" href="mailto:beas@beas.co.in">beas@beas.co.in</a>
                         </p>
                       </div>
                     </div>

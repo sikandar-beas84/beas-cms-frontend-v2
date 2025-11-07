@@ -5,7 +5,6 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import Image from "next/image";
 import { Col, Row } from "react-bootstrap";
 import { Mail, Phone } from "react-feather";
 import { env } from '../../util/constants/common';

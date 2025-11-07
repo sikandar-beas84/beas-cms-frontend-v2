@@ -64,7 +64,7 @@ export default function Header() {
                 <NavDropdown.Item href="#action3">Banking , Insurance and Finance</NavDropdown.Item>
 
               </NavDropdown>
-              <Nav.Link href="#">Skills</Nav.Link>
+              <Nav.Link href="#">Skill</Nav.Link>
               <Nav.Link href="#">Case Studies</Nav.Link>
               <Nav.Link href="#">Career</Nav.Link>
               <Nav.Link href="#">About Us</Nav.Link>

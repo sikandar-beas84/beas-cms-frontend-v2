@@ -38,8 +38,7 @@ const Skills = ({skills}) => {
                         {/* <Image width={450} height={150} src={`${env.BACKEND_BASE_URL}assets/img/menu-content/${skills?.menu_contents?.image}`} className="img-fluid" alt="image" />
                          */}
                         <div className="aboutTxt">
-                            <p className="sub-title">Specality Of Our Company</p>
-                            <h1>{skills?.menu_contents?.title}</h1>
+                            <h1 className='inner-page-title'>{skills?.menu_contents?.title}</h1>
                             <div dangerouslySetInnerHTML={{ __html: skills?.description }} />
                         </div>
                         <div className='clear'></div>

@@ -1,143 +1,82 @@
-"use client";
-import React from 'react'
+import React, { JSX } from "react";
+import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import { Col, Row, Dropdown } from "react-bootstrap";
+import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import Link from 'next/link';
-import { Phone } from 'react-feather';
-import { PhoneCall } from 'react-feather';
-import { useRouter } from 'next/router';
-import { env } from '../../util/constants/common';
-import Image from 'next/image';
-
-const Header = ({homeData}) => {
-  const router = useRouter();
-  const casestudy = Array.isArray(homeData?.projects) ? homeData.projects?.[0] : [];
+import Image from "next/image";
+import { Col, Row } from "react-bootstrap";
+import { Mail, Phone } from "react-feather";
+export default function Header() {
   return (
     <>
-    <div className="nav-white-bg fixed-top shadow-sm">
-          <Container>
-            <Row>
-              <Col>
-                <Navbar collapseOnSelect expand="lg">
+      <section className="blue-bg p-10">
+        <Container>
+          <Row className="align-items-center">
+            <Col xs={12} md={6}>
+              <p className="main-focus-text mb-0">AI-Driven Development • Faster Execution • Smarter Results</p>
+            </Col>
+            <Col xs={12} md={6} className="d-none d-md-block">
+              <ul className="d-flex justify-content-md-end gap-4 m-0 p-0">
+                <li>
+                  <a href="mailto:beas@beas.co.in" className="text-white d-flex align-items-center gap-2 text-decoration-none">
+                    <Mail size={16} /> beas@beas.co.in
+                  </a>
+                </li>
+                <li>
+                  <a href="tel:+913323211380" className="text-white d-flex align-items-center gap-2 text-decoration-none">
+                    <Phone size={16} /> +91-33-2321-1380
+                  </a>
+                </li>
+              </ul>
+            </Col>
+          </Row>
+        </Container>
+      </section>
 
-                  <Navbar.Brand href={env.SITE_URL}>
-                  <Image
-                    src={`${env.BACKEND_BASE_URL}${homeData?.logo?.image}`}   // use optimized format (webp/avif)
-                    alt="Hero Banner"
-                    width={300}
-                    height={50}
-                    priority      // ✅ ensures this image is not lazy-loaded
-                    fetchPriority="high" // ✅ tells browser it’s critical
-                    className="img-fluid" // you can keep bootstrap class
-                  />
-                    </Navbar.Brand>
-                  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                  <Navbar.Collapse id="responsive-navbar-nav">
-                  <Nav className="mx-auto">
-                    {homeData?.menus
-                      ?.sort((a, b) => a.order - b.order) // sort menus by order field
-                      ?.map((item, index) => {
-                        // Special dropdown for Industries
-                        if (item.slug === "industries") {
-                          return (
-                            <NavDropdown title="Industries" id="industries-dropdown" key={index}>
-                              {homeData?.industries?.children?.map((child, i) => (
-                                <NavDropdown.Item href={`/industries/${child.slug}`} key={i}>
-                                  {child.name}
-                                </NavDropdown.Item>
-                              ))}
-                            </NavDropdown>
-                          );
-                        }
+      <Navbar expand="lg" className="bg-white p-4">
+        <Container>
+          <Navbar.Brand href="#">
+            <img src="/assets/images/logo.png" alt="logo" className='img-fluid' />
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Navbar.Collapse id="navbarScroll">
+            <Nav
+              className="mx-auto my-2 my-lg-0"
+              style={{ maxHeight: '100px' }}
+              navbarScroll
+            >
+              <Nav.Link href="#">Home</Nav.Link>
+              <NavDropdown title="Services" id="navbarScrollingDropdown">
+                <NavDropdown.Item href="#action3">Application Development</NavDropdown.Item>
+                <NavDropdown.Item href="#action3">Analytics and AI</NavDropdown.Item>
+                <NavDropdown.Item href="#action3">Application Maintenance</NavDropdown.Item>
+                <NavDropdown.Item href="#action3">Application Solutioning</NavDropdown.Item>
+                <NavDropdown.Item href="#action3">Cloud and DevOps Services</NavDropdown.Item>
+                <NavDropdown.Item href="#action3">Cybersecurity Services</NavDropdown.Item>
+                <NavDropdown.Item href="#action3">Digital transformation</NavDropdown.Item>
+                <NavDropdown.Item href="#action3">Professional Services Final</NavDropdown.Item>
+                <NavDropdown.Item href="#action3">UI/UX</NavDropdown.Item>
+              </NavDropdown>
+              <NavDropdown title="Industries" id="navbarScrollingDropdown">
+                <NavDropdown.Item href="#action3">Media and Entertainment</NavDropdown.Item>
+                <NavDropdown.Item href="#action3">Banking , Insurance and Finance</NavDropdown.Item>
 
-                        // Special dropdown for Services
-                        if (item.slug === "services") {
-                          return (
-                            <NavDropdown title="Services" id="services-dropdown" key={index}>
-                              {homeData?.services?.children?.map((child, i) => (
-                                <NavDropdown.Item href={`/services/${child.slug}`} key={i}>
-                                  {child.name}
-                                </NavDropdown.Item>
-                              ))}
-                            </NavDropdown>
-                          );
-                        }
+              </NavDropdown>
+              <Nav.Link href="#">Skills</Nav.Link>
+              <Nav.Link href="#">Case Studies</Nav.Link>
+              <Nav.Link href="#">Career</Nav.Link>
+              <Nav.Link href="#">About Us</Nav.Link>
+              <Nav.Link href="#">Contact Us</Nav.Link>
 
-                        // Special case for Case Study
-                        if (item.slug === "casestudy") {
-                          return (
-                            <Nav.Link href={`/${item.slug}/${casestudy.slug}`} key={index}>
-                              {item.name}
-                            </Nav.Link>
-                          );
-                        }
-
-                        // Default menu item
-                        return (
-                          <Nav.Link href={`/${item.slug}`} key={index}>
-                            {item.name}
-                          </Nav.Link>
-                        );
-                      })}
-                  </Nav>
-
-
-                    {/* <Nav className="mx-auto">
-                      { homeData?.menus?.slice(0, 2).map((item, index)=>(
-                        <Nav.Link href={`/${item.slug}`} key={index}>{item.name}</Nav.Link>
-                      ))}
-
-                      <NavDropdown title="Industries" id="collapsible-nav-dropdown">
-                        { homeData?.industries?.children?.map((item, index)=>(
-                          <NavDropdown.Item href={`/industries/${item.slug}`} key={index}> {item.name}</NavDropdown.Item>
-                        ))}
-                      </NavDropdown>
-
-                      <NavDropdown title="Services" id="collapsible-nav-dropdown">
-                        { homeData?.services?.children?.map((item, index)=>(
-                          <NavDropdown.Item href={`/service/${item.slug}`} key={index}> {item.name}</NavDropdown.Item>
-                        ))}
-                      </NavDropdown>
-                    
-                      {homeData?.menus?.slice(4, 9).map((item, index) => {
-                        if (item.slug === 'casestudy') {
-                          return (
-                            <Nav.Link href={`/${item.slug}/${casestudy.slug}`} key={index}>
-                            {item.name}
-                            </Nav.Link>
-                          );
-                        } else {
-                          return (
-                            <Nav.Link href={`/${item.slug}`} key={index}>
-                              {item.name}
-                            </Nav.Link>
-                          );
-                        }
-                      })}
-                    </Nav> */}
-                    
-                    <Nav>
-                    <Nav.Link href="#"><div className='d-flex top-phone-txt'><PhoneCall /><div>For any query <strong>{homeData?.contactus?.mobile}</strong></div></div></Nav.Link>
-                      {/* <Nav.Link href="#" className="gradient-border">
-                       Get Quote
-                      </Nav.Link> */}
-                      {/* <Nav.Link href="#" className="blue-btn2">
-                       Get Quote
-                      </Nav.Link> */}
-                    </Nav>
-                  </Navbar.Collapse>
-
-                </Navbar>
-              </Col>
-            </Row>
-          </Container>
-        </div>
-        <div className="quote-bar" onClick={() => router.push('/contact')} style={{ cursor: 'pointer' }}>Get Quote</div>
-        </>
-  )
-}
-
-export default React.memo(Header);
+            </Nav>
+            <Form className="d-flex">
+              <Button variant="outline-primary">Request A Quote</Button>
+            </Form>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </>
+  );
+};

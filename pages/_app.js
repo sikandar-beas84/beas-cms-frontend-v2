@@ -1,6 +1,6 @@
 // pages/_app.js
 import App from 'next/app';
-import { Inter, Poppins } from "next/font/google";
+// import { Inter, Poppins } from "next/font/google";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import 'slick-carousel/slick/slick.css';
@@ -11,11 +11,11 @@ import Header from './component/Header';
 import Footer from './component/Footer';
 import HomeService from "../util/service/Home";
 
-const inter = Inter({ subsets: ["latin"] });
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["200", "400", "500", "700"], // choose weights
-});
+// const inter = Inter({ subsets: ["latin"] });
+// const poppins = Poppins({
+//   subsets: ["latin"],
+//   weight: ["200", "400", "500", "700"], // choose weights
+// });
 
 class MyApp extends App {
   static async getInitialProps(appContext) {
@@ -43,7 +43,7 @@ class MyApp extends App {
 
     return (
       <>
-        <div className={poppins.className}>
+        <div>
         <section className="top-bg">
           <Header homeData={pageProps.homeData} />
         </section>

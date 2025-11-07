@@ -8,7 +8,13 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Image from "next/image";
 import { Col, Row } from "react-bootstrap";
 import { Mail, Phone } from "react-feather";
-export default function Header() {
+import { env } from '../../util/constants/common';
+import { useRouter } from 'next/router';
+
+
+export default function Header({homeData}) {
+  const router = useRouter();
+  const casestudy = Array.isArray(homeData?.projects) ? homeData.projects?.[0] : [];
   return (
     <>
       <section className="blue-bg p-10">
@@ -47,29 +53,51 @@ export default function Header() {
               style={{ maxHeight: '100px' }}
               navbarScroll
             >
-              <Nav.Link href="#">Home</Nav.Link>
-              <NavDropdown title="Services" id="navbarScrollingDropdown">
-                <NavDropdown.Item href="#action3">Application Development</NavDropdown.Item>
-                <NavDropdown.Item href="#action3">Analytics and AI</NavDropdown.Item>
-                <NavDropdown.Item href="#action3">Application Maintenance</NavDropdown.Item>
-                <NavDropdown.Item href="#action3">Application Solutioning</NavDropdown.Item>
-                <NavDropdown.Item href="#action3">Cloud and DevOps Services</NavDropdown.Item>
-                <NavDropdown.Item href="#action3">Cybersecurity Services</NavDropdown.Item>
-                <NavDropdown.Item href="#action3">Digital transformation</NavDropdown.Item>
-                <NavDropdown.Item href="#action3">Professional Services Final</NavDropdown.Item>
-                <NavDropdown.Item href="#action3">UI/UX</NavDropdown.Item>
-              </NavDropdown>
-              <NavDropdown title="Industries" id="navbarScrollingDropdown">
-                <NavDropdown.Item href="#action3">Media and Entertainment</NavDropdown.Item>
-                <NavDropdown.Item href="#action3">Banking , Insurance and Finance</NavDropdown.Item>
+              {homeData?.menus
+                ?.sort((a, b) => a.order - b.order) // sort menus by order field
+                ?.map((item, index) => {
+                  // Special dropdown for Industries
+                  if (item.slug === "industries") {
+                    return (
+                      <NavDropdown title="Industries" id="navbarScrollingDropdown" key={index}>
+                        {homeData?.industries?.children?.map((child, i) => (
+                          <NavDropdown.Item href={`/industries/${child.slug}`} key={i}>
+                            {child.name}
+                          </NavDropdown.Item>
+                        ))}
+                      </NavDropdown>
+                    );
+                  }
 
-              </NavDropdown>
-              <Nav.Link href="#">Skill</Nav.Link>
-              <Nav.Link href="#">Case Studies</Nav.Link>
-              <Nav.Link href="#">Career</Nav.Link>
-              <Nav.Link href="#">About Us</Nav.Link>
-              <Nav.Link href="#">Contact Us</Nav.Link>
+                  // Special dropdown for Services
+                  if (item.slug === "services") {
+                    return (
+                      <NavDropdown title="Services" id="navbarScrollingDropdown" key={index}>
+                        {homeData?.services?.children?.map((child, i) => (
+                          <NavDropdown.Item href={`/services/${child.slug}`} key={i}>
+                            {child.name}
+                          </NavDropdown.Item>
+                        ))}
+                      </NavDropdown>
+                    );
+                  }
 
+                  // Special case for Case Study
+                  if (item.slug === "casestudy") {
+                    return (
+                      <Nav.Link href={`/${item.slug}/${casestudy.slug}`} key={index}>
+                        {item.name}
+                      </Nav.Link>
+                    );
+                  }
+
+                  // Default menu item
+                  return (
+                    <Nav.Link href={`/${item.slug}`} key={index}>
+                      {item.name}
+                    </Nav.Link>
+                  );
+                })}
             </Nav>
             <Form className="d-flex">
               <Button variant="outline-primary">Request A Quote</Button>

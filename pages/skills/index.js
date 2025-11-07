@@ -33,13 +33,13 @@ const Skills = ({skills}) => {
         <Container className='py-5'>
             <Row>
                 <Col>
-                    <div className="aboutusTxt">
+                    <div>
 
                         {/* <Image width={450} height={150} src={`${env.BACKEND_BASE_URL}assets/img/menu-content/${skills?.menu_contents?.image}`} className="img-fluid" alt="image" />
                          */}
                         <div className="aboutTxt">
                             <h1 className='inner-page-title'>{skills?.menu_contents?.title}</h1>
-                            <div dangerouslySetInnerHTML={{ __html: skills?.description }} />
+                            <div className="inner-page-text" dangerouslySetInnerHTML={{ __html: skills?.description }} />
                         </div>
                         <div className='clear'></div>
                     </div>
@@ -47,11 +47,40 @@ const Skills = ({skills}) => {
 
             </Row>
         </Container>
-        {/* <section className='service-left-panel-curve pad-150'> */}
-          <section className=''>
+      
+          <section>
             <Container>
+              <Row>
+                <Col xs={12}>
+                  <div className='skill-block'>
+                  <div className='skill-wrap'>
+                     <div className='sill-wrap-head'>
+                      <div className='skill-wrap-img'>
+                      <img src="/assets/images/s1.png" alt="skill-name" className='img-fluid' />
+                      </div>
+                      <div className='skill-wrap-head-text'>UI/UX</div>
+                     </div>
+                     <div className='sill-wrap-text'>
+                     Figma, Tailwind, Adobe, 3D Vista Stitcher ver:4, Affinity Photo, Laminar Neo, and Virtual Tour Pro
+                     </div>
+                  </div>
+                  {/* <!--/--> */}
+                  <div className='skill-wrap'>
+                     <div className='sill-wrap-head'>
+                      <div className='skill-wrap-img'>
+                      <img src="/assets/images/s1.png" alt="skill-name" className='img-fluid' />
+                      </div>
+                      <div className='skill-wrap-head-text'>UI/UX</div>
+                     </div>
+                     <div className='sill-wrap-text'>
+                     Figma, Tailwind, Adobe, 3D Vista Stitcher ver:4, Affinity Photo, Laminar Neo, and Virtual Tour Pro
+                     </div>
+                  </div>
+                  </div>
+                </Col>
+              </Row>
               
-              <div className='tecnology-all pb-5'>
+              {/* <div className='tecnology-all pb-5'>
                 <ul>
                   { skills?.menu_contents?.contents?.map((item,index) => {
                   const randomNum = (index % 6) + 1;
@@ -78,13 +107,9 @@ const Skills = ({skills}) => {
                   </li>);
                   })}
                 </ul>
-              </div>
+              </div> */}
 
-                {/* <Row>
-                    <Col xs={12} className='text-center mb-5'>
-                    {<div dangerouslySetInnerHTML={{ __html: skills?.menu_contents?.description }} />}
-                    </Col>
-                </Row> */}
+                
             </Container>
         </section>
       </main>

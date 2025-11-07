@@ -48,7 +48,7 @@ const Skills = ({skills}) => {
             </Row>
         </Container>
       
-          <section>
+          <section className='pb-5'>
             <Container>
               <Row>
                 <Col xs={12}>
@@ -76,6 +76,128 @@ const Skills = ({skills}) => {
                      Figma, Tailwind, Adobe, 3D Vista Stitcher ver:4, Affinity Photo, Laminar Neo, and Virtual Tour Pro
                      </div>
                   </div>
+                  <div className='skill-wrap'>
+                     <div className='sill-wrap-head'>
+                      <div className='skill-wrap-img'>
+                      <img src="/assets/images/s1.png" alt="skill-name" className='img-fluid' />
+                      </div>
+                      <div className='skill-wrap-head-text'>UI/UX</div>
+                     </div>
+                     <div className='sill-wrap-text'>
+                     Figma, Tailwind, Adobe, 3D Vista Stitcher ver:4, Affinity Photo, Laminar Neo, and Virtual Tour Pro
+                     </div>
+                  </div>
+                
+                  {/* <!--/--> */}
+                  <div className='skill-wrap'>
+                     <div className='sill-wrap-head'>
+                      <div className='skill-wrap-img'>
+                      <img src="/assets/images/s1.png" alt="skill-name" className='img-fluid' />
+                      </div>
+                      <div className='skill-wrap-head-text'>UI/UX</div>
+                     </div>
+                     <div className='sill-wrap-text'>
+                     Figma, Tailwind, Adobe, 3D Vista Stitcher ver:4, Affinity Photo, Laminar Neo, and Virtual Tour Pro
+                     </div>
+                  </div>
+                
+                  {/* <!--/--> */}<div className='skill-wrap'>
+                     <div className='sill-wrap-head'>
+                      <div className='skill-wrap-img'>
+                      <img src="/assets/images/s1.png" alt="skill-name" className='img-fluid' />
+                      </div>
+                      <div className='skill-wrap-head-text'>UI/UX</div>
+                     </div>
+                     <div className='sill-wrap-text'>
+                     Figma, Tailwind, Adobe, 3D Vista Stitcher ver:4, Affinity Photo, Laminar Neo, and Virtual Tour Pro
+                     </div>
+                  </div>
+                
+                  {/* <!--/--> */}<div className='skill-wrap'>
+                     <div className='sill-wrap-head'>
+                      <div className='skill-wrap-img'>
+                      <img src="/assets/images/s1.png" alt="skill-name" className='img-fluid' />
+                      </div>
+                      <div className='skill-wrap-head-text'>UI/UX</div>
+                     </div>
+                     <div className='sill-wrap-text'>
+                     Figma, Tailwind, Adobe, 3D Vista Stitcher ver:4, Affinity Photo, Laminar Neo, and Virtual Tour Pro
+                     </div>
+                  </div>
+                
+                  {/* <!--/--> */}<div className='skill-wrap'>
+                     <div className='sill-wrap-head'>
+                      <div className='skill-wrap-img'>
+                      <img src="/assets/images/s1.png" alt="skill-name" className='img-fluid' />
+                      </div>
+                      <div className='skill-wrap-head-text'>UI/UX</div>
+                     </div>
+                     <div className='sill-wrap-text'>
+                     Figma, Tailwind, Adobe, 3D Vista Stitcher ver:4, Affinity Photo, Laminar Neo, and Virtual Tour Pro
+                     </div>
+                  </div>
+                
+                  {/* <!--/--> */}<div className='skill-wrap'>
+                     <div className='sill-wrap-head'>
+                      <div className='skill-wrap-img'>
+                      <img src="/assets/images/s1.png" alt="skill-name" className='img-fluid' />
+                      </div>
+                      <div className='skill-wrap-head-text'>UI/UX</div>
+                     </div>
+                     <div className='sill-wrap-text'>
+                     Figma, Tailwind, Adobe, 3D Vista Stitcher ver:4, Affinity Photo, Laminar Neo, and Virtual Tour Pro
+                     </div>
+                  </div>
+                
+                  {/* <!--/--> */}<div className='skill-wrap'>
+                     <div className='sill-wrap-head'>
+                      <div className='skill-wrap-img'>
+                      <img src="/assets/images/s1.png" alt="skill-name" className='img-fluid' />
+                      </div>
+                      <div className='skill-wrap-head-text'>UI/UX</div>
+                     </div>
+                     <div className='sill-wrap-text'>
+                     Figma, Tailwind, Adobe, 3D Vista Stitcher ver:4, Affinity Photo, Laminar Neo, and Virtual Tour Pro
+                     </div>
+                  </div>
+                
+                  {/* <!--/--> */}<div className='skill-wrap'>
+                     <div className='sill-wrap-head'>
+                      <div className='skill-wrap-img'>
+                      <img src="/assets/images/s1.png" alt="skill-name" className='img-fluid' />
+                      </div>
+                      <div className='skill-wrap-head-text'>UI/UX</div>
+                     </div>
+                     <div className='sill-wrap-text'>
+                     Figma, Tailwind, Adobe, 3D Vista Stitcher ver:4, Affinity Photo, Laminar Neo, and Virtual Tour Pro
+                     </div>
+                  </div>
+                
+                  {/* <!--/--> */}<div className='skill-wrap'>
+                     <div className='sill-wrap-head'>
+                      <div className='skill-wrap-img'>
+                      <img src="/assets/images/s1.png" alt="skill-name" className='img-fluid' />
+                      </div>
+                      <div className='skill-wrap-head-text'>UI/UX</div>
+                     </div>
+                     <div className='sill-wrap-text'>
+                     Figma, Tailwind, Adobe, 3D Vista Stitcher ver:4, Affinity Photo, Laminar Neo, and Virtual Tour Pro
+                     </div>
+                  </div>
+                
+                  {/* <!--/--> */}<div className='skill-wrap'>
+                     <div className='sill-wrap-head'>
+                      <div className='skill-wrap-img'>
+                      <img src="/assets/images/s1.png" alt="skill-name" className='img-fluid' />
+                      </div>
+                      <div className='skill-wrap-head-text'>UI/UX</div>
+                     </div>
+                     <div className='sill-wrap-text'>
+                     Figma, Tailwind, Adobe, 3D Vista Stitcher ver:4, Affinity Photo, Laminar Neo, and Virtual Tour Pro
+                     </div>
+                  </div>
+                
+                  {/* <!--/--> */}
                   </div>
                 </Col>
               </Row>

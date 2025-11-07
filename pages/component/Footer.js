@@ -36,13 +36,15 @@ export default function Footer() {
             </ul>
           </Col>
           <Col xs={12} md={3}>
-             <div className='footer-txt'>Quick Links</div>
-             <ul>
-              <li>BEAS Consultancy & Services Pvt. Ltd. CF-345, Salt Lake City, Sector - I Kolkata - 700064,West Bengal, India</li>
-              <li>+91-33-2321-1380 / 1381 / 1384</li>
-              <li>beas@beas.co.in</li>
+            <div className='get-in-touch-block'>
+              <div className='footer-txt'>Get In Touch</div>
+              <ul>
+                <li>BEAS Consultancy & Services Pvt. Ltd. CF-345, Salt Lake City, Sector - I Kolkata - 700064,West Bengal, India</li>
+                <li>+91-33-2321-1380 / 1381 / 1384</li>
+                <li>beas@beas.co.in</li>
 
-            </ul>
+              </ul>
+            </div>
           </Col>
         </Row>
       </Container>

@@ -1,0 +1,35 @@
+{
+  "name": "beas-cms-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "postbuild": "next-sitemap --config next-sitemap.config.cjs"
+  },
+  "dependencies": {
+    "@flaticon/flaticon-uicons": "^3.3.1",
+    "bootstrap": "^5.3.7",
+    "d3": "^7.9.0",
+    "feather-icons": "^4.29.2",
+    "framer-motion": "^11.5.4",
+    "next": "15.4.1",
+    "next-sitemap": "^4.2.3",
+    "react": "19.1.0",
+    "react-bootstrap": "^2.10.10",
+    "react-dom": "19.1.0",
+    "react-feather": "^2.0.10",
+    "react-google-recaptcha": "^3.1.0",
+    "react-icons": "^5.5.0",
+    "react-intersection-observer": "^9.13.1",
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1",
+    "topojson-client": "^3.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^8",
+    "eslint-config-next": "14.2.7"
+  }
+}

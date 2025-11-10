@@ -163,3 +163,14 @@ margin-top:20px;
     font-size: 0.83rem;
   }
 }
+.footer-icon{
+  margin-right: 8px;
+  font-size: 15px;
+}
+footer ul li {
+  display: flex;
+}
+.footer-li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}

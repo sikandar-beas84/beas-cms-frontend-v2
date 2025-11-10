@@ -20,7 +20,6 @@ function Home({homeData}) {
       return <div>Loading...</div>;
     }
 
-    console.log("homeData=",homeData.logo)
   const { scrollY } = useScroll();
   const scale = useTransform(scrollY, [0, 500], [1, 1.5]);
 

@@ -1,7 +1,61 @@
+import React from 'react'
 import { Col, Row } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import { Mail, Map, Phone, ArrowUp } from "react-feather";
-export default function Footer() {
+import { Smartphone, MapPin, PhoneCall, Printer } from 'react-feather'
+import Nav from 'react-bootstrap/Nav';
+import { env } from '../../util/constants/common';
+import Image from 'next/image';
+
+import { FaLaptopCode, FaCloud, FaLock, FaCogs, FaLightbulb } from "react-icons/fa";
+import { MdOutlineDesignServices } from "react-icons/md";
+import { AiOutlineAppstore } from "react-icons/ai";
+import { SiAdobe } from "react-icons/si";
+
+import { FaHome, FaIndustry, FaServicestack, FaUserGraduate, FaBookOpen, FaEnvelope } from "react-icons/fa";
+import { FaFilm, FaUniversity, FaShoppingCart, FaLandmark, FaHeartbeat } from "react-icons/fa";
+import { FaWhatsapp, FaTwitter, FaLinkedin, FaFacebook, FaInstagram } from "react-icons/fa";
+import { MdInfo } from "react-icons/md";
+import { GiSkills } from "react-icons/gi";
+import { usePathname } from "next/navigation";
+
+const Footer = ({homeData}) => {
+    //for share start
+    const baseUrl = env.SITE_URL; // <-- your site URL
+    const path = usePathname();
+    const pageUrl = `${baseUrl}${path}`;
+    //for share end
+  const casestudy = Array.isArray(homeData?.projects) ? homeData.projects?.[0] : [];
+  const serviceIcons = {
+    "application-development": <FaLaptopCode />,
+    "analytics-and-ai": <FaLightbulb />,
+    "application-maintenance": <FaCogs />,
+    "application-solutioning": <AiOutlineAppstore />,
+    "cloud-and-devops-services": <FaCloud />,
+    "cybersecurity-services": <FaLock />,
+    "digital-transformation": <MdOutlineDesignServices />,
+    "professional-services-final": <FaCogs />,
+    "ui-ux": <SiAdobe />,
+  };
+  const industryIcons = {
+    "media-and-entertainment": <FaFilm />,
+    "banking-insurance-and-finance": <FaUniversity />,
+    "e-business": <FaShoppingCart />,
+    "government": <FaLandmark />,
+    "healthcare-and-wellness": <FaHeartbeat />,
+    "manufacturing": <FaIndustry />,
+  };
+  const menuIcons = {
+    "home": <FaHome />,
+    "about": <MdInfo />,
+    "industries": <FaIndustry />,
+    "services": <FaServicestack />,
+    "skills": <GiSkills />,
+    "career": <FaUserGraduate />,
+    "casestudy": <FaBookOpen />,
+    "contact": <FaEnvelope />,
+  };
+
   return (
     <footer>
 
@@ -13,31 +67,57 @@ export default function Footer() {
               <Col xs={12} md={4}>
                 <div className='footer-txt'>Quick Links</div>
                 <ul className='footer-list'>
-                  <li><a href='#'>Home</a></li>
-                  <li><a href='#'>About Us</a></li>
-                  <li><a href='#'>Our Services</a></li>
-                  <li><a href='#'>Portfolio</a></li>
-                  <li><a href='#'>Contact Us</a></li>
+                { homeData?.menus?.map((item, index)=>{
+                  if (item.slug === 'casestudy') {
+                    return (
+                      <li className='footer-li' key={index}>
+                        <span className='footer-icon'>
+                          {menuIcons['casestudy'] || <FaHome />}
+                        </span>
+                      <Nav.Link href={`/${item.slug}/${casestudy.slug}`}>{item.name}</Nav.Link>
+                      </li>
+                      );
+                  }else {
+                    return (
+                      //item.slug !== "service" && item.slug !== "industries" && (
+                        <li className='footer-li' key={index}>
+                          <span className='footer-icon'>
+                            {menuIcons[item.slug] || <FaHome />}
+                          </span>
+                          <Nav.Link href={`/${item.slug}`}>
+                            {item.name}
+                          </Nav.Link>
+                        </li>
+                      //)
+                      );
+                  }
+                })}
                 </ul>
               </Col>
               <Col xs={12} md={4}>
                 <div className='footer-txt'>Industries</div>
                 <ul className='footer-list'>
-                  <li><a href='#'>Home</a></li>
-                  <li><a href='#'>About Us</a></li>
-                  <li><a href='#'>Our Services</a></li>
-                  <li><a href='#'>Portfolio</a></li>
-                  <li><a href='#'>Contact Us</a></li>
+                { homeData?.industries?.children?.map((item, index)=>(
+                  <li className='footer-li' key={index}>
+                    <span className='footer-icon'>
+                      {industryIcons[item.slug] || <FaLaptopCode />} {/* fallback icon */}
+                    </span>
+                  <Nav.Link href={`/industries/${item.slug}`}>{item.name}</Nav.Link>
+                  </li>
+                ))}
                 </ul>
               </Col>
               <Col xs={12} md={4}>
                 <div className='footer-txt'>Our Services</div>
                 <ul className='footer-list'>
-                  <li><a href='#'>Home</a></li>
-                  <li><a href='#'>About Us</a></li>
-                  <li><a href='#'>Our Services</a></li>
-                  <li><a href='#'>Portfolio</a></li>
-                  <li><a href='#'>Contact Us</a></li>
+                  { homeData?.services?.children?.map((item, index)=>(
+                    <li className='footer-li' key={index}>
+                      <span className='footer-icon'>
+                        {serviceIcons[item.slug] || <FaLaptopCode />} {/* fallback icon */}
+                      </span>
+                    <Nav.Link href={`/services/${item.slug}`}>{item.name}</Nav.Link>
+                    </li>
+                  ))}
                 </ul>
               </Col>
             </Row>
@@ -62,32 +142,55 @@ export default function Footer() {
       <section className='bg-white py-3 mt-5'>
         <Container>
           <Row>
-            <Col xs={12} lg={6}>
+            <Col xs={12} lg={8}>
               <div className='award-section'>
                 <ul>
-                  <li>
-                    <img src="/assets/images/a1.png" alt="a1-logo" className='img-fluid' />
-                  </li>
-                  <li>
-                    <img src="/assets/images/a2.png" alt="a2-logo" className='img-fluid' />
-                  </li>
-                  <li>
-                    <img src="/assets/images/a3.png" alt="a3-logo" className='img-fluid' />
-                  </li>
+                { homeData?.certificates?.map((item, index)=>(
+                <li className='certificate-icon' key={index}>
+                  <Image width={220} height={90} src={`${env.BACKEND_BASE_URL}${item?.image}`} alt="image" loading="lazy" />
+                </li>
+                ))}
                 </ul>
               </div>
             </Col>
-            <Col xs={12} lg={6}>
+            <Col xs={12} lg={4}>
             <div className='award-section'>
                 <ul>
                   <li>
-                    <img src="/assets/images/a1.png" alt="a1-logo" className='img-fluid' />
+                  <a
+                    href={`https://www.facebook.com/BEASConsultancy/`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaFacebook size={50} color="#1877F2" />
+                  </a>
+                  </li>
+                  {/* <li>
+                  <a
+                    href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent("haha")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaTwitter size={24} color="#1DA1F2" />
+                  </a>
+                  </li> */}
+                  <li>
+                  <a
+                    href={`https://in.linkedin.com/company/beas-consultancy-and-services-pvt.ltd`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaLinkedin size={50} color="#0077B5" />
+                  </a>
                   </li>
                   <li>
-                    <img src="/assets/images/a2.png" alt="a2-logo" className='img-fluid' />
-                  </li>
-                  <li>
-                    <img src="/assets/images/a3.png" alt="a3-logo" className='img-fluid' />
+                  <a
+                    href="https://www.instagram.com/BEASConsultancy/" // 👈 replace with your Instagram username
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaInstagram size={50} color="#E4405F" />
+                  </a>
                   </li>
                 </ul>
               </div>
@@ -111,3 +214,4 @@ export default function Footer() {
     </footer>
   );
 }
+export default React.memo(Footer);

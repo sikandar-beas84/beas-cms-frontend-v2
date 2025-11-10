@@ -4,7 +4,7 @@ node_modules/
 # production
 .next/
 out/
-
+util/constants/common.js
 # misc
 .DS_Store
 .env

@@ -78,7 +78,7 @@ export default function Footer() {
               </div>
             </Col>
             <Col xs={12} lg={6}>
-            <div className='award-section'>
+            <div className='social-icon-section'>
                 <ul>
                   <li>
                     <img src="/assets/images/a1.png" alt="a1-logo" className='img-fluid' />

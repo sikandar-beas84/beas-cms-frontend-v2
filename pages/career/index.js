@@ -11,20 +11,20 @@ import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
 import { Buffer } from "buffer";
 
-const Career = ({careers, menucareer}) => {
+const Career = ({ careers, menucareer }) => {
   const router = useRouter();
-    if (router.isFallback) {
-      return <div>Loading...</div>;
-    }
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
-    <SEO
+      <SEO
         title={menucareer?.name || "Career | Beas Consultancy & Services Pvt. Ltd."}
         description={menucareer?.description || "Explore exciting career opportunities with us."}
         keywords="career, jobs, openings"
         image={
-          menucareer?.image 
+          menucareer?.image
             ? `${env.BACKEND_BASE_URL}${menucareer.image}`
             : `${env.BACKEND_BASE_URL}/default-image.jpg`
         }
@@ -33,14 +33,39 @@ const Career = ({careers, menucareer}) => {
       <main>
         <BreadCrumb pagetitle="Career" pageBanner={`assets/img/menu-content/${menucareer?.menu_contents?.banner}`} />
         <Container className='py-5'>
+
           <Row>
             <Col>
-              <p className="sub-title">{menucareer?.menu_contents?.title}</p>
-              <p className='title mb-3'>Why Join Us?</p>
-              <div className='all_contents' dangerouslySetInnerHTML={{ __html: menucareer?.menu_contents?.description }} />
+              <h1 className='inner-page-title'>{menucareer?.menu_contents?.title}</h1>
+              <div className="inner-page-text" dangerouslySetInnerHTML={{ __html: menucareer?.menu_contents?.description }} />
             </Col>
           </Row>
+        </Container>
+
+        <Container className='pb-5'>
           <Row>
+            <Col xs={12} md={3} lg={4}>
+
+              <div className='skill-wrap'>
+                <div className='sill-wrap-head'>
+                  <div className='skill-wrap-img-without-bg'>
+                    <img src="/assets/images/java.png" alt="skill-name" className='img-fluid' />
+                  </div>
+                  <div className='skill-wrap-head-text'>UI/UX</div>
+                </div>
+                <div className='sill-wrap-text'>
+                  Figma, Tailwind, Adobe, 3D Vista Stitcher ver:4, Affinity Photo, Laminar Neo, and Virtual Tour Pro
+                </div>
+                <p className='job-experience-txt'>2-5 years</p>
+                <button type="button" class="btn btn-primary-blue">Apply</button>
+              </div>
+            </Col>
+
+
+          </Row>
+        </Container>
+
+        {/* <Row>
               <Col>
                 <div className="">
                   <Row>
@@ -75,8 +100,8 @@ const Career = ({careers, menucareer}) => {
                   </Row>
                 </div>
               </Col>
-            </Row>
-        </Container>
+          </Row> */}
+
       </main>
     </>
   )

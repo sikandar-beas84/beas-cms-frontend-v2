@@ -62,9 +62,8 @@ body {
 }
 
 /* Footer */
-footer{background-color: var(--light-blue-color-veriation);padding:50px 0;}
+footer{background-color: var(--light-blue-color-veriation);padding:50px 0 0 0;}
 .get-in-touch-block ul{margin:0;padding:0; list-style: none;}
-.get-in-touch-block ul li{margin:0;padding:0;}
 .footer-list {
   margin: 0;
   padding: 0;
@@ -82,13 +81,33 @@ footer{background-color: var(--light-blue-color-veriation);padding:50px 0;}
   list-style:none;
 }
 .footer-list li a{color:#000; text-decoration:none;}
-.footer-txt{margin-bottom:30px;
+.footer-txt{margin-bottom:20px;
   font-weight: 600;
   font-size: 1.25rem;
   line-height: 30px;
   text-transform: capitalize;
   }
-
+  .get-in-touch-block{background-color:#fff; border-radius:24px; box-shadow: 0px 0px 4px 1px #0000000A;
+    padding:25px; margin-top: 50px;}
+  .get-in-touch-block li {
+    display: flex;
+    align-items: flex-start;   
+    gap: 15px;                
+    margin-bottom: 10px;       
+    line-height: 1.6;
+  }
+  
+  .get-in-touch-block svg {
+    flex-shrink: 0;           
+    margin-top: 7px;
+    color:#8b8b8b;          
+  }
+  .scroll-top{padding: 15px 20px;
+    background: #302F2F;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1rem;}
+  
 /* Skills */
 .inner-page-title {
   font-weight: 700;
@@ -105,7 +124,7 @@ font-size: 1.125rem;
 
 }
 .skill-block{display:flex;flex-wrap: wrap; gap: 1rem;}
-.skill-wrap{border-radius:8px; border:1px solid #D9D9D9;flex: 1 1 calc(25% - 1rem);box-sizing: border-box;padding:20px;}
+.skill-wrap{border-radius:8px; border:1px solid #D9D9D9;flex: 0 0 calc(25% - 1rem);box-sizing: border-box;padding:20px;}
 .sill-wrap-head{display:flex; gap:15px; align-items: center;}
 .skill-wrap-head-text{
   font-weight: 600;
@@ -120,8 +139,16 @@ line-height: 26px;
 text-transform: capitalize;
 margin-top:20px;
 }
-/* Responive */
+.award-section ul{margin:0; padding:0; list-style: none; display:flex;gap:20px;}
+.award-section ul li{margin:0; padding:0;}
+.bg-light-blue{background-color: var(--light-blue-color-veriation);}
 
+/* Responive */
+@media (min-width: 1366px) {
+  .container, .container-lg, .container-md, .container-sm, .container-xl {
+      max-width: 1200px;
+  }
+}
 @media (min-width: 992px) {
   .navbar-expand-lg .navbar-nav .dropdown-menu {
     border: none;

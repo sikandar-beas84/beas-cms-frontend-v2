@@ -1,7 +1,7 @@
-
+import { env } from '../util/constants/common';
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-    siteUrl: 'http://192.168.1.16/beasconsultancy/frontend',
+    siteUrl: env.SITE_URL,
     generateRobotsTxt: true, // (optional)
     sitemapSize: 5000,
     changefreq: 'daily',

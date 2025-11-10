@@ -1,30 +1,41 @@
 //REACT_ENV=prod
 const REACT_ENV = 'dev'
-const dev_url = 'http://192.168.1.16/beasconsultancy/backend/public/'
-//const dev_url = 'http://192.168.1.16/beasconsultancy/backend/public/'
-const prod_url = 'http://192.168.1.16/beasconsultancy/backend/public/'
-
-const server_url = 'http://192.168.1.16/beasconsultancy/backend/public/'
-const site_url = 'http://192.168.1.16:3000/'
-const backend_domain = '192.168.1.16'
-
+// 
+const backend_base_url_dev = 'http://127.0.0.1:8000/'
+const frontend_base_url_dev = 'http://localhost:3000/'
+const server_url_dev = 'http://192.168.1.111/'
+const site_url_dev = 'http://localhost:3000'
+const backend_domain_dev = '127.0.0.1'
+const access_token_dev = 'sHetF-JwtYi-kJtsE-TeuAa-nKwqP-LshNd-aXhwV-ZalBr'
+const site_key_dev = '6Le7mo4rAAAAAHp0irf1mq-EZntqBPN-n2Xwkjcz'
+// 
+const backend_base_url_prod = ''
+const frontend_base_url_prod = ''
+const server_url_prod = ''
+const site_url_prod = ''
+const backend_domain_prod = ''
+const access_token_prod = ''
+const site_key_prod = ''
+// 
 let prodObj = {
-    BACKEND_DOMAIN: backend_domain,
-    SERVER_URL: server_url,
-    SITE_URL: site_url,
-    API_BASE_URL: `${prod_url}api/`,
-    BACKEND_BASE_URL: prod_url,
-    ACCESS_TOKEN: "sHetF-JwtYi-kJtsE-TeuAa-nKwqP-LshNd-aXhwV-ZalBr",
-    SITE_KEY: "6Le7mo4rAAAAAHp0irf1mq-EZntqBPN-n2Xwkjcz"
+    BACKEND_DOMAIN: backend_domain_prod,
+    SERVER_URL: server_url_prod,
+    SITE_URL: site_url_prod,
+    API_BASE_URL: `${backend_base_url_prod}api/`,
+    BACKEND_BASE_URL: backend_base_url_prod,
+    FRONTEND_BASE_URL: frontend_base_url_prod,
+    ACCESS_TOKEN: access_token_prod,
+    SITE_KEY: site_key_prod
 }
 const devObj = {
-    BACKEND_DOMAIN: backend_domain,
-    SERVER_URL: server_url,
-    SITE_URL: site_url,
-    API_BASE_URL: `${dev_url}api/`,
-    BACKEND_BASE_URL: dev_url,
-    ACCESS_TOKEN: "sHetF-JwtYi-kJtsE-TeuAa-nKwqP-LshNd-aXhwV-ZalBr",
-    SITE_KEY: "6Le7mo4rAAAAAHp0irf1mq-EZntqBPN-n2Xwkjcz"
+    BACKEND_DOMAIN: backend_domain_dev,
+    SERVER_URL: server_url_dev,
+    SITE_URL: site_url_dev,
+    API_BASE_URL: `${backend_base_url_dev}api/`,
+    BACKEND_BASE_URL: backend_base_url_dev,
+    FRONTEND_BASE_URL: frontend_base_url_dev,
+    ACCESS_TOKEN: access_token_dev,
+    SITE_KEY: site_key_dev
 }
 
 const getEnv = () => {

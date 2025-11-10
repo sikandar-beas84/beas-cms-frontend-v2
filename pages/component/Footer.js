@@ -57,7 +57,7 @@ const Footer = ({homeData}) => {
   };
 
   return (
-    <footer>
+    <>
 
       <Container>
 
@@ -153,8 +153,7 @@ const Footer = ({homeData}) => {
                 </ul>
               </div>
             </Col>
-            <Col xs={12} lg={6}>
-            <div className='social-icon-section'>
+            
             <Col xs={12} lg={4}>
             <div className='award-section'>
                 <ul>
@@ -213,7 +212,7 @@ const Footer = ({homeData}) => {
           </Row>
         </Container>
       </section>
-    </footer>
+    </>
   );
 }
 export default React.memo(Footer);

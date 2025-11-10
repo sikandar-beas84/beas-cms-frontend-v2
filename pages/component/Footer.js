@@ -19,12 +19,12 @@ import { MdInfo } from "react-icons/md";
 import { GiSkills } from "react-icons/gi";
 import { usePathname } from "next/navigation";
 
-const Footer = ({homeData}) => {
-    //for share start
-    const baseUrl = env.SITE_URL; // <-- your site URL
-    const path = usePathname();
-    const pageUrl = `${baseUrl}${path}`;
-    //for share end
+const Footer = ({ homeData }) => {
+  //for share start
+  const baseUrl = env.SITE_URL; // <-- your site URL
+  const path = usePathname();
+  const pageUrl = `${baseUrl}${path}`;
+  //for share end
   const casestudy = Array.isArray(homeData?.projects) ? homeData.projects?.[0] : [];
   const serviceIcons = {
     "application-development": <FaLaptopCode />,
@@ -59,112 +59,114 @@ const Footer = ({homeData}) => {
   return (
     <>
 
-      <Container>
+      <footer>
+        <Container>
 
-        <Row>
-          <Col xs={12} md={8}>
-            <Row>
-              <Col xs={12} md={4}>
-                <div className='footer-txt'>Quick Links</div>
-                <ul className='footer-list'>
-                { homeData?.menus?.map((item, index)=>{
-                  if (item.slug === 'casestudy') {
-                    return (
-                      <li className='footer-li' key={index}>
-                        <span className='footer-icon'>
+          <Row>
+            <Col xs={12} md={8}>
+              <Row>
+                <Col xs={12} md={4}>
+                  <div className='footer-txt'>Quick Links</div>
+                  <ul className='footer-list'>
+                    {homeData?.menus?.map((item, index) => {
+                      if (item.slug === 'casestudy') {
+                        return (
+                          <li className='footer-li' key={index}>
+                            {/* <span className='footer-icon'>
                           {menuIcons['casestudy'] || <FaHome />}
-                        </span>
-                      <Nav.Link href={`/${item.slug}/${casestudy.slug}`}>{item.name}</Nav.Link>
-                      </li>
-                      );
-                  }else {
-                    return (
-                      //item.slug !== "service" && item.slug !== "industries" && (
-                        <li className='footer-li' key={index}>
-                          <span className='footer-icon'>
+                        </span> */}
+                            <Nav.Link href={`/${item.slug}/${casestudy.slug}`}>{item.name}</Nav.Link>
+                          </li>
+                        );
+                      } else {
+                        return (
+                          //item.slug !== "service" && item.slug !== "industries" && (
+                          <li className='footer-li' key={index}>
+                            {/* <span className='footer-icon'>
                             {menuIcons[item.slug] || <FaHome />}
-                          </span>
-                          <Nav.Link href={`/${item.slug}`}>
-                            {item.name}
-                          </Nav.Link>
-                        </li>
-                      //)
-                      );
-                  }
-                })}
+                          </span> */}
+                            <Nav.Link href={`/${item.slug}`}>
+                              {item.name}
+                            </Nav.Link>
+                          </li>
+                          //)
+                        );
+                      }
+                    })}
+                  </ul>
+                </Col>
+                <Col xs={12} md={4}>
+                  <div className='footer-txt'>Industries</div>
+                  <ul className='footer-list'>
+                    {homeData?.industries?.children?.map((item, index) => (
+                      <li className='footer-li' key={index}>
+                        {/* <span className='footer-icon'>
+                      {industryIcons[item.slug] || <FaLaptopCode />} 
+                    </span> */}
+                        <Nav.Link href={`/industries/${item.slug}`}>{item.name}</Nav.Link>
+                      </li>
+                    ))}
+                  </ul>
+                </Col>
+                <Col xs={12} md={4}>
+                  <div className='footer-txt'>Our Services</div>
+                  <ul className='footer-list'>
+                    {homeData?.services?.children?.map((item, index) => (
+                      <li className='footer-li' key={index}>
+                        {/* <span className='footer-icon'>
+                        {serviceIcons[item.slug] || <FaLaptopCode />}
+                      </span> */}
+                        <Nav.Link href={`/services/${item.slug}`}>{item.name}</Nav.Link>
+                      </li>
+                    ))}
+                  </ul>
+                </Col>
+              </Row>
+            </Col>
+            <Col xs={12} md={4}>
+              <div className='get-in-touch-block'>
+                <div className='footer-txt'>Get In Touch</div>
+                <ul>
+                  <li><Map size={16} />BEAS Consultancy & Services Pvt. Ltd. CF-345, Salt Lake City, Sector - I Kolkata - 700064,West Bengal, India</li>
+                  <li><Phone size={16} /> +91-33-2321-1380 / 1381 / 1384</li>
+                  <li><Mail size={16} /> beas@beas.co.in</li>
+
                 </ul>
-              </Col>
-              <Col xs={12} md={4}>
-                <div className='footer-txt'>Industries</div>
-                <ul className='footer-list'>
-                { homeData?.industries?.children?.map((item, index)=>(
-                  <li className='footer-li' key={index}>
-                    <span className='footer-icon'>
-                      {industryIcons[item.slug] || <FaLaptopCode />} {/* fallback icon */}
-                    </span>
-                  <Nav.Link href={`/industries/${item.slug}`}>{item.name}</Nav.Link>
-                  </li>
-                ))}
-                </ul>
-              </Col>
-              <Col xs={12} md={4}>
-                <div className='footer-txt'>Our Services</div>
-                <ul className='footer-list'>
-                  { homeData?.services?.children?.map((item, index)=>(
-                    <li className='footer-li' key={index}>
-                      <span className='footer-icon'>
-                        {serviceIcons[item.slug] || <FaLaptopCode />} {/* fallback icon */}
-                      </span>
-                    <Nav.Link href={`/services/${item.slug}`}>{item.name}</Nav.Link>
-                    </li>
-                  ))}
-                </ul>
-              </Col>
-            </Row>
-          </Col>
-          <Col xs={12} md={4}>
-            <div className='get-in-touch-block'>
-              <div className='footer-txt'>Get In Touch</div>
-              <ul>
-                <li><Map size={16} />BEAS Consultancy & Services Pvt. Ltd. CF-345, Salt Lake City, Sector - I Kolkata - 700064,West Bengal, India</li>
-                <li><Phone size={16} /> +91-33-2321-1380 / 1381 / 1384</li>
-                <li><Mail size={16} /> beas@beas.co.in</li>
-
-              </ul>
-            </div>
-          </Col>
+              </div>
+            </Col>
 
 
-        </Row>
-        {/* Footer White Section */}
+          </Row>
+          {/* Footer White Section */}
 
-      </Container>
-      <section className='bg-white py-3 mt-5'>
+        </Container>
+      </footer>
+      <section className='bg-white py-2'>
         <Container>
           <Row>
             <Col xs={12} lg={8}>
               <div className='award-section'>
                 <ul>
-                { homeData?.certificates?.map((item, index)=>(
-                <li className='certificate-icon' key={index}>
-                  <Image width={220} height={90} src={`${env.BACKEND_BASE_URL}${item?.image}`} alt="image" loading="lazy" />
-                </li>
-                ))}
+                  {homeData?.certificates?.map((item, index) => (
+                    <li className='certificate-icon' key={index}>
+                      <Image width={220} height={90} src={`${env.BACKEND_BASE_URL}${item?.image}`} alt="image" loading="lazy" />
+                    </li>
+                  ))}
                 </ul>
               </div>
             </Col>
-            
+
             <Col xs={12} lg={4}>
-            <div className='award-section'>
+              <div className='social-icon-section'>
                 <ul>
                   <li>
-                  <a
-                    href={`https://www.facebook.com/BEASConsultancy/`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <FaFacebook size={50} color="#1877F2" />
-                  </a>
+                    <a
+                      href={`https://www.facebook.com/BEASConsultancy/`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FaFacebook size={50} color="#1877F2" />
+                    </a>
                   </li>
                   {/* <li>
                   <a
@@ -176,22 +178,22 @@ const Footer = ({homeData}) => {
                   </a>
                   </li> */}
                   <li>
-                  <a
-                    href={`https://in.linkedin.com/company/beas-consultancy-and-services-pvt.ltd`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <FaLinkedin size={50} color="#0077B5" />
-                  </a>
+                    <a
+                      href={`https://in.linkedin.com/company/beas-consultancy-and-services-pvt.ltd`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FaLinkedin size={50} color="#0077B5" />
+                    </a>
                   </li>
                   <li>
-                  <a
-                    href="https://www.instagram.com/BEASConsultancy/" // 👈 replace with your Instagram username
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <FaInstagram size={50} color="#E4405F" />
-                  </a>
+                    <a
+                      href="https://www.instagram.com/BEASConsultancy/" // 👈 replace with your Instagram username
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FaInstagram size={50} color="#E4405F" />
+                    </a>
                   </li>
                 </ul>
               </div>

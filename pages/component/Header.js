@@ -25,13 +25,13 @@ const Header = ({homeData}) => {
             <Col xs={12} md={6} className="d-none d-md-block">
               <ul className="d-flex justify-content-md-end gap-4 m-0 p-0">
                 <li>
-                  <a href={`mailto:${homeData.contactus.email}`} className="text-white d-flex align-items-center gap-2 text-decoration-none">
-                    <Mail size={16} /> {homeData.contactus.email}
+                  <a href={`mailto:${homeData?.contactus?.email}`} className="text-white d-flex align-items-center gap-2 text-decoration-none">
+                    <Mail size={16} /> {homeData?.contactus?.email}
                   </a>
                 </li>
                 <li>
-                  <a href={`tel:${homeData.contactus.mobile}`} className="text-white d-flex align-items-center gap-2 text-decoration-none">
-                    <Phone size={16} /> {homeData.contactus.mobile}
+                  <a href={`tel:${homeData?.contactus?.mobile}`} className="text-white d-flex align-items-center gap-2 text-decoration-none">
+                    <Phone size={16} /> {homeData?.contactus?.mobile}
                   </a>
                 </li>
               </ul>

@@ -153,6 +153,8 @@ const Footer = ({homeData}) => {
                 </ul>
               </div>
             </Col>
+            <Col xs={12} lg={6}>
+            <div className='social-icon-section'>
             <Col xs={12} lg={4}>
             <div className='award-section'>
                 <ul>

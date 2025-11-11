@@ -51,7 +51,6 @@ function Home({homeData}) {
               </Col>
             </Row>
           </Container>
-          <Container fluid>
             {/* <div className='beas_W1200'>
               <ul className='clientele__list pt-5 py-4'>
                 { homeData?.services?.children?.map((item, index)=>(
@@ -61,204 +60,582 @@ function Home({homeData}) {
                   )) }
               </ul>
             </div> */}
-            <Row>
-              <Col className="px-0">
-                <div className="working-area working--area">
-                  <div className="scroll-animation ">
-                    <div className="scroll-slide-track">
-                      <ul>
-                        { homeData?.clients?.map((item, index)=>(
-                        <li key={index}>
-                          <Image width={600} height={100} src={`${env.BACKEND_BASE_URL}${item?.logo}`} alt="image" loading="lazy" />
-                        </li>
-                        )) }
-                      </ul>
-                    </div>
+
+            {/* service section start */}
+      <div className="service" id="what_why_panel1">
+         <div className="container">
+            <div className="serv-head">
+               <h2>Our world class Services</h2>
+               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
+            </div>
+         </div>
+         <div className="service-inr">
+            <div className="container">
+               <div className="srvc-txt">
+                  <div className="srvc-txt-top">
+                     <div className="row no-gutters">
+                        <div className="col-lg-4 col-md-6 col-sm-6 col-12">
+                           <div className="srvc-box fst-srvc-bx sevc-1 hverx">
+                              <img src="assets/images/service1.png" alt="" className="srvc-icon"/>
+                              <div className="srvc-bxtx">
+                                 <h3>Website Design</h3>
+                                 <p>Lorem Ipsum is simply dummy text caption  the the printing  typesetting the industry is Lorem Ipsum has been the</p>
+                              </div>
+                           </div>
+                        </div>
+                        <div className="col-lg-4 col-md-6 col-sm-6 col-12">
+                           <div className="srvc-box fst-srvc-bx sevc-1 hverx">
+                              <img src="assets/images/service1.png" alt="" className="srvc-icon"/>
+                              <div className="srvc-bxtx">
+                                 <h3>Website Design</h3>
+                                 <p>Lorem Ipsum is simply dummy text caption  the the printing  typesetting the industry is Lorem Ipsum has been the</p>
+                              </div>
+                           </div>
+                        </div>
+                        <div className="col-lg-4 col-md-6 col-sm-6 col-12">
+                           <div className="srvc-box fst-srvc-bx sevc-1 hverx">
+                              <img src="assets/images/service1.png" alt="" className="srvc-icon"/>
+                              <div className="srvc-bxtx">
+                                 <h3>Website Design</h3>
+                                 <p>Lorem Ipsum is simply dummy text caption  the the printing  typesetting the industry is Lorem Ipsum has been the</p>
+                              </div>
+                           </div>
+                        </div>
+                        <div className="col-lg-4 col-md-6 col-sm-6 col-12">
+                           <div className="srvc-box fst-srvc-bx sevc-1 hverx">
+                              <img src="assets/images/service1.png" alt="" className="srvc-icon"/>
+                              <div className="srvc-bxtx">
+                                 <h3>Website Design</h3>
+                                 <p>Lorem Ipsum is simply dummy text caption  the the printing  typesetting the industry is Lorem Ipsum has been the</p>
+                              </div>
+                           </div>
+                        </div>
+                        <div className="col-lg-4 col-md-6 col-sm-6 col-12">
+                           <div className="srvc-box fst-srvc-bx sevc-1 hverx">
+                              <img src="assets/images/service1.png" alt="" className="srvc-icon"/>
+                              <div className="srvc-bxtx">
+                                 <h3>Website Design</h3>
+                                 <p>Lorem Ipsum is simply dummy text caption  the the printing  typesetting the industry is Lorem Ipsum has been the</p>
+                              </div>
+                           </div>
+                        </div>
+                        <div className="col-lg-4 col-md-6 col-sm-6 col-12">
+                           <div className="srvc-box fst-srvc-bx sevc-1 hverx">
+                              <img src="assets/images/service1.png" alt="" className="srvc-icon"/>
+                              <div className="srvc-bxtx">
+                                 <h3>Website Design</h3>
+                                 <p>Lorem Ipsum is simply dummy text caption  the the printing  typesetting the industry is Lorem Ipsum has been the</p>
+                              </div>
+                           </div>
+                        </div>
+                        <div className="col-lg-4 col-md-6 col-sm-6 col-12">
+                           <div className="srvc-box fst-srvc-bx sevc-1 hverx">
+                              <img src="assets/images/service1.png" alt="" className="srvc-icon"/>
+                              <div className="srvc-bxtx">
+                                 <h3>Website Design</h3>
+                                 <p>Lorem Ipsum is simply dummy text caption  the the printing  typesetting the industry is Lorem Ipsum has been the</p>
+                              </div>
+                           </div>
+                        </div>
+                        <div className="col-lg-4 col-md-6 col-sm-6 col-12">
+                           <div className="srvc-box fst-srvc-bx sevc-1 hverx">
+                              <img src="assets/images/service1.png" alt="" className="srvc-icon"/>
+                              <div className="srvc-bxtx">
+                                 <h3>Website Design</h3>
+                                 <p>Lorem Ipsum is simply dummy text caption  the the printing  typesetting the industry is Lorem Ipsum has been the</p>
+                              </div>
+                           </div>
+                        </div>
+                        <div className="col-lg-4 col-md-6 col-sm-6 col-12">
+                           <div className="srvc-box fst-srvc-bx sevc-1 hverx">
+                              <img src="assets/images/service1.png" alt="" className="srvc-icon"/>
+                              <div className="srvc-bxtx">
+                                 <h3>Website Design</h3>
+                                 <p>Lorem Ipsum is simply dummy text caption  the the printing  typesetting the industry is Lorem Ipsum has been the</p>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
                   </div>
-                </div>
-              </Col>
-            </Row>
+               </div>
+            </div>
+         </div>
+      </div>
+      {/* sevice section end */}
 
-            <div className='beas_W1200 pt-0'>
-              <div className='bg_0081d2 AboutUs'>
-                <Row>
-                  <Col lg={12}>
-                    <div className='aboutTxt text-left'>
-                      <h1>{homeData?.aboutus?.name}</h1>
-                      <div className="gry-txt">
-                      {aboutuspreviewText}
-                      </div>
-                      <div className='Learn_More_Link'>
-                        <Link href="/about">
-                        <p className='beas_text_link'>
-                          Learn More <ArrowUpRight />
-                        </p>
-                      </Link>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col lg={12}>
-                    <div className='WHOWEARE'>
-                      <ul>
-                      { homeData?.commonaboutus?.map((item, index)=>(
-                      <li key={index}><span>{item?.short_desc}</span><span className="ttxt">{item?.title}</span><p class="stat-label">{item?.long_desc}</p></li>
-                      ))}
-                      </ul>
-                    </div>
-                  </Col>
-                </Row>
-              </div>
-            </div> 
-            
-          </Container>
+      {/* About section start */}
+      <div className="About">
+         <div className="container">
+            <div className="serv-head stat-head">
+               <h2>About Us</h2>
+               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the dummy.</p>
+            </div>
+            <div className="stat-bod">
+               <div className="counter-show">
+                  <div className="row">
+                     <div className="counter col-lg-3 col-md-6 col-sm-6 col-6">
+                        <div className="stat-box">
+                           <div className="stat-img">
+                              <img src="assets/images/stat-1.png" alt=""/>
+                           </div>
+                           <div className="d-flexrt">
+                              <h3 className="count-number">10 <span>+</span></h3>
+                           </div>
+                           <p>Years in business</p>
+                        </div>
+                     </div>
+                     <div className="counter col-lg-3 col-md-6 col-sm-6 col-6">
+                        <div className="stat-box">
+                           <div className="stat-img">
+                              <img src="assets/images/stat-1.png" alt=""/>
+                           </div>
+                           <div className="d-flexrt">
+                              <h3 className="count-number">10 <span>+</span></h3>
+                           </div>
+                           <p>Years in business</p>
+                        </div>
+                     </div>
+                     <div className="counter col-lg-3 col-md-6 col-sm-6 col-6">
+                        <div className="stat-box">
+                           <div className="stat-img">
+                              <img src="assets/images/stat-1.png" alt=""/>
+                           </div>
+                           <div className="d-flexrt">
+                              <h3 className="count-number">10 <span>+</span></h3>
+                           </div>
+                           <p>Years in business</p>
+                        </div>
+                     </div>
+                     <div className="counter col-lg-3 col-md-6 col-sm-6 col-6">
+                        <div className="stat-box">
+                           <div className="stat-img">
+                              <img src="assets/images/stat-1.png" alt=""/>
+                           </div>
+                           <div className="d-flexrt">
+                              <h3 className="count-number">10 <span>+</span></h3>
+                           </div>
+                           <p>Years in business</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      {/* About section end */}
+
+      {/* why section start */}
+      <div class="why">
+         <div class="container">
+            <div class="serv-head stat-head why-head">
+               <h2>Why Choose Us?</h2>
+               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
+            </div>
+            <div className="why-inr">
+               <div className="row">
+                  <div className="col-lg-3 col-md-6 col-sm-6 p-0">
+                     <div className="why-box why-1">
+                        <div className="why-img">
+                           <img src="assets/images/why-1.png" alt=""/>
+                        </div>
+                        <h3>Dedicated Specialists</h3>
+                        <p>Lorem Ipsum is simply dummy caption  the the printing and typesetting the industry is Lorem Ipsum has been the</p>
+                     </div>
+                  </div>
+                  <div className="col-lg-3 col-md-6 col-sm-6 p-0">
+                     <div className="why-box why-1">
+                        <div className="why-img">
+                           <img src="assets/images/why-1.png" alt=""/>
+                        </div>
+                        <h3>Dedicated Specialists</h3>
+                        <p>Lorem Ipsum is simply dummy caption  the the printing and typesetting the industry is Lorem Ipsum has been the</p>
+                     </div>
+                  </div>
+                  <div className="col-lg-3 col-md-6 col-sm-6 p-0">
+                     <div className="why-box why-1">
+                        <div className="why-img">
+                           <img src="assets/images/why-1.png" alt=""/>
+                        </div>
+                        <h3>Dedicated Specialists</h3>
+                        <p>Lorem Ipsum is simply dummy caption  the the printing and typesetting the industry is Lorem Ipsum has been the</p>
+                     </div>
+                  </div>
+                  <div className="col-lg-3 col-md-6 col-sm-6 p-0">
+                     <div className="why-box why-1 why-last">
+                        <div className="why-img">
+                           <img src="assets/images/why-1.png" alt=""/>
+                        </div>
+                        <h3>Dedicated Specialists</h3>
+                        <p>Lorem Ipsum is simply dummy caption  the the printing and typesetting the industry is Lorem Ipsum has been the</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      {/* why section end */}
+
+      {/* portfolio section start */}
+      <div className="portfolio">
+         <div className="container">
+            <div className="port-head">
+               <div className="port-hd-txt">
+                  <h2>Portfolio that speak!</h2>
+                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
+               </div>
+            </div>
+            <div className="row">
+               <div className="col-lg-4 col-md-6 col-sm-6">
+                  <div className="port-box">
+                     <div className="port-img">
+                        <img src="assets/images/port-1.png" alt="" class="port-shw"/>
+                     </div>
+                     <h3>Project name</h3>
+                     <p>Lorem Ipsum is simply dummy the caption printing and typesetting lorem Ipsum </p>
+                     <div className="port-tags">
+                        <h4>Angular</h4>
+                        <h4>Node JS</h4>
+                        <h4>ABC Dummy</h4>
+                     </div>
+                  </div>
+               </div>               
+               <div className="col-lg-4 col-md-6 col-sm-6">
+                  <div className="port-box">
+                     <div className="port-img">
+                        <img src="assets/images/port-1.png" alt="" class="port-shw"/>
+                     </div>
+                     <h3>Project name</h3>
+                     <p>Lorem Ipsum is simply dummy the caption printing and typesetting lorem Ipsum </p>
+                     <div className="port-tags">
+                        <h4>Angular</h4>
+                        <h4>Node JS</h4>
+                        <h4>ABC Dummy</h4>
+                     </div>
+                  </div>
+               </div>               
+               <div className="col-lg-4 col-md-6 col-sm-6">
+                  <div className="port-box">
+                     <div className="port-img">
+                        <img src="assets/images/port-1.png" alt="" class="port-shw"/>
+                     </div>
+                     <h3>Project name</h3>
+                     <p>Lorem Ipsum is simply dummy the caption printing and typesetting lorem Ipsum </p>
+                     <div className="port-tags">
+                        <h4>Angular</h4>
+                        <h4>Node JS</h4>
+                        <h4>ABC Dummy</h4>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      {/* portfolio section end */}
+
+      {/* process secton start */}
+      <div className="process">
+         <div className="container">
+            <div className="port-hd-txt proc-hd">
+               <h2>Industries we Serve</h2>
+               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
+            </div>
+         </div>
+         <div className="process-inr">
+            <div className="container">
+               <div className="process-txt">
+                  <div className="tab">
+                     <button className="tablinks activen">1. Media and Entertainment</button>
+                     <button className="tablinks">2. Banking , Insurance and Finance</button>
+                     <button className="tablinks">3. Business</button>
+                     <button className="tablinks">4. Government</button>
+                     <button className="tablinks">5. Healthcare and Wellness</button>
+                     <button className="tablinks">6. Manufacturing</button>
+                  </div>
+                  <div className="tabcontent">
+                     <div className="proc-deet">
+                        <div className="proc-img">
+                           <img src="assets/images/process.png" alt=""/>
+                        </div>
+                        <div className="proc-text">
+                           <h2>Media and Entertainment</h2>
+                           <p>Lorem Ipsum is simply dumy text of printing and typesetting industry. Lorem Ipsum has been the industry's standard lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum has been the industry's standard dummy.</p>
+                           <a href="#" className="proc-btn thar-three4">Get in Touch</a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      {/* process secton end */}
+
+      {/* more section start */}
+      <div className="more">
+         <div className="more-inr">
+            <div className="container">
+               <div className="more-txt">
+                  <div className="mr-txt-lft">
+                     <h2>Want more information ?</h2>
+                     <p>Request a quote about our web and mobile application development services
+                        Lorem Ipsum is simply dummy text of the
+                     </p>
+                  </div>
+                  <a href="#" className="mr-btn">Get Free Consultation Now</a>
+               </div>
+            </div>
+         </div>
+      </div>
+      {/* more section end */}
+
+      {/* technology section start */}
+      <div className="tachnology">
+         <div className="container">
+            <div className="tech-hd">
+               <h2>Our Technology Expertise</h2>
+               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum</p>
+            </div>
+            <div className="tech-list-r">
+               <div className="row">
+                  <div className="col-lg-2 col-md-4 col-sm-4 col-6">
+                     <div className="tech-list-bx">
+                        <img className="tech-icon" src="assets/images/angular.png" alt=""/>
+                        <h5>Angular</h5>
+                     </div>
+                  </div>
+                  <div className="col-lg-2 col-md-4 col-sm-4 col-6">
+                     <div className="tech-list-bx">
+                        <img className="tech-icon" src="assets/images/angular.png" alt=""/>
+                        <h5>Angular</h5>
+                     </div>
+                  </div>
+                  <div className="col-lg-2 col-md-4 col-sm-4 col-6">
+                     <div className="tech-list-bx">
+                        <img className="tech-icon" src="assets/images/angular.png" alt=""/>
+                        <h5>Angular</h5>
+                     </div>
+                  </div>
+                  <div className="col-lg-2 col-md-4 col-sm-4 col-6">
+                     <div className="tech-list-bx">
+                        <img className="tech-icon" src="assets/images/angular.png" alt=""/>
+                        <h5>Angular</h5>
+                     </div>
+                  </div>
+                  <div className="col-lg-2 col-md-4 col-sm-4 col-6">
+                     <div className="tech-list-bx">
+                        <img className="tech-icon" src="assets/images/angular.png" alt=""/>
+                        <h5>Angular</h5>
+                     </div>
+                  </div>
+                  <div className="col-lg-2 col-md-4 col-sm-4 col-6">
+                     <div className="tech-list-bx">
+                        <img className="tech-icon" src="assets/images/angular.png" alt=""/>
+                        <h5>Angular</h5>
+                     </div>
+                  </div>
+                  <div className="col-lg-2 col-md-4 col-sm-4 col-6">
+                     <div className="tech-list-bx">
+                        <img className="tech-icon" src="assets/images/angular.png" alt=""/>
+                        <h5>Angular</h5>
+                     </div>
+                  </div>
+                  <div className="col-lg-2 col-md-4 col-sm-4 col-6">
+                     <div className="tech-list-bx">
+                        <img className="tech-icon" src="assets/images/angular.png" alt=""/>
+                        <h5>Angular</h5>
+                     </div>
+                  </div>
+                  <div className="col-lg-2 col-md-4 col-sm-4 col-6">
+                     <div className="tech-list-bx">
+                        <img className="tech-icon" src="assets/images/angular.png" alt=""/>
+                        <h5>Angular</h5>
+                     </div>
+                  </div>
+                  <div className="col-lg-2 col-md-4 col-sm-4 col-6">
+                     <div className="tech-list-bx">
+                        <img className="tech-icon" src="assets/images/angular.png" alt=""/>
+                        <h5>Angular</h5>
+                     </div>
+                  </div>
+                  <div className="col-lg-2 col-md-4 col-sm-4 col-6">
+                     <div className="tech-list-bx">
+                        <img className="tech-icon" src="assets/images/angular.png" alt=""/>
+                        <h5>Angular</h5>
+                     </div>
+                  </div>
+                  <div className="col-lg-2 col-md-4 col-sm-4 col-6">
+                     <div className="tech-list-bx">
+                        <img className="tech-icon" src="assets/images/angular.png" alt=""/>
+                        <h5>Angular</h5>
+                     </div>
+                  </div>
+                  <div className="col-lg-2 col-md-4 col-sm-4 col-6">
+                     <div className="tech-list-bx">
+                        <img className="tech-icon" src="assets/images/angular.png" alt=""/>
+                        <h5>Angular</h5>
+                     </div>
+                  </div>
+                  <div className="col-lg-2 col-md-4 col-sm-4 col-6">
+                     <div className="tech-list-bx">
+                        <img className="tech-icon" src="assets/images/angular.png" alt=""/>
+                        <h5>Angular</h5>
+                     </div>
+                  </div>
+                  <div className="col-lg-2 col-md-4 col-sm-4 col-6">
+                     <div className="tech-list-bx">
+                        <img className="tech-icon" src="assets/images/angular.png" alt=""/>
+                        <h5>Angular</h5>
+                     </div>
+                  </div>
+                  <div className="col-lg-2 col-md-4 col-sm-4 col-6">
+                     <div className="tech-list-bx">
+                        <img className="tech-icon" src="assets/images/angular.png" alt=""/>
+                        <h5>Angular</h5>
+                     </div>
+                  </div>
+                  <div className="col-lg-2 col-md-4 col-sm-4 col-6">
+                     <div className="tech-list-bx">
+                        <img className="tech-icon" src="assets/images/angular.png" alt=""/>
+                        <h5>Angular</h5>
+                     </div>
+                  </div>
+                  <div className="col-lg-2 col-md-4 col-sm-4 col-6">
+                     <div className="tech-list-bx">
+                        <img className="tech-icon" src="assets/images/angular.png" alt=""/>
+                        <h5>Angular</h5>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      {/* technology section end */}
+
+      {/* testimonial section begin */}
+      <div className="testimonial">
+         <div className="container">
+            <div className="serv-head test-head">
+               <h2>our Testimonials</h2>
+               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the dummy.</p>
+               <img src="assets/images/test-star-grp.png"/>
+            </div>
+            <div className="test-inr">
+               <div className="row">
+                  <div className="col-lg-4 col-md-6 col-sm-6">
+                     <div className="test-box">
+                        <div className="quote-txt">
+                           <p>I highly recommend at least reaching out to them if you are searching for a technology solution for your business at a very reasonable cost!</p>
+                        </div>
+                        <div className="tester">
+                           <div className="tester-img">
+                              <img src="assets/images/tester-1.png" alt=""/>
+                           </div>
+                           <div className="tester-name">
+                              <h2>Fabien Mahieu</h2>
+                              <p>Co-Founder/Director Flexiwork, UK</p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div className="col-lg-4 col-md-6 col-sm-6">
+                     <div className="test-box">
+                        <div className="quote-txt">
+                           <p>I highly recommend at least reaching out to them if you are searching for a technology solution for your business at a very reasonable cost!</p>
+                        </div>
+                        <div className="tester">
+                           <div className="tester-img">
+                              <img src="assets/images/tester-1.png" alt=""/>
+                           </div>
+                           <div className="tester-name">
+                              <h2>Fabien Mahieu</h2>
+                              <p>Co-Founder/Director Flexiwork, UK</p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div className="col-lg-4 col-md-6 col-sm-6">
+                     <div className="test-box">
+                        <div className="quote-txt">
+                           <p>I highly recommend at least reaching out to them if you are searching for a technology solution for your business at a very reasonable cost!</p>
+                        </div>
+                        <div className="tester">
+                           <div className="tester-img">
+                              <img src="assets/images/tester-1.png" alt=""/>
+                           </div>
+                           <div className="tester-name">
+                              <h2>Fabien Mahieu</h2>
+                              <p>Co-Founder/Director Flexiwork, UK</p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      {/* testimonial section end */}
+
+      {/* Blogs section start */}
+      <div className="Blogs">
+         <div className="container">
+            <div className="Blogs-head">
+               <h2>Blogs</h2>
+               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum</p>
+            </div>
+            <div className="Blogs-inr">
+               <div className="row">
+                  <div className="col-lg-4 col-md-6 col-sm-6">
+                     <div className="guiditem">
+                        <div className="guidimg">
+                           <a href=""><img src="assets/images/guid2.jpg" alt=""/></a>
+                           <div className="guidcal">
+                              <strong>20 <br/><b>Jan</b></strong>
+                           </div>
+                        </div>
+                        <div className="guidtext">
+                           <h5><a href="">Bring to the table win-win sur<br/>vival strategies to</a></h5>
+                           <p>Lorem ipsum dolor sit amet, cibo mundi ea duo dummy duo vim exerci pha vim exerci textpha edrum  cibo mundi duo edrum</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div className="col-lg-4 col-md-6 col-sm-6">
+                     <div className="guiditem">
+                        <div className="guidimg">
+                           <a href=""><img src="assets/images/guid2.jpg" alt=""/></a>
+                           <div className="guidcal">
+                              <strong>20 <br/><b>Jan</b></strong>
+                           </div>
+                        </div>
+                        <div className="guidtext">
+                           <h5><a href="">Bring to the table win-win sur<br/>vival strategies to</a></h5>
+                           <p>Lorem ipsum dolor sit amet, cibo mundi ea duo dummy duo vim exerci pha vim exerci textpha edrum  cibo mundi duo edrum</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div className="col-lg-4 col-md-6 col-sm-6">
+                     <div className="guiditem">
+                        <div className="guidimg">
+                           <a href=""><img src="assets/images/guid2.jpg" alt=""/></a>
+                           <div className="guidcal">
+                              <strong>20 <br/><b>Jan</b></strong>
+                           </div>
+                        </div>
+                        <div className="guidtext">
+                           <h5><a href="">Bring to the table win-win sur<br/>vival strategies to</a></h5>
+                           <p>Lorem ipsum dolor sit amet, cibo mundi ea duo dummy duo vim exerci pha vim exerci textpha edrum  cibo mundi duo edrum</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      {/* Blogs section end */}
+
+
+          
         </section>
 
-        <section className='section_e6f6ff mt-5 py-5'>
-          <div className='beas_W1200'>
-            <h2 class="beas_h2 mb-0">Our Services</h2>
-            <Row>
-              { homeData?.services?.children?.map((item, index)=>{
-              const descriptionText = item?.description
-              ? item.description.split(" ").slice(0, 10).join(" ") + "..."
-              : "";
-              return (
-                <Col lg={4} key={index}>
-                  <Nav.Link href={`/services/${item.slug}`}  style={{ cursor: "pointer", color: 'white !important' }}>
-                    <div className="wedeliver_block srvc-box" >
-                      <div className="we_icon">
-                        <Image 
-                        width={600} 
-                        height={100} 
-                        src={`${env.BACKEND_BASE_URL}assets/img/menu-content/${item?.menu_contents?.icon}`} 
-                        className="img-fluid" 
-                        alt="image" 
-                        loading="lazy"
-                        />
-                      </div>
-                      <div className='wedeliver_item'>
-                          <h3>{item.name}</h3>
-                          <p className="p-0">
-                        {descriptionText}
-                      </p>
-                        </div>                      
-                      <div className='Learn_More_Link'>
-                        <p className='beas_text_link m-0'>
-                          Learn More <ArrowUpRight />
-                        </p>
-                      </div>
-                    </div>
-                  </Nav.Link>
-                </Col>
-              );
-            })}
-            </Row>
-            <h2 class="beas_h2 pt-5 mb-0">Industries we Serve</h2>
-            <Row>
-            { homeData?.industries?.children?.map((item, index)=>(
-              <Col lg={4} key={index}>
-                <div className='industries_imgs'>
-                  <a href={`/industries/${item.slug}`}>
-                  <Image width={600} height={100} src={`${env.BACKEND_BASE_URL}assets/img/menu-content/${item?.menu_contents?.image}`} alt="image" loading="lazy" />
-                    <span class="text__csogW">{item.name}</span>
-                    <div class="overlay__L3Hen"></div>
-                  </a>
-                </div>
-              </Col>
-              ))}
-            </Row>
-          </div>
-        </section>
         
-        <div className='container-fluid'>
-          <div className='beas_W1200'>
-            <div class="text-center pt-5"><h2 class="beas_h2 mb-4">Our Technology Expertise</h2></div>
-            <Row>
-            { homeData?.technologies?.map((item, index)=>(
-              <Col lg={2} key={index}>
-                <div class="tech-list-bx">
-                <Image width={600} height={100} src={`${env.BACKEND_BASE_URL}assets/img/technology/${item.logo}`} alt="image" loading="lazy" />
-                  <h5>{item.name}</h5>
-                </div>
-              </Col>
-            ))}
-            </Row>
-          </div>
-        </div>
-        
-        <section className="tool-bg mt-5">
-          <Container>
-            <div className='beas_W1200'>
-              <Row className="">
-
-              <Col>
-                <div className="beas_Why">
-                {homeData?.whychooseus?.map((item, index) =>
-                  item.slug === "why-choose-us-content" && (
-                    <React.Fragment key={index}>
-                      <p className="title">{item?.title}</p>
-                      <div className="grey-txt" dangerouslySetInnerHTML={{ __html: item?.description }} />
-                    </React.Fragment>
-                  )
-                )}
-                <Row>
-                {homeData?.whychooseus?.map((item, index) => {
-                  if (item.slug === "why-choose-us-sub-content") {
-                  return (
-                  <Col lg={4}>
-                    <div class="why_block__GpObg">
-                      <div class="why_icon_num">
-                      <Image width={600} height={100} style={{ minWidth: "42px" }}  src={`${env.BACKEND_BASE_URL}${item.image}`} alt="image" loading="lazy" />
-                        
-                      <span>{index + 1}</span>
-                      </div>
-                        <p class="mb-0 mt-3">{item.description}</p>
-                    </div>
-                  </Col>
-                  );
-                  }
-                  return null;
-                })}
-                </Row>
-                  
-                </div>
-              </Col>
-            </Row>
-            </div>
-            
-          </Container>
-        </section>
-
-        <section>
-          <Container>
-            <div className='beas_W1200'>
-              <div class="text-center pt-5"><h2 class="beas_h2 mb-4">What Our Clients Say</h2></div>
-              <div className='w-50 m-auto'>
-                <BannerCarousal page="testimonial" testimonials={homeData?.testimonials} />
-              </div>
-            </div>
-          </Container>
-        </section>
-
-        <section class="section_e6f6ff mt-5 py-5">
-          <Container>
-            <div className='beas_W1200'>
-              <div class="text-center pt-0"><h2 class="beas_h2 mb-4">Project Experience</h2></div>
-              <div className='bg-white ProjectExperience'>
-                <div className=''>
-                <Row>
-              <BannerCarousal page="projects" projects={homeData?.projects} />
-            </Row>
-
-                </div>
-              </div>
-            </div>
-          </Container>
-          {/* <div class="text-center my-5 mb-0">
-            <a class="btn Home_btn_border__TjT33 ms-0" href="#">
-              See Case Studies <ArrowUpRight />
-            </a>
-          </div> */}
-        </section>
       </main>
     </>
   );

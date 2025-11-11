@@ -44,24 +44,25 @@ const Career = ({ careers, menucareer }) => {
 
         <Container className='pb-5'>
           <Row>
-            <Col xs={12} md={3} lg={4}>
-
+          { careers?.map((item,index)=>(
+            <Col key={index} xs={12} md={3} lg={4}>
+              <Link href={`/career/${item?.title}`} className="">
               <div className='skill-wrap'>
                 <div className='sill-wrap-head'>
                   <div className='skill-wrap-img-without-bg'>
-                    <img src="/assets/images/java.png" alt="skill-name" className='img-fluid' />
+                  <Image width={80} height={60} src={`${env.BACKEND_BASE_URL}${item?.image}`} alt="image" className="img-fluid" loading="lazy" />
                   </div>
-                  <div className='skill-wrap-head-text'>UI/UX</div>
+                  <div className='skill-wrap-head-text'>{item?.role}</div>
                 </div>
                 <div className='sill-wrap-text'>
-                  Figma, Tailwind, Adobe, 3D Vista Stitcher ver:4, Affinity Photo, Laminar Neo, and Virtual Tour Pro
+                {item.description}
                 </div>
-                <p className='job-experience-txt'>2-5 years</p>
+                <p className='job-experience-txt'>{item.experience}</p>
                 <button type="button" class="btn btn-primary-blue">Apply</button>
               </div>
+              </Link>
             </Col>
-
-
+          )) }
           </Row>
         </Container>
 

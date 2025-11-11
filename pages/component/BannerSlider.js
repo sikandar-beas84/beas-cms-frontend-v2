@@ -27,7 +27,10 @@ const BannerSlider = ({bannerSlide}) => {
   const handleSelect = (selectedIndex) => {
     setActiveIndex(selectedIndex); // Update active index on slide change
   };
+
+
   return (
+    <>
     <Carousel>
       { bannerSlide?.map((item,index)=>{
         const descriptionText = item?.description
@@ -60,9 +63,7 @@ const BannerSlider = ({bannerSlide}) => {
                 </p>
                 <div className='fw-300' dangerouslySetInnerHTML={{ __html: descriptionText }} />
                 <p><a className="link-txt f-small" href={`/industries/${item.slug}`}>Learn More <ArrowUpRight/></a></p>
-                {/* <Link href={`/industries/${item.slug}`} style={{ cursor: "pointer", textDecoration:'none', }}>
-                <p className="link-txt f-small">Learn More <ArrowUpRight/></p>
-                </Link> */}
+                
              </motion.div>
             </Col>
           </Row>
@@ -71,6 +72,8 @@ const BannerSlider = ({bannerSlide}) => {
         );
     }) }
     </Carousel>
+
+    </> 
   )
 }
 

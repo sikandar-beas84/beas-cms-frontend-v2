@@ -42,99 +42,22 @@ const Skills = ({ skills }) => {
         </Container>
         <Container className='pb-5'>
           <Row>
-            <Col xs={12} md={3} lg={4}>
-
-              <div className='skill-wrap'>
+          { skills?.menu_contents?.contents?.map((item,index) => (
+            <Col key={index} xs={12} md={3} lg={4}>
+              <div className='skill-wrap skill-image175'>
                 <div className='sill-wrap-head'>
                   <div className='skill-wrap-img'>
                     <img src="/assets/images/s1.png" alt="skill-name" className='img-fluid' />
                   </div>
-                  <div className='skill-wrap-head-text'>UI/UX</div>
+                  <div className='skill-wrap-head-text'>{item?.extra_title}</div>
                 </div>
                 <div className='sill-wrap-text'>
-                  Figma, Tailwind, Adobe, 3D Vista Stitcher ver:4, Affinity Photo, Laminar Neo, and Virtual Tour Pro
+                {item?.extra_description}
                 </div>
               </div>
             </Col>
-            {/* <!--/--> */}
-            <Col xs={12} md={3} lg={4}>
-
-              <div className='skill-wrap'>
-                <div className='sill-wrap-head'>
-                  <div className='skill-wrap-img'>
-                    <img src="/assets/images/s1.png" alt="skill-name" className='img-fluid' />
-                  </div>
-                  <div className='skill-wrap-head-text'>UI/UX</div>
-                </div>
-                <div className='sill-wrap-text'>
-                  Figma, Tailwind, Adobe, 3D Vista Stitcher ver:4, Affinity Photo, Laminar Neo, and Virtual Tour Pro
-                </div>
-              </div>
-            </Col>
-            {/* <!--/--> */}
-            <Col xs={12} md={3} lg={4}>
-
-              <div className='skill-wrap'>
-                <div className='sill-wrap-head'>
-                  <div className='skill-wrap-img'>
-                    <img src="/assets/images/s1.png" alt="skill-name" className='img-fluid' />
-                  </div>
-                  <div className='skill-wrap-head-text'>UI/UX</div>
-                </div>
-                <div className='sill-wrap-text'>
-                  Figma, Tailwind, Adobe, 3D Vista Stitcher ver:4, Affinity Photo, Laminar Neo, and Virtual Tour Pro
-                </div>
-              </div>
-            </Col>
-            {/* <!--/--> */}
-            <Col xs={12} md={3} lg={4}>
-
-              <div className='skill-wrap'>
-                <div className='sill-wrap-head'>
-                  <div className='skill-wrap-img'>
-                    <img src="/assets/images/s1.png" alt="skill-name" className='img-fluid' />
-                  </div>
-                  <div className='skill-wrap-head-text'>UI/UX</div>
-                </div>
-                <div className='sill-wrap-text'>
-                  Figma, Tailwind, Adobe, 3D Vista Stitcher ver:4, Affinity Photo, Laminar Neo, and Virtual Tour Pro
-                </div>
-              </div>
-            </Col>
-            {/* <!--/--> */}
-
+            ))}
           </Row>
-
-          {/* <div className='tecnology-all pb-5'>
-                <ul>
-                  { skills?.menu_contents?.contents?.map((item,index) => {
-                  const randomNum = (index % 6) + 1;
-                  return(
-                  <li key={index}>
-                    <a href='#'>
-                      <div className='tech-head'>
-                        <span className={`coloe_t${randomNum}`}>
-                        <Image
-                          src={`/assets/images/skills/skills${index+1}.png`}   // use optimized format (webp/avif)
-                          alt="Hero Banner"
-                          width={1920}
-                          height={1080}
-                          priority      // ✅ ensures this image is not lazy-loaded
-                          fetchPriority="high" // ✅ tells browser it’s critical
-                          className="img-fluid" // you can keep bootstrap class
-                        />
-                        
-                        </span>
-                        <p>{item?.extra_title}</p>
-                      </div>
-                      <p>{item?.extra_description}</p>
-                    </a>
-                  </li>);
-                  })}
-                </ul>
-              </div> */}
-
-
         </Container>
 
       </main>

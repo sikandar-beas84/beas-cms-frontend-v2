@@ -20,11 +20,7 @@ import { GiSkills } from "react-icons/gi";
 import { usePathname } from "next/navigation";
 
 const Footer = ({ homeData }) => {
-  //for share start
-  const baseUrl = env.SITE_URL; // <-- your site URL
-  const path = usePathname();
-  const pageUrl = `${baseUrl}${path}`;
-  //for share end
+
   const casestudy = Array.isArray(homeData?.projects) ? homeData.projects?.[0] : [];
   const serviceIcons = {
     "application-development": <FaLaptopCode />,
@@ -159,42 +155,17 @@ const Footer = ({ homeData }) => {
             <Col xs={12} lg={4}>
               <div className='social-icon-section'>
                 <ul>
-                  <li>
+                    { homeData.socials.map((item,index)=>(
+                  <li key={index}>
                     <a
-                      href={`https://www.facebook.com/BEASConsultancy/`}
+                      href={item?.url}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <FaFacebook size={50} color="#1877F2" />
+                     <Image width={30} height={30} src={`${env.BACKEND_BASE_URL}${item?.icon}`} alt="image" loading="lazy" />
                     </a>
                   </li>
-                  {/* <li>
-                  <a
-                    href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent("haha")}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <FaTwitter size={24} color="#1DA1F2" />
-                  </a>
-                  </li> */}
-                  <li>
-                    <a
-                      href={`https://in.linkedin.com/company/beas-consultancy-and-services-pvt.ltd`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FaLinkedin size={50} color="#0077B5" />
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://www.instagram.com/BEASConsultancy/" // 👈 replace with your Instagram username
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FaInstagram size={50} color="#E4405F" />
-                    </a>
-                  </li>
+                  )) }
                 </ul>
               </div>
             </Col>

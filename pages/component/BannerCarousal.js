@@ -5,10 +5,35 @@ import { ArrowUpRight } from "react-feather";
 import { useRouter } from 'next/router';
 import { env } from '../../util/constants/common';
 import Image from 'next/image';
+import Link from "next/link";
 
 const BannerCarousal = ({ page, technologiya, clients, projects, testimonials }) => {
 
   const createSliderSettings = (slidesToShowDefault, sliderDot = false) => ({
+    dots: sliderDot,
+    infinite: true,
+    speed: 500,
+    slidesToShow: slidesToShowDefault,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: slidesToShowDefault > 3 ? 3 : slidesToShowDefault,
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+        }
+      }
+    ]
+  });
+
+  const testimoniolnewSliderSettings = (slidesToShowDefault, sliderDot = false) => ({
     dots: sliderDot,
     infinite: true,
     speed: 500,
@@ -43,6 +68,8 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials })
   const testimonialsettings = createSliderSettings(1);
   // client settings
   const clientsettings = createSliderSettings(5);
+
+  const testimonialnewsettings = testimoniolnewSliderSettings(3);
 
   const router = useRouter();
 
@@ -222,6 +249,88 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials })
           </div>
           ))}
 
+        </Slider>
+      )}
+
+      {page == 'testimonialnew' && (
+        <Slider {...testimonialnewsettings}>
+          
+          { testimonials?.map((item, index)=>{
+            const messageText = item?.message
+            ? item.message.length > 50
+              ? item.message.substring(0, 250) + "..."
+              : item.message
+            : "";
+              return(
+              <div className="test-box" key={index}>
+                <div className="quote-txt">
+                  <p>{messageText}</p>
+                </div>
+                <div className="tester">
+                  <div className="tester-img">
+                  <Image
+                    src={`${env.BACKEND_BASE_URL}assets/img/testimonial/${item.profile_photo_path}`}  
+                    alt="Hero Banner"
+                    width={50}
+                    height={50}
+                    priority      
+                    fetchPriority="high" 
+                    className="img-fluid" 
+                  />
+                  </div>
+                  <div className="tester-name">
+                      <h2>{item.name}</h2>
+                      <p dangerouslySetInnerHTML={{ __html: item?.role }} />
+                  </div>
+                </div>
+                </div>
+              );
+            })}
+        </Slider>
+      )}
+
+      {page == 'projectsnew' && (
+        <Slider {...settings}>
+          { projects?.map((item, index)=>{
+
+            const titleText = item?.title
+            ? item.title.split(" ").slice(0, 4).join(" ") + "..."
+            : "";
+            const businessNeed = item?.business_need
+            ? item.business_need.split(" ").slice(0, 10).join(" ") + "..."
+            : "";
+          return(
+          <>
+          <Link
+            href={`/casestudy/${item.slug}`}
+          >
+          <div className="port-box">
+            <div className="port-img">
+                
+                <Image
+                  src={`${env.BACKEND_BASE_URL}${item.image}`} 
+                  alt="Hero Banner"
+                  width={100}
+                  height={100}
+                  priority 
+                  fetchPriority="high" 
+                  className="img-fluid port-shw" 
+                />
+            </div>
+            <h3>{titleText}</h3>
+            <p dangerouslySetInnerHTML={{ __html: businessNeed }} />
+            <div className="port-tags">
+                <h4>Angular</h4>
+                <h4>Node JS</h4>
+                <h4>ABC Dummy</h4>
+            </div>
+          </div>
+          </Link>
+
+          </>
+          );
+        })}
+          
         </Slider>
       )}
     </>

@@ -9,65 +9,56 @@ import { env } from '../../util/constants/common';
 import Image from 'next/image';
 
 const BannerSlider = ({bannerSlide}) => {
-  // State to track the active slide
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  // Define animation variants
-  const textVariants = {
-    hidden: { opacity: 0, x: -100 },
-    visible: { opacity: 1, x: 0, transition: { duration: 1 } },
-  };
-
-  const imageVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 1 } },
-  };
-
-  // Handler for slide change
-  const handleSelect = (selectedIndex) => {
-    setActiveIndex(selectedIndex); // Update active index on slide change
-  };
-
 
   return (
     <>
-    <Carousel>
+    <Carousel slide={true} fade={false} interval={3000}>
       { bannerSlide?.map((item,index)=>{
-        const descriptionText = item?.description
-        ? item.description.split(" ").slice(0, 15).join(" ") + "..."
-        : "";
+        const descriptionText = item?.description;
+        // descriptionText="Empower your digital transformation with artificial intelligence, intelligent automation, and next-gen software innovation.";
         return(
        <Carousel.Item key={index}>
+        <div className='banner'>
+        <div className="banner_thumb_img">
         <Image
               src={`${env.BACKEND_BASE_URL}${item.image}`}   // use optimized format (webp/avif)
               alt="Hero Banner"
               width={1920}
-              height={1080}
+              height={980}
               priority      // ✅ ensures this image is not lazy-loaded
               fetchPriority="high" // ✅ tells browser it’s critical
               className="img-fluid" // you can keep bootstrap class
             />
        
           <Carousel.Caption>
-          <Row>
-            <Col xs={12} xl={8} className="position-relative">
-              <motion.div
-                key={activeIndex} // Re-run animation on index change
-                className="slider-text"
-                initial="hidden"
-                animate="visible"
-                variants={textVariants}
-              >
-                <p>
-                  {item.title}
-                </p>
-                <div className='fw-300' dangerouslySetInnerHTML={{ __html: descriptionText }} />
-                <p><a className="link-txt f-small" href={`/industries/${item.slug}`}>Learn More <ArrowUpRight/></a></p>
-                
-             </motion.div>
-            </Col>
-          </Row>
+          <div className="banner_text_infos">
+            <div className="container">
+              <div className="bnr-txt">
+                <p>{item.slug}</p>
+                  <h1 className="drop_ani">{item.title}</h1>
+                  <p>
+                    {/* <div className='fw-300' dangerouslySetInnerHTML={{ __html: descriptionText }} /> */}
+                    {descriptionText}
+                  </p>
+                  <a href={`/industries/${item.slug}`} class="bnr-btn thar-three">CONTACT US</a>
+              </div>
+            </div>
+          </div>
         </Carousel.Caption>
+        </div>
+        <div className="scroll_down_am what1">
+        <div className="mouse_scroll">
+          <div className="mouse">
+              <div className="wheel"></div>
+          </div>
+          <div className="weh_m">
+              <span className="m_scroll_arrows unu"></span>
+              <span className="m_scroll_arrows doi"></span>
+              <span className="m_scroll_arrows trei"></span>
+          </div>
+        </div>
+      </div>
+        </div>
       </Carousel.Item>
         );
     }) }

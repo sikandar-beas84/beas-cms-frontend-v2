@@ -44,119 +44,111 @@ const AboutUs = ({aboutus, commonaboutus}) => {
 
             <main>
                 <BreadCrumb pagetitle="About Us" pageBanner={`assets/img/menu-content/${aboutus?.menu_contents?.banner}`} />
-                <Container className='py-5 container-bx'>
-                    <Row>
-                        <Col>
-                            <div className="aboutusTxt">
 
-                                <Image width={450} height={150} src={`${env.BACKEND_BASE_URL}${aboutus?.image}`} className="img-fluid about_thumb_img" alt="image" loading="lazy" />
-                                <div className="abut_all_contents">
-                                    <p className="sub-title">About Our Company</p>
-                                    <h1>{aboutus?.menu_contents?.title}</h1>
-                                    <div dangerouslySetInnerHTML={{ __html: aboutus?.description }} />
+                <section className="section-padding">
+                    <div className="container">
+                        <div className="row align-items-center">
+                            <div className="col-lg-5 col-md-5">
+                                <div className="about_imgs">
+                                    <span>
+                                        <img src="assets/images/abt_img.png" className="drop_ani"/> 
+                                    </span>
                                 </div>
-                                <div className='clear'></div>
                             </div>
-                        </Col>
-
-                    </Row>
-                </Container>
-
-                <section className='about_count_sec'>
-                    <Container>
-                        <Row>
-                            <Col xs={12} className='text-center about_count_inr'>
-                                
-                                <div className='counterpanel'>
-                                    <div className='counterInrPanel'>
-                                        <Row>
-                                            { commonaboutus?.map((item, index)=>{
-                                            if (item.title !== "Years Experience") {
-                                            return(<Col key={index}>
-                                                <div class="counter_bx">
-                                                    <em>
-                                                    <Image 
-                                                    width={600} 
-                                                    height={100} 
-                                                    src={`${env.BACKEND_BASE_URL}${item?.icon}`} 
-                                                    className="img-fluid" 
-                                                    alt="image" 
-                                                    loading="lazy"
-                                                    />
-                                                    </em>
-                                                    <div class="st_texts">
-                                                        <p><span class="counter-value" data-count="100">{item?.short_desc}</span></p>
-                                                        <b>{item?.long_desc}</b>
-                                                    </div>
-                                                </div>
-                                            </Col>);
-                                            }
-                                            })}
-                                        </Row>
-                                    </div>
+                            <div className="col-lg-7 col-md-7">
+                                <div className="about_texts">
+                                    <h1>Corporate Overview Driving Growth Through Quality</h1>
+                                    <p>Laoreet scelerisque euismod egestas suspendisse aliquet amet ultrices faucibus mauris sit odio. Mattis morbi suspendisse mus ut pellentesque at pulvinar. Interdum justo suspendisse porttitor ornare. Mattis morbfaucibus mauris sit odio.</p>
+                                    <p>Laoreet scelerisque euismod egestas suspendisse aliquet amet ultrices faucibus mauris sit odio. Mattis morbi suspendisse mus ut pellentesque at pulvinar. Interdum justo suspendisse porttitor ornare. </p>
                                 </div>
-                                <p className="sub-title">Specality Of Our Company</p>
-                                <div className='title' dangerouslySetInnerHTML={{ __html: aboutus?.menu_contents?.description }} />
-                                
-                            </Col>
-                        </Row>
-                    </Container>
+                            </div>
+                        </div>
+                    </div>
                 </section>
 
-                <section className='mis_about_section'>
-                    <Container>
-                        <Row>
-                            {/* <Col xs={12} className='text-center mb-5'>
-                                <p className="sub-title">Specality Of Our Company</p>
-                                <div className='title' dangerouslySetInnerHTML={{ __html: aboutus?.menu_contents?.description }} />
-                            </Col> */}
-                            <Col xs={12}>
-                                <div className='white-card-container pb-5'>
-                                    { aboutus?.menu_contents?.contents.map((item,index)=>(
-                                    <div className='white-card mis_cont' key={index}>
-                                        <div className='media_img'>
-                                            <Image width={450} height={150} src={`${env.BACKEND_BASE_URL}assets/img/menu-content/${item?.extra_icon}`} className="img-fluid" alt="image" loading="lazy" />
-                                        </div>
-                                        <div className='media-body'>
-                                            <p className=''>{item?.extra_title}</p>
-                                            <div className='' dangerouslySetInnerHTML={{ __html: item?.extra_description }} />
-                                        </div>
-                                        
-
-                                    </div>
-                                    ))}
+                <section className='section-abuts'>
+                    <div className='container'>
+                        <div className='row'>
+                            <div className='col-lg-12'>
+                                <div className='ser_rea'>
+                                    <div className="about_texts">
+                                    <p>Laoreet scelerisque euismod egestas suspendisse aliquet amet ultrices faucibus mauris sit odio. Mattis morbi suspendisse mus ut pellentesque at pulvinar. Interdum justo suspendisse porttitor ornare. Mattis morbfaucibus mauris sit odio.</p>
+                                    <p>Laoreet scelerisque euismod egestas suspendisse aliquet amet ultrices faucibus mauris sit odio. Mattis morbi suspendisse mus ut pellentesque at pulvinar. Interdum justo suspendisse porttitor ornare. </p>
                                 </div>
-                            </Col>
-                        </Row>
-                    </Container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shp1"><img src="assets/images/ser_bg.png"/></div>
+                    <div class="shp2"><img src="assets/images/ser_bg2.png"/></div>
                 </section>
-                {/* <Container className='py-5'>
-                    <Row>
-                        <Col xs={12} className='mb-3'>
-                            <div className="aboutTxt">
-                                <p className="sub-title mb-0">Meet Our Team</p>
-                                <p className='mb-3'>{experts?.title}</p>
-                                <div className="gry-txt" dangerouslySetInnerHTML={{ __html: experts?.description }} />
-                            </div>
-                        </Col>
-                        { experts?.contents?.map((item,index)=>(
-                        <Col xs={12} lg={3} key={index}>
-                            <div className='team-item'>
-                                <div className='team-member-image'>
-                                    <Image width={450} height={150} src={`${env.BACKEND_BASE_URL}${item?.extra_image}`}
-                                        alt='image' className='img-fluid' />
-                                </div>
-                                <div className='team-member-name'>
-                                    {item?.extra_title}
-                                    <span>{item?.extra_role}</span>
-                                </div>
-                            </div>
 
-                        </Col>
-                        )) }
+                <div className="why_abt">
+                    <div className="container">
+                        <div className="row align-items-center">
+                            <div className="col-md-6 col-12">
+                                <div className="our_misson_boxs">
+                                    <div className="mission_boxs our_box_mi">
+                                        <h2>Our Mission</h2>
+                                        <p>To be a world class IT Services and Solutions Provider 
+    through meeting customer requirements every- time. 
+    We will continuously enhance our Domain, Technology 
+    and Process capabilities, to ensure that we provide value 
+    to our customers in every transaction.</p>
+                                    </div>
+                                    <div className="vis_boxs our_box_mi">
+                                        <h2>Our Business Objective</h2>
+                                        <p>To be a world class IT Services and Solutions Provider 
+    through meeting customer requirements every- time. 
+    We will continuously enhance our Domain, Technology 
+    and Process capabilities, to ensure that we provide value 
+    to our customers in every transaction.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-md-6 col-12">
+                                <div className="why_abuts">
+                                <h2>Our Corporate Strategy</h2>
+                                <ul>
+                                    <li>1. Build strong technical and domain capabilities to ensure responsiveness to client needs. </li>
+                                    <li>2. Create and maintain World-class processes. </li>
+                                    <li>3. Enhance Corporate reach in global markets. </li>
+                                    <li>4. Create a strong human capital through training, mentoring and by establishing a work- environment of Equality, Inclusion and Diversity.</li>
+                                </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                    </Row>
-                </Container> */}
+                <section className="meter-area">
+                    <div className="container">
+                    <h2>We've helped businesses increase their revenue on an average by 90% in their first year with us!</h2>
+                    <div className="counter-show">
+                        <div className="row">
+                            <div className="all-meter">
+                                <ul>
+                                <li className="meter-box">
+                                    <span class="timer count-number">1500</span><span>+</span>
+                                    <p>Satisfied Clients Across the Globe</p>
+                                </li>
+                                <li className="meter-box">
+                                    <span class="timer count-number">7000</span><span>+</span>
+                                    <p>Projects Delivered Successfully</p>
+                                </li>
+                                <li className="meter-box">
+                                    <span class="timer count-number">450</span><span>+</span>
+                                    <p>Experts Under the Same Roof</p>
+                                </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </section>
+
+
+                
             </main>
         </>
     )

@@ -14,7 +14,7 @@ const BreadCrumb = ({pagetitle, pageslug, pageBanner}) => {
         <Row>
           <Col>
            <div className='breadcrumbWrap'>
-             <div className='pageTitle'>{pagetitle}</div>
+             <div className='pageTitle drop_ani'>{pagetitle}</div>
              <div className='pgNameListing'>
               <ul>
                 <li>Home</li>

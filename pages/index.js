@@ -13,6 +13,7 @@ import { env } from '../util/constants/common';
 import SEO from '../components/SEO';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import IndustriesProcess from './component/IndustriesProcess';
 
 function Home({homeData}) {
   const router = useRouter();
@@ -194,7 +195,7 @@ function Home({homeData}) {
           {/* portfolio section end */}
 
           {/* process secton start */}
-          <div className="process">
+          {/* <div className="process">
             <div className="container">
                 <div className="port-hd-txt proc-hd">
                   <h2>Industries we Serve</h2>
@@ -227,7 +228,8 @@ function Home({homeData}) {
                   </div>
                 </div>
             </div>
-          </div>
+          </div> */}
+          <IndustriesProcess/>
           {/* process secton end */}
 
           {/* more section start */}

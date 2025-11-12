@@ -115,16 +115,16 @@ const Header = ({homeData}) => {
       </Navbar>
 
       <Link href="#" className="">
-             {/* <Image
-                src="../assets/images/whatsapp.png"
+             <Image
+                src="/assets/images/whatsapp.png"
                 alt="whatsApp"
                 width={40}
                 height={40}
                 priority
                 fetchPriority="high"
                 className="img-fluid fixed-social"
-              /> */}
-              <img src="../assets/images/whatsapp.png"className="img-fluid fixed-social"/>
+              />
+           
       </Link>
     </>
   );

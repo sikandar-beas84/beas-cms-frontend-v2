@@ -10,11 +10,11 @@ import { env } from '../../util/constants/common';
 import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
 
-const Service = ({services, service}) => {
+const Service = ({ services, service }) => {
   const router = useRouter();
-    if (router.isFallback) {
-      return <div>Loading...</div>;
-    }
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
 
   const metaTitle = "Services | Beas Consultancy & Services Pvt. Ltd.";
   const metaDesc = service?.description
@@ -27,7 +27,7 @@ const Service = ({services, service}) => {
 
   return (
     <>
-    <SEO
+      <SEO
         title={metaTitle}
         description={metaDesc}
         keywords="services, software solutions, IT consultancy, Beas services"
@@ -36,42 +36,101 @@ const Service = ({services, service}) => {
       />
       <main>
         <BreadCrumb pagetitle="Services" pageBanner={`assets/img/menu-content/${service?.menu_contents?.banner}`} />
-        <Container className='py-5 serviceInfo_how-it-works__lcCAN'>
-          {/* <Row>
+        <Container className='py-5'>
+          <Row>
             <Col>
-              <p className='title mb-3'>Service Page</p>
-              <p>Holisticly benchmark functional products before excellent methods of empowerment. Seamlessly visualize innovative web-readiness whereas extensive initiatives. Completely unleash frictionless data via end-to-end services. Continually unleash virtual e-tailers through magnetic core competencies. Interactively engage distributed alignments via focused alignments. Dynamically fabricate excellent innovation for go forward technology. Intrinsicly impact empowered scenarios after cost effective outsourcing. Synergistically productivate pandemic e-business rather than state of the art e-tailers. Continually expedite customized information with go forward potentialities.</p>
-            </Col>
-          </Row> */}
-
-
-          <Row className='mt-4'>
-            <Col>
-            { services?.map((item, index)=>(
-
-              <div className='serviceListBlock' key={index}>
-                <div className='serviceListBlockFirst'>
-                  <div className='mediaimg'>
-                    <Image width={600} height={150} src={`${env.BACKEND_BASE_URL}assets/img/menu-content/${item?.menu_contents?.image}`} alt="image" className="img-fluid" loading="lazy" />
-                  </div>
-                </div>
-                <div className='serviceListBlockSecond serviceInfo'>
-                  <div className='serviceListBlockWrap'> <span className='title'>{item?.menu_contents?.title}</span></div>
-                    <div className='industries-body-text py-3' dangerouslySetInnerHTML={{ __html: item?.menu_contents?.description?.split(' ').slice(0, 90).join(' ')+'...' }} />
-                    <div className='Learn_More_Link'>
-                      <Nav.Link href={`/service/${item?.menu_contents?.slug}`} key={index} className='link-txt-new'>Read more <ArrowUpRight /></Nav.Link>
-                    </div>
-                  
-
-                </div>
+              <div className="about_texts">
+                <h1>Corporate Overview Driving Growth Through Quality</h1>
+                <p>Holisticly benchmark functional products before excellent methods of empowerment. Seamlessly visualize innovative web-readiness whereas extensive initiatives. Completely unleash frictionless data via end-to-end services. Continually unleash virtual e-tailers through magnetic core competencies. Interactively engage distributed alignments via focused alignments. Dynamically fabricate excellent innovation for go forward technology. Intrinsicly impact empowered scenarios after cost effective outsourcing. Synergistically productivate pandemic e-business rather than state of the art e-tailers. Continually expedite customized information with go forward potentialities.</p>
               </div>
-            ))}
-                
             </Col>
           </Row>
-
-
         </Container>
+        <section className="section-abuts section-services">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-12">
+                <div className="ser_rea services_sec">
+                  {services?.map((item, index) => {
+                    const isEven = index % 2 !== 0; // true for even-positioned items (1,3,5,...)
+                    const description = item?.menu_contents?.description
+                      ? item?.menu_contents?.description.split(' ').slice(0, 90).join(' ') + '...'
+                      : '';
+
+                    return (
+                      <div className="row no-gutters" key={index}>
+                        {/* For even items: text first, image second */}
+                        {isEven ? (
+                          <>
+                            <div className="col-lg-6 col-12">
+                              <div className="services-text">
+                                <h2>{item?.menu_contents?.title}</h2>
+                                <p dangerouslySetInnerHTML={{ __html: description }} />
+                               
+                                <Nav.Link
+                                  href={`/services/${item?.menu_contents?.slug}`}
+                                  key={index}
+                                  className="services-btn proc-btn thar-three4"
+                                >
+                                  Read Case Study
+                                </Nav.Link>
+                              </div>
+                            </div>
+                            <div className="col-lg-6 col-12">
+                              <div className="mediaimg">
+                                <Image
+                                  width={600}
+                                  height={150}
+                                  src={`${env.BACKEND_BASE_URL}assets/img/menu-content/${item?.menu_contents?.image}`}
+                                  alt="image"
+                                  className="img-fluid"
+                                  loading="lazy"
+                                />
+                              </div>
+                            </div>
+                          </>
+                        ) : (
+                          // For odd items: image first, text second
+                          <>
+                            <div className="col-lg-6 col-12">
+                              <div className="mediaimg">
+                                <Image
+                                  width={600}
+                                  height={150}
+                                  src={`${env.BACKEND_BASE_URL}assets/img/menu-content/${item?.menu_contents?.image}`}
+                                  alt="image"
+                                  className="img-fluid"
+                                  loading="lazy"
+                                />
+                              </div>
+                            </div>
+                            <div className="col-lg-6 col-12">
+                              <div className="services-text">
+                                <h2>{item?.menu_contents?.title}</h2>
+                                <p dangerouslySetInnerHTML={{ __html: description }} />
+                              
+                                <Nav.Link
+                                  href={`/services/${item?.menu_contents?.slug}`}
+                                  key={index}
+                                  className="services-btn proc-btn thar-three4"
+                                >
+                                  Read Case Study
+                                </Nav.Link>
+                              </div>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div className="shp1"><img src="../assets/images/ser-bg.png" /></div>
+          <div className="shp2"><img src="../assets/images/ser-bg2.png" /></div>
+        </section>
       </main>
     </>
   )
@@ -80,14 +139,14 @@ const Service = ({services, service}) => {
 export default React.memo(Service);
 
 export async function getServerSideProps() {
-    const res = await HomeService.homePage()
-    const services = res.data?.services?.children || []
-    const service = res.data?.services || []
-  
-    return {
-      props: {
-        services,
-        service
-      }
+  const res = await HomeService.homePage()
+  const services = res.data?.services?.children || []
+  const service = res.data?.services || []
+
+  return {
+    props: {
+      services,
+      service
     }
   }
+}

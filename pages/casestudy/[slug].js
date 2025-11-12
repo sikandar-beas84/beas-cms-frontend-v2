@@ -60,8 +60,12 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug }) => {
 
         
         <div className="bgF2F4F7 p-relative">
+          
           <Container className="py-5">
             <Row>
+              <Col xs={12}>
+                <h1 className="inner-page-title-small">{casestudy?.title}</h1>
+              </Col>
               <Col xs={12} lg={5}>
                 <div className="serviceDetailsWrap">
                   <Image
@@ -77,8 +81,7 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug }) => {
               </Col>
 
               <Col xs={12} lg={7}>
-                <div className="CaseStudyH">{casestudy?.title}</div>
-                <Accordion defaultActiveKey="0" flush>
+               <Accordion defaultActiveKey="0" flush>
                   <Accordion.Item eventKey="0">
                     <Accordion.Header>
                       Project Overview / Business Need

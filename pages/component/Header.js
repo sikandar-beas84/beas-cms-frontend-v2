@@ -10,6 +10,7 @@ import { Mail, Phone } from "react-feather";
 import { useRouter } from 'next/router';
 import { env } from '../../util/constants/common';
 import Image from 'next/image';
+import Link from "next/link";
 
 const Header = ({homeData}) => {
   const router = useRouter();
@@ -112,6 +113,19 @@ const Header = ({homeData}) => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
+      <Link href="#" className="">
+             {/* <Image
+                src="../assets/images/whatsapp.png"
+                alt="whatsApp"
+                width={40}
+                height={40}
+                priority
+                fetchPriority="high"
+                className="img-fluid fixed-social"
+              /> */}
+              <img src="../assets/images/whatsapp.png"className="img-fluid fixed-social"/>
+      </Link>
     </>
   );
 }

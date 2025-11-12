@@ -58,7 +58,7 @@ const Career = ({ careers, menucareer }) => {
                       {item.description}
                     </div>
                     <p className='job-experience-txt'>{item.experience}</p>
-                    <button type="button" class="btn btn-primary-blue">Apply</button>
+                    <button type="button" className="btn btn-primary-blue">Apply</button>
                   </div>
                 </Link>
               </Col>
@@ -131,7 +131,7 @@ const Career = ({ careers, menucareer }) => {
                     </div>
                   </Col>
                   <Col xs={12} md={4} className='mb-3'>
-                    <button type="button" class="btn btn-primary-blue">Submit</button>
+                    <button type="button" className="btn btn-primary-blue">Submit</button>
                   </Col>
                 </Row>
               </div>
@@ -149,7 +149,7 @@ const Career = ({ careers, menucareer }) => {
                 {/* <!--/--> */}
                 <div className='job-details-inner-block'>
                   <p className='job-details-title'>Required Skills</p>
-                  <div class="skill-tags">
+                  <div className="skill-tags">
                     <p>Angular</p>
                     <p>Node JS</p>
                     <p>ABC Dummy</p>
@@ -159,7 +159,7 @@ const Career = ({ careers, menucareer }) => {
                 {/* <!--/--> */}
                 <div className='job-details-inner-block'>
                   <p className='job-details-title'>Additional Skills</p>
-                  <div class="skill-tags">
+                  <div className="skill-tags">
                     <p>Angular</p>
                     <p>Node JS</p>
                     <p>ABC Dummy</p>

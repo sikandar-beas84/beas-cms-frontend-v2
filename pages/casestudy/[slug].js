@@ -9,10 +9,11 @@ import { env } from "../../util/constants/common";
 import Link from "next/link";
 import SEO from "../../components/SEO";
 import { useRouter } from "next/router";
+import BannerCarousal from "../component/BannerCarousal";
 
 const MAX_VISIBLE = 10; // show 10 numbers at a time
 
-const Page = ({ casestudy, menucasestudy, projects, currentSlug }) => {
+const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData }) => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
@@ -58,9 +59,9 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug }) => {
           pageBanner={`assets/img/menu-content/${menucasestudy?.menu_contents?.banner}`}
         />
 
-        
+
         <div className="bgF2F4F7 p-relative">
-          
+
           <Container className="py-5">
             <Row>
               <Col xs={12}>
@@ -81,7 +82,7 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug }) => {
               </Col>
 
               <Col xs={12} lg={7}>
-               <Accordion defaultActiveKey="0" flush>
+                <Accordion defaultActiveKey="0" flush>
                   <Accordion.Item eventKey="0">
                     <Accordion.Header>
                       Project Overview / Business Need
@@ -134,44 +135,53 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug }) => {
                   <Accordion.Item eventKey="3">
                     <Accordion.Header>Technology Platform</Accordion.Header>
                     <Accordion.Body>
-                    <ul>
-                    { casestudy?.technology_platform?.map((item, index)=>(
-                    <li key={index}>{item}</li>
-                    ))}
-                  </ul>
+                      <ul>
+                        {casestudy?.technology_platform?.map((item, index) => (
+                          <li key={index}>{item}</li>
+                        ))}
+                      </ul>
                     </Accordion.Body>
                   </Accordion.Item>
                 </Accordion>
               </Col>
             </Row>
-          
-          
+            <Row>
+              <Col xs={12} className="mt-5">
+                <h1 class="inner-page-title mb-2 text-center">Our Recent studies</h1>
+                <p className="text-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                  been the industry's standard dummy.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              </Col>
+              <Col xs={12} className="my-3">
+                <BannerCarousal page="projectsnew" projects={homeData?.projects} />
+              </Col>
+            </Row>
+
           </Container>
-          {/* ✅ Simple Previous / Next */}
+
           <div className="d-flex justify-content-between carousel-control">
             {/* Previous */}
             {
-            prevProject? (
-              <Link
-                href={`/casestudy/${prevProject.slug}`}
-                className="btn btn-primary"
-              >
-                <ChevronLeft/>
-              </Link>
-            ) : <Link href="#" className="btn btn-primary" ><ChevronLeft/></Link>
+              prevProject ? (
+                <Link
+                  href={`/casestudy/${prevProject.slug}`}
+                  className="btn btn-primary"
+                >
+                  <ChevronLeft />
+                </Link>
+              ) : <Link href="#" className="btn btn-primary" ><ChevronLeft /></Link>
             }
 
             {/* Next */}
             {
-            nextProject? (
-              <Link
-                href={`/casestudy/${nextProject.slug}`}
-                className="btn btn-primary"
-              >
-                <ChevronRight/>
-              </Link>
-            ) : <Link href="#" className="btn btn-primary" ><ChevronRight/></Link>
-          }
+              nextProject ? (
+                <Link
+                  href={`/casestudy/${nextProject.slug}`}
+                  className="btn btn-primary"
+                >
+                  <ChevronRight />
+                </Link>
+              ) : <Link href="#" className="btn btn-primary" ><ChevronRight /></Link>
+            }
           </div>
         </div>
       </main>
@@ -194,6 +204,10 @@ export async function getServerSideProps({ params }) {
     (item) => item.slug.toString() === slug
   );
 
+  const homesection = await HomeService.homePage();
+  const homeResult = homesection.data;
+
+
   if (currentIndex === -1) {
     return {
       notFound: true,
@@ -208,6 +222,7 @@ export async function getServerSideProps({ params }) {
       menucasestudy,
       projects,
       currentSlug: slug,
+      homeData: homeResult ? homeResult : [],
     },
   };
 }

@@ -316,9 +316,9 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials })
                 />
             </div>
             <h3>{titleText}</h3>
-            {typeof window !== 'undefined' && businessNeed && (
+            {/* {typeof window !== 'undefined' && businessNeed && (
   <div dangerouslySetInnerHTML={{ __html: businessNeed.trim() }} />
-)}
+)} */}
             <div className="port-tags">
                 <h4>Angular</h4>
                 <h4>Node JS</h4>

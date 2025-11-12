@@ -120,7 +120,7 @@ function Home({homeData}) {
                         <div className="counter col-lg-3 col-md-6 col-sm-6 col-6" key={index}>
                             <div className="stat-box">
                               <div className="stat-img">
-                                  <img src="assets/images/stat-1.png" alt=""/>
+                              <Image width={100} height={100} style={{ minWidth: "42px" }}  src={`${env.BACKEND_BASE_URL}${item.icon}`} alt="image" loading="lazy" />
                               </div>
                               <div className="d-flexrt">
                                   <h3 className="count-number">{item?.short_desc}</h3>

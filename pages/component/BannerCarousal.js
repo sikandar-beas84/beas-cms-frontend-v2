@@ -297,34 +297,34 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials })
               ? item?.title.split(" ").slice(0, 4).join(" ") + "..."
               : "";
             const businessNeed = item?.business_need
-            ? item?.business_need.split(" ").slice(0, 10).join(" ") + "..."
-            : "";
-          return(
-          <>
-          
-          <div className="port-box" onClick={() => router.push(`/casestudy/${item.slug}`)}>
-            <div className="port-img">
-                
-                <Image
-                  src={`${env.BACKEND_BASE_URL}${item.image}`} 
-                  alt="Hero Banner"
-                  width={100}
-                  height={100}
-                  priority 
-                  fetchPriority="high" 
-                  className="img-fluid port-shw" 
-                />
-            </div>
-            <h3>{titleText}</h3>
-            {/* {typeof window !== 'undefined' && businessNeed && (
+              ? item?.business_need.split(" ").slice(0, 10).join(" ") + "..."
+              : "";
+            return (
+              <>
+
+                <div className="port-box" onClick={() => router.push(`/casestudy/${item.slug}`)}>
+                  <div className="port-img">
+
+                    <Image
+                      src={`${env.BACKEND_BASE_URL}${item.image}`}
+                      alt="Hero Banner"
+                      width={100}
+                      height={100}
+                      priority
+                      fetchPriority="high"
+                      className="img-fluid port-shw"
+                    />
+                  </div>
+                  <h3>{titleText}</h3>
+                  {/* {typeof window !== 'undefined' && businessNeed && (
   <div dangerouslySetInnerHTML={{ __html: businessNeed.trim() }} />
 )} */}
-            <div className="port-tags">
-                <h4>Angular</h4>
-                <h4>Node JS</h4>
-                <h4>ABC Dummy</h4>
-            </div>
-          </div>
+                  <div className="port-tags">
+                    <h4>Angular</h4>
+                    <h4>Node JS</h4>
+                    <h4>ABC Dummy</h4>
+                  </div>
+                </div>
 
               </>
             );

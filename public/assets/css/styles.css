@@ -200,6 +200,8 @@ a{text-decoration:none!important;}
   line-height: 26px;
   text-transform: capitalize;
   margin-top: 20px;
+  color:#000;
+  min-height: 50px;
 }
 
 .award-section ul {

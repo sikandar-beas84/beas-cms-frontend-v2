@@ -55,7 +55,7 @@ const Career = ({ careers, menucareer }) => {
                       <div className='skill-wrap-head-text'>{item?.role}</div>
                     </div>
                     <div className='sill-wrap-text'>
-                      {item.description}
+                      {item?.responsibility}
                     </div>
                     <p className='job-experience-txt'>{item.experience}</p>
                     <button type="button" className="btn btn-primary-blue">Apply</button>

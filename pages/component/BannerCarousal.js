@@ -9,6 +9,8 @@ import Link from "next/link";
 
 const BannerCarousal = ({ page, technologiya, clients, projects, testimonials }) => {
 
+  const router = useRouter();
+
   const createSliderSettings = (slidesToShowDefault, sliderDot = false) => ({
     dots: sliderDot,
     infinite: true,
@@ -70,8 +72,6 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials })
   const clientsettings = createSliderSettings(5);
 
   const testimonialnewsettings = testimoniolnewSliderSettings(3);
-
-  const router = useRouter();
 
   return (
     <>
@@ -294,17 +294,15 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials })
           { projects?.map((item, index)=>{
 
             const titleText = item?.title
-            ? item.title.split(" ").slice(0, 4).join(" ") + "..."
+            ? item?.title.split(" ").slice(0, 4).join(" ") + "..."
             : "";
             const businessNeed = item?.business_need
-            ? item.business_need.split(" ").slice(0, 10).join(" ") + "..."
+            ? item?.business_need.split(" ").slice(0, 10).join(" ") + "..."
             : "";
           return(
           <>
-          <Link
-            href={`/casestudy/${item.slug}`}
-          >
-          <div className="port-box">
+          
+          <div className="port-box" onClick={() => router.push(`/casestudy/${item.slug}`)}>
             <div className="port-img">
                 
                 <Image
@@ -318,14 +316,15 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials })
                 />
             </div>
             <h3>{titleText}</h3>
-            <p dangerouslySetInnerHTML={{ __html: businessNeed }} />
+            {typeof window !== 'undefined' && businessNeed && (
+  <div dangerouslySetInnerHTML={{ __html: businessNeed.trim() }} />
+)}
             <div className="port-tags">
                 <h4>Angular</h4>
                 <h4>Node JS</h4>
                 <h4>ABC Dummy</h4>
             </div>
           </div>
-          </Link>
 
           </>
           );

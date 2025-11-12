@@ -2172,7 +2172,13 @@ a.services-btn {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
+.ser_frmArea {
+  background: #FFFFFF;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.05);
+  border-radius: 7px;
+  padding: 20px;
+  margin-top: 30px;
+}
   /* Responive */
 @media (min-width: 1366px) {
 

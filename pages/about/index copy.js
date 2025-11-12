@@ -73,7 +73,7 @@ const AboutUs = ({aboutus, commonaboutus}) => {
                                             { commonaboutus?.map((item, index)=>{
                                             if (item.title !== "Years Experience") {
                                             return(<Col key={index}>
-                                                <div class="counter_bx">
+                                                <div className="counter_bx">
                                                     <em>
                                                     <Image 
                                                     width={600} 
@@ -84,8 +84,8 @@ const AboutUs = ({aboutus, commonaboutus}) => {
                                                     loading="lazy"
                                                     />
                                                     </em>
-                                                    <div class="st_texts">
-                                                        <p><span class="counter-value" data-count="100">{item?.short_desc}</span></p>
+                                                    <div className="st_texts">
+                                                        <p><span className="counter-value" data-count="100">{item?.short_desc}</span></p>
                                                         <b>{item?.long_desc}</b>
                                                     </div>
                                                 </div>

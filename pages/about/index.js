@@ -91,8 +91,8 @@ const AboutUs = ({aboutus, commonaboutus}) => {
                             </div>
                         </div>
                     </div>
-                    <div class="shp1"><img src="assets/images/ser_bg.png"/></div>
-                    <div class="shp2"><img src="assets/images/ser_bg2.png"/></div>
+                    <div className="shp1"><img src="assets/images/ser_bg.png"/></div>
+                    <div className="shp2"><img src="assets/images/ser_bg2.png"/></div>
                 </section>
 
                 <div className="why_abt">

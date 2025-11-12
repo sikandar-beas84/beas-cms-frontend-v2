@@ -40,7 +40,7 @@ const BannerSlider = ({bannerSlide}) => {
                     {/* <div className='fw-300' dangerouslySetInnerHTML={{ __html: descriptionText }} /> */}
                     {descriptionText}
                   </p>
-                  <a href={`/industries/${item.slug}`} class="bnr-btn thar-three">CONTACT US</a>
+                  <a href={`/industries/${item.slug}`} className="bnr-btn thar-three">CONTACT US</a>
               </div>
             </div>
           </div>

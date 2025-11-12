@@ -1,4 +1,4 @@
-import React, {useState } from 'react'
+import React, { useState } from 'react'
 import { Container } from 'react-bootstrap'
 import { Col, Row } from "react-bootstrap";
 import BreadCrumb from '../component/BreadCrumb';
@@ -7,13 +7,13 @@ import HomeService from '../../util/service/Home';
 import { env } from '../../util/constants/common';
 import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
-
-const ContactUs = ({contactus}) => {
+import Accordion from 'react-bootstrap/Accordion';
+const ContactUs = ({ contactus }) => {
 
   const router = useRouter();
-    if (router.isFallback) {
-      return <div>Loading...</div>;
-    }
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
 
   const [formData, setFormData] = useState({
     name: '',
@@ -99,13 +99,13 @@ const ContactUs = ({contactus}) => {
 
   return (
     <>
-    <SEO
+      <SEO
         title="Contact Us"
         description="Reach out to Beas Consultancy. We’re here to help with your questions, suggestions, and business inquiries."
         keywords="Contact Beas, Contact Form, Business Inquiry, Support"
         url={`${env.BACKEND_BASE_URL}${contactus?.slug || 'skills'}`}
         image={
-          contactus?.image 
+          contactus?.image
             ? `${env.BACKEND_BASE_URL}${contactus.image}`
             : `${env.BACKEND_BASE_URL}/default-image.jpg`
         }
@@ -113,135 +113,149 @@ const ContactUs = ({contactus}) => {
       />
       <main>
         <BreadCrumb pagetitle="Contact Us" pageBanner={contactus?.banner} />
-        <Container className='py-5 contactPage'>
-          <Row>
-            <Col xs={12} lg={6}>
-              <form className="was-validate contact-frm" onSubmit={handleSubmit}>
-                <Row>
-                  <Col xs={12}>
-                    <div className="contactTxt">
-                      <p className="sub-title">{contactus?.slug}</p>
-                      <h1>{contactus?.title}</h1>
-                      <div className="gry--txt" dangerouslySetInnerHTML={{ __html: contactus?.short_desc }} />
-                    </div>
-                  </Col>
-                  <Row className='row contact-form margin-top-8'>
-                  <Col xs={12} lg={6}>
-                    <label>Name <span className='text-danger'><b>*</b></span></label>
-                    <input 
-                      type='text' 
-                      name="name" 
-                      value={formData.name}
-                      onChange={handleChange}
-                      className='form-control mb-3'
-                      required 
-                    />
-                    {errors.name && (<p className='error_message'>{errors.name[0]}</p>)}
-                  </Col>
-                  <Col xs={12} lg={6}>
-                    <label>Email <span className='text-danger'><b>*</b></span></label>
-                    <input 
-                      type='text' 
-                      name="email" 
-                      value={formData.email}
-                      onChange={handleChange}
-                      className='form-control mb-3'
-                      required 
-                    />
-                    {errors.email && (<p className='error_message'>{errors.email[0]}</p>)}
-                  </Col>
-                  <Col xs={12} lg={6}>
-                    <label>Phone No <span className='text-danger'><b>*</b></span></label>
-                    <input 
-                      type='text' 
-                      name="phone" 
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className='form-control mb-3'
-                      required 
-                    />
-                    {errors.phone && (<p className='error_message'>{errors.phone[0]}</p>)}
-                  </Col>
-                  <Col xs={12} lg={6}>
-                    <label>Subject <span className='text-danger'><b>*</b></span></label>
-                    <input 
-                      type='text' 
-                      name="subject" 
-                      value={formData.subject}
-                      onChange={handleChange}
-                      className='form-control mb-3'
-                      required 
-                    />
-                    {errors.subject && (<p className='error_message'>{errors.subject[0]}</p>)}
-                  </Col>
-                  <Col xs={12} lg={12}>
-                    <label>Message <span className='text-danger'><b>*</b></span></label>
-                    <textarea 
-                    name="message" 
-                    value={formData.message}
-                    onChange={handleChange}
-                    className='form-control h-150 mb-3'
-                    required 
-                    ></textarea>
-                    {errors.message && (<p className='error_message'>{errors.message[0]}</p>)}
-                  </Col>
-                  <Col xs={12} lg={6}>
-                    <label>Choose a file: <span className='text-danger'><b>*</b></span></label>
-                    <input 
-                        type='file' 
-                        name="file" 
-                        onChange={handleChange}
-                        accept=".doc,.docx,.pdf,.ppt,.pptx"
-                        className='form-control mb-3' 
-                      />
-                      <p className='bold-title' style={{fontSize:'12px'}}>Attach files: (File size up to 3 MB. Formats: doc, docx, pdf, ppt, pptx)</p>
-                      {errors.file && (<p className='error_message'>{errors.file[0]}</p>)}
-                  </Col>
-                  </Row>
-                  <Col xs={12} lg={3}>
-                    <button type="submit" className='red-btn w-100 mt-3'  >Submit</button>
-                  </Col>
-                  <Col xs={12} className='mt-3'>
-                  {status && <p>{status}</p>}
-                  </Col>
-                </Row>
-              </form>
 
-            </Col>
-            <Col xs={12} lg={5}>
-              <div className='map-wrap contact-page-info'>
-
-              <Row>
-                  <Col>
-                  <div className='SalesInquiries'>
-                    <span><PhoneCall /></span>
-                    <div>
-                      <p className="contact_popup_text__6IJDd"><b>Sales Inquiries</b> 
-                      <a className="contact_popup_link__IFKEk" href="tel:+91-33-2321-1380">+91-33-2321-1380</a>
-                      </p>
-                    </div>
-                  </div>
-                    
-                  </Col>
-                  <Col>
-                    <div className='CustomerSupport'>
-                      <span><Mail /></span>
-                      <div>
-                        <p className="contact_popup_text__6IJDd"><b>Customer Support</b> 
-                        <a className="contact_popup_link__IFKEk" href="mailto:beas@beas.co.in">beas@beas.co.in</a>
-                        </p>
+        <section className="section-padding">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-8 col-md-12">
+                <div className="contact_form_heading">
+                  <h2>Are you Ready for a Better, more Productive Business?</h2>
+                </div>
+                <div className="contact_form_box">
+                  <div className="row">
+                    <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                      <div className="contact_inputs">
+                        <input type="text" placeholder="Name" />
                       </div>
                     </div>
-                    
-                  </Col>
-                </Row>
-                <iframe className='contactMap' src={`${contactus?.url}`} width="100%" height="400" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
-
+                    <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                      <div className="contact_inputs">
+                        <input type="text" placeholder="Email" />
+                      </div>
+                    </div>
+                    <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                      <div className="contact_inputs">
+                        <input type="text" placeholder="Mobile Number" />
+                      </div>
+                    </div>
+                    <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                      <div className="contact_inputs">
+                        <input type="text" placeholder="Subject" />
+                      </div>
+                    </div>
+                    <div className="col-lg-12 col-md-12 col-sm-12 col-12">
+                      <div className="contact_inputs">
+                        <textarea placeholder="Message" rows={5}></textarea>
+                      </div>
+                    </div>
+                    <div className="col-lg-12 col-md-12 col-sm-12 col-12">
+                      <div className="contact_form_btn">
+                        <input type="submit" name="" value="Send Message" className="post-job-btn" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
+              <div className="col-lg-4 col-md-12">
+                <div className="contact_right_box">
+                  <div className="contact_form_add_heading">
 
-            </Col>
-          </Row>
-        </Container>
+                    <div className="form_add map_add1">
+                      <div className="map_location_icon">
+                        <img src="assets/images/add2.png" className="beats" />
+                      </div>
+                      <div className="map_location_icon_cont">
+                        <h1>Address</h1>
+                        <h3>BEAS Consultancy & Services Pvt. Ltd. CF-345, Salt Lake City, Sector - I Kolkata - 700064, West Bengal, India</h3>
+                      </div>
+                      <div className="clearfix"></div>
+                    </div>
+                    <div className="form_add map_add3">
+                      <div className="map_location_icon">
+                        <img src="assets/images/add3.png" className="beats" />
+                      </div>
+                      <div className="map_location_icon_cont map_location_icon_cont4">
+                        <h1>Email Address</h1>
+                        <h3> <a href="#">beas@beas.co.in</a>  <br /> <a href="#">beas@beas.co.in</a></h3>
+                      </div>
+                      <div className="clearfix"></div>
+                    </div>
+                    <div className="form_add map_add2">
+                      <div className="map_location_icon">
+                        <img src="assets/images/add1.png" className="beats" />
+                      </div>
+                      <div className="map_location_icon_cont map_location_icon_cont2">
+                        <h1>Mobile Number</h1>
+                        <h3> <a href="#">033 2666 8888</a>  <br /> <a href="#">+91 9876543210</a></h3>
+                      </div>
+                      <div className="clearfix"></div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <section className="section-abuts section-contact">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-12">
+                <div className="ser_rea">
+                  <div className="about_texts">
+                    <div className="serv-head">
+                      <h2>Frequently Asked Questions</h2>
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
+                      <Accordion defaultActiveKey="0" flush>
+                        <Accordion.Item eventKey="0">
+                          <Accordion.Header>
+                            1. Simply dummy question text show here?
+                          </Accordion.Header>
+                          <Accordion.Body>
+                            <p>Federal Bank Limited is a major Indian commercial bank in the private sector headquartered at Aluva, Kerala having more than thousand branches and
+                              ATMs spread across different States in India.Federal Bank Limited is a major Indian commercial bank in the private sector headquartered at Aluva,
+                              Kerala having more than thousand branches and ATMs spread across different States in India.Federal Bank Limited is a major Indian commercial bank in
+                              the private sector headquartered at Aluva, Kerala having more than thousand branches and ATMs spread across different States in India.</p>
+                          </Accordion.Body>
+                        </Accordion.Item>
+
+                        <Accordion.Item eventKey="1">
+                        <Accordion.Header>
+                            1. Simply dummy question text show here?
+                          </Accordion.Header>
+                          <Accordion.Body>
+                            <p>Federal Bank Limited is a major Indian commercial bank in the private sector headquartered at Aluva, Kerala having more than thousand branches and
+                              ATMs spread across different States in India.Federal Bank Limited is a major Indian commercial bank in the private sector headquartered at Aluva,
+                              Kerala having more than thousand branches and ATMs spread across different States in India.Federal Bank Limited is a major Indian commercial bank in
+                              the private sector headquartered at Aluva, Kerala having more than thousand branches and ATMs spread across different States in India.</p>
+                          </Accordion.Body>
+                        </Accordion.Item>
+
+                        <Accordion.Item eventKey="2">
+                        <Accordion.Header>
+                            1. Simply dummy question text show here?
+                          </Accordion.Header>
+                          <Accordion.Body>
+                            <p>Federal Bank Limited is a major Indian commercial bank in the private sector headquartered at Aluva, Kerala having more than thousand branches and
+                              ATMs spread across different States in India.Federal Bank Limited is a major Indian commercial bank in the private sector headquartered at Aluva,
+                              Kerala having more than thousand branches and ATMs spread across different States in India.Federal Bank Limited is a major Indian commercial bank in
+                              the private sector headquartered at Aluva, Kerala having more than thousand branches and ATMs spread across different States in India.</p>
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      
+                      </Accordion>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="shp1"><img src="assets/images/ser-bg.png" /></div>
+          <div className="shp2"><img src="assets/images/ser-bg2.png" /></div>
+        </section>
       </main>
     </>
   )

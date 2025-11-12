@@ -113,101 +113,131 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials })
 
       {page == 'projects' && (
         <Slider {...settings}>
-          { projects?.map((item, index)=>{
+          {projects?.map((item, index) => {
 
             const titleText = item?.title
-            ? item.title.split(" ").slice(0, 4).join(" ") + "..."
-            : "";
-          return(<Col xs={12} lg={4} key={index}>
-            <div className="portfolio-work-wrap">
-              <div className="portfolio-work-wrap__img">
-              <Image
-              src={`${env.BACKEND_BASE_URL}${item.image}`}   // use optimized format (webp/avif)
-              alt="Hero Banner"
-              width={1920}
-              height={1080}
-              priority      // ✅ ensures this image is not lazy-loaded
-              fetchPriority="high" // ✅ tells browser it’s critical
-              className="img-fluid" // you can keep bootstrap class
-            />
-              
-              </div>
-              <div
+              ? item.title.split(" ").slice(0, 4).join(" ") + "..."
+              : "";
+            return (<Col xs={12} lg={4} key={index}>
+              <div className="portfolio-work-wrap">
+                <div className="portfolio-work-wrap__img">
+                  <Image
+                    src={`${env.BACKEND_BASE_URL}${item.image}`}   // use optimized format (webp/avif)
+                    alt="Hero Banner"
+                    width={1920}
+                    height={1080}
+                    priority      // ✅ ensures this image is not lazy-loaded
+                    fetchPriority="high" // ✅ tells browser it’s critical
+                    className="img-fluid" // you can keep bootstrap class
+                  />
+
+                </div>
+                <div
                   className="portfolio-work-wrap__block"
                   onClick={() => router.push(`/casestudy/${item.slug}`)}
                   style={{ cursor: 'pointer' }} // Optional: makes it feel clickable
                 >
-                <div className="portfolio-work-wrap__txt">
-                  <p>{titleText}</p>
+                  <div className="portfolio-work-wrap__txt">
+                    <p>{titleText}</p>
+                  </div>
+                  <p className="link-txt"><ArrowUpRight /></p>
                 </div>
-                <p className="link-txt"><ArrowUpRight /></p>
+
               </div>
 
-            </div>
+            </Col>);
+          })}
 
-          </Col>);
-        })}
-          
         </Slider>
       )}
 
       {page == 'testimonial' && (
         <Slider {...testimonialsettings}>
 
-          { testimonials?.map((item, index)=>(
-          <div className="client-testimonial">
-            <div className="testimonial-wrapper">
-              <div className="testimonial">
-                <p>
-                  {item.message}
-                </p>
-              </div>
-              <div className="media">
-              <Image
-              src={`${env.BACKEND_BASE_URL}assets/img/testimonial/${item.profile_photo_path}`}   // use optimized format (webp/avif)
-              alt="Hero Banner"
-              width={1920}
-              height={1080}
-              priority      // ✅ ensures this image is not lazy-loaded
-              fetchPriority="high" // ✅ tells browser it’s critical
-              className="img-fluid" // you can keep bootstrap class
-            />
-               <div className="media-body">
-                  <div className="overview">
-                    <div className="overview-box">
-                      <div className="name"><b>{item.name}</b></div>
-                      <div className="grey-txt" dangerouslySetInnerHTML={{ __html: item?.role }} />
-                      {/* <div className="details">{item.role}</div> */}
-                    </div>
-                    <div className="overview-box-quote">
-                    <Image
-                      src="/assets/images/quote.png"   // use optimized format (webp/avif)
-                      alt="Hero Banner"
-                      width={1920}
-                      height={1080}
-                      priority      // ✅ ensures this image is not lazy-loaded
-                      fetchPriority="high" // ✅ tells browser it’s critical
-                      className="img-fluid" // you can keep bootstrap class
-                    />
-                      
+          {testimonials?.map((item, index) => (
+            <div className="client-testimonial">
+              <div className="testimonial-wrapper">
+                <div className="testimonial">
+                  <p>
+                    {item.message}
+                  </p>
+                </div>
+                <div className="media">
+                  <Image
+                    src={`${env.BACKEND_BASE_URL}assets/img/testimonial/${item.profile_photo_path}`}   // use optimized format (webp/avif)
+                    alt="Hero Banner"
+                    width={1920}
+                    height={1080}
+                    priority      // ✅ ensures this image is not lazy-loaded
+                    fetchPriority="high" // ✅ tells browser it’s critical
+                    className="img-fluid" // you can keep bootstrap class
+                  />
+                  <div className="media-body">
+                    <div className="overview">
+                      <div className="overview-box">
+                        <div className="name"><b>{item.name}</b></div>
+                        <div className="grey-txt" dangerouslySetInnerHTML={{ __html: item?.role }} />
+                        {/* <div className="details">{item.role}</div> */}
+                      </div>
+                      <div className="overview-box-quote">
+                        <Image
+                          src="/assets/images/quote.png"   // use optimized format (webp/avif)
+                          alt="Hero Banner"
+                          width={1920}
+                          height={1080}
+                          priority      // ✅ ensures this image is not lazy-loaded
+                          fetchPriority="high" // ✅ tells browser it’s critical
+                          className="img-fluid" // you can keep bootstrap class
+                        />
+
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
           ))}
 
         </Slider>
       )}
       {page == 'tools' && (
         <Slider {...toolssettings}>
-          
-         { technologiya?.map((item, index)=>(
-          <div className='tools' key={index}>
-            <div className='tools-image'>
-            <Image
-                src={`${env.BACKEND_BASE_URL}assets/img/technology/${item.logo}`}   // use optimized format (webp/avif)
+
+          {technologiya?.map((item, index) => (
+            <div className='tools' key={index}>
+              <div className='tools-image'>
+                <Image
+                  src={`${env.BACKEND_BASE_URL}assets/img/technology/${item.logo}`}   // use optimized format (webp/avif)
+                  alt="Hero Banner"
+                  width={1920}
+                  height={1080}
+                  priority      // ✅ ensures this image is not lazy-loaded
+                  fetchPriority="high" // ✅ tells browser it’s critical
+                  className="img-fluid" // you can keep bootstrap class
+                />
+                <Image
+                  src={`${env.BACKEND_BASE_URL}assets/img/technology/${item.logo}`}   // use optimized format (webp/avif)
+                  alt="Hero Banner"
+                  width={1920}
+                  height={1080}
+                  priority      // ✅ ensures this image is not lazy-loaded
+                  fetchPriority="high" // ✅ tells browser it’s critical
+                  className="img-fluid" // you can keep bootstrap class
+                />
+
+              </div>
+            </div>
+          ))}
+
+        </Slider>
+      )}
+      {page == 'clients' && (
+        <Slider {...clientsettings}>
+
+          {clients?.map((item, index) => (
+            <div className='client-logo' key={index}>
+              <Image
+                src={`${env.BACKEND_BASE_URL}${item.logo}`}   // use optimized format (webp/avif)
                 alt="Hero Banner"
                 width={1920}
                 height={1080}
@@ -215,38 +245,8 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials })
                 fetchPriority="high" // ✅ tells browser it’s critical
                 className="img-fluid" // you can keep bootstrap class
               />
-              <Image
-              src={`${env.BACKEND_BASE_URL}assets/img/technology/${item.logo}`}   // use optimized format (webp/avif)
-              alt="Hero Banner"
-              width={1920}
-              height={1080}
-              priority      // ✅ ensures this image is not lazy-loaded
-              fetchPriority="high" // ✅ tells browser it’s critical
-              className="img-fluid" // you can keep bootstrap class
-            />
-            
+
             </div>
-          </div>
-         ))}
-
-        </Slider>
-      )}
-      {page == 'clients' && (
-        <Slider {...clientsettings}>
-
-          { clients?.map((item, index)=>(
-          <div className='client-logo' key={index}>
-            <Image
-              src={`${env.BACKEND_BASE_URL}${item.logo}`}   // use optimized format (webp/avif)
-              alt="Hero Banner"
-              width={1920}
-              height={1080}
-              priority      // ✅ ensures this image is not lazy-loaded
-              fetchPriority="high" // ✅ tells browser it’s critical
-              className="img-fluid" // you can keep bootstrap class
-            />
-            
-          </div>
           ))}
 
         </Slider>
@@ -254,48 +254,48 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials })
 
       {page == 'testimonialnew' && (
         <Slider {...testimonialnewsettings}>
-          
-          { testimonials?.map((item, index)=>{
+
+          {testimonials?.map((item, index) => {
             const messageText = item?.message
-            ? item.message.length > 50
-              ? item.message.substring(0, 250) + "..."
-              : item.message
-            : "";
-              return(
+              ? item.message.length > 50
+                ? item.message.substring(0, 250) + "..."
+                : item.message
+              : "";
+            return (
               <div className="test-box" key={index}>
                 <div className="quote-txt">
                   <p>{messageText}</p>
                 </div>
                 <div className="tester">
                   <div className="tester-img">
-                  <Image
-                    src={`${env.BACKEND_BASE_URL}assets/img/testimonial/${item.profile_photo_path}`}  
-                    alt="Hero Banner"
-                    width={50}
-                    height={50}
-                    priority      
-                    fetchPriority="high" 
-                    className="img-fluid" 
-                  />
+                    <Image
+                      src={`${env.BACKEND_BASE_URL}assets/img/testimonial/${item.profile_photo_path}`}
+                      alt="Hero Banner"
+                      width={50}
+                      height={50}
+                      priority
+                      fetchPriority="high"
+                      className="img-fluid"
+                    />
                   </div>
                   <div className="tester-name">
-                      <h2>{item.name}</h2>
-                      <p dangerouslySetInnerHTML={{ __html: item?.role }} />
+                    <h2>{item.name}</h2>
+                    <p dangerouslySetInnerHTML={{ __html: item?.role }} />
                   </div>
                 </div>
-                </div>
-              );
-            })}
+              </div>
+            );
+          })}
         </Slider>
       )}
 
       {page == 'projectsnew' && (
         <Slider {...settings}>
-          { projects?.map((item, index)=>{
+          {projects?.map((item, index) => {
 
             const titleText = item?.title
-            ? item?.title.split(" ").slice(0, 4).join(" ") + "..."
-            : "";
+              ? item?.title.split(" ").slice(0, 4).join(" ") + "..."
+              : "";
             const businessNeed = item?.business_need
             ? item?.business_need.split(" ").slice(0, 10).join(" ") + "..."
             : "";
@@ -326,10 +326,10 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials })
             </div>
           </div>
 
-          </>
-          );
-        })}
-          
+              </>
+            );
+          })}
+
         </Slider>
       )}
     </>

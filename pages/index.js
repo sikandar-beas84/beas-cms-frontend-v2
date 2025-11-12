@@ -137,12 +137,12 @@ function Home({homeData}) {
           {/* About section end */}
 
           {/* why section start */}
-          <div class="why">
-            <div class="container">
+          <div className="why">
+            <div className="container">
                 {homeData?.whychooseus?.map((item, index) =>
                   item.slug === "why-choose-us-content" && (
                         <React.Fragment key={index}>
-                  <div class="serv-head stat-head why-head">
+                  <div className="serv-head stat-head why-head">
                     <h2>{item?.title}</h2>
                     <div className="grey-txt" dangerouslySetInnerHTML={{ __html: item?.description }} />
                   </div>

@@ -123,9 +123,9 @@ const Footer = ({ homeData }) => {
               <div className='get-in-touch-block'>
                 <div className='footer-txt'>Get In Touch</div>
                 <ul>
-                  <li><Map size={16} />BEAS Consultancy & Services Pvt. Ltd. CF-345, Salt Lake City, Sector - I Kolkata - 700064,West Bengal, India</li>
-                  <li><Phone size={16} /> +91-33-2321-1380 / 1381 / 1384</li>
-                  <li><Mail size={16} /> beas@beas.co.in</li>
+                  <li><Map size={16} />{homeData?.contactus?.address}</li>
+                  <li><Phone size={16} /> {homeData?.contactus?.phone}</li>
+                  <li><Mail size={16} /> {homeData?.contactus?.email}</li>
 
                 </ul>
               </div>

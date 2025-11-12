@@ -64,7 +64,7 @@ const AboutUs = ({aboutus, commonaboutus}) => {
                             <div className="col-lg-5 col-md-5">
                                 <div className="about_imgs">
                                     <span>
-                                    <Image width={450} height={150} src={`${env.BACKEND_BASE_URL}${aboutus?.image}`} className="img-fluid about_thumb_img" alt="image" loading="lazy" />
+                                    <Image width={500} height={200} src={`${env.BACKEND_BASE_URL}${aboutus?.image}`} className="img-fluid about_thumb_img" alt="image" loading="lazy" />
                                     </span>
                                 </div>
                             </div>

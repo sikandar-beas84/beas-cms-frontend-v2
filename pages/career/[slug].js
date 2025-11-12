@@ -348,8 +348,7 @@ export async function getServerSideProps({ params }) {
   const result = await HomeService.contactPage();
   const contact = result.data?.contact || [];
   // Find index of current project by matching the ID (slug)
-  console.log("slug",slug);
-  console.log("careers",careers);
+
   const career = careers.find((item) => item.title.toString() === slug);
   const careerId = career?.id;
 

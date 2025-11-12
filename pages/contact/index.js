@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Container } from 'react-bootstrap'
 import { Col, Row } from "react-bootstrap";
 import BreadCrumb from '../component/BreadCrumb';
@@ -15,6 +15,8 @@ const ContactUs = ({ contactus }) => {
     return <div>Loading...</div>;
   }
 
+  const fileInputRef = useRef(null);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -26,6 +28,7 @@ const ContactUs = ({ contactus }) => {
 
   const [status, setStatus] = useState('');
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -63,7 +66,8 @@ const ContactUs = ({ contactus }) => {
     for (const key in formData) {
       data.append(key, formData[key]);
     }
-
+    setLoading(true); // ✅ start loader
+    setStatus('');    // clear previous status
     try {
       const res = await fetch(`${env.API_BASE_URL}save-customer-enquiry`, {
         method: 'POST',
@@ -77,7 +81,11 @@ const ContactUs = ({ contactus }) => {
       if (res.ok) {
         setStatus('✅ Message sent successfully!');
         setErrors({});
-        setFormData({ name: '', email: '', phone: '', subject: '', message: '', file: '' });
+        setFormData({ name: '', email: '', phone: '', subject: '', message: '', file: null });
+        // ✅ Reset file input
+        if (fileInputRef.current) {
+          fileInputRef.current.value = null;
+        }
       } else {
         setStatus(`❌ Error: ${result.message || 'Failed to send'}`);
         setErrors(result.error);
@@ -85,6 +93,8 @@ const ContactUs = ({ contactus }) => {
     } catch (err) {
       //console.error(err);
       setStatus('❌ Submission failed.');
+    }finally {
+      setLoading(false); // ✅ stop loader
     }
   };
 
@@ -122,38 +132,90 @@ const ContactUs = ({ contactus }) => {
                   <h2>Are you Ready for a Better, more Productive Business?</h2>
                 </div>
                 <div className="contact_form_box">
-                  <div className="row">
-                    <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-                      <div className="contact_inputs">
-                        <input type="text" placeholder="Name" />
+                  <form className="was-validate contact-frm" onSubmit={handleSubmit}>
+                    <div className="row">
+                      <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div className="contact_inputs">
+                        <input 
+                          type='text' 
+                          name="name" 
+                          value={formData.name}
+                          onChange={handleChange}
+                          className='form-control mb-3'
+                          placeholder='Name'
+                          required 
+                        />
+                        {errors.name && (<p className='error_message'>{errors.name[0]}</p>)}
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-                      <div className="contact_inputs">
-                        <input type="text" placeholder="Email" />
+                      <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div className="contact_inputs">
+                        <input 
+                          type='text' 
+                          name="email" 
+                          value={formData.email}
+                          onChange={handleChange}
+                          className='form-control mb-3'
+                          placeholder='Email'
+                          required 
+                        />
+                        {errors.email && (<p className='error_message'>{errors.email[0]}</p>)}
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-                      <div className="contact_inputs">
-                        <input type="text" placeholder="Mobile Number" />
+                      <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div className="contact_inputs">
+                        <input 
+                          type='text' 
+                          name="phone" 
+                          value={formData.phone}
+                          onChange={handleChange}
+                          className='form-control mb-3'
+                          placeholder='Mobile Number'
+                          required 
+                        />
+                        {errors.phone && (<p className='error_message'>{errors.phone[0]}</p>)}
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-                      <div className="contact_inputs">
-                        <input type="text" placeholder="Subject" />
+                      <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div className="contact_inputs">
+                        <input 
+                          type='text' 
+                          name="subject" 
+                          value={formData.subject}
+                          onChange={handleChange}
+                          className='form-control mb-3'
+                          placeholder='Subject'
+                          required 
+                        />
+                        {errors.subject && (<p className='error_message'>{errors.subject[0]}</p>)}
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-lg-12 col-md-12 col-sm-12 col-12">
-                      <div className="contact_inputs">
-                        <textarea placeholder="Message" rows={5}></textarea>
+                      <div className="col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div className="contact_inputs">
+                        <textarea 
+                          name="message" 
+                          value={formData.message}
+                          onChange={handleChange}
+                          className='form-control h-150 mb-3'
+                          placeholder='Message'
+                          rows={5}
+                          required 
+                          ></textarea>
+                          {errors.message && (<p className='error_message'>{errors.message[0]}</p>)}
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-lg-12 col-md-12 col-sm-12 col-12">
-                      <div className="contact_form_btn">
-                        <input type="submit" name="" value="Send Message" className="post-job-btn" />
+                      <div className="col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div className="contact_form_btn">
+                          
+                          <button type="submit" className='red-btn w-100 mt-3 post-job-btn' disabled={loading} >
+                            {loading ? 'Submitting...' : 'Submit'}
+                            </button>
+                        </div>
                       </div>
+                      {loading && <div className="spinner">Loading...</div>}
+                      {status && <p>{status}</p>}
                     </div>
-                  </div>
+                  </form>
                 </div>
               </div>
               <div className="col-lg-4 col-md-12">
@@ -166,7 +228,7 @@ const ContactUs = ({ contactus }) => {
                       </div>
                       <div className="map_location_icon_cont">
                         <h1>Address</h1>
-                        <h3>BEAS Consultancy & Services Pvt. Ltd. CF-345, Salt Lake City, Sector - I Kolkata - 700064, West Bengal, India</h3>
+                        <h3>{contactus?.address}</h3>
                       </div>
                       <div className="clearfix"></div>
                     </div>
@@ -176,7 +238,7 @@ const ContactUs = ({ contactus }) => {
                       </div>
                       <div className="map_location_icon_cont map_location_icon_cont4">
                         <h1>Email Address</h1>
-                        <h3> <a href="#">beas@beas.co.in</a>  <br /> <a href="#">beas@beas.co.in</a></h3>
+                        <h3> <a href="#">{contactus?.email}</a></h3>
                       </div>
                       <div className="clearfix"></div>
                     </div>
@@ -186,7 +248,7 @@ const ContactUs = ({ contactus }) => {
                       </div>
                       <div className="map_location_icon_cont map_location_icon_cont2">
                         <h1>Mobile Number</h1>
-                        <h3> <a href="#">033 2666 8888</a>  <br /> <a href="#">+91 9876543210</a></h3>
+                        <h3> <a href="#">{contactus?.phone}</a>  <br /> <a href="#">{contactus?.mobile}</a></h3>
                       </div>
                       <div className="clearfix"></div>
                     </div>

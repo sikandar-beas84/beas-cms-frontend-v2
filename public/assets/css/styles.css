@@ -2137,6 +2137,42 @@ a.services-btn {
   display: none;
 }
 /* contact css end */
+
+
+.error_message {
+  position: relative;
+  color: red;
+  font-size: 12px;
+  border: 1px solid red;
+  padding: 5px 10px;
+  border-radius: 5px;
+  float: left;
+  background: #fff0f0;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+.error_message::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 20px;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 8px solid red;
+}
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
   /* Responive */
 @media (min-width: 1366px) {
 

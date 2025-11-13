@@ -8,7 +8,7 @@ import { env } from '../../util/constants/common';
 import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
 import Accordion from 'react-bootstrap/Accordion';
-const ContactUs = ({ contactus }) => {
+const ContactUs = ({ contactus, faqs }) => {
 
   const router = useRouter();
   if (router.isFallback) {
@@ -268,45 +268,24 @@ const ContactUs = ({ contactus }) => {
                 <div className="ser_rea">
                   <div className="about_texts">
                     <div className="serv-head">
-                      <h2>Frequently Asked Questions</h2>
-                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
-                      <Accordion defaultActiveKey="0" flush>
-                        <Accordion.Item eventKey="0">
-                          <Accordion.Header>
-                            1. Simply dummy question text show here?
-                          </Accordion.Header>
-                          <Accordion.Body>
-                            <p>Federal Bank Limited is a major Indian commercial bank in the private sector headquartered at Aluva, Kerala having more than thousand branches and
-                              ATMs spread across different States in India.Federal Bank Limited is a major Indian commercial bank in the private sector headquartered at Aluva,
-                              Kerala having more than thousand branches and ATMs spread across different States in India.Federal Bank Limited is a major Indian commercial bank in
-                              the private sector headquartered at Aluva, Kerala having more than thousand branches and ATMs spread across different States in India.</p>
-                          </Accordion.Body>
-                        </Accordion.Item>
-
-                        <Accordion.Item eventKey="1">
-                        <Accordion.Header>
-                            1. Simply dummy question text show here?
-                          </Accordion.Header>
-                          <Accordion.Body>
-                            <p>Federal Bank Limited is a major Indian commercial bank in the private sector headquartered at Aluva, Kerala having more than thousand branches and
-                              ATMs spread across different States in India.Federal Bank Limited is a major Indian commercial bank in the private sector headquartered at Aluva,
-                              Kerala having more than thousand branches and ATMs spread across different States in India.Federal Bank Limited is a major Indian commercial bank in
-                              the private sector headquartered at Aluva, Kerala having more than thousand branches and ATMs spread across different States in India.</p>
-                          </Accordion.Body>
-                        </Accordion.Item>
-
-                        <Accordion.Item eventKey="2">
-                        <Accordion.Header>
-                            1. Simply dummy question text show here?
-                          </Accordion.Header>
-                          <Accordion.Body>
-                            <p>Federal Bank Limited is a major Indian commercial bank in the private sector headquartered at Aluva, Kerala having more than thousand branches and
-                              ATMs spread across different States in India.Federal Bank Limited is a major Indian commercial bank in the private sector headquartered at Aluva,
-                              Kerala having more than thousand branches and ATMs spread across different States in India.Federal Bank Limited is a major Indian commercial bank in
-                              the private sector headquartered at Aluva, Kerala having more than thousand branches and ATMs spread across different States in India.</p>
-                          </Accordion.Body>
-                        </Accordion.Item>
+                      { faqs?.map((item,index)=> item.type ==='faq-heading' && (
+                          <React.Fragment key={index}>
+                          <h2>{item?.title}</h2>
+                          <p>{item?.long_desc}</p>
+                          </React.Fragment>
+                      )) }
                       
+                      <Accordion defaultActiveKey="0" flush>
+                      { faqs?.map((item,index)=> item.type !=='faq-heading' && (
+                        <Accordion.Item eventKey={index}>
+                          <Accordion.Header>
+                            { `${index+1}. ${item.title}` }
+                          </Accordion.Header>
+                          <Accordion.Body>
+                            <p>{item.short_desc}</p>
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      )) }
                       </Accordion>
 
                     </div>
@@ -326,12 +305,17 @@ const ContactUs = ({ contactus }) => {
 export default React.memo(ContactUs);
 
 export async function getServerSideProps() {
+
   const res = await HomeService.contactPage();
   const contactus = res.data?.contact || {}
 
+  const faqres = await HomeService.faqPage();
+  const faqs = faqres.data?.faqs || {}
+
   return {
     props: {
-      contactus
+      contactus,
+      faqs
     }
   }
 }

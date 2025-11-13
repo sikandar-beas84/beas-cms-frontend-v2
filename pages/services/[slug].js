@@ -55,9 +55,7 @@ const Page = ({ service, enrichedChildren }) => {
                     {item1?.menu_contents?.contents?.map((content, index) => {
                       const caseStudyId = content?.casestudy?.data?.casestudy?.id;
                       const isEven = index % 2 !== 0;
-                      const encodedId = caseStudyId
-                        ? Buffer.from(caseStudyId.toString()).toString("base64")
-                        : null;
+                      const slug = content?.casestudy?.data?.casestudy?.slug;
 
                       const description = content?.extra_description;
 
@@ -75,7 +73,7 @@ const Page = ({ service, enrichedChildren }) => {
                                     <Link
                                       href={{
                                         pathname: "/casestudy",
-                                        query: { id: encodedId },
+                                        query: { id: slug },
                                       }}
                                       className="services-btn proc-btn thar-three4"
                                     >
@@ -126,7 +124,7 @@ const Page = ({ service, enrichedChildren }) => {
                                     <Link
                                       href={{
                                         pathname: "/casestudy",
-                                        query: { id: encodedId },
+                                        query: { id: slug },
                                       }}
                                       className="services-btn proc-btn thar-three4"
                                     >

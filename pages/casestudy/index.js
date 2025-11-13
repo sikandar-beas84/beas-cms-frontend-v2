@@ -96,15 +96,7 @@ export default React.memo(Casestudy);
 export async function getServerSideProps({ query  }) {
   const { id } = query ;
 
-   // Decode Base64 id to original ID
-   let decodedId;
-   try {
-     decodedId = Buffer.from(id, "base64").toString("utf-8");
-   } catch (error) {
-     return { notFound: true };
-   }
-
-  const response = await HomeService.individualProjectPage(decodedId);
+  const response = await HomeService.individualProjectPage(id);
   const casestudy = response.data?.casestudy || [];
 
   const result = await HomeService.menuProjectPage();

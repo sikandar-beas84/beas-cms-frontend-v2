@@ -51,10 +51,7 @@ const Page = ({industry, enrichedContents}) => {
                                     { enrichedContents?.map((item, index)=>
                                     {
                                         const caseStudyId = item?.casestudy?.data?.casestudy?.id;
-
-                                        const encodedId = caseStudyId
-                                        ? Buffer.from(caseStudyId.toString()).toString("base64")
-                                        : null;
+                                        const slug = item?.casestudy?.data?.casestudy?.slug;
 
                                         return(
                                         item?.casestudy?.data?.casestudy?.slug ? (
@@ -77,7 +74,7 @@ const Page = ({industry, enrichedContents}) => {
                                                             <Link
                                                                 href={{
                                                                     pathname: "/casestudy",
-                                                                    query: { id: encodedId },
+                                                                    query: { id: slug },
                                                                 }}
                                                                 className=""
                                                                 >

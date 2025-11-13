@@ -1,4 +1,4 @@
-import { getService } from "../configs/FetchRequest";
+import { getService, postService } from "../configs/FetchRequest";
 import { env } from '../constants/common';
   
   
@@ -12,11 +12,12 @@ import { env } from '../constants/common';
   HomeService.menuIndustryPage = () => getService('get-menu-industries', `${env.ACCESS_TOKEN}`)
   HomeService.menuServicePage = () => getService('get-menu-services', `${env.ACCESS_TOKEN}`)
   HomeService.projectPage = () => getService('get-projects', `${env.ACCESS_TOKEN}`)
-  HomeService.individualProjectPage = (id) => getService(`get-individual-project?id=${id}`, `${env.ACCESS_TOKEN}`)
+  HomeService.individualProjectPage = (slug) => postService('get-casestudy-by-slug', `${env.ACCESS_TOKEN}`,slug)
   HomeService.contactPage = () => getService('get-contact', `${env.ACCESS_TOKEN}`)
   HomeService.menuSkillPage = () => getService('get-menu-skills', `${env.ACCESS_TOKEN}`)
   HomeService.menuProjectPage = () => getService('get-menu-casestudy', `${env.ACCESS_TOKEN}`)
   HomeService.commonaboutusPage = () => getService('get-common-aboutus', `${env.ACCESS_TOKEN}`)
+  HomeService.faqPage = () => getService('get-faq', `${env.ACCESS_TOKEN}`)
   
 
   

@@ -294,11 +294,11 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials })
           {projects?.map((item, index) => {
 
             const titleText = item?.title
-              ? item?.title.split(" ").slice(0, 4).join(" ") + "..."
+              ? item?.title.split(" ").slice(0, 4).join(" ") + ""
               : "";
-            const businessNeed = item?.business_need
-              ? item?.business_need.split(" ").slice(0, 10).join(" ") + "..."
-              : "";
+            
+            const longdesc = item?.long_desc ? item.long_desc.split(",") : [];
+            
             return (
               <>
 
@@ -316,13 +316,11 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials })
                     />
                   </div>
                   <h3>{titleText}</h3>
-                  {/* {typeof window !== 'undefined' && businessNeed && (
-  <div dangerouslySetInnerHTML={{ __html: businessNeed.trim() }} />
-)} */}
+                  <p>{item?.short_desc}</p>
                   <div className="port-tags">
-                    <h4>Angular</h4>
-                    <h4>Node JS</h4>
-                    <h4>ABC Dummy</h4>
+                    { longdesc.map((item, index)=>(
+                    <h4 key={index}>{item}</h4>
+                    )) }
                   </div>
                 </div>
 

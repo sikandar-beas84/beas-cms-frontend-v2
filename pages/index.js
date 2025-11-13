@@ -161,7 +161,7 @@ function Home({homeData}) {
                               <Image width={60} height={50} style={{ minWidth: "42px" }}  src={`${env.BACKEND_BASE_URL}${item.image}`} alt="image" loading="lazy" />
                               </div>
                               <h3>{item.title}</h3>
-                              <p>Lorem Ipsum is simply dummy caption  the the printing and typesetting the industry is Lorem Ipsum has been the</p>
+                              <p>{item.description}</p>
                           </div>
                         </div>
                         </React.Fragment>
@@ -178,8 +178,8 @@ function Home({homeData}) {
             <div className="container">
                 <div className="port-head">
                   <div className="port-hd-txt">
-                      <h2>Portfolio that speak!</h2>
-                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
+                    <h2>{homeData?.portfoliohomepage?.title}</h2>
+                    <p>{homeData?.portfoliohomepage?.long_desc}</p>
                   </div>
                 </div>
                 <div className="row">
@@ -229,7 +229,7 @@ function Home({homeData}) {
                 </div>
             </div>
           </div> */}
-          <IndustriesProcess/>
+          <IndustriesProcess industryData={homeData?.industries?.children} pageTitle={homeData?.industrieshomepage?.title} pageDesc={homeData?.industrieshomepage?.long_desc} />
           {/* process secton end */}
 
           {/* more section start */}
@@ -238,12 +238,10 @@ function Home({homeData}) {
                 <div className="container">
                   <div className="more-txt">
                       <div className="mr-txt-lft">
-                        <h2>Want more information ?</h2>
-                        <p>Request a quote about our web and mobile application development services
-                            Lorem Ipsum is simply dummy text of the
-                        </p>
+                        <h2>{homeData?.consultanthomepage?.title}</h2>
+                        <p>{homeData?.consultanthomepage?.long_desc}</p>
                       </div>
-                      <a href="#" className="mr-btn">Get Free Consultation Now</a>
+                      <Link href={homeData?.consultanthomepage?.short_desc} className="mr-btn">Get Free Consultation Now</Link>
                   </div>
                 </div>
             </div>
@@ -254,8 +252,8 @@ function Home({homeData}) {
           <div className="tachnology">
             <div className="container">
                 <div className="tech-hd">
-                  <h2>Our Technology Expertise</h2>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum</p>
+                  <h2>{homeData?.technologyhomepage?.title}</h2>
+                  <p>{homeData?.technologyhomepage?.long_desc}</p>
                 </div>
                 <div className="tech-list-r">
                   <div className="row">
@@ -279,8 +277,8 @@ function Home({homeData}) {
           <div className="testimonial">
             <div className="container">
             <div className="serv-head test-head">
-              <h2>our Testimonials</h2>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the dummy.</p>
+              <h2>{homeData?.testimonialhomepage?.title}</h2>
+              <p>{homeData?.testimonialhomepage?.long_desc}</p>
               <img src="assets/images/test-star-grp.png"/>
             </div>
             <div className="test-inr">
@@ -298,8 +296,8 @@ function Home({homeData}) {
           <div className="Blogs">
             <div className="container">
                 <div className="Blogs-head">
-                  <h2>Blogs</h2>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum</p>
+                  <h2>{homeData?.bloghomepage?.title}</h2>
+                  <p>{homeData?.bloghomepage?.long_desc}</p>
                 </div>
                 <div className="Blogs-inr">
                   <div className="row">

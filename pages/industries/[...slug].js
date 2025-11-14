@@ -3,7 +3,6 @@ import React from 'react'
 import BreadCrumb from '../component/BreadCrumb';
 import Container from 'react-bootstrap/Container';
 import { Col, Row } from "react-bootstrap";
-import { ArrowUpRight } from 'react-feather';
 import Link from 'next/link'
 import Image from 'next/image';
 import HomeService from '../../util/service/Home';
@@ -11,32 +10,42 @@ import { env } from '../../util/constants/common';
 import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
 import { postService } from "../../util/configs/FetchRequest";
-import { Buffer } from "buffer";
 
-const Page = ({industry, enrichedContents}) => {
+const Page = ({industry, enrichedContents, seometadata}) => {
 
     const router = useRouter();
     if (router.isFallback) {
       return <div>Loading...</div>;
     }
     
-    const metaTitle = `Industry | ${industry?.name}`;
-    const metaDesc = industry?.menu_contents?.description
-        ? industry.menu_contents.description.replace(/(<([^>]+)>)/gi, "").slice(0, 50)
+    const metaTitle = seometadata?.title
+        ? seometadata?.title
+        :`Industry`;
+    const metaKeyword = seometadata?.keyword
+        ? seometadata?.keyword
+        :"services, beas consultancy, business solutions, software development";
+    const metaDesc = seometadata?.description
+        ? seometadata?.description
         : "Explore our wide range of services to empower your business through innovative solutions.";
-    const metaImage = industry?.image
-        ? `${env.BACKEND_BASE_URL}${industry.image}`
-        : `${env.BACKEND_BASE_URL}assets/img/default-image.jpg`;
-    const metaUrl = `${env.FRONTEND_BASE_URL}/industry/${industry?.slug || ""}`;
+    const metaImage = seometadata?.image
+        ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
+        : `${env.BACKEND_BASE_URL}${industry?.image}`;
+    const metaUrl = seometadata?.url
+        ?`${env.FRONTEND_BASE_URL}industries/${seometadata?.url}`
+        :`${env.FRONTEND_BASE_URL}industries/${industry?.slug}`;
+    const metaAuthor = seometadata?.author
+        ? seometadata?.author
+        :"BEAS Consultancy And Services Private Limited";
 
     return (
         <>
             <SEO
-                title={metaTitle}
-                description={metaDesc}
-                keywords="services, beas consultancy, business solutions, software development"
-                image={metaImage}
-                url={metaUrl}
+                title={ metaTitle }
+                description={ metaDesc }
+                keywords={ metaKeyword }
+                image={ metaImage }
+                url={ metaUrl }
+                author={ metaAuthor }
             />
             <main>
                 <BreadCrumb pagetitle={industry?.name} pageslug='Industry' pageBanner={`assets/img/menu-content/${industry?.menu_contents?.banner}`} />
@@ -50,51 +59,102 @@ const Page = ({industry, enrichedContents}) => {
                                 <Row>
                                     { enrichedContents?.map((item, index)=>
                                     {
-                                        const caseStudyId = item?.casestudy?.data?.casestudy?.id;
-                                        const slug = item?.casestudy?.data?.casestudy?.slug;
 
-                                        return(
-                                        item?.casestudy?.data?.casestudy?.slug ? (
-                                        <React.Fragment key={index}>
-                                            <Col xs={4}>
-                                                <div className='gigs_box'>
-                                                    <div className='story-box'>
-                                                        <Image width={550} height={200} src={`${env.BACKEND_BASE_URL}${item?.casestudy?.data?.casestudy?.image}`} alt='image' className='img-fluid' loading="lazy" />
+                                        const casestudyData = item?.casestudy?.data?.casestudy;
+                                        const isEven = index % 2 !== 0;
+                                        const slug = casestudyData?.slug;
+
+                                        const description = item?.extra_description;
+                                        
+                                        const short_desc = casestudyData?.short_desc
+                                            ? casestudyData?.short_desc.split(" ").slice(0, 4).join(" ") + ""
+                                            : "";
+                                        
+                                        const longdesc = casestudyData?.long_desc ? casestudyData.long_desc.split(",") : [];
+
+                                        return description ? (
+                                            <div className="row no-gutters" key={index}>
+                                              {/* For even items: text first, image second */}
+                                              {isEven ? (
+                                                <>
+                                                  <div className="col-lg-6 col-12">
+                                                    <div className="services-text">
+                                                      <h2>{casestudyData?.title}</h2>
+                                                      <p>{short_desc}</p>
+                                                      <div className="port-tags services-tags">
+                                                      { longdesc.map((item, index)=>(
+                                                      <h4 key={index}>{item}</h4>
+                                                      )) }
+                                                      </div>
+                                                      {casestudyData?.slug && (
+                                                        <Link
+                                                          href={{
+                                                            pathname: "/casestudy",
+                                                            query: { id: slug },
+                                                          }}
+                                                          className="services-btn proc-btn thar-three4"
+                                                        >
+                                                          Read Case Study
+                                                        </Link>
+                                                      )}
                                                     </div>
-                                                    <div className='p-3'>
-                                                        <div style={{display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
-                                                            <p className='mt-3'>
-                                                                {item?.casestudy?.data?.casestudy?.title}
-                                                            </p>
-                                                            {item?.casestudy?.data?.casestudy?.slug ? (
-                                                            // <Link
-                                                            //     href={`/casestudy/${item?.casestudy?.data?.casestudy?.slug}`}
-                                                            //     className="btn btn-outline-primary ms-auto"
-                                                            // >
-                                                            <Link
-                                                                href={{
-                                                                    pathname: "/casestudy",
-                                                                    query: { id: slug },
-                                                                }}
-                                                                className=""
-                                                                >
-                                                                Read Case Study <ArrowUpRight />
-                                                            </Link>
-                                                            ) : (
-                                                            <button type="button" className="" disabled>
-                                                                Read Case Study <ArrowUpRight />
-                                                            </button>
-                                                            )}
-                                                        </div>
+                                                  </div>
+                    
+                                                  <div className="col-lg-6 col-12">
+                                                    <div className="mediaimg">
+                                                      <Image
+                                                        width={600}
+                                                        height={150}
+                                                        src={`${env.BACKEND_BASE_URL}${casestudyData?.image}`}
+                                                        alt="image"
+                                                        className="img-fluid"
+                                                        loading="lazy"
+                                                      />
                                                     </div>
-                                                </div>
-                                            </Col>
-
-
-                                            
-                                        </React.Fragment>
-                                        ): null
-                                    )})}  
+                                                  </div>
+                                                </>
+                                              ) : (
+                                                // For odd items: image first, text second
+                                                <>
+                                                  <div className="col-lg-6 col-12">
+                                                    <div className="mediaimg">
+                                                      <Image
+                                                        width={600}
+                                                        height={150}
+                                                        src={`${env.BACKEND_BASE_URL}${casestudyData?.image}`}
+                                                        alt="image"
+                                                        className="img-fluid"
+                                                        loading="lazy"
+                                                      />
+                                                    </div>
+                                                  </div>
+                                                  <div className="col-lg-6 col-12">
+                                                    <div className="services-text">
+                                                      <h2>{casestudyData?.title}</h2>
+                                                      <p>{short_desc}</p>
+                                                      <div className="port-tags services-tags">
+                                                      { longdesc.map((item, index)=>(
+                                                      <h4 key={index}>{item}</h4>
+                                                      )) }
+                                                      </div>
+                                                      {casestudyData?.slug && (
+                                                        <Link
+                                                          href={{
+                                                            pathname: "/casestudy",
+                                                            query: { id: slug },
+                                                          }}
+                                                          className="services-btn proc-btn thar-three4"
+                                                        >
+                                                          Read Case Study
+                                                        </Link>
+                                                      )}
+                                                    </div>
+                                                  </div>
+                                                </>
+                                              )}
+                                            </div>
+                                          ) : null;
+                                    })}  
 
 
                                 </Row>
@@ -136,7 +196,7 @@ export async function getServerSideProps({ params }) {
           if (!item.extra_description) return item;
     
           try {
-            const data = await postService('get-casestudy-by-slug', `${env.ACCESS_TOKEN}`, item.extra_description);
+            const data = await HomeService.individualProjectPage(item?.extra_description);
             return { ...item, casestudy: data };
           } catch (err) {
             //console.error(`Failed to fetch for ${item.extra_description}:`, err);
@@ -144,11 +204,15 @@ export async function getServerSideProps({ params }) {
           }
         })
       );
+      
+      const seobyslug = await HomeService.seobyslug(slug);
+      const seometadata = seobyslug?.data?.seometa;
 
     return {
       props: {
         industry,
-        enrichedContents
+        enrichedContents,
+        seometadata
       },
     };
   }

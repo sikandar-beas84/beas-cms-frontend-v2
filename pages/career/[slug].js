@@ -2,17 +2,13 @@
 import React, { useState, useRef } from 'react'
 import BreadCrumb from '../component/BreadCrumb'
 import { Container, Row, Col } from 'react-bootstrap'
-import Accordion from 'react-bootstrap/Accordion';
-import { ArrowRight, ArrowUp, ArrowUpRight } from 'react-feather';
-import Carousel from 'react-bootstrap/Carousel';
-import Nav from 'react-bootstrap/Nav';
+import { ArrowUp } from 'react-feather';
 import HomeService from '../../util/service/Home';
 import { env } from '../../util/constants/common';
 import ReCAPTCHA from 'react-google-recaptcha';
 import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
-import { Buffer } from "buffer";
-const Page = ({ career, menucareer, contact, careerId }) => {
+const Page = ({ career, menucareer, contact, careerId, seometadata }) => {
 
   const router = useRouter();
   if (router.isFallback) {
@@ -121,26 +117,34 @@ const Page = ({ career, menucareer, contact, careerId }) => {
     }
   };
 
+  const metaTitle = seometadata?.title
+  ? seometadata?.title
+  :`Career`;
+const metaKeyword = seometadata?.keyword
+  ? seometadata?.keyword
+  :"career, job opening, full-time jobs, hiring, apply job, beas consultancy";
+const metaDesc = seometadata?.description
+  ? seometadata?.description
+  : "Explore exciting career opportunities with us.";
+const metaImage = seometadata?.image
+  ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
+  : `${env.BACKEND_BASE_URL}${menucareer?.image}`;
+const metaUrl = seometadata?.url
+  ?`${env.FRONTEND_BASE_URL}career/${seometadata?.url}`
+  :`${env.FRONTEND_BASE_URL}career/${career?.id}`;
+const metaAuthor = seometadata?.author
+  ? seometadata?.author
+  :"BEAS Consultancy And Services Private Limited";
 
   return (
     <>
       <SEO
-        title={`${menucareer?.name || "Career"} | Beas Consultancy & Services Pvt. Ltd.`}
-        description={
-          menucareer?.description ||
-          menucareer?.menu_contents?.description ||
-          "Explore exciting career opportunities with us."
-        }
-        keywords={
-          "career, job opening, full-time jobs, hiring, apply job, beas consultancy"
-        }
-        image={
-          menucareer?.image
-            ? `${env.BACKEND_BASE_URL}${menucareer.image}`
-            : `${env.BACKEND_BASE_URL}/default-image.jpg`
-        }
-        url={`${env.FRONTEND_BASE_URL}/career/${career?.id}`}
-        author="Beas Consultancy & Services Pvt. Ltd."
+          title={ metaTitle }
+          description={ metaDesc }
+          keywords={ metaKeyword }
+          image={ metaImage }
+          url={ metaUrl }
+          author={ metaAuthor }
       />
       <main>
         <BreadCrumb pagetitle={career.title} pageslug='Career' pageBanner={`assets/img/menu-content/${menucareer?.menu_contents?.banner}`} />
@@ -388,12 +392,16 @@ export async function getServerSideProps({ params }) {
     };
   }
 
+  const seobyslug = await HomeService.seobyslug('career');
+  const seometadata = seobyslug?.data?.seometa;
+
   return {
     props: {
       career,
       menucareer,
       contact,
-      careerId
+      careerId,
+      seometadata
     },
   };
 }

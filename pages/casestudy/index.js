@@ -6,35 +6,44 @@ import Accordion from 'react-bootstrap/Accordion';
 import Image from 'next/image';
 import HomeService from '../../util/service/Home';
 import { env } from '../../util/constants/common';
-import Link from 'next/link';
 import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
 
-const Casestudy = ({casestudy, menucasestudy}) => {
+const Casestudy = ({casestudy, menucasestudy, seometadata}) => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
+
+  const metaTitle = seometadata?.name
+  ? seometadata?.title
+  :`Case Study`;
+  const metaKeyword = seometadata?.keyword
+  ? seometadata?.keyword
+  :"case study, business solution, project success, Beas consultancy";
+  const metaDesc = seometadata?.description
+  ? seometadata?.description
+  : "Learn how Beas Consultancy delivered a tailored solution and business impact.";
+  const metaImage = seometadata?.image
+  ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
+  : `${env.BACKEND_BASE_URL}${casestudy?.image}`;
+  const metaUrl = seometadata?.url
+  ?`${env.FRONTEND_BASE_URL}casestudy/${seometadata?.url}`
+  :`${env.FRONTEND_BASE_URL}casestudy/${casestudy?.slug}`;
+  const metaAuthor = seometadata?.author
+  ? seometadata?.author
+  :"BEAS Consultancy And Services Private Limited";
+
   return (
     <>
     <SEO
-      title={`Case Study | ${casestudy?.title}`}
-      description={
-        casestudy?.title ||
-        `${casestudy?.title} - Learn how Beas Consultancy delivered a tailored solution and business impact.`
-      }
-      keywords={
-        casestudy?.title || 
-        "case study, business solution, project success, Beas consultancy"
-      }
-      image={
-        casestudy?.image 
-          ? `${env.BACKEND_BASE_URL}${casestudy.image}`
-          : `${env.BACKEND_BASE_URL}/default-image.jpg`
-      }
-      url={`${env.FRONTEND_BASE_URL}/casestudy/${casestudy?.slug}`}
-      author="Beas Consultancy & Services Pvt. Ltd."
-    />
+        title={ metaTitle }
+        description={ metaDesc }
+        keywords={ metaKeyword }
+        image={ metaImage }
+        url={ metaUrl }
+        author={ metaAuthor }
+      />
     <main>
       <BreadCrumb pagetitle = {casestudy.title} pageslug='Casestudy' pageBanner={`assets/img/menu-content/${menucasestudy?.menu_contents?.banner}`} />
       <div className="bgF2F4F7 p-relative">
@@ -102,10 +111,14 @@ export async function getServerSideProps({ query  }) {
   const result = await HomeService.menuProjectPage();
   const menucasestudy = result.data?.casestudy || [];
 
+  const seobyslug = await HomeService.seobyslug(id);
+  const seometadata = seobyslug?.data?.seometa;
+
   return {
     props: {
       casestudy,
-      menucasestudy
+      menucasestudy,
+      seometadata
     },
   };
 }

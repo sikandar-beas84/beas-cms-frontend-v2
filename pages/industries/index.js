@@ -1,16 +1,14 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
 import { Col, Row } from "react-bootstrap";
-import { ArrowUpRight } from "react-feather";
 import BreadCrumb from '../component/BreadCrumb';
-import Nav from 'react-bootstrap/Nav';
 import Image from 'next/image';
 import HomeService from '../../util/service/Home';
 import { env } from '../../util/constants/common';
 import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-const Indutries = ({ industries }) => {
+const Indutries = ({ industries, seometadata }) => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
@@ -23,20 +21,36 @@ const Indutries = ({ industries }) => {
     const words = text.split(/\s+/).slice(0, wordLimit);
     return words.join(' ') + (words.length >= wordLimit ? '...' : '');
   };
+
+  const metaTitle = seometadata?.title
+  ? seometadata?.title
+  :`Industries`;
+  const metaKeyword = seometadata?.keyword
+  ? seometadata?.keyword
+  :"Industries, IT Services, Beas Consultancy & Services Pvt. Ltd., Software Solutions, Healthcare, Education, Retail, Manufacturing";
+  const metaDesc = seometadata?.description
+  ? seometadata?.description
+  : "Explore the industries we serve with expert solutions tailored to your business needs. Discover how Beas Consultancy empowers various sectors.";
+  const metaImage = seometadata?.image
+  ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
+  : `${env.BACKEND_BASE_URL}${industries?.image}`;
+  const metaUrl = seometadata?.url
+  ?`${env.FRONTEND_BASE_URL}industries/${seometadata?.url}`
+  :`${env.FRONTEND_BASE_URL}industries/${industries?.slug}`;
+  const metaAuthor = seometadata?.author
+  ? seometadata?.author
+  :"BEAS Consultancy And Services Private Limited";
+
   return (
 
     <>
       <SEO
-        title={industries?.name || 'Industries | Beas Consultancy & Services Pvt. Ltd.'}
-        description="Explore the industries we serve with expert solutions tailored to your business needs. Discover how Beas Consultancy empowers various sectors."
-        keywords="Industries, IT Services, Beas Consultancy & Services Pvt. Ltd., Software Solutions, Healthcare, Education, Retail, Manufacturing"
-        image={
-          industries?.image
-            ? `${env.BACKEND_BASE_URL}${industries.image}`
-            : `${env.BACKEND_BASE_URL}/default-image.jpg`
-        }
-        url={`${env.BACKEND_BASE_URL}${industries?.slug || 'industries'}`}
-        author="Beas Consultancy & Services Pvt. Ltd."
+        title={ metaTitle }
+        description={ metaDesc }
+        keywords={ metaKeyword }
+        image={ metaImage }
+        url={ metaUrl }
+        author={ metaAuthor }
       />
       <main>
         <BreadCrumb pagetitle="Industries" pageBanner={`assets/img/menu-content/${industries?.menu_contents?.banner}`} />
@@ -44,8 +58,8 @@ const Indutries = ({ industries }) => {
           <Row>
             <Col>
               <div className="about_texts">
-                <h1>Industries</h1>
-                <p>Holisticly benchmark functional products before excellent methods of empowerment. Seamlessly visualize innovative web-readiness whereas extensive initiatives. Completely unleash frictionless data via end-to-end services. Continually unleash virtual e-tailers through magnetic core competencies. Interactively engage distributed alignments via focused alignments. Dynamically fabricate excellent innovation for go forward technology. Intrinsicly impact empowered scenarios after cost effective outsourcing. Synergistically productivate pandemic e-business rather than state of the art e-tailers. Continually expedite customized information with go forward potentialities.</p>
+                <h1>{industries?.menu_contents?.short_desc}</h1>
+                <p>{industries?.menu_contents?.description}</p>
               </div>
             </Col>
           </Row>
@@ -128,13 +142,21 @@ const Indutries = ({ industries }) => {
 
 export default React.memo(Indutries);
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+
+  const url = context.req.url;
+  const lastSegment = url.split("/").filter(Boolean).pop();
+
   const res = await HomeService.menuIndustryPage()
   const industries = res.data?.industries || []
 
+  const seobyslug = await HomeService.seobyslug(lastSegment);
+  const seometadata = seobyslug?.data?.seometa;
+
   return {
     props: {
-      industries
+      industries,
+      seometadata
     }
   }
 }

@@ -9,13 +9,13 @@ const backend_domain_dev = '192.168.1.111'
 const access_token_dev = 'sHetF-JwtYi-kJtsE-TeuAa-nKwqP-LshNd-aXhwV-ZalBr'
 const site_key_dev = '6Le7mo4rAAAAAHp0irf1mq-EZntqBPN-n2Xwkjcz'
 // 
-const backend_base_url_prod = ''
-const frontend_base_url_prod = ''
-const server_url_prod = ''
-const site_url_prod = ''
-const backend_domain_prod = ''
-const access_token_prod = ''
-const site_key_prod = ''
+const backend_base_url_prod = 'http://192.168.1.16/beasconsultancy/backend/public/'
+const frontend_base_url_prod = 'http://localhost:3000/'
+const server_url_prod = 'http://192.168.1.16/beasconsultancy/backend/public/'
+const site_url_prod = 'http://localhost:3000/'
+const backend_domain_prod = '192.168.1.16'
+const access_token_prod = 'sHetF-JwtYi-kJtsE-TeuAa-nKwqP-LshNd-aXhwV-ZalBr'
+const site_key_prod = '6Le7mo4rAAAAAHp0irf1mq-EZntqBPN-n2Xwkjcz'
 // 
 let prodObj = {
     BACKEND_DOMAIN: backend_domain_prod,

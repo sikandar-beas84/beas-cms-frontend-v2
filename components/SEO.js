@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { env } from '../util/constants/common';
 
 export default function SEO({
   title,
@@ -7,9 +8,9 @@ export default function SEO({
   image,
   url,
   publishedDate, // optional
-  author = 'Author Name', // fallback if not provided
+  author = 'BEAS Consultancy And Services Private Limited', // fallback if not provided
 }) {
-  const jsonLd = {
+  const schema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: title,
@@ -17,10 +18,23 @@ export default function SEO({
     image: image,
     datePublished: publishedDate,
     author: {
-      "@type": "Person",
+      "@type": "Organization",
       name: author,
     },
-    url: url,
+    publisher: {
+      "@type": "Organization",
+      name: author,
+      logo: {
+        "@type": "ImageObject",
+        url: `${env.FRONTEND_BASE_URL}/assets/img/logo.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": url,
+    },
+    datePublished: publishedDate,
+    dateModified: publishedDate,
   };
 
   return (
@@ -37,6 +51,8 @@ export default function SEO({
       <meta property="og:image" content={image} />
       <meta property="og:url" content={url} />
       <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="Beas Consultancy and Services Pvt. Ltd." />
+      <meta property="article:author" content={author} />
 
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -45,10 +61,12 @@ export default function SEO({
       <meta name="twitter:image" content={image} />
 
       {/* JSON-LD Structured Data */}
+      { schema && (
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
+      )}
     </Head>
   );
 }

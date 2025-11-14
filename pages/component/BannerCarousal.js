@@ -7,7 +7,7 @@ import { env } from '../../util/constants/common';
 import Image from 'next/image';
 import Link from "next/link";
 
-const BannerCarousal = ({ page, technologiya, clients, projects, testimonials }) => {
+const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, blogs }) => {
 
   const router = useRouter();
 
@@ -72,45 +72,12 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials })
   const clientsettings = createSliderSettings(5);
 
   const testimonialnewsettings = testimoniolnewSliderSettings(3);
+  const blogsettings = createSliderSettings(3);
 
   return (
     <>
 
-      {/* {page == 'topBanner' && (
-        <Slider {...workareasettings}>
-          <div className="working-area__list">
-            <span>Application Development <span className="star">* </span></span>
-          </div>
-          <div className="working-area__list">
-            <span>Application Maintaince <span className="star">* </span></span>
-          </div>
-          <div className="working-area__list">
-            <span>Mobility <span className="star">* </span></span>
-          </div>
-          <div className="working-area__list">
-            <span>UI/UX Services <span className="star">* </span></span>
-          </div>
-          <div className="working-area__list">
-            <span>Data Analytics <span className="star">* </span></span>
-          </div>
-          <div className="working-area__list">
-            <span>Professional Services <span className="star">* </span></span>
-          </div>
-          <div className="working-area__list">
-            <span>Large Offshore Development <span className="star">* </span></span>
-          </div>
-          <div className="working-area__list">
-            <span>AI/ML/DML <span className="star">* </span></span>
-          </div>
-          <div className="working-area__list">
-            <span>Cloud Computing <span className="star">* </span></span>
-          </div>
-          <div className="working-area__list">
-            <span>Cybersecurity</span>
-          </div>
-       </Slider>
-      )} */}
-
+      
       {page == 'projects' && (
         <Slider {...settings}>
           {projects?.map((item, index) => {
@@ -330,6 +297,64 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials })
 
         </Slider>
       )}
+
+      {page == 'blogs' && (
+        <Slider {...blogsettings}>
+          {blogs?.map((item, index) => {
+
+            const titleText = item?.title;
+            const short_desc = item?.short_desc;
+            const slug = item?.slug;
+
+            const createdAtString = item?.created_at;
+
+            const created_at = createdAtString ? new Date(createdAtString) : null;
+
+            const day = created_at ? created_at.getDate() : "";
+            const month = created_at ? created_at.getMonth() + 1 : "";
+            const year = created_at ? created_at.getFullYear() : "";
+
+            return (
+              <>
+              
+                <div key={index} className="col-lg-4 col-md-6 col-sm-6">
+                  <Link
+                  href={{
+                    pathname: "/blog",
+                    query: { id: slug },
+                  }}
+                  className="services-btn proc-btn thar-three4"
+                >
+                  <div className="guiditem">
+                      <div className="guidimg">
+                        <Image
+                          src={`${env.BACKEND_BASE_URL}${item.image}`}
+                          alt="Hero Banner"
+                          width={100}
+                          height={100}
+                          priority
+                          fetchPriority="high"
+                          className="img-fluid port-shw"
+                        />
+                        <div className="guidcal">
+                            <strong>{day} <br/><b>{month}</b></strong>
+                        </div>
+                      </div>
+                      <div className="guidtext">
+                        <h5>{titleText}</h5>
+                        <p>{short_desc}</p>
+                      </div>
+                  </div>
+                  </Link>
+                </div>
+              
+              </>
+            );
+          })}
+
+        </Slider>
+      )}
+
     </>
   );
 };

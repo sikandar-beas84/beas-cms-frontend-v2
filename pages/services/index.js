@@ -10,29 +10,40 @@ import { env } from '../../util/constants/common';
 import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
 
-const Service = ({ services, service }) => {
+const Service = ({ services, service, seometadata }) => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
 
-  const metaTitle = "Services | Beas Consultancy & Services Pvt. Ltd.";
-  const metaDesc = service?.description
-    ? service.description.replace(/<[^>]+>/g, '').slice(0, 150)
-    : "Explore our wide range of services tailored to your business needs.";
-  const metaImage = service?.image
-    ? `${env.BACKEND_BASE_URL}${service?.image}`
-    : `${env.BACKEND_BASE_URL}assets/img/default-image.jpg`;
-  const metaUrl = `${env.FRONTEND_BASE_URL}${service?.slug}`;
+  const metaTitle = seometadata?.title
+  ? seometadata?.title
+  :`Service`;
+  const metaKeyword = seometadata?.keyword
+  ? seometadata?.keyword
+  :"services, beas consultancy, business solutions, software development";
+  const metaDesc = seometadata?.description
+  ? seometadata?.description
+  : "Explore our wide range of services tailored to your business needs.";
+  const metaImage = seometadata?.image
+  ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
+  : `${env.BACKEND_BASE_URL}${service?.image}`;
+  const metaUrl = seometadata?.url
+  ?`${env.FRONTEND_BASE_URL}services/${seometadata?.url}`
+  :`${env.FRONTEND_BASE_URL}services/${service?.slug}`;
+  const metaAuthor = seometadata?.author
+  ? seometadata?.author
+  :"BEAS Consultancy And Services Private Limited";
 
   return (
     <>
       <SEO
-        title={metaTitle}
-        description={metaDesc}
-        keywords="services, software solutions, IT consultancy, Beas services"
-        image={metaImage}
-        url={metaUrl}
+        title={ metaTitle }
+        description={ metaDesc }
+        keywords={ metaKeyword }
+        image={ metaImage }
+        url={ metaUrl }
+        author={ metaAuthor }
       />
       <main>
         <BreadCrumb pagetitle="Services" pageBanner={`assets/img/menu-content/${service?.menu_contents?.banner}`} />
@@ -40,8 +51,8 @@ const Service = ({ services, service }) => {
           <Row>
             <Col>
               <div className="about_texts">
-                <h1>Corporate Overview Driving Growth Through Quality</h1>
-                <p>Holisticly benchmark functional products before excellent methods of empowerment. Seamlessly visualize innovative web-readiness whereas extensive initiatives. Completely unleash frictionless data via end-to-end services. Continually unleash virtual e-tailers through magnetic core competencies. Interactively engage distributed alignments via focused alignments. Dynamically fabricate excellent innovation for go forward technology. Intrinsicly impact empowered scenarios after cost effective outsourcing. Synergistically productivate pandemic e-business rather than state of the art e-tailers. Continually expedite customized information with go forward potentialities.</p>
+                <h1>{service?.menu_contents?.short_desc}</h1>
+                <p>{service?.menu_contents?.description}</p>
               </div>
             </Col>
           </Row>
@@ -138,15 +149,23 @@ const Service = ({ services, service }) => {
 
 export default React.memo(Service);
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+
+  const url = context.req.url;
+  const lastSegment = url.split("/").filter(Boolean).pop();
+
   const res = await HomeService.homePage()
   const services = res.data?.services?.children || []
   const service = res.data?.services || []
 
+  const seobyslug = await HomeService.seobyslug(lastSegment);
+  const seometadata = seobyslug?.data?.seometa;
+
   return {
     props: {
       services,
-      service
+      service,
+      seometadata
     }
   }
 }

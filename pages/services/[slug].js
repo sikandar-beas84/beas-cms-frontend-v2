@@ -3,7 +3,6 @@ import React from 'react'
 import BreadCrumb from '../component/BreadCrumb';
 import Container from 'react-bootstrap/Container';
 import { Col, Row } from "react-bootstrap";
-import { ArrowUpRight } from 'react-feather';
 import Link from 'next/link'
 import Image from 'next/image';
 import HomeService from '../../util/service/Home';
@@ -11,32 +10,42 @@ import { env } from '../../util/constants/common';
 import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
 import { postService } from "../../util/configs/FetchRequest";
-import { Buffer } from "buffer";
 
-const Page = ({ service, enrichedChildren }) => {
+const Page = ({ service, enrichedChildren, seometadata }) => {
 
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
 
-  const metaTitle = `Service | ${service?.name}`;
-  const metaDesc = service?.menu_contents?.description
-    ? service.menu_contents.description.replace(/(<([^>]+)>)/gi, "").slice(0, 50)
-    : "Explore our wide range of services to empower your business through innovative solutions.";
-  const metaImage = service?.image
-    ? `${env.BACKEND_BASE_URL}${service.image}`
-    : `${env.BACKEND_BASE_URL}assets/img/default-image.jpg`;
-  const metaUrl = `${env.FRONTEND_BASE_URL}/service/${service?.slug || ""}`;
+  const metaTitle = seometadata?.title
+  ? seometadata?.title
+  :`Services`;
+const metaKeyword = seometadata?.keyword
+  ? seometadata?.keyword
+  :"services, beas consultancy, business solutions, software development";
+const metaDesc = seometadata?.description
+  ? seometadata?.description
+  : service?.menu_contents?.description.replace(/(<([^>]+)>)/gi, "").slice(0, 50);
+const metaImage = seometadata?.image
+  ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
+  : `${env.BACKEND_BASE_URL}${service?.image}`;
+const metaUrl = seometadata?.url
+  ?`${env.FRONTEND_BASE_URL}services/${seometadata?.url}`
+  :`${env.FRONTEND_BASE_URL}services/${service?.slug}`;
+const metaAuthor = seometadata?.author
+  ? seometadata?.author
+  :"BEAS Consultancy And Services Private Limited";
 
   return (
     <>
       <SEO
-        title={metaTitle}
-        description={metaDesc}
-        keywords="services, beas consultancy, business solutions, software development"
-        image={metaImage}
-        url={metaUrl}
+          title={ metaTitle }
+          description={ metaDesc }
+          keywords={ metaKeyword }
+          image={ metaImage }
+          url={ metaUrl }
+          author={ metaAuthor }
       />
       <main>
         <BreadCrumb pagetitle={service?.name} pageslug='Service' pageBanner={`assets/img/menu-content/${service?.menu_contents?.banner}`} />
@@ -53,23 +62,34 @@ const Page = ({ service, enrichedChildren }) => {
                 <div className='imageTextBlock '>
                   <div className='ser_rea services_sec'>
                     {item1?.menu_contents?.contents?.map((content, index) => {
-                      const caseStudyId = content?.casestudy?.data?.casestudy?.id;
+
+                      const casestudyData = content?.casestudy?.data?.casestudy;
                       const isEven = index % 2 !== 0;
-                      const slug = content?.casestudy?.data?.casestudy?.slug;
+                      const slug = casestudyData?.slug;
 
                       const description = content?.extra_description;
+                      
+                      const short_desc = casestudyData?.short_desc
+                        ? casestudyData?.short_desc.split(" ").slice(0, 4).join(" ") + ""
+                        : "";
+                      
+                      const longdesc = casestudyData?.long_desc ? casestudyData.long_desc.split(",") : [];
 
-                      return content?.extra_description ? (
+                      return description ? (
                         <div className="row no-gutters" key={index}>
                           {/* For even items: text first, image second */}
                           {isEven ? (
                             <>
                               <div className="col-lg-6 col-12">
                                 <div className="services-text">
-                                  <h2>{content.casestudy?.data?.casestudy?.title}</h2>
-                                  <p dangerouslySetInnerHTML={{ __html: description }} />
-
-                                  {content.casestudy?.data?.casestudy?.slug && (
+                                  <h2>{casestudyData?.title}</h2>
+                                  <p>{short_desc}</p>
+                                  <div className="port-tags services-tags">
+                                  { longdesc.map((item, index)=>(
+                                  <h4 key={index}>{item}</h4>
+                                  )) }
+                                  </div>
+                                  {casestudyData?.slug && (
                                     <Link
                                       href={{
                                         pathname: "/casestudy",
@@ -88,7 +108,7 @@ const Page = ({ service, enrichedChildren }) => {
                                   <Image
                                     width={600}
                                     height={150}
-                                    src={`${env.BACKEND_BASE_URL}${content.casestudy?.data?.casestudy?.image}`}
+                                    src={`${env.BACKEND_BASE_URL}${casestudyData?.image}`}
                                     alt="image"
                                     className="img-fluid"
                                     loading="lazy"
@@ -104,7 +124,7 @@ const Page = ({ service, enrichedChildren }) => {
                                   <Image
                                     width={600}
                                     height={150}
-                                    src={`${env.BACKEND_BASE_URL}${content.casestudy?.data?.casestudy?.image}`}
+                                    src={`${env.BACKEND_BASE_URL}${casestudyData?.image}`}
                                     alt="image"
                                     className="img-fluid"
                                     loading="lazy"
@@ -113,14 +133,14 @@ const Page = ({ service, enrichedChildren }) => {
                               </div>
                               <div className="col-lg-6 col-12">
                                 <div className="services-text">
-                                  <h2>{content.casestudy?.data?.casestudy?.title}</h2>
-                                  <p dangerouslySetInnerHTML={{ __html: description }} />
+                                  <h2>{casestudyData?.title}</h2>
+                                  <p>{short_desc}</p>
                                   <div className="port-tags services-tags">
-                                    <h4>Angular</h4>
-                                    <h4>Node JS</h4>
-                                    <h4>ABC Dummy</h4>
+                                  { longdesc.map((item, index)=>(
+                                  <h4 key={index}>{item}</h4>
+                                  )) }
                                   </div>
-                                  {content.casestudy?.data?.casestudy?.slug && (
+                                  {casestudyData?.slug && (
                                     <Link
                                       href={{
                                         pathname: "/casestudy",
@@ -195,11 +215,15 @@ export async function getServerSideProps({ params }) {
       };
     })
   );
+  
+  const seobyslug = await HomeService.seobyslug(slug);
+  const seometadata = seobyslug?.data?.seometa;
 
   return {
     props: {
       service,
       enrichedChildren,
+      seometadata
     },
   };
 }

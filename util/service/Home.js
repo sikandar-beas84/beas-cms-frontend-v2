@@ -18,7 +18,9 @@ import { env } from '../constants/common';
   HomeService.menuProjectPage = () => getService('get-menu-casestudy', `${env.ACCESS_TOKEN}`)
   HomeService.commonaboutusPage = () => getService('get-common-aboutus', `${env.ACCESS_TOKEN}`)
   HomeService.faqPage = () => getService('get-faq', `${env.ACCESS_TOKEN}`)
-  
+  HomeService.commonPage = () => getService('get-all-common', `${env.ACCESS_TOKEN}`)
+  HomeService.seobyslug = (slug) => postService('get-seo-by-slug', `${env.ACCESS_TOKEN}`, slug)
+  HomeService.individualBlogPage = (slug) => postService('get-blog-by-slug', `${env.ACCESS_TOKEN}`,slug)
 
   
   export default HomeService;

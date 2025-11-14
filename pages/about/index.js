@@ -7,17 +7,17 @@ import { env } from '../../util/constants/common';
 import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
 
-const AboutUs = ({aboutus, commonaboutus}) => {
+const AboutUs = ({aboutus, commonaboutus, seometadata}) => {
     const router = useRouter();
     if (router.isFallback) {
       return <div>Loading...</div>;
     }
 
     const descriptionText = aboutus?.description
-    ? aboutus?.description.split(" ").slice(0, 195).join(" ") + ""
+    ? aboutus?.description.split(" ").slice(0, 133).join(" ") + ""
     : "";
     const descriptionTextTwo = aboutus?.description
-    ? aboutus?.description.split(" ").slice(195, 400).join(" ") + ""
+    ? aboutus?.description.split(" ").slice(133, 400).join(" ") + ""
     : "";
     const [safeHTML, setHtml] = useState('');
 
@@ -25,35 +25,35 @@ const AboutUs = ({aboutus, commonaboutus}) => {
     setHtml(descriptionTextTwo); // only runs on client
     }, []);
 
+    const metaTitle = seometadata?.title
+    ? seometadata?.title
+    :`About Us`;
+    const metaKeyword = seometadata?.keyword
+    ? seometadata?.keyword
+    :"About Beas, Meet our team, Software Company, Technology, Experts at Beas, Corporate Profile";
+    const metaDesc = seometadata?.description
+    ? seometadata?.description
+    : "Learn more about Beas and our specialties.";
+    const metaImage = seometadata?.image
+    ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
+    : `${env.BACKEND_BASE_URL}${aboutus?.image}`;
+    const metaUrl = seometadata?.url
+    ?`${env.FRONTEND_BASE_URL}about/${seometadata?.url}`
+    :`${env.FRONTEND_BASE_URL}about/${aboutus?.slug}`;
+    const metaAuthor = seometadata?.author
+    ? seometadata?.author
+    :"BEAS Consultancy And Services Private Limited";
 
     return (
         <>
         <SEO
-            title={aboutus?.name || 'About Us | Beas Consultancy & Services Pvt. Ltd.'}
-            description={aboutus?.menu_contents?.description || 'Learn more about Beas and our specialties.'}
-            keywords={
-                [
-                aboutus?.menu_contents?.title,
-                aboutus?.menu_contents?.description,
-                'About Beas',
-                'Meet our team',
-                'Software Company',
-                'Technology',
-                'Experts at Beas',
-                'Corporate Profile'
-                ]
-                .filter(Boolean)
-                .join(', ')
-            }
-            image={
-                aboutus?.image 
-                  ? `${env.BACKEND_BASE_URL}${aboutus.image}`
-                  : `${env.BACKEND_BASE_URL}/default-image.jpg`
-              }
-            url={`${env.BACKEND_BASE_URL}${aboutus?.slug || 'about-us'}`}
-            publishedDate={aboutus?.created_at || new Date().toISOString()}
-            author="Beas Consultancy & Services Pvt. Ltd."
-            />
+        title={ metaTitle }
+        description={ metaDesc }
+        keywords={ metaKeyword }
+        image={ metaImage }
+        url={ metaUrl }
+        author={ metaAuthor }
+      />
 
             <main>
                 <BreadCrumb pagetitle="About Us" pageBanner={`assets/img/menu-content/${aboutus?.menu_contents?.banner}`} />
@@ -105,7 +105,7 @@ const AboutUs = ({aboutus, commonaboutus}) => {
                                     
                                     <div key={index} className="mission_boxs our_box_mi">
                                         <h2>{item?.extra_title}</h2>
-                                        <div className='' dangerouslySetInnerHTML={{ __html: item?.extra_description }} />
+                                        <p>{item?.extra_description}</p>
                                     </div>
                                 ))}
                                 </div>
@@ -156,7 +156,11 @@ const AboutUs = ({aboutus, commonaboutus}) => {
 
 export default React.memo(AboutUs);
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+
+    const url = context.req.url;
+    const lastSegment = url.split("/").filter(Boolean).pop();
+    
     const res = await HomeService.menuAboutusPage();
     const aboutus = res.data?.aboutus || [];
 
@@ -165,12 +169,16 @@ export async function getServerSideProps() {
 
     const res2 = await HomeService.commonaboutusPage();
     const commonaboutus = res2.data?.commonaboutus || [];
+
+    const seobyslug = await HomeService.seobyslug(lastSegment);
+    const seometadata = seobyslug?.data?.seometa;
   
     return {
       props: {
         aboutus,
         experts,
-        commonaboutus
+        commonaboutus,
+        seometadata
       }
     }
   }

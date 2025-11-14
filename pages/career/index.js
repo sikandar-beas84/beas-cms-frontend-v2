@@ -1,7 +1,6 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
 import { Col, Row } from "react-bootstrap";
-import { ArrowUp, ArrowUpRight, Upload } from "react-feather";
 import BreadCrumb from '../component/BreadCrumb';
 import Link from 'next/link'
 import Image from 'next/image';
@@ -9,26 +8,41 @@ import HomeService from '../../util/service/Home';
 import { env } from '../../util/constants/common';
 import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
-import Form from 'react-bootstrap/Form';
 
-const Career = ({ careers, menucareer }) => {
+const Career = ({ careers, menucareer, seometadata }) => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
 
+  const metaTitle = seometadata?.name
+  ? seometadata?.title
+  :`Careers`;
+  const metaKeyword = seometadata?.keyword
+  ? seometadata?.keyword
+  :"career, jobs, openings";
+  const metaDesc = seometadata?.description
+  ? seometadata?.description
+  : "Explore exciting career opportunities with us.";
+  const metaImage = seometadata?.image
+  ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
+  : `${env.BACKEND_BASE_URL}${menucareer?.image}`;
+  const metaUrl = seometadata?.url
+  ?`${env.FRONTEND_BASE_URL}career/${seometadata?.url}`
+  :`${env.FRONTEND_BASE_URL}career/${menucareer?.slug}`;
+  const metaAuthor = seometadata?.author
+  ? seometadata?.author
+  :"BEAS Consultancy And Services Private Limited";
+
   return (
     <>
       <SEO
-        title={menucareer?.name || "Career | Beas Consultancy & Services Pvt. Ltd."}
-        description={menucareer?.description || "Explore exciting career opportunities with us."}
-        keywords="career, jobs, openings"
-        image={
-          menucareer?.image
-            ? `${env.BACKEND_BASE_URL}${menucareer.image}`
-            : `${env.BACKEND_BASE_URL}/default-image.jpg`
-        }
-        url={`${env.BACKEND_BASE_URL}${menucareer?.slug || 'career'}`}
+        title={ metaTitle }
+        description={ metaDesc }
+        keywords={ metaKeyword }
+        image={ metaImage }
+        url={ metaUrl }
+        author={ metaAuthor }
       />
       <main>
         <BreadCrumb pagetitle="Career" pageBanner={`assets/img/menu-content/${menucareer?.menu_contents?.banner}`} />
@@ -72,17 +86,25 @@ const Career = ({ careers, menucareer }) => {
 
 export default React.memo(Career);
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+
+  const url = context.req.url;
+  const lastSegment = url.split("/").filter(Boolean).pop();
+
   const res = await HomeService.menuCareerPage();
   const menucareer = res.data?.career || [];
 
   const res1 = await HomeService.careerPage();
   const careers = res1.data?.careers || [];
 
+  const seobyslug = await HomeService.seobyslug(lastSegment);
+  const seometadata = seobyslug?.data?.seometa;
+
   return {
     props: {
       menucareer,
-      careers
+      careers,
+      seometadata
     }
   }
 }

@@ -13,7 +13,7 @@ import BannerCarousal from "../component/BannerCarousal";
 
 const MAX_VISIBLE = 10; // show 10 numbers at a time
 
-const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData }) => {
+const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seometadata }) => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
@@ -31,25 +31,34 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData }) => 
   const start = currentGroup * MAX_VISIBLE;
   const end = Math.min(start + MAX_VISIBLE, totalPages);
 
+  const metaTitle = seometadata?.title
+  ? seometadata?.title
+  :`Case Study`;
+const metaKeyword = seometadata?.keyword
+  ? seometadata?.keyword
+  :"case study, business solution, project success, Beas consultancy";
+const metaDesc = seometadata?.description
+  ? seometadata?.description
+  : "Learn how Beas Consultancy delivered a tailored solution and business impact";
+const metaImage = seometadata?.image
+  ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
+  : `${env.BACKEND_BASE_URL}${casestudy?.image}`;
+const metaUrl = seometadata?.url
+  ?`${env.FRONTEND_BASE_URL}casestudy/${seometadata?.url}`
+  :`${env.FRONTEND_BASE_URL}casestudy/${casestudy?.slug}`;
+const metaAuthor = seometadata?.author
+  ? seometadata?.author
+  :"BEAS Consultancy And Services Private Limited";
+
   return (
     <>
       <SEO
-        title={`Case Study | ${casestudy?.title}`}
-        description={
-          casestudy?.title ||
-          `${casestudy?.title} - Learn how Beas Consultancy delivered a tailored solution and business impact.`
-        }
-        keywords={
-          casestudy?.title ||
-          "case study, business solution, project success, Beas consultancy"
-        }
-        image={
-          casestudy?.image
-            ? `${env.BACKEND_BASE_URL}${casestudy.image}`
-            : `${env.BACKEND_BASE_URL}/default-image.jpg`
-        }
-        url={`${env.FRONTEND_BASE_URL}/casestudy/${casestudy?.slug}`}
-        author="Beas Consultancy & Services Pvt. Ltd."
+        title={ metaTitle }
+        description={ metaDesc }
+        keywords={ metaKeyword }
+        image={ metaImage }
+        url={ metaUrl }
+        author={ metaAuthor }
       />
 
       <main>
@@ -147,9 +156,8 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData }) => 
             </Row>
             <Row>
               <Col xs={12} className="mt-5">
-                <h1 class="inner-page-title mb-2 text-center">Our Recent studies</h1>
-                <p className="text-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                  been the industry's standard dummy.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                <h1 className="inner-page-title mb-2 text-center">{homeData?.portfoliohomepage?.title}</h1>
+                <p className="text-center">{homeData?.portfoliohomepage?.long_desc}</p>
               </Col>
               <Col xs={12} className="my-3">
                 <BannerCarousal page="projectsnew" projects={homeData?.projects} />
@@ -216,6 +224,9 @@ export async function getServerSideProps({ params }) {
 
   const casestudy = projects[currentIndex];
 
+  const seobyslug = await HomeService.seobyslug(slug);
+  const seometadata = seobyslug?.data?.seometa;
+
   return {
     props: {
       casestudy,
@@ -223,6 +234,7 @@ export async function getServerSideProps({ params }) {
       projects,
       currentSlug: slug,
       homeData: homeResult ? homeResult : [],
+      seometadata
     },
   };
 }

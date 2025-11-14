@@ -15,13 +15,11 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import IndustriesProcess from './component/IndustriesProcess';
 
-function Home({homeData}) {
+function Home({homeData, seometadata}) {
   const router = useRouter();
     if (router.isFallback) {
       return <div>Loading...</div>;
     }
-
-    console.log("homeData",homeData);
   const { scrollY } = useScroll();
   const scale = useTransform(scrollY, [0, 500], [1, 1.5]);
 
@@ -29,21 +27,37 @@ function Home({homeData}) {
   // const aboutussentences = aboutustext?.match(/[^.!?]+[.!?]+/g) || [];
   // const aboutuspreviewText = aboutussentences.slice(0, 3).join(' ').trim();
   const aboutuspreviewText = homeData?.aboutus?.menu_contents?.description;
- 
   const home_image = homeData?.menus?.[0]?.image;
+
+  //seo start
+  const metaTitle = seometadata?.title
+  ? seometadata?.title
+  :`Home`;
+const metaKeyword = seometadata?.keyword
+  ? seometadata?.keyword
+  :"IT Consulting, Software Development, Digital Transformation, Business Solutions, Technology Partners, Beas Consultancy";
+const metaDesc = seometadata?.description
+  ? seometadata?.description
+  : "Learn about our 25+ years of IT consulting expertise, client stories, and services.";
+const metaImage = seometadata?.image
+  ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
+  : `${env.BACKEND_BASE_URL}${home_image}`;
+const metaUrl = seometadata?.url
+  ?`${env.FRONTEND_BASE_URL}${seometadata?.url}`
+  :`${env.FRONTEND_BASE_URL}`;
+const metaAuthor = seometadata?.author
+  ? seometadata?.author
+  :"BEAS Consultancy And Services Private Limited";
+  //seo end
   return (
     <>
       <SEO
-        title={homeData?.menus?.[0]?.name || 'Home | Beas Consultancy & Services Pvt. Ltd.'}
-        description={aboutuspreviewText || "Learn about our 25+ years of IT consulting expertise, client stories, and services."}
-        keywords="IT Consulting, Software Development, Digital Transformation, Business Solutions, Technology Partners, Beas Consultancy"
-        image={
-          home_image 
-            ? `${env.BACKEND_BASE_URL}${home_image}`
-            : `${env.BACKEND_BASE_URL}/default-image.jpg`
-        }
-        url={`${env.BACKEND_BASE_URL}${homeData?.menus?.[0]?.slug || 'home'}`}
-        author="Beas Consultancy & Services Pvt. Ltd."
+        title={ metaTitle }
+        description={ metaDesc }
+        keywords={ metaKeyword }
+        image={ metaImage }
+        url={ metaUrl }
+        author={ metaAuthor }
       />
       <main>
         <section>
@@ -195,40 +209,6 @@ function Home({homeData}) {
           {/* portfolio section end */}
 
           {/* process secton start */}
-          {/* <div className="process">
-            <div className="container">
-                <div className="port-hd-txt proc-hd">
-                  <h2>Industries we Serve</h2>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
-                </div>
-            </div>
-            <div className="process-inr">
-                <div className="container">
-                  <div className="process-txt">
-                      <div className="tab">
-                        <button className="tablinks activen">1. Media and Entertainment</button>
-                        <button className="tablinks">2. Banking , Insurance and Finance</button>
-                        <button className="tablinks">3. Business</button>
-                        <button className="tablinks">4. Government</button>
-                        <button className="tablinks">5. Healthcare and Wellness</button>
-                        <button className="tablinks">6. Manufacturing</button>
-                      </div>
-                      <div className="tabcontent">
-                        <div className="proc-deet">
-                            <div className="proc-img">
-                              <img src="assets/images/process.png" alt=""/>
-                            </div>
-                            <div className="proc-text">
-                              <h2>Media and Entertainment</h2>
-                              <p>Lorem Ipsum is simply dumy text of printing and typesetting industry. Lorem Ipsum has been the industry's standard lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum has been the industry's standard dummy.</p>
-                              <a href="#" className="proc-btn thar-three4">Get in Touch</a>
-                            </div>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-            </div>
-          </div> */}
           <IndustriesProcess industryData={homeData?.industries?.children} pageTitle={homeData?.industrieshomepage?.title} pageDesc={homeData?.industrieshomepage?.long_desc} />
           {/* process secton end */}
 
@@ -301,8 +281,10 @@ function Home({homeData}) {
                 </div>
                 <div className="Blogs-inr">
                   <div className="row">
-                      <div className="col-lg-4 col-md-6 col-sm-6">
-                        <div className="guiditem">
+
+                      
+                      <BannerCarousal page="blogs" blogs={homeData?.blogs} />
+                        {/* <div className="guiditem">
                             <div className="guidimg">
                               <a href=""><img src="assets/images/guid2.jpg" alt=""/></a>
                               <div className="guidcal">
@@ -313,37 +295,11 @@ function Home({homeData}) {
                               <h5><a href="">Bring to the table win-win sur<br/>vival strategies to</a></h5>
                               <p>Lorem ipsum dolor sit amet, cibo mundi ea duo dummy duo vim exerci pha vim exerci textpha edrum  cibo mundi duo edrum</p>
                             </div>
-                        </div>
+                        </div> */}
                       </div>
-                      <div className="col-lg-4 col-md-6 col-sm-6">
-                        <div className="guiditem">
-                            <div className="guidimg">
-                              <a href=""><img src="assets/images/guid2.jpg" alt=""/></a>
-                              <div className="guidcal">
-                                  <strong>20 <br/><b>Jan</b></strong>
-                              </div>
-                            </div>
-                            <div className="guidtext">
-                              <h5><a href="">Bring to the table win-win sur<br/>vival strategies to</a></h5>
-                              <p>Lorem ipsum dolor sit amet, cibo mundi ea duo dummy duo vim exerci pha vim exerci textpha edrum  cibo mundi duo edrum</p>
-                            </div>
-                        </div>
-                      </div>
-                      <div className="col-lg-4 col-md-6 col-sm-6">
-                        <div className="guiditem">
-                            <div className="guidimg">
-                              <a href=""><img src="assets/images/guid2.jpg" alt=""/></a>
-                              <div className="guidcal">
-                                  <strong>20 <br/><b>Jan</b></strong>
-                              </div>
-                            </div>
-                            <div className="guidtext">
-                              <h5><a href="">Bring to the table win-win sur<br/>vival strategies to</a></h5>
-                              <p>Lorem ipsum dolor sit amet, cibo mundi ea duo dummy duo vim exerci pha vim exerci textpha edrum  cibo mundi duo edrum</p>
-                            </div>
-                        </div>
-                      </div>
-                  </div>
+
+                      
+                  
                 </div>
             </div>
           </div>
@@ -361,9 +317,14 @@ export async function getServerSideProps() {
 
   const homesection = await HomeService.homePage();
   const homeResult = homesection.data;
+
+  const seobyslug = await HomeService.seobyslug();
+  const seometadata = seobyslug?.data?.seometa;
+
   return {
     props: {
       homeData: homeResult ? homeResult : [],
+      seometadata
     },
   };
 }

@@ -1,14 +1,11 @@
 import React, { useState, useRef } from 'react'
-import { Container } from 'react-bootstrap'
-import { Col, Row } from "react-bootstrap";
 import BreadCrumb from '../component/BreadCrumb';
-import { Mail, PhoneCall } from 'react-feather'
 import HomeService from '../../util/service/Home';
 import { env } from '../../util/constants/common';
 import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
 import Accordion from 'react-bootstrap/Accordion';
-const ContactUs = ({ contactus, faqs }) => {
+const ContactUs = ({ contactus, faqs, seometadata }) => {
 
   const router = useRouter();
   if (router.isFallback) {
@@ -107,19 +104,34 @@ const ContactUs = ({ contactus, faqs }) => {
     file: formData.file
   }).every((value) => value && value !== '');
 
+  const metaTitle = seometadata?.title
+  ? seometadata?.title
+  :`Contact Us`;
+  const metaKeyword = seometadata?.keyword
+  ? seometadata?.keyword
+  :"Contact Beas, Contact Form, Business Inquiry, Support";
+  const metaDesc = seometadata?.description
+  ? seometadata?.description
+  : "Reach out to Beas Consultancy. We’re here to help with your questions, suggestions, and business inquiries."
+  const metaImage = seometadata?.image
+  ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
+  : `${env.BACKEND_BASE_URL}${contactus?.image}`;
+  const metaUrl = seometadata?.url
+  ?`${env.FRONTEND_BASE_URL}contact/${seometadata?.url}`
+  :`${env.FRONTEND_BASE_URL}contact/${contactus?.slug}`;
+  const metaAuthor = seometadata?.author
+  ? seometadata?.author
+  :"BEAS Consultancy And Services Private Limited";
+
   return (
     <>
       <SEO
-        title="Contact Us"
-        description="Reach out to Beas Consultancy. We’re here to help with your questions, suggestions, and business inquiries."
-        keywords="Contact Beas, Contact Form, Business Inquiry, Support"
-        url={`${env.BACKEND_BASE_URL}${contactus?.slug || 'skills'}`}
-        image={
-          contactus?.image
-            ? `${env.BACKEND_BASE_URL}${contactus.image}`
-            : `${env.BACKEND_BASE_URL}/default-image.jpg`
-        }
-        author="Beas Consultancy & Services Pvt. Ltd."
+        title={ metaTitle }
+        description={ metaDesc }
+        keywords={ metaKeyword }
+        image={ metaImage }
+        url={ metaUrl }
+        author={ metaAuthor }
       />
       <main>
         <BreadCrumb pagetitle="Contact Us" pageBanner={contactus?.banner} />
@@ -304,7 +316,10 @@ const ContactUs = ({ contactus, faqs }) => {
 
 export default React.memo(ContactUs);
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+
+  const url = context.req.url;
+  const lastSegment = url.split("/").filter(Boolean).pop();
 
   const res = await HomeService.contactPage();
   const contactus = res.data?.contact || {}
@@ -312,10 +327,14 @@ export async function getServerSideProps() {
   const faqres = await HomeService.faqPage();
   const faqs = faqres.data?.faqs || {}
 
+  const seobyslug = await HomeService.seobyslug(lastSegment);
+  const seometadata = seobyslug?.data?.seometa;
+
   return {
     props: {
       contactus,
-      faqs
+      faqs,
+      seometadata
     }
   }
 }

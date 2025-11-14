@@ -7,26 +7,41 @@ import { env } from '../../util/constants/common';
 import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
 
-const Skills = ({ skills }) => {
+const Skills = ({ skills, seometadata }) => {
 
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
 
+  const metaTitle = seometadata?.title
+  ? seometadata?.title
+  :`Skills`;
+  const metaKeyword = seometadata?.keyword
+  ? seometadata?.keyword
+  :"Skills, Expertise, Technologies, Services";
+  const metaDesc = seometadata?.description
+  ? seometadata?.description
+  : "Explore the skills and capabilities of Beas Consultancy.";
+  const metaImage = seometadata?.image
+  ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
+  : `${env.BACKEND_BASE_URL}${skills?.image}`;
+  const metaUrl = seometadata?.url
+  ?`${env.FRONTEND_BASE_URL}skills/${seometadata?.url}`
+  :`${env.FRONTEND_BASE_URL}skills/${skills?.slug}`;
+  const metaAuthor = seometadata?.author
+  ? seometadata?.author
+  :"BEAS Consultancy And Services Private Limited";
+
   return (
     <>
       <SEO
-        title={skills?.name || "Skills | Beas Consultancy & Services Pvt. Ltd."}
-        description={skills?.menu_contents?.description?.slice(0, 50) || 'Explore the skills and capabilities of Beas Consultancy.'}
-        keywords="Skills, Expertise, Technologies, Services"
-        image={
-          skills?.image
-            ? `${env.BACKEND_BASE_URL}${skills.image}`
-            : `${env.BACKEND_BASE_URL}/default-image.jpg`
-        }
-        url={`${env.BACKEND_BASE_URL}${skills?.slug || 'skills'}`}
-        author="Beas Consultancy & Services Pvt. Ltd."
+        title={ metaTitle }
+        description={ metaDesc }
+        keywords={ metaKeyword }
+        image={ metaImage }
+        url={ metaUrl }
+        author={ metaAuthor }
       />
       <main>
         <BreadCrumb pagetitle="Skills" pageBanner={`assets/img/menu-content/${skills?.menu_contents?.banner}`} />
@@ -67,14 +82,21 @@ const Skills = ({ skills }) => {
 
 export default React.memo(Skills);
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+
+  const url = context.req.url;
+  const lastSegment = url.split("/").filter(Boolean).pop();
+
   const res = await HomeService.menuSkillPage();
   const skills = res.data?.skills || [];
 
+  const seobyslug = await HomeService.seobyslug(lastSegment);
+  const seometadata = seobyslug?.data?.seometa;
 
   return {
     props: {
-      skills
+      skills,
+      seometadata
     }
   }
 }

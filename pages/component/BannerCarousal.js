@@ -299,10 +299,11 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
       )}
 
       {page == 'blogs' && (
-        <Slider {...blogsettings}>
+        <Slider {...testimonialnewsettings}>
+
           {blogs?.map((item, index) => {
 
-            const titleText = item?.title;
+              const titleText = item?.title;
             const short_desc = item?.short_desc;
             const slug = item?.slug;
 
@@ -315,9 +316,7 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
             const year = created_at ? created_at.getFullYear() : "";
 
             return (
-              <>
-              
-                <div key={index} className="col-lg-4 col-md-6 col-sm-6">
+              <div key={index} className="col-lg-4 col-md-6 col-sm-6">
                   <Link
                   href={{
                     pathname: "/blog",
@@ -347,11 +346,8 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
                   </div>
                   </Link>
                 </div>
-              
-              </>
             );
           })}
-
         </Slider>
       )}
 

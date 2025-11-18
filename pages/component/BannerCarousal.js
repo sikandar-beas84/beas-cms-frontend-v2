@@ -320,10 +320,7 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
               
                 <div key={index} className='test-box'>
                   <Link
-                  href={{
-                    pathname: "/blog",
-                    query: { id: slug },
-                  }}
+                  href={`blogs/${slug}`}
                   
                 >
                   <div className="guiditem">

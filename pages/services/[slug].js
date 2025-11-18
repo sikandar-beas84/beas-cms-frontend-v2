@@ -82,9 +82,7 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
                             const slug = casestudyData?.slug;
                             const description = content?.extra_description;
 
-                            const short_desc = casestudyData?.short_desc
-                              ? casestudyData?.short_desc.split(" ").slice(0, 4).join(" ")
-                              : "";
+                            const short_desc = casestudyData?.short_desc;
 
                             const longdesc = casestudyData?.long_desc
                               ? casestudyData.long_desc.split(",")

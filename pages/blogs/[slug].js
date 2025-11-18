@@ -6,7 +6,7 @@ import HomeService from '../../util/service/Home';
 import { env } from '../../util/constants/common';
 import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
-import { Clock, MessageCircle, Facebook, Twitter, Instagram, Linkedin, CornerUpLeft, Search } from "react-feather";
+import { Clock, MessageCircle } from "react-feather";
 
 const Blog = ({ blog, seometadata }) => {
     const router = useRouter();
@@ -292,14 +292,14 @@ const Blog = ({ blog, seometadata }) => {
 
 export default React.memo(Blog);
 
-export async function getServerSideProps({query}) {
+export async function getServerSideProps({params}) {
 
-    const { id } = query ;
+    const { slug } = params ;
 
-    const response = await HomeService.individualBlogPage(id);
+    const response = await HomeService.individualBlogPage(slug);
     const blog = response.data?.blog || [];
 
-    const seobyslug = await HomeService.seobyslug(id);
+    const seobyslug = await HomeService.seobyslug(slug);
     const seometadata = seobyslug?.data?.seometa;
 
   return {

@@ -80,9 +80,7 @@ const Page = ({ industry, enrichedContents, seometadata }) => {
               const description = item?.extra_description;
               if (!description) return null;
 
-              const short_desc = casestudyData?.short_desc
-                ? casestudyData?.short_desc.split(" ").slice(0, 4).join(" ")
-                : "";
+              const short_desc = casestudyData?.short_desc;
 
               const longdesc = casestudyData?.long_desc
                 ? casestudyData.long_desc.split(",")

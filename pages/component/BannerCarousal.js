@@ -316,7 +316,7 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
             const year = created_at ? created_at.getFullYear() : "";
 
             return (
-              <>
+              
               
                 <div key={index} className='test-box'>
                   <Link
@@ -349,7 +349,7 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
                   </Link>
                 </div>
             );
-          )})}
+          })}
         </Slider>
       )}
 

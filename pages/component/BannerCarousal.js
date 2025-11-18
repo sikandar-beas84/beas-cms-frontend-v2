@@ -270,13 +270,13 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
               <>
 
                 <div className="port-box" onClick={() => router.push(`/casestudy/${item.slug}`)}>
-                  <div className="port-img">
+                  <div className="port-img port-img2">
 
                     <Image
                       src={`${env.BACKEND_BASE_URL}${item.image}`}
-                      alt="Hero Banner"
-                      width={100}
-                      height={100}
+                      alt="projects"
+                      width={400}
+                      height={400}
                       priority
                       fetchPriority="high"
                       className="img-fluid port-shw"

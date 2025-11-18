@@ -1467,7 +1467,7 @@ img.port-shw {
   left: 0;
   right: 0;
   margin: auto;
-  width:100%;
+
 }
 .guidimg a img {
   width: 100%;
@@ -1970,7 +1970,7 @@ img.port-shw {
     font-size:1.250rem;
     font-weight: 700;}
   .accordion-item{border-bottom:1px solid transparent!important;}
-  .accordion-body{background:#f7f9fe; margin-bottom: 15px;}
+  .accordion-body{background:#eef2fd; margin-bottom: 15px;}
   .accordion-button::after{background-image:url(../images/arrow-up-black.png);width:20px;height:20px;}
   .accordion-button:not(.collapsed)::after{background-image:url(../images/arrow-up.png);width:20px;height:20px;}
 /* contact css suro */
@@ -2766,5 +2766,17 @@ height:40px;
   display: flex;
   justify-content:center;
 }
+.blog-hm-desc{height:156px; overflow:hidden;position:relative;}
+.mt-35{margin-top:35px;}
 
+.blog-hm-img{width: 100%;
+  position: relative;
+  overflow: hidden;
+  height: 196px;
+  border-radius: 5px 5px 0 0;}
+
+.blog-hm-title{min-height:72px;}
+.contact-bg .serv-head{width:100%;}
+.contact-bg .serv-head h2{line-height: 30px;}
+.accordion-body p{text-align:left;}
 /* blog end */

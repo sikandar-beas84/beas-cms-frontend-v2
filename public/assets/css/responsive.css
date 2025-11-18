@@ -62,7 +62,7 @@
     color: #000;
 }
 .accordion-body {
-    background: transparent;
+    /* background: transparent; */
     color: black;
     font-size: 18px;
     font-weight: 600;

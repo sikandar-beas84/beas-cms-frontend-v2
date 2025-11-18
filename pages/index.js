@@ -84,18 +84,15 @@ const metaAuthor = seometadata?.author
                         <div className="row no-gutters">
                         { homeData?.services?.children?.map((item, index)=>{
                           const descriptionText = item?.description
-                          ? item.description.length > 50
-                            ? item.description.substring(0, 60) + "..."
-                            : item.description
-                          : "";
+                          
                           return (
                             
                             <div className="col-lg-4 col-md-6 col-sm-6 col-12">
                               <Link href={`/services/${item?.slug}`}>
                               <div className="srvc-box fst-srvc-bx sevc-1 hverx">
                                   <Image 
-                                    width={50} 
-                                    height={50} 
+                                    width={90} 
+                                    height={90} 
                                     src={`${env.BACKEND_BASE_URL}assets/img/menu-content/${item?.menu_contents?.icon}`} 
                                     className="img-fluid srvc-icon" 
                                     alt="image" 
@@ -103,7 +100,7 @@ const metaAuthor = seometadata?.author
                                     />
                                   <div className="srvc-bxtx">
                                     <h3>{item?.name}</h3>
-                                    <p>{descriptionText}</p>
+                                    <p className='blog-hm-desc'>{descriptionText}</p>
                                     <p>Read more...</p>
                                   </div>
                                   
@@ -172,7 +169,7 @@ const metaAuthor = seometadata?.author
                         <div className="col-lg-4 col-md-6 col-sm-6 p-0">
                           <div className="why-box why-1">
                               <div className="why-img">
-                              <Image width={60} height={50} style={{ minWidth: "42px" }}  src={`${env.BACKEND_BASE_URL}${item.image}`} alt="image" loading="lazy" />
+                              <Image width={90} height={90} src={`${env.BACKEND_BASE_URL}${item.image}`} alt="image" loading="lazy" />
                               </div>
                               <h3>{item.title}</h3>
                               <p>{item.description}</p>

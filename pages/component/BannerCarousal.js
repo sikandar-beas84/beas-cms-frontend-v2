@@ -324,12 +324,12 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
                   
                 >
                   <div className="guiditem">
-                      <div className="guidimg">
+                      <div className="blog-hm-img">
                         <Image
                           src={`${env.BACKEND_BASE_URL}${item.image}`}
-                          alt="Hero Banner"
-                          width={100}
-                          height={100}
+                          alt="blog"
+                          width={400}
+                          height={400}
                           priority
                           fetchPriority="high"
                           className="img-fluid port-shw"
@@ -339,8 +339,13 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
                         </div>
                       </div>
                       <div className="guidtext">
-                        <h5>{titleText}</h5>
-                        <p>{short_desc}</p>
+                        <h5 className='blog-hm-title'>{titleText}</h5>
+                        <div
+                          className="mb-0 blog-hm-desc"
+                          dangerouslySetInnerHTML={{ __html: short_desc }}
+                        ></div>
+                        <div class="d-flex justify-content-center mt-35"><div class="post-job-btn">Read More</div></div>
+                      
                       </div>
                   </div>
                   </Link>

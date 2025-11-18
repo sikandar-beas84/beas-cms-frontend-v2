@@ -83,7 +83,7 @@ const Service = ({ services, service, seometadata }) => {
                                   key={index}
                                   className="services-btn proc-btn thar-three4"
                                 >
-                                  Read Case Study
+                                  Read More
                                 </Nav.Link>
                               </div>
                             </div>
@@ -125,7 +125,7 @@ const Service = ({ services, service, seometadata }) => {
                                   key={index}
                                   className="services-btn proc-btn thar-three4"
                                 >
-                                  Read Case Study
+                                  Read More
                                 </Nav.Link>
                               </div>
                             </div>

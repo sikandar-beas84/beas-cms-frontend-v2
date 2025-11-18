@@ -90,7 +90,7 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
     } catch (err) {
       //console.error(err);
       setStatus('❌ Submission failed.');
-    }finally {
+    } finally {
       setLoading(false); // ✅ stop loader
     }
   };
@@ -105,33 +105,33 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
   }).every((value) => value && value !== '');
 
   const metaTitle = seometadata?.title
-  ? seometadata?.title
-  :`Contact Us`;
+    ? seometadata?.title
+    : `Contact Us`;
   const metaKeyword = seometadata?.keyword
-  ? seometadata?.keyword
-  :"Contact Beas, Contact Form, Business Inquiry, Support";
+    ? seometadata?.keyword
+    : "Contact Beas, Contact Form, Business Inquiry, Support";
   const metaDesc = seometadata?.description
-  ? seometadata?.description
-  : "Reach out to Beas Consultancy. We’re here to help with your questions, suggestions, and business inquiries."
+    ? seometadata?.description
+    : "Reach out to Beas Consultancy. We’re here to help with your questions, suggestions, and business inquiries."
   const metaImage = seometadata?.image
-  ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
-  : `${env.BACKEND_BASE_URL}${contactus?.image}`;
+    ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
+    : `${env.BACKEND_BASE_URL}${contactus?.image}`;
   const metaUrl = seometadata?.url
-  ?`${env.FRONTEND_BASE_URL}contact/${seometadata?.url}`
-  :`${env.FRONTEND_BASE_URL}contact/${contactus?.slug}`;
+    ? `${env.FRONTEND_BASE_URL}contact/${seometadata?.url}`
+    : `${env.FRONTEND_BASE_URL}contact/${contactus?.slug}`;
   const metaAuthor = seometadata?.author
-  ? seometadata?.author
-  :"BEAS Consultancy And Services Private Limited";
+    ? seometadata?.author
+    : "BEAS Consultancy And Services Private Limited";
 
   return (
     <>
       <SEO
-        title={ metaTitle }
-        description={ metaDesc }
-        keywords={ metaKeyword }
-        image={ metaImage }
-        url={ metaUrl }
-        author={ metaAuthor }
+        title={metaTitle}
+        description={metaDesc}
+        keywords={metaKeyword}
+        image={metaImage}
+        url={metaUrl}
+        author={metaAuthor}
       />
       <main>
         <BreadCrumb pagetitle="Contact Us" pageBanner={contactus?.banner} />
@@ -148,80 +148,80 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
                     <div className="row">
                       <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                         <div className="contact_inputs">
-                        <input 
-                          type='text' 
-                          name="name" 
-                          value={formData.name}
-                          onChange={handleChange}
-                          className='form-control mb-3'
-                          placeholder='Name'
-                          required 
-                        />
-                        {errors.name && (<p className='error_message'>{errors.name[0]}</p>)}
+                          <input
+                            type='text'
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            className='form-control mb-3'
+                            placeholder='Name'
+                            required
+                          />
+                          {errors.name && (<p className='error_message'>{errors.name[0]}</p>)}
                         </div>
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                         <div className="contact_inputs">
-                        <input 
-                          type='text' 
-                          name="email" 
-                          value={formData.email}
-                          onChange={handleChange}
-                          className='form-control mb-3'
-                          placeholder='Email'
-                          required 
-                        />
-                        {errors.email && (<p className='error_message'>{errors.email[0]}</p>)}
+                          <input
+                            type='text'
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            className='form-control mb-3'
+                            placeholder='Email'
+                            required
+                          />
+                          {errors.email && (<p className='error_message'>{errors.email[0]}</p>)}
                         </div>
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                         <div className="contact_inputs">
-                        <input 
-                          type='text' 
-                          name="phone" 
-                          value={formData.phone}
-                          onChange={handleChange}
-                          className='form-control mb-3'
-                          placeholder='Mobile Number'
-                          required 
-                        />
-                        {errors.phone && (<p className='error_message'>{errors.phone[0]}</p>)}
+                          <input
+                            type='text'
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleChange}
+                            className='form-control mb-3'
+                            placeholder='Mobile Number'
+                            required
+                          />
+                          {errors.phone && (<p className='error_message'>{errors.phone[0]}</p>)}
                         </div>
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                         <div className="contact_inputs">
-                        <input 
-                          type='text' 
-                          name="subject" 
-                          value={formData.subject}
-                          onChange={handleChange}
-                          className='form-control mb-3'
-                          placeholder='Subject'
-                          required 
-                        />
-                        {errors.subject && (<p className='error_message'>{errors.subject[0]}</p>)}
+                          <input
+                            type='text'
+                            name="subject"
+                            value={formData.subject}
+                            onChange={handleChange}
+                            className='form-control mb-3'
+                            placeholder='Subject'
+                            required
+                          />
+                          {errors.subject && (<p className='error_message'>{errors.subject[0]}</p>)}
                         </div>
                       </div>
                       <div className="col-lg-12 col-md-12 col-sm-12 col-12">
                         <div className="contact_inputs">
-                        <textarea 
-                          name="message" 
-                          value={formData.message}
-                          onChange={handleChange}
-                          className='form-control h-150 mb-3'
-                          placeholder='Message'
-                          rows={5}
-                          required 
+                          <textarea
+                            name="message"
+                            value={formData.message}
+                            onChange={handleChange}
+                            className='form-control h-150 mb-3'
+                            placeholder='Message'
+                            rows={5}
+                            required
                           ></textarea>
                           {errors.message && (<p className='error_message'>{errors.message[0]}</p>)}
                         </div>
                       </div>
                       <div className="col-lg-12 col-md-12 col-sm-12 col-12">
                         <div className="contact_form_btn">
-                          
+
                           <button type="submit" className='red-btn w-100 mt-3 post-job-btn' disabled={loading} >
                             {loading ? 'Submitting...' : 'Submit'}
-                            </button>
+                          </button>
                         </div>
                       </div>
                       {loading && <div className="spinner">Loading...</div>}
@@ -278,27 +278,45 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
             <div className="row">
               <div className="col-lg-12">
                 <div className="ser_rea">
-                  <div className="about_texts">
+                  <div className="about_texts contact-bg">
                     <div className="serv-head">
-                      { faqs?.map((item,index)=> item.type ==='faq-heading' && (
+
+                      {/* Heading Items */}
+                      {faqs?.map((item, index) =>
+                        item.type === "faq-heading" && (
                           <React.Fragment key={index}>
-                          <h2>{item?.title}</h2>
-                          <p>{item?.long_desc}</p>
+                            <h2>{item?.title}</h2>
+                            <p className="mb-4">{item?.long_desc}</p>
                           </React.Fragment>
-                      )) }
-                      
-                      <Accordion defaultActiveKey="0" flush>
-                      { faqs?.map((item,index)=> item.type !=='faq-heading' && (
-                        <Accordion.Item eventKey={index}>
-                          <Accordion.Header>
-                            { `${index+1}. ${item.title}` }
-                          </Accordion.Header>
-                          <Accordion.Body>
-                            <p>{item.short_desc}</p>
-                          </Accordion.Body>
-                        </Accordion.Item>
-                      )) }
-                      </Accordion>
+                        )
+                      )}
+
+                      {/* Find first valid accordion item */}
+                      {(() => {
+                        const firstAccordionIndex = faqs?.findIndex(
+                          (item) => item.type !== "faq-heading"
+                        );
+
+                        return (
+                          <Accordion
+                            defaultActiveKey={firstAccordionIndex.toString()}
+                            flush
+                          >
+                            {faqs?.map((item, index) =>
+                              item.type !== "faq-heading" ? (
+                                <Accordion.Item eventKey={index.toString()} key={index}>
+                                  <Accordion.Header>
+                                    {`${index + 1}. ${item.title}`}
+                                  </Accordion.Header>
+                                  <Accordion.Body>
+                                    <p>{item.short_desc}</p>
+                                  </Accordion.Body>
+                                </Accordion.Item>
+                              ) : null
+                            )}
+                          </Accordion>
+                        );
+                      })()}
 
                     </div>
                   </div>
@@ -306,9 +324,15 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
               </div>
             </div>
           </div>
-          <div className="shp1"><img src="assets/images/ser-bg.png" /></div>
-          <div className="shp2"><img src="assets/images/ser-bg2.png" /></div>
+
+          <div className="shp1">
+            <img src="assets/images/ser-bg.png" />
+          </div>
+          <div className="shp2">
+            <img src="assets/images/ser-bg2.png" />
+          </div>
         </section>
+
       </main>
     </>
   )

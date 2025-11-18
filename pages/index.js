@@ -281,8 +281,26 @@ const metaAuthor = seometadata?.author
                 </div>
                 <div className="Blogs-inr">
                   <div className="row">
-                      <BannerCarousal page="blogs" blogs={homeData?.blogs} />                       
+                    <div className='col-12'>
+                      
+                      <BannerCarousal page="blogs" blogs={homeData?.blogs} />
+                        {/* <div className="guiditem">
+                            <div className="guidimg">
+                              <a href=""><img src="assets/images/guid2.jpg" alt=""/></a>
+                              <div className="guidcal">
+                                  <strong>20 <br/><b>Jan</b></strong>
+                              </div>
+                            </div>
+                            <div className="guidtext">
+                              <h5><a href="">Bring to the table win-win sur<br/>vival strategies to</a></h5>
+                              <p>Lorem ipsum dolor sit amet, cibo mundi ea duo dummy duo vim exerci pha vim exerci textpha edrum  cibo mundi duo edrum</p>
+                            </div>
+                        </div> */}
+                        </div>
                       </div>
+
+                      
+                  
                 </div>
             </div>
           </div>

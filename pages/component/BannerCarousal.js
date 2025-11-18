@@ -316,13 +316,15 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
             const year = created_at ? created_at.getFullYear() : "";
 
             return (
-              <div key={index} className="col-lg-4 col-md-6 col-sm-6">
+              <>
+              
+                <div key={index} className='test-box'>
                   <Link
                   href={{
                     pathname: "/blog",
                     query: { id: slug },
                   }}
-                  className="services-btn proc-btn thar-three4"
+                  
                 >
                   <div className="guiditem">
                       <div className="guidimg">
@@ -336,7 +338,7 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
                           className="img-fluid port-shw"
                         />
                         <div className="guidcal">
-                            <strong>{day} <br/><b>{month}</b></strong>
+                            <strong>{day}</strong> <br/><span>{month}</span>
                         </div>
                       </div>
                       <div className="guidtext">
@@ -347,7 +349,7 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
                   </Link>
                 </div>
             );
-          })}
+          )})}
         </Slider>
       )}
 

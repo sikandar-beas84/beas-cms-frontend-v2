@@ -25,13 +25,13 @@ body {
   font-size: 1rem;
 }
 
-.container,
+/* .container,
 .container-lg,
 .container-md,
 .container-sm,
 .container-xl {
   max-width: 1300px;
-}
+} */
 
 /* Header */
 .blue-bg {
@@ -1467,6 +1467,7 @@ img.port-shw {
   left: 0;
   right: 0;
   margin: auto;
+  width:100%;
 }
 .guidimg a img {
   width: 100%;
@@ -1478,12 +1479,12 @@ img.port-shw {
 }
 .guidcal {
   position: absolute;
-  bottom: 1px;
-  right: 23px;
-  background: #302F2F;
+  bottom: 0px;
+  right: 10px;
+  background: #302f2f;
   border-radius: 3px;
   text-align: center;
-  padding: 6px 17px;
+  padding: 20px 30px;
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   -ms-transition: all 0.3s;
@@ -1491,12 +1492,13 @@ img.port-shw {
   transition: all 0.3s;
 }
 .guidcal strong {
-  font-weight: 600;
-  font-size: 16px;
+  font-weight: 700;
+  font-size: 30px;
   color: #fff;
   display: inline-block;
   line-height: 21px;
 }
+.guidcal span{color:#fff;}
 .guidtext {
   width: 100%;
   padding: 26px 25px;
@@ -1629,7 +1631,7 @@ img.port-shw {
 }
 .why_abt {
   padding-bottom: 75px;
-  background: url(/_next/static/media/image2.99d8aeb5.png);
+  background: url(../images/image2.png);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -1647,6 +1649,9 @@ img.port-shw {
   background: #0081D2;
 }
 .vis_boxs {
+  background: #302F2F;
+}
+.our_misson_boxs .mission_boxs.our_box_mi:nth-of-type(2) {
   background: #302F2F;
 }
 .our_box_mi h2 {
@@ -1715,7 +1720,7 @@ img.port-shw {
 }
 .meter-box {
   float: left;
-  width: 33.33%;
+  width: 25%;
   padding: 20px;
   margin-top: 25px;
   text-align: center;
@@ -1796,12 +1801,12 @@ img.port-shw {
 .breadcrumbWrap {
   padding: 75px 0;
 }
-.breadcrumbBg {
+/* .breadcrumbBg {
   background: url(../images/breadcrumbBg.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-}
+} */
 /* about css end */
 
 /* menu css suro */
@@ -2189,7 +2194,7 @@ height:40px;
   border: 1px solid #0081D2;
   background: #0081D2;
 }
-  /* Responive */
+  /* Responive 
 @media (min-width: 1366px) {
 
   .container,
@@ -2212,7 +2217,7 @@ height:40px;
   }
 }
 
-/* Responive For All screens */
+Responive For All screens
 @media screen and (max-width: 1399.98px) {
   .navbar a {
     font-size: 0.83rem;
@@ -2221,4 +2226,4 @@ height:40px;
     font-size: 50px;
     line-height: 50px;
 }
-}
+}*/

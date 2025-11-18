@@ -281,7 +281,7 @@ const metaAuthor = seometadata?.author
                 </div>
                 <div className="Blogs-inr">
                   <div className="row">
-
+                    <div className='col-12'>
                       
                       <BannerCarousal page="blogs" blogs={homeData?.blogs} />
                         {/* <div className="guiditem">
@@ -296,6 +296,7 @@ const metaAuthor = seometadata?.author
                               <p>Lorem ipsum dolor sit amet, cibo mundi ea duo dummy duo vim exerci pha vim exerci textpha edrum  cibo mundi duo edrum</p>
                             </div>
                         </div> */}
+                        </div>
                       </div>
 
                       

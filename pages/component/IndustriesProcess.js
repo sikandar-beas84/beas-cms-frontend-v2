@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/image';
 import { motion, AnimatePresence } from "framer-motion";
 import { env } from '../../util/constants/common';
+import Link from 'next/link';
 
 const IndustriesProcess = ({pageTitle, pageDesc, industryData}) => {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -58,8 +59,8 @@ const IndustriesProcess = ({pageTitle, pageDesc, industryData}) => {
                                     >
                                         <div className="proc-img">
                                             <Image
-                                                src={`${env.BACKEND_BASE_URL}assets/img/menu-content/${tabs[activeIndex].menu_contents?.image}`}
-                                                alt={tabs[activeIndex].name}
+                                                src={`${env.BACKEND_BASE_URL}assets/img/menu-content/${tabs[activeIndex]?.menu_contents?.image}`}
+                                                alt={tabs[activeIndex]?.name}
                                                 width={500}
                                                 height={350}
                                                 className="img-fluid"
@@ -68,11 +69,11 @@ const IndustriesProcess = ({pageTitle, pageDesc, industryData}) => {
                                         </div>
 
                                         <div className="proc-text">
-                                            <h2>{tabs[activeIndex].name}</h2>
-                                            <p>{tabs[activeIndex].name}</p>
-                                            <a href="#" className="proc-btn thar-three4">
+                                            <h2>{tabs[activeIndex]?.name}</h2>
+                                            <p>{tabs[activeIndex]?.name}</p>
+                                            <Link href={`industries/${tabs[activeIndex]?.slug}`} className="proc-btn thar-three4">
                                                 Get in Touch
-                                            </a>
+                                            </Link>
                                         </div>
                                     </motion.div>
                                 </AnimatePresence>

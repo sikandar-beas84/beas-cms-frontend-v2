@@ -14,7 +14,6 @@ const Blog = ({ blogs, seometadata, commonblog }) => {
       return <div>Loading...</div>;
     }
     
-    console.log("blogs",blogs);
 
     const metaTitle = seometadata?.name
     ? seometadata?.title

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import BreadCrumb from '../component/BreadCrumb';
 import { Container, Col, Row } from 'react-bootstrap'
 import Image from 'next/image';
@@ -20,46 +20,43 @@ const Blog = ({ blog, seometadata, homeData }) => {
   const month = created_at ? created_at.getMonth() + 1 : "";
   const year = created_at ? created_at.getFullYear() : "";
 
+
+  const [status, setStatus] = useState('');
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
 
-    if (name === "email") {
-      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-      if (!regex.test(value)) {
-        //Invalid input — do not update formData
-        setErrors((prev) => ({
-          ...prev,
-          email: ["Enter a valid email address."],
-        }));
-        return;
-      } else {
-        //  Valid input
-        setErrors((prev) => ({
-          ...prev,
-          email: null,
-        }));
-      }
-    }
     setFormData((prev) => ({
       ...prev,
       [name]: files ? files[0] : value
     }));
 
   }
+
+  const fileInputRef = useRef(null);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     url: '',
-    message: '',
+    comment: '',
   });
+
+  const customCheck = (e) =>{
+
+    const checked = e.target.checked;
+    setIsChecked(checked);
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     //const token = recaptchaRef.current.getValue();
 
-    if (!captchaToken) {
-      alert('Please verify the captcha');
+    if (!isChecked) {
+      alert('Please checkbox');
       return;
     }
 
@@ -67,18 +64,15 @@ const Blog = ({ blog, seometadata, homeData }) => {
     for (const key in formData) {
       data.append(key, formData[key]);
     }
-    data.append('check_token', checkToken);
-    data.append('blog_id', careerId);
+    data.append('blog_id', blog?.id);
 
-    // for (let [key, value] of data.entries()) {
-    //   console.log(`${key}:`, value);
-    // }
+    console.log("datata",data);
 
     setLoading(true); //  start loader
     setStatus('');    // clear previous status
 
     try {
-      const res = await fetch(`${env.API_BASE_URL}apply-job`, {
+      const res = await fetch(`${env.API_BASE_URL}save-blog-comment`, {
         method: 'POST',
         headers: {
           'X-SECURE-KEY': env.ACCESS_TOKEN
@@ -88,10 +82,10 @@ const Blog = ({ blog, seometadata, homeData }) => {
 
       const result = await res.json();
       if (res.ok) {
-        setStatus('✅ Your job application has been submitted successfully.');
+        setStatus('✅ Your comment has been submitted successfully.');
         setErrors({});
         setFormData({
-          name: '', email: '', phone: '', resume: null
+          name: '', email: '', url: '', comment: ''
         });
         // ✅ Reset file input
         if (fileInputRef.current) {
@@ -142,7 +136,6 @@ const Blog = ({ blog, seometadata, homeData }) => {
       />
       <main>
         <BreadCrumb pagetitle="Blog" pageBanner={`${blog?.banner}`} />
-        {console.log('blog', blog)}
         <Container className='py-5'>
           <section className="space-ptb">
             <div className="container">
@@ -217,7 +210,7 @@ const Blog = ({ blog, seometadata, homeData }) => {
                                     placeholder='Your Name'
                                     required
                                   />
-
+                                  {errors.name && (<p className='error_message'>{errors.name[0]}</p>)}
                                 </div>
                                 <div className="form-group col-md-6">
                                   <input
@@ -229,7 +222,7 @@ const Blog = ({ blog, seometadata, homeData }) => {
                                     placeholder='Your Email'
                                     required
                                   />
-
+                                  {errors.email && (<p className='error_message'>{errors.email[0]}</p>)}
                                 </div>
                                 <div className="form-group col-12">
                                   <input
@@ -241,30 +234,36 @@ const Blog = ({ blog, seometadata, homeData }) => {
                                     placeholder='Your Website'
                                     required
                                   />
-
+                                  {errors.url && (<p className='error_message'>{errors.url[0]}</p>)}
                                 </div>
                                 <div className="form-group col-md-12">
                                   <textarea
                                     type='text'
-                                    name="message"
-                                    value={formData.message}
+                                    rows={10}
+                                    name="comment"
+                                    value={formData.comment}
                                     onChange={handleChange}
                                     className='form-control'
                                     placeholder='Your Message'
                                     required
                                   ></textarea>
-
+                                  {errors.comment && (<p className='error_message'>{errors.comment[0]}</p>)}
                                 </div>
                                 <div className=" form-group col-md-12">
                                   <div className="custom-control custom-checkbox checkbox-">
-                                    <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                                    <label className="custom-control-label pr-5" for="customCheck1"> I consent to having this website store my submitted information so they can respond to my inquiry.</label>
+                                    <input type="checkbox" className="custom-control-input" id="customcheck" checked={isChecked} onChange={customCheck} />
+                                    <label className="custom-control-label pr-5" for="customcheck"> I consent to let this website store my information to respond to my inquiry.</label>
                                   </div>
                                 </div>
                                 <div className="col-md-12 pt-3">
-                                  <a className="post-job-btn" href="#">Send Message</a>
+                                  <button type="submit" className='btn btn-primary-blue' disabled={loading}>
+                                  Send Message
+                                  </button>
+                                  
                                 </div>
+                                {loading && <div className="spinner">Loading...</div>}
                               </div>
+                              {status && <p>{status}</p>}
                             </form>
                           </div>
                         </div>

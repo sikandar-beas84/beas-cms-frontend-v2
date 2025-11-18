@@ -23,6 +23,7 @@ import { env } from '../constants/common';
   HomeService.individualBlogPage = (slug) => postService('get-blog-by-slug', `${env.ACCESS_TOKEN}`,slug)
   HomeService.blogPage = () => getService('get-blogs', `${env.ACCESS_TOKEN}`)
 
+
   
   export default HomeService;
   

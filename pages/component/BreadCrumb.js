@@ -9,12 +9,12 @@ const BreadCrumb = ({pagetitle, pageslug, pageBanner}) => {
   };
 
   return (
-    <section>
-      <Container fluid  className="breadcrumbBg" style={bgStyle}>
+    <section className="breadcrumbBg" style={bgStyle}>
+      <Container>
         <Row>
           <Col>
            <div className='breadcrumbWrap'>
-             <div className='pageTitle drop_ani'>{pagetitle}</div>
+             <div className='pageTitle'>{pagetitle}</div>
              <div className='pgNameListing'>
               <ul>
                 <li>Home</li>

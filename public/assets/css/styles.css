@@ -2740,6 +2740,31 @@ height:40px;
 }
 .share-box .share-box-social li {
       display: inline-block;
-      float: left; 
+    
 }
+.border-20 img{border-radius:10px;}
+.blog-sidebar {
+  background-color: #e1f4ff;
+  padding: 20px 15px;
+  margin-bottom: 20px;
+  position: sticky;
+  top: 150px; 
+}
+
+.blog-sidebar h2{font-size:1.5rem; text-align:center; font-weight:700;}
+.certificate-list{
+  margin:40px 0 0 0 ;
+  padding:0;
+}
+.blog-details-txt{color:#5e5e5e;}
+.certificate-list li{
+  margin: 0 0 15px 0;
+  padding: 15px;
+  list-style: none;
+  background: #fff;
+  border-radius: 10px;
+  display: flex;
+  justify-content:center;
+}
+
 /* blog end */

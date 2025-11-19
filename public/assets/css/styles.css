@@ -2828,3 +2828,41 @@ a.services-btn {
     margin-bottom: -10px; 
   }
  
+  .grey-txt{    color: #fff;
+    font-family: Segoe UI;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 40px;
+  }
+ 
+ 
+  .proc-deet {
+    display: flex;
+    align-items: flex-start; 
+    gap: 20px; 
+  }
+   
+  .proc-img {
+    flex: 0 0 40%; 
+    height: auto;  
+  }
+   
+  .proc-img img {
+    width: 100%; 
+    height: auto;
+    display: block;
+  }
+   
+  .proc-text {
+    flex: 1;     
+  }
+
+  .blog-entertain-desc {
+    line-height: 1.6em;
+    height: calc(1.6em * 8);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 8
+;
+    -webkit-box-orient: vertical;
+}

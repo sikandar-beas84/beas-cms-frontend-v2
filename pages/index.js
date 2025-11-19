@@ -73,8 +73,8 @@ const metaAuthor = seometadata?.author
           <div className="service" id="what_why_panel1">
             <div className="container">
                 <div className="serv-head">
-                  <h2>{homeData?.underbannercontent?.title}</h2>
-                  <p>{homeData?.underbannercontent?.long_desc}</p>
+                  <h2>{homeData?.servicehomepage?.title}</h2>
+                  <p>{homeData?.servicehomepage?.long_desc}</p>
                 </div>
             </div>
             <div className="service-inr">
@@ -234,16 +234,9 @@ const metaAuthor = seometadata?.author
                 </div>
                 <div className="tech-list-r">
                   <div className="row">
-                    { homeData?.technologies?.map((item, index)=>{
-                      return(
-                      <div className="col-lg-2 col-md-4 col-sm-4 col-6">
-                        <div className="tech-list-bx">
-                        <Image width={600} height={100} src={`${env.BACKEND_BASE_URL}assets/img/technology/${item.logo}`} alt="image" loading="lazy" />
-                      <h5>{item.name}</h5>
-                        </div>
+                        <div className="col-lg-12 col-md-12 col-sm-12"> 
+                        <BannerCarousal page="technology" technologies={homeData?.technologies} />
                       </div>
-                      );
-                    })}
                   </div>
                 </div>
             </div>
@@ -279,25 +272,9 @@ const metaAuthor = seometadata?.author
                 <div className="Blogs-inr">
                   <div className="row">
                     <div className='col-12'>
-                      
                       <BannerCarousal page="blogs" blogs={homeData?.blogs} />
-                        {/* <div className="guiditem">
-                            <div className="guidimg">
-                              <a href=""><img src="assets/images/guid2.jpg" alt=""/></a>
-                              <div className="guidcal">
-                                  <strong>20 <br/><b>Jan</b></strong>
-                              </div>
-                            </div>
-                            <div className="guidtext">
-                              <h5><a href="">Bring to the table win-win sur<br/>vival strategies to</a></h5>
-                              <p>Lorem ipsum dolor sit amet, cibo mundi ea duo dummy duo vim exerci pha vim exerci textpha edrum  cibo mundi duo edrum</p>
-                            </div>
-                        </div> */}
-                        </div>
                       </div>
-
-                      
-                  
+                    </div>
                 </div>
             </div>
           </div>

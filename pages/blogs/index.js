@@ -60,14 +60,14 @@ const Blog = ({ blogs, seometadata, commonblog }) => {
         author={metaAuthor}
       />
       <main>
-        <BreadCrumb pagetitle="Blog" pageBanner={`${commonblog?.image}`} />
+        <BreadCrumb pagetitle={commonblog?.title} pageBanner={`${commonblog?.image}`} />
 
-        <Container className='py-5'>
+        <Container className='pt-5'>
           <Row>
             <Col>
               <div className="about_texts">
-                <h1>{commonblog?.long_desc}</h1>
-                <p>{commonblog?.short_desc}</p>
+                <h1>{commonblog?.short_desc}</h1>
+                <p>{commonblog?.long_desc}</p>
               </div>
             </Col>
           </Row>
@@ -77,15 +77,18 @@ const Blog = ({ blogs, seometadata, commonblog }) => {
             <div className="row">
               {displayedBlogs?.map((item, index) => {
               
-                const createdAtString = item?.blog?.created_at;
+                const createdAtString = item?.created_at;
                 const created_at = createdAtString ? new Date(createdAtString) : null;
                 const day = created_at ? created_at.getDate() : "";
                 const month = created_at ? created_at.getMonth() + 1 : "";
+                const monthName = created_at
+                ? new Intl.DateTimeFormat('en-US', { month: 'short' }).format(created_at)
+                : "";
                 const year = created_at ? created_at.getFullYear() : "";
 
                 return (
                   <div className="col-12 col-md-4">
-                    <div key={index} className='test-box'>
+                    <div key={index}>
                       <Link
                         href={`blogs/${item?.slug}`}
 
@@ -103,7 +106,7 @@ const Blog = ({ blogs, seometadata, commonblog }) => {
                             />
                             <div className="guidcal">
 
-                              <strong>{day}</strong> <br /><span>{month}</span>
+                              <strong>{day}</strong> <br /><span>{monthName}</span>
                             </div>
                           </div>
                           <div className="guidtext">

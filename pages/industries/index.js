@@ -78,7 +78,7 @@ const Indutries = ({ industries, seometadata }) => {
                           <>
                             <div className="col-lg-6 col-12">
                               <div className="services-text">
-                                <h2>{item?.menu_contents?.title}</h2>
+                                <h2>{item?.name}</h2>
                                 <p>{stripHtml(item?.description)}</p>
                                 <Link href={`/industries/${item?.slug}`} className="services-btn proc-btn thar-three4">
                                    Read More
@@ -114,7 +114,7 @@ const Indutries = ({ industries, seometadata }) => {
                             </div>
                             <div className="col-lg-6 col-12">
                               <div className="services-text">
-                                <h2>{item?.menu_contents?.title}</h2>
+                                <h2>{item?.name}</h2>
                                 <p>{stripHtml(item?.description)}</p>
                                 <Link href={`/industries/${item?.slug}`} className="services-btn proc-btn thar-three4">
                                    Read More

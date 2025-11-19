@@ -147,7 +147,7 @@ const metaAuthor = seometadata?.author
           author={ metaAuthor }
       />
       <main>
-        <BreadCrumb pagetitle={career.title} pageslug='Career' pageBanner={`assets/img/menu-content/${menucareer?.menu_contents?.banner}`} />
+        <BreadCrumb pagetitle={career?.role} pageslug='Career' pageBanner={`assets/img/menu-content/${menucareer?.menu_contents?.banner}`} />
 
         <Container className='py-5'>
 

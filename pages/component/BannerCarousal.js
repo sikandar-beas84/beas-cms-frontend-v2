@@ -7,7 +7,12 @@ import { env } from '../../util/constants/common';
 import Image from 'next/image';
 import Link from "next/link";
 
-const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, blogs }) => {
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Grid } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/grid";
+
+const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, blogs, technologies }) => {
 
   const router = useRouter();
 
@@ -59,6 +64,39 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
     ]
   });
 
+  const technologySliderSettings = () => ({
+    loop: true,
+    speed: 2500,
+  
+    autoplay: {
+      delay: 0,
+      disableOnInteraction: false,
+    },
+  
+    slidesPerView: 6,
+  
+    grid: {
+      rows: 2,
+      fill: "row",
+    },
+  
+    spaceBetween: 10,
+  
+    breakpoints: {
+      1024: {
+        slidesPerView: 4,
+        grid: { rows: 2 },
+      },
+      600: {
+        slidesPerView: 2,
+        grid: { rows: 2 },
+      },
+    },
+  });
+  
+  const technologysettings = technologySliderSettings();
+
+
   // Default settings
   const settings = createSliderSettings(3);
   // Work Area settings
@@ -71,7 +109,8 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
   // client settings
   const clientsettings = createSliderSettings(5);
 
-  const testimonialnewsettings = testimoniolnewSliderSettings(3);
+  const testimonialnewsettings = testimoniolnewSliderSettings(2);
+
   const blogsettings = createSliderSettings(3);
 
   return (
@@ -224,9 +263,7 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
 
           {testimonials?.map((item, index) => {
             const messageText = item?.message
-              ? item.message.length > 50
-                ? item.message.substring(0, 250) + "..."
-                : item.message
+              ? item.message
               : "";
             return (
               <div className="test-box" key={index}>
@@ -299,7 +336,7 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
       )}
 
       {page == 'blogs' && (
-        <Slider {...testimonialnewsettings}>
+        <Slider {...blogsettings}>
 
           {blogs?.map((item, index) => {
 
@@ -313,6 +350,9 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
 
             const day = created_at ? created_at.getDate() : "";
             const month = created_at ? created_at.getMonth() + 1 : "";
+            const monthName = created_at
+            ? new Intl.DateTimeFormat('en-US', { month: 'short' }).format(created_at)
+            : "";
             const year = created_at ? created_at.getFullYear() : "";
 
             return (
@@ -335,7 +375,7 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
                           className="img-fluid port-shw"
                         />
                         <div className="guidcal">
-                            <strong>{day}</strong> <br/><span>{month}</span>
+                            <strong>{day}</strong> <br/><span>{monthName}</span>
                         </div>
                       </div>
                       <div className="guidtext">
@@ -353,6 +393,30 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
             );
           })}
         </Slider>
+      )}
+
+      {page == 'technology' && (
+        <Swiper 
+          modules={[Autoplay, Grid]}
+          { ...technologysettings }
+        className="technology-swiper"
+      >
+        {technologies?.map((item, index) => (
+          <SwiperSlide key={index}>
+            <div className="tech-list-bx">
+              <Image
+                width={100}
+                height={100}
+                src={`${env.BACKEND_BASE_URL}assets/img/technology/${item.logo}`}
+                alt={item.name}
+                loading="lazy"
+              />
+              <h5>{item.name}</h5>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      
       )}
 
     </>

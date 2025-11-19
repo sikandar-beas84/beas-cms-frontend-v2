@@ -45,7 +45,7 @@ const Blog = ({ blog, seometadata, homeData }) => {
     comment: '',
   });
 
-  const customCheck = (e) =>{
+  const customCheck = (e) => {
 
     const checked = e.target.checked;
     setIsChecked(checked);
@@ -134,7 +134,7 @@ const Blog = ({ blog, seometadata, homeData }) => {
       />
       <main>
         <BreadCrumb pagetitle="Blog" pageBanner={`${blog?.banner}`} />
-        <Container className='py-5'>
+        <div className='py-5'>
           <section className="space-ptb">
             <div className="container">
               <div className="row">
@@ -146,13 +146,13 @@ const Blog = ({ blog, seometadata, homeData }) => {
                       </div>
                       <div className="blog-post-footer border-0 justify-content-start pt-0 blog-details-txt">
                         <div className="blog-post-time">
-                           <Clock size={16} /> {day} / {month} / {year}
+                          <Clock size={16} /> {day} / {month} / {year}
                         </div>
                         <div className="blog-post-author">
-                          <span><User size={16}/> {blog?.author_name}</span>
+                          <span><User size={16} /> {blog?.author_name}</span>
                         </div>
                         <div className="blog-post-comment">
-                          <MessageCircle size={16} /> {blog.blog_contents.length} 
+                          <MessageCircle size={16} /> {blog.blog_contents.length}
                         </div>
                       </div>
                       <div className="blog-post-image border-20">
@@ -172,7 +172,7 @@ const Blog = ({ blog, seometadata, homeData }) => {
                         ></div>
                       </div>
                       <div className="blog-post-content mt-4">
-                       
+
 
                         <blockquote className="blockquote">
                           <p>{blog?.quote}</p>
@@ -181,14 +181,21 @@ const Blog = ({ blog, seometadata, homeData }) => {
                         <div className="mt-4">
 
                           {blog.blog_contents.map((item, index) => (
-                            <div key={index} className="media mb-3">
-                              {/* <div className="avatar avatar-lg">
-                            <img src="assets/images/01.jpg" className="img-fluid rounded-circle" alt="..."/>
-                            </div> */}
-                              <div className="media-body ml-3 border p-4">
-                                <div className="d-flex">
-                                  <h6 className="mt-0">{item.name}</h6>
-                                </div>
+                            <div key={index} className="row media mb-3">
+                              <div className="avatar-section">
+                                <Image
+                                  src="/assets/images/user.webp"
+                                  alt="user"
+                                  width={40}
+                                  height={40}
+                                  priority
+                                  fetchPriority="high"
+                                  className="img-fluid"
+                                />
+                                <h6 className="mt-0">{item.name}</h6>
+                              </div>
+                              <div className="media-body ml-3 border p-3 max-95 ccomment-box">
+
                                 <p className="mb-0">{item.comment}</p>
                               </div>
                             </div>
@@ -230,7 +237,7 @@ const Blog = ({ blog, seometadata, homeData }) => {
                                     onChange={handleChange}
                                     className='form-control'
                                     placeholder='Your Website'
-                                    required
+
                                   />
                                   {errors.url && (<p className='error_message'>{errors.url[0]}</p>)}
                                 </div>
@@ -255,9 +262,9 @@ const Blog = ({ blog, seometadata, homeData }) => {
                                 </div>
                                 <div className="col-md-12 pt-3">
                                   <button type="submit" className='btn btn-primary-blue' disabled={loading}>
-                                  Send Message
+                                    Send Message
                                   </button>
-                                  
+
                                 </div>
                                 {loading && <div className="spinner">Loading...</div>}
                               </div>
@@ -280,7 +287,8 @@ const Blog = ({ blog, seometadata, homeData }) => {
                       <li>End-to-end support for every project</li>
                       <li>Data-driven strategies for smarter decisions</li>
                       <li>Cost-effective and scalable solutions</li>
-                   </ul>
+                      <li>Innovative approach with cutting-edge technologies</li>
+                     </ul>
                     <div className='d-flex justify-content-center'>
                       <a className="post-job-btn" href="#">Connect with us</a>
                     </div>
@@ -291,7 +299,7 @@ const Blog = ({ blog, seometadata, homeData }) => {
               </div>
             </div>
           </section>
-        </Container>
+        </div>
         {/* <Container>
           <Row>
             <Col>

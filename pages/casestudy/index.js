@@ -8,8 +8,9 @@ import HomeService from '../../util/service/Home';
 import { env } from '../../util/constants/common';
 import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
+import BannerCarousal from "../component/BannerCarousal";
 
-const Casestudy = ({casestudy, menucasestudy, seometadata}) => {
+const Casestudy = ({casestudy, menucasestudy, seometadata, homeData}) => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
@@ -48,17 +49,20 @@ const Casestudy = ({casestudy, menucasestudy, seometadata}) => {
       <BreadCrumb pagetitle = {casestudy.title} pageslug='Casestudy' pageBanner={`assets/img/menu-content/${menucasestudy?.menu_contents?.banner}`} />
       <div className="bgF2F4F7 p-relative">
       <Container className="py-5">
-        <Row>  
+        <Row> 
+        <Col xs={12}>
+                <h1 className="inner-page-title-small">{casestudy?.title}</h1>
+              </Col> 
           <Col xs={12} lg={5}>
-            
+          
              <div className='serviceDetailsWrap'>
               <Image width={600} height={150} src={`${env.BACKEND_BASE_URL}${casestudy?.image}`} alt='image' className='img-fluid' loading="lazy" />
             </div>
             
           </Col>
           <Col xs={12} lg={7}>
-           
-            <div className="CaseStudyH">{casestudy?.title}</div>
+         
+            
             <Accordion defaultActiveKey="0" flush>
               <Accordion.Item eventKey="0">
                 <Accordion.Header>Project Overview / Business Need</Accordion.Header>
@@ -93,6 +97,15 @@ const Casestudy = ({casestudy, menucasestudy, seometadata}) => {
           </Col>
           
         </Row>
+        <Row>
+              <Col xs={12} className="mt-5">
+                <h1 className="inner-page-title mb-2 text-center">{homeData?.portfoliohomepage?.title}</h1>
+                <p className="text-center">{homeData?.portfoliohomepage?.long_desc}</p>
+              </Col>
+              <Col xs={12} className="my-3">
+                <BannerCarousal page="projectsnew" projects={homeData?.projects} />
+              </Col>
+            </Row>
       </Container>
       </div>
     </main>

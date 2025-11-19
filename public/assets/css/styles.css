@@ -2184,12 +2184,7 @@ a.services-btn {
   padding: 20px;
   margin-top: 30px;
 }
-.fixed-social{position: fixed;
-right: 0;
-bottom: 0;
-width:40px;
-height:40px;
-}
+
 .tab button.activen::before {
   border: 1px solid #0081D2;
   background: #0081D2;
@@ -2745,7 +2740,7 @@ height:40px;
 .border-20 img{border-radius:10px;}
 .blog-sidebar {
   background-color: #e1f4ff;
-  padding: 20px 15px;
+  padding: 30px 15px;
   margin-bottom: 20px;
   position: sticky;
   top: 150px; 
@@ -2766,18 +2761,70 @@ height:40px;
   display: flex;
   justify-content:center;
 }
-.blog-hm-desc{height:156px; overflow:hidden;position:relative;}
 .mt-35{margin-top:35px;}
-
 .blog-hm-img{width: 100%;
   position: relative;
   overflow: hidden;
   height: 196px;
   border-radius: 5px 5px 0 0;}
-
-.blog-hm-title{min-height:72px;}
+  .blog-hm-title {
+    line-height: 1.4em;
+    height: calc(1.4em * 3); 
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  .blog-hm-desc {
+    line-height: 1.4em;
+    height: calc(1.4em * 6); 
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+  }
 .contact-bg .serv-head{width:100%;}
 .contact-bg .serv-head h2{line-height: 30px;}
 .accordion-body p{text-align:left;}
 .port-img2{height: 340px;}
+.avatar-section{display:flex;gap:10px; margin-bottom:20px;vertical-align:center;}
+.avatar-section img{width:40px; height:40px; border-radius:50%;}
+.max-95{max-width:95%;}
+.ccomment-box{
+  background: #ebebeb;
+  position: relative;
+  padding: 20px;
+  border-radius: 6px;
+}
+.ccomment-box::after {
+  content: "";
+  position: absolute;
+  top: -10px;           
+  left: 20px; 
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent; 
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #ebebeb; /* same as background */
+}
 /* blog end */
+
+/* wp */
+.fixed-social p{color:#000; font-size:16px; margin-bottom:0;}
+.fixed-social {
+  position: fixed;
+  right: 30px;
+  bottom: 60px;
+  width: 120px;
+  text-align: center;
+  cursor:pointer;
+  z-index: 9999;
+}
+.fixed-social img{
+  position: absolute;
+  left: 58px;
+  top: 52px;}
+.arc-text {
+    margin-bottom: -10px; 
+  }
+ 

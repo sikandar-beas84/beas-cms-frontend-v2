@@ -2780,4 +2780,24 @@ height:40px;
 .contact-bg .serv-head h2{line-height: 30px;}
 .accordion-body p{text-align:left;}
 .port-img2{height: 340px;}
+.avatar-section{display:flex;gap:10px; margin-bottom:20px;vertical-align:center;}
+.avatar-section img{width:40px; height:40px; border-radius:50%;}
+.max-95{max-width:95%;}
+.ccomment-box{
+  background: #ebebeb;
+  position: relative;
+  padding: 20px;
+  border-radius: 6px;
+}
+.ccomment-box::after {
+  content: "";
+  position: absolute;
+  top: -10px;           
+  left: 20px; 
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent; 
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #ebebeb; /* same as background */
+}
 /* blog end */

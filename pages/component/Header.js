@@ -1,4 +1,5 @@
 import React, { JSX } from "react";
+import { useEffect, useRef } from "react";
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -12,9 +13,17 @@ import { env } from '../../util/constants/common';
 import Image from 'next/image';
 import Link from "next/link";
 
-const Header = ({homeData}) => {
+const Header = ({ homeData }) => {
   const router = useRouter();
   const casestudy = Array.isArray(homeData?.projects) ? homeData.projects?.[0] : [];
+
+
+
+
+
+
+
+
   return (
     <>
       <section className="blue-bg p-10">
@@ -45,14 +54,14 @@ const Header = ({homeData}) => {
         <Container>
           <Navbar.Brand href="#">
             <Image
-                src={`${env.BACKEND_BASE_URL}${homeData?.logo?.image}`}
-                alt="Logo"
-                width={300}
-                height={50}
-                priority
-                fetchPriority="high"
-                className="img-fluid"
-              />
+              src={`${env.BACKEND_BASE_URL}${homeData?.logo?.image}`}
+              alt="Logo"
+              width={300}
+              height={50}
+              priority
+              fetchPriority="high"
+              className="img-fluid"
+            />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
@@ -114,18 +123,63 @@ const Header = ({homeData}) => {
         </Container>
       </Navbar>
 
-      <Link href="#" className="">
-             <Image
-                src="/assets/images/whatsapp.png"
-                alt="whatsApp"
-                width={40}
-                height={40}
-                priority
-                fetchPriority="high"
-                className="img-fluid fixed-social"
-              />
-           
-      </Link>
+      {/* <Link href="#" className="">
+        <Image
+          src="/assets/images/whatsapp.png"
+          alt="whatsApp"
+          width={60}
+          height={60}
+          priority
+          fetchPriority="high"
+          className="img-fluid fixed-social"
+        />
+
+      </Link> */}
+
+
+      <div className="badge fixed-social">
+        <svg width="140" height="80" viewBox="0 0 140 80" className="arc-text">
+          <defs>
+
+            <path id="arcPath" d="M20,75 A85,85 0 0,1 120,75" />
+          </defs>
+
+          <text fill="black" fontSize="14" fontWeight="600">
+            <textPath href="#arcPath" startOffset="50%" textAnchor="middle">
+              Connect With Us
+            </textPath>
+          </text>
+        </svg>
+
+        <Image
+          src="/assets/images/whatsapp.png"
+          alt="whatsApp"
+          width={50}
+          height={50}
+          priority
+          fetchPriority="high"
+          className="img-fluid"
+          onClick={() => {
+            window.open(
+              "https://wa.me/9433068494?text=BEAS%20CONSULTANCY%20PT%20LTD.",
+              "_blank"
+            );
+          }}
+        />
+      </div>
+
+
+      
+
+
+
+
+
+
+
+
+
+
     </>
   );
 }

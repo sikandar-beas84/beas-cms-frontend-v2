@@ -2745,7 +2745,7 @@ height:40px;
 .border-20 img{border-radius:10px;}
 .blog-sidebar {
   background-color: #e1f4ff;
-  padding: 20px 15px;
+  padding: 30px 15px;
   margin-bottom: 20px;
   position: sticky;
   top: 150px; 
@@ -2766,16 +2766,28 @@ height:40px;
   display: flex;
   justify-content:center;
 }
-.blog-hm-desc{height:156px; overflow:hidden;position:relative;}
 .mt-35{margin-top:35px;}
-
 .blog-hm-img{width: 100%;
   position: relative;
   overflow: hidden;
   height: 196px;
   border-radius: 5px 5px 0 0;}
-
-.blog-hm-title{min-height:72px;}
+  .blog-hm-title {
+    line-height: 1.4em;
+    height: calc(1.4em * 3); 
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  .blog-hm-desc {
+    line-height: 1.4em;
+    height: calc(1.4em * 6); 
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+  }
 .contact-bg .serv-head{width:100%;}
 .contact-bg .serv-head h2{line-height: 30px;}
 .accordion-body p{text-align:left;}

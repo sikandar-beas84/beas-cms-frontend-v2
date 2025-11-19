@@ -24,7 +24,7 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
   const prevProject = projects[currentIndex - 1] || null;
   const nextProject = projects[currentIndex + 1] || null;
 
-  // 🔹 Pagination logic (10 at a time)
+  //  Pagination logic (10 at a time)
   const totalPages = projects.length;
   const currentPage = currentIndex + 1;
   const currentGroup = Math.floor((currentPage - 1) / MAX_VISIBLE);
@@ -70,7 +70,7 @@ const metaAuthor = seometadata?.author
 
 
         <div className="bgF2F4F7 p-relative">
-
+        
           <Container className="py-5">
             <Row>
               <Col xs={12}>

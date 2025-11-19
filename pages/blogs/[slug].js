@@ -289,7 +289,8 @@ const Blog = ({ blog, seometadata, homeData }) => {
                       <li>End-to-end support for every project</li>
                       <li>Data-driven strategies for smarter decisions</li>
                       <li>Cost-effective and scalable solutions</li>
-                    </ul>
+                      <li>Innovative approach with cutting-edge technologies</li>
+                     </ul>
                     <div className='d-flex justify-content-center'>
                       <a className="post-job-btn" href="#">Connect with us</a>
                     </div>

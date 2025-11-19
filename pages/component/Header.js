@@ -16,10 +16,31 @@ import Link from "next/link";
 const Header = ({ homeData }) => {
   const router = useRouter();
   const casestudy = Array.isArray(homeData?.projects) ? homeData.projects?.[0] : [];
+  const emblemRef = useRef(null);
 
-
-
-
+  useEffect(() => {
+    if (!emblemRef.current) return;
+  
+    const element = emblemRef.current;
+    const text = element.innerText;
+    element.innerHTML = "";
+  
+    for (let i = 0; i < text.length; i++) {
+      const letter = text[i];
+      const span = document.createElement("span");
+      span.textContent = letter;
+  
+      const r = (360 / text.length) * i;
+      const x = (Math.PI / text.length).toFixed(0) * i;
+      const y = (Math.PI / text.length).toFixed(0) * i;
+  
+      span.style.transform = `rotate(${r}deg) translate3d(${x}px, ${y}px, 0)`;
+  
+      element.appendChild(span);
+    }
+  }, []);
+  
+  
 
 
 
@@ -137,27 +158,39 @@ const Header = ({ homeData }) => {
       </Link> */}
 
 
-      <div className="badge fixed-social">
-        <svg width="140" height="80" viewBox="0 0 140 80" className="arc-text">
-          <defs>
-
-            <path id="arcPath" d="M20,75 A85,85 0 0,1 120,75" />
-          </defs>
-
-          <text fill="black" fontSize="14" fontWeight="600">
-            <textPath href="#arcPath" startOffset="50%" textAnchor="middle">
-              Connect With Us
-            </textPath>
-          </text>
-        </svg>
-
+      {/* <div className="badge fixed-social">
+        
         <Image
           src="/assets/images/whatsapp.png"
           alt="whatsApp"
           width={50}
           height={50}
-          priority
-          fetchPriority="high"
+          className="center-icon"
+          onClick={() => {
+            window.open(
+              "https://wa.me/9433068494?text=BEAS%20CONSULTANCY%20PT%20LTD.",
+              "_blank"
+            );
+          }}
+        />
+      </div> */}
+
+
+
+
+
+
+
+
+
+
+     <div className="wpp-iicon">
+      <div className="emblem" ref={emblemRef}>Connect With Us*</div>
+      <Image
+          src="/assets/images/whatsapp.png"
+          alt="whatsApp"
+          width={40}
+          height={40}
           className="img-fluid"
           onClick={() => {
             window.open(
@@ -167,15 +200,7 @@ const Header = ({ homeData }) => {
           }}
         />
       </div>
-
-
-      
-
-
-
-
-
-
+    
 
 
 

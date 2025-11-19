@@ -5,6 +5,7 @@ import { env } from '../../util/constants/common';
 import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
 import Accordion from 'react-bootstrap/Accordion';
+import ModalComponent from '../component/ModalComponent';
 const ContactUs = ({ contactus, faqs, seometadata }) => {
 
   const router = useRouter();
@@ -332,6 +333,7 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
             <img src="assets/images/ser-bg2.png" />
           </div>
         </section>
+        <ModalComponent/>
 
       </main>
     </>

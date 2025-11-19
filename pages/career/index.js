@@ -64,7 +64,7 @@ const Career = ({ careers, menucareer, seometadata }) => {
                   <div className='skill-wrap'>
                     <div className='sill-wrap-head'>
                       <div className='skill-wrap-img-without-bg'>
-                        <Image width={80} height={60} src={`${env.BACKEND_BASE_URL}${item?.image}`} alt="image" className="img-fluid" loading="lazy" />
+                        <Image width={60} height={60} src={`${env.BACKEND_BASE_URL}${item?.image}`} alt="image" className="img-fluid" loading="lazy" />
                       </div>
                       <div className='skill-wrap-head-text'>{item?.role}</div>
                     </div>

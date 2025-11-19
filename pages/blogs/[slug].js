@@ -66,8 +66,6 @@ const Blog = ({ blog, seometadata, homeData }) => {
     }
     data.append('blog_id', blog?.id);
 
-    console.log("datata",data);
-
     setLoading(true); //  start loader
     setStatus('');    // clear previous status
 

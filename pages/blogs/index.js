@@ -14,6 +14,21 @@ const Blog = ({ blogs, seometadata, commonblog }) => {
     return <div>Loading...</div>;
   }
 
+  const PER_PAGE = 6; // 👉 SET ITEMS PER PAGE
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const totalBlogs = blogs?.length || 0;
+  const totalPages = Math.ceil(totalBlogs / PER_PAGE);
+
+  // Slice according to page
+  const displayedBlogs = blogs.slice(
+    (currentPage - 1) * PER_PAGE,
+    currentPage * PER_PAGE
+  );
+
+  const goToPage = (pageNum) => setCurrentPage(pageNum);
+
+
 
   const metaTitle = seometadata?.name
     ? seometadata?.title
@@ -52,7 +67,7 @@ const Blog = ({ blogs, seometadata, commonblog }) => {
             <Col>
               <div className="about_texts">
                 <h1>{commonblog?.long_desc}</h1>
-                <p>{commonblog?.description}</p>
+                <p>{commonblog?.short_desc}</p>
               </div>
             </Col>
           </Row>
@@ -60,7 +75,7 @@ const Blog = ({ blogs, seometadata, commonblog }) => {
         <section className="section-abuts section-services">
           <div className="container">
             <div className="row">
-              {blogs?.map((item, index) => {
+              {displayedBlogs?.map((item, index) => {
               
                 const createdAtString = item?.blog?.created_at;
                 const created_at = createdAtString ? new Date(createdAtString) : null;
@@ -107,6 +122,42 @@ const Blog = ({ blogs, seometadata, commonblog }) => {
               })}
             </div>
           </div>
+
+          {/* PAGINATION UI */}
+          <div className="pagination-wrapper mt-5 d-flex justify-content-center">
+              <ul className="pagination">
+
+                {/* PREV BUTTON */}
+                <li
+                  className={`page-item ${currentPage === 1 ? "disabled" : ""}`}
+                  onClick={() => currentPage > 1 && goToPage(currentPage - 1)}
+                >
+                  <a className="page-link">Prev</a>
+                </li>
+
+                {/* PAGE NUMBERS */}
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(num => (
+                  <li
+                    key={num}
+                    className={`page-item ${currentPage === num ? "active" : ""}`}
+                    onClick={() => goToPage(num)}
+                  >
+                    <a className="page-link">{num}</a>
+                  </li>
+                ))}
+
+                {/* NEXT BUTTON */}
+                <li
+                  className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}
+                  onClick={() => currentPage < totalPages && goToPage(currentPage + 1)}
+                >
+                  <a className="page-link">Next</a>
+                </li>
+              </ul>
+            </div>
+
+
+
         </section>
       </main>
     </>
@@ -126,7 +177,7 @@ export async function getServerSideProps(context) {
 
   const commonresponse = await HomeService.commonPage();
   const commonData = commonresponse.data?.common || [];
-  const firstBlog = commonData.filter((item) => item.slug === 'blog');
+  const firstBlog = commonData.filter((item) => item.slug === 'blog-section-homepage');
   const commonblog = firstBlog?.length > 0 ? firstBlog[0] : null;
 
   const seobyslug = await HomeService.seobyslug(lastSegment);

@@ -73,7 +73,7 @@ const Header = ({ homeData }) => {
 
       <Navbar expand="lg" className="bg-white p-4">
         <Container>
-          <Navbar.Brand href="#">
+          <Navbar.Brand href="/">
             <Image
               src={`${env.BACKEND_BASE_URL}${homeData?.logo?.image}`}
               alt="Logo"

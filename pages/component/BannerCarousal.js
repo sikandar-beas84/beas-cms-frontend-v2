@@ -320,7 +320,7 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
                     />
                   </div>
                   <h3>{titleText}</h3>
-                  <p>{item?.short_desc}</p>
+                  <div className='blog-hm-desc p-3'>{item?.short_desc}</div>
                   <div className="port-tags">
                     { longdesc.map((item, index)=>(
                     <h4 key={index}>{item}</h4>

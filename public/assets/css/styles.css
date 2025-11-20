@@ -925,7 +925,6 @@ img.port-shw {
 .port-tags h4 {
   display: block;
   padding: 9px 9px 9px 15px;
-  font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -3127,3 +3126,9 @@ letter-spacing:1px;}
     -webkit-box-orient: vertical;
 }
   /* sikandar end*/
+
+  .section-abuts{ border-top: 1px solid #0081d2;}
+.carosalArrow{
+  position: relative;
+    top: 100px;
+}

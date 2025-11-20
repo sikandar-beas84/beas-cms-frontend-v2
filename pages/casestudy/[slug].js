@@ -86,7 +86,34 @@ const metaAuthor = seometadata?.author
 
 
         <div className="bgF2F4F7 p-relative">
-        
+          <Container fluid>
+          <div className="d-flex justify-content-between carosalArrow">
+            {/* Previous */}
+            {
+              prevProject ? (
+                <Link
+                  href={`/casestudy/${prevProject.slug}`}
+                  className="btn btn-primary"
+                >
+                  <ChevronLeft />
+                </Link>
+              ) : <Link href="#" className="btn btn-primary" ><ChevronLeft /></Link>
+            }
+
+            {/* Next */}
+            {
+              nextProject ? (
+                <Link
+                  href={`/casestudy/${nextProject.slug}`}
+                  className="btn btn-primary"
+                >
+                  <ChevronRight />
+                </Link>
+              ) : <Link href="#" className="btn btn-primary" ><ChevronRight /></Link>
+            }
+          </div>
+          </Container>
+
           <Container className="py-5">
             <Row>
               <Col xs={12}>
@@ -182,31 +209,7 @@ const metaAuthor = seometadata?.author
 
           </Container>
 
-          <div className="d-flex justify-content-between carousel-control">
-            {/* Previous */}
-            {
-              prevProject ? (
-                <Link
-                  href={`/casestudy/${prevProject.slug}`}
-                  className="btn btn-primary"
-                >
-                  <ChevronLeft />
-                </Link>
-              ) : <Link href="#" className="btn btn-primary" ><ChevronLeft /></Link>
-            }
-
-            {/* Next */}
-            {
-              nextProject ? (
-                <Link
-                  href={`/casestudy/${nextProject.slug}`}
-                  className="btn btn-primary"
-                >
-                  <ChevronRight />
-                </Link>
-              ) : <Link href="#" className="btn btn-primary" ><ChevronRight /></Link>
-            }
-          </div>
+         
         </div>
       </main>
     </>

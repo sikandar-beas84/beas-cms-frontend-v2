@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import BreadCrumb from '../component/BreadCrumb'
 import { Container, Row, Col } from 'react-bootstrap'
 import Accordion from 'react-bootstrap/Accordion';
@@ -25,7 +25,6 @@ const Casestudy = ({casestudy, menucasestudy, seometadata, homeData}) => {
     const timer = setTimeout(() => {
       setShowModal(true);
       setShow(true);
-      console.log("call",showModal);
     }, 10000);
 
     return () => clearTimeout(timer); // cleanup on unmount

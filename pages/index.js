@@ -172,7 +172,7 @@ const metaAuthor = seometadata?.author
                         <React.Fragment key={index}>
                   <div className="serv-head stat-head why-head">
                     <h2>{item?.title}</h2>
-                    <div className="grey-txt" dangerouslySetInnerHTML={{ __html: item?.description }} />
+                    <p className="" dangerouslySetInnerHTML={{ __html: item?.description }} />
                   </div>
                 </React.Fragment>
                   )

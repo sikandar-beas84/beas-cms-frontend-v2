@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import BreadCrumb from "../component/BreadCrumb";
 import { Container, Row, Col } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
@@ -10,6 +10,7 @@ import Link from "next/link";
 import SEO from "../../components/SEO";
 import { useRouter } from "next/router";
 import BannerCarousal from "../component/BannerCarousal";
+import ModalComponent  from '../component/ModalComponent';
 
 const MAX_VISIBLE = 10; // show 10 numbers at a time
 
@@ -18,6 +19,21 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
+
+
+  const [showModal, setShowModal] = useState(false);
+  const [show, setShow] = useState(false);
+  
+  useEffect(() => {
+    // Show modal after 10 seconds (10000 ms)
+    const timer = setTimeout(() => {
+      setShowModal(true);
+      setShow(true);
+      console.log("call",showModal);
+    }, 10000);
+
+    return () => clearTimeout(timer); // cleanup on unmount
+  }, []);
 
   // find current index
   const currentIndex = projects.findIndex((p) => p.slug === currentSlug);
@@ -60,7 +76,7 @@ const metaAuthor = seometadata?.author
         url={ metaUrl }
         author={ metaAuthor }
       />
-
+      {showModal && <ModalComponent modalshow={show} />}
       <main>
         <BreadCrumb
           pagetitle={casestudy.title}

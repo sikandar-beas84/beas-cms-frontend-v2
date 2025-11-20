@@ -3443,42 +3443,167 @@ a.services-btn {
 .fixed-social {
   position: fixed;
   right: 30px;
-  bottom: 60px;
-  width: 120px;
-  text-align: center;
-  cursor:pointer;
-  z-index: 9999;
+  bottom: 150px;
+  z-index: 999;
 }
-.fixed-social img{
-  position: absolute;
-  left: 58px;
-  top: 52px;}
-.arc-text {
-    margin-bottom: -10px; 
-  }
+.modal-header{border-bottom:1px solid transparent;}
+.pop-up-award{display:flex;justify-content:center;}
+.modal-ffoter ul{margin:0;padding:0;display:flex; gap:10px;}
+.modal-ffoter ul li{margin:0;padding:0; list-style:none;}
+.year-awar{display:flex;justify-content:center;}
+.pop-up-award{margin-top:20px;}
+.pop-up-award li{margin: 0;
+padding: 5px 8px!important;
+background: #fff;
+border: 1px solid #e8e9ed;
+display: flex;
+vertical-align: middle;
+justify-content: center;
+border-radius: 5px;}
+.bgg-light{background:#F7F9FE;}
+.mmodal-header{position: absolute;
+  z-index: 99;
+  right: 10px;}
  
-  /* 20.11.25 */
-  .modal-ffoter ul li img{margin-right:5px;}
-  .modal-ffoter ul li{font-weight: 600;}
-  .bgg-light-blue{}
-  .bgg-bright{background: #a70606;
-    padding:20px;
-    display: flex;
-    flex-direction: column;}
-  .contact-modal .modal-body{padding:0; border-radius: 20px;}
-  .ccompany-name{    color: #fff;
-    font-size: 29px;
-    font-weight: 400;
+ 
+ 
+ 
+  .emblem {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 55vh;
+    margin: 0 auto;
+    width: 15vh;
+    height: 15vh;
+    border-radius: 50%;
+    font-weight: bold;
+    animation: spinZ 20s linear infinite;
     text-align: center;
-    margin-top:10px;
-    margin-bottom: 0;
-    text-transform: uppercase;
-  letter-spacing:1px;}
-  .pop-up-award{margin-top:0;}
-
+    background-color: #fff;
+  }
+  .emblem span {
+      position: absolute;
+      display: inline-block;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      text-transform: uppercase;
+      font-size: 12px;
+      color:#000;
+      /* transition: all .5s cubic-bezier(0,0,0,1); */
+      /* animation: colorLoop 2s ease-in-out infinite; */
+    }
+ 
+    @keyframes spinZ {
+      0% {
+        transform: rotateZ(360deg);
+      }
+      100% {
+        transform: rotateZ(0deg);
+      }
+    }
+    .wpp-iicon{position: fixed;z-index:99;}
+    .wpp-iicon img{position:relative;top:59vh;left:30px;}
+ 
+    /* @keyframes colorLoop {
+      0%   { color: #fff; }  
+      50%  { color: #000; }  
+      100% { color: #fff; }  
+    } */
+ 
+   /* Base styling */
+.contact-modal .modal-body{padding:0;}
+.ccompany-name{color: #fff;
+  font-size: 22px;
+  font-weight: 500;
+  text-align: center;
+  margin-top:10px;
+  margin-bottom: 0;
+  text-transform: uppercase;
+letter-spacing:1px;}
+.modal-ffoter ul li img{margin-right:5px;}
+.modal-ffoter ul li{font-weight: 600;}
+.bgg-light-blue{padding:20px;background:#f8fdff;}
+.bgg-bright {
+  background: #a70606;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  position: relative;   /* required */
+  overflow: hidden;
+}
+ 
+/* Background image layer */
+.bgg-bright::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../images/moddal-bg.webp");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.25;                
+  mix-blend-mode: normal;        
+  z-index: 0;
+}
+ 
+/* Tech animation (particles) */
+.bgg-bright::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.12) 2px, transparent 2px);
+  background-size: 40px 40px;
+  animation: move-bg 25s linear infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+ 
+/* Tech floating lines  */
+.bgg-bright .tech-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+ 
+  background-size: 80px 80px;
+  animation: move-lines 35s linear infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+ 
+/* Animation keyframes */
+@keyframes move-bg {
+  0% { transform: translate(0,0); }
+  50% { transform: translate(60px,60px); }
+  100% { transform: translate(0,0); }
+}
+ 
+@keyframes move-lines {
+  0% { background-position: 0 0, 0 0; }
+  50% { background-position: 60px 60px, 60px 60px; }
+  100% { background-position: 0 0, 0 0; }
+}
+ 
+/* Ensure your content stays on top */
+.bgg-bright > * {
+  position: relative;
+  z-index: 3;
+}
 
   /* sikandar start*/
-  .grey-txt{    color: #fff;
+  .grey-txt2{    color: #fff;
     font-family: Segoe UI;
     font-weight: 400;
     font-size: 16px;

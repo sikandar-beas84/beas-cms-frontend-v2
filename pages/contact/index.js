@@ -333,7 +333,7 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
             <img src="assets/images/ser-bg2.png" />
           </div>
         </section>
-        <ModalComponent/>
+        
 
       </main>
     </>

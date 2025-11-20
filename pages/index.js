@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Link from 'next/link'
 import Container from 'react-bootstrap/Container';
 import { Col, Row } from "react-bootstrap";
@@ -14,14 +14,29 @@ import SEO from '../components/SEO';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import IndustriesProcess from './component/IndustriesProcess';
+import ModalComponent  from './component/ModalComponent';
 
 function Home({homeData, seometadata}) {
+
   const router = useRouter();
     if (router.isFallback) {
       return <div>Loading...</div>;
     }
-  const { scrollY } = useScroll();
-  const scale = useTransform(scrollY, [0, 500], [1, 1.5]);
+
+    const [showModal, setShowModal] = useState(false);
+    const [show, setShow] = useState(false);
+    
+    useEffect(() => {
+      // Show modal after 10 seconds (10000 ms)
+      const timer = setTimeout(() => {
+        setShowModal(true);
+        setShow(true);
+        console.log("call",showModal);
+      }, 10000);
+
+      return () => clearTimeout(timer); // cleanup on unmount
+    }, []);
+
 
   //const aboutustext = homeData?.aboutus?.description;
   // const aboutussentences = aboutustext?.match(/[^.!?]+[.!?]+/g) || [];
@@ -59,6 +74,7 @@ const metaAuthor = seometadata?.author
         url={ metaUrl }
         author={ metaAuthor }
       />
+      {showModal && <ModalComponent modalshow={show} />}
       <main>
         <section>
 

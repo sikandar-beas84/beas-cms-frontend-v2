@@ -3457,6 +3457,27 @@ a.services-btn {
     margin-bottom: -10px; 
   }
  
+  /* 20.11.25 */
+  .modal-ffoter ul li img{margin-right:5px;}
+  .modal-ffoter ul li{font-weight: 600;}
+  .bgg-light-blue{}
+  .bgg-bright{background: #a70606;
+    padding:20px;
+    display: flex;
+    flex-direction: column;}
+  .contact-modal .modal-body{padding:0; border-radius: 20px;}
+  .ccompany-name{    color: #fff;
+    font-size: 29px;
+    font-weight: 400;
+    text-align: center;
+    margin-top:10px;
+    margin-bottom: 0;
+    text-transform: uppercase;
+  letter-spacing:1px;}
+  .pop-up-award{margin-top:0;}
+
+
+  /* sikandar start*/
   .grey-txt{    color: #fff;
     font-family: Segoe UI;
     font-weight: 400;
@@ -3495,3 +3516,4 @@ a.services-btn {
 ;
     -webkit-box-orient: vertical;
 }
+  /* sikandar end*/

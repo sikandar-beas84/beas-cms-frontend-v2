@@ -40,6 +40,7 @@ function ModalComponent() {
                                         className="img-fluid"
                                     />
                                 </div>
+                                <p className='ccompany-name'>Beas Consultancy Pvt Ltd</p>
                                 <div className='award-section pt-4 pop-up-award'>
                                     <ul>
                                         <li>

@@ -18,6 +18,8 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
     return <div>Loading...</div>;
   }
 
+  
+
   const metaTitle = seometadata?.title
     ? seometadata?.title
     : `Services`;
@@ -53,31 +55,32 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
           pageslug="Service"
           pageBanner={`assets/img/menu-content/${service?.menu_contents?.banner}`}
         />
-        <Container className='py-5'>
-          {enrichedChildren?.map((item1, index1) => (
-            <Row key={index1}>
-              <Col>
-                {/* <p className='title mb-3'>{service?.name}</p> */}
-                <div className="about_texts">
-                  <h1>{service?.name}</h1>
-                  <div className='ServicesPara mb-4' dangerouslySetInnerHTML={{ __html: item1?.description }} />
-                </div>
-              </Col>
-            </Row>
-          ))}
-        </Container>
+        
         <div className="py-5">
           {/* {console.log('enrichedChildren', enrichedChildren)} */}
-          {enrichedChildren?.map((item1, index1) => (
+          { enrichedChildren?.map((item1, index1) => item1?.menu_contents?.contents.length> 0 &&(
             <React.Fragment key={index1}>
+              <Container>
+              <Row key={index1}>
+                  <Col>
+                    {/* <p className='title mb-3'>{service?.name}</p> */}
+                    <div className="about_texts">
+                      {/* <h1>{service?.name}</h1> */}
+                      <div className='ServicesPara mb-4' dangerouslySetInnerHTML={{ __html: item1?.description }} />
+                    </div>
+                  </Col>
+                </Row>
+              </Container>
               <section className="section-abuts section-services">
                 <Container>
+                
                   <Row>
                     <Col xs={12}>
                       <div className="imageTextBlock">
                         <div className="ser_rea services_sec">
                           {item1?.menu_contents?.contents?.map((content, index) => {
                             const casestudyData = content?.casestudy?.data?.casestudy;
+                            
                             const isEven = index % 2 !== 0;
                             const slug = casestudyData?.slug;
                             const description = content?.extra_description;
@@ -213,8 +216,10 @@ export async function getServerSideProps({ params }) {
     return { notFound: true };
   }
 
+
   // 3. Enrich children with case studies
   const enrichedChildren = await Promise.all(
+
     (service?.children || []).map(async (child) => {
       const contents = child?.menu_contents?.contents || [];
 

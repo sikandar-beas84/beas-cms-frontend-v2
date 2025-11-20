@@ -18,6 +18,8 @@ const Page = ({ industry, enrichedContents, seometadata }) => {
     return <div>Loading...</div>;
   }
 
+
+
   const metaTitle = seometadata?.title
     ? seometadata?.title
     : `Industry`;
@@ -218,7 +220,9 @@ export async function getServerSideProps({ params }) {
   }
 
   const contents = industry?.menu_contents?.contents || [];
+
   const enrichedContents = await Promise.all(
+
     contents.map(async (item) => {
       if (!item.extra_description) return item;
 

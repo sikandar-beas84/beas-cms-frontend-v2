@@ -291,6 +291,7 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
                           </React.Fragment>
                         )
                       )}
+                      </div>
 
                       {/* Find first valid accordion item */}
                       {(() => {
@@ -319,7 +320,7 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
                         );
                       })()}
 
-                    </div>
+                    
                   </div>
                 </div>
               </div>

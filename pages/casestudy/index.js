@@ -9,12 +9,27 @@ import { env } from '../../util/constants/common';
 import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
 import BannerCarousal from "../component/BannerCarousal";
+import ModalComponent  from '../component/ModalComponent';
 
 const Casestudy = ({casestudy, menucasestudy, seometadata, homeData}) => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
+
+  const [showModal, setShowModal] = useState(false);
+  const [show, setShow] = useState(false);
+  
+  useEffect(() => {
+    // Show modal after 10 seconds (10000 ms)
+    const timer = setTimeout(() => {
+      setShowModal(true);
+      setShow(true);
+      console.log("call",showModal);
+    }, 10000);
+
+    return () => clearTimeout(timer); // cleanup on unmount
+  }, []);
 
   const metaTitle = seometadata?.name
   ? seometadata?.title
@@ -45,6 +60,7 @@ const Casestudy = ({casestudy, menucasestudy, seometadata, homeData}) => {
         url={ metaUrl }
         author={ metaAuthor }
       />
+      {showModal && <ModalComponent modalshow={show} />}
     <main>
       <BreadCrumb pagetitle = {casestudy.title} pageslug='Casestudy' pageBanner={`assets/img/menu-content/${menucasestudy?.menu_contents?.banner}`} />
       <div className="bgF2F4F7 p-relative">

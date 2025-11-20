@@ -144,7 +144,7 @@ function ModalComponent({modalshow=false}) {
                                                     src="/assets/images/a1.png"
                                                     alt="awards"
                                                     width={150}
-                                                    height={90}
+                                                    height={80}
                                                     className="img-fluid"
                                                 />
                                             </li>
@@ -153,7 +153,7 @@ function ModalComponent({modalshow=false}) {
                                                     src="/assets/images/a2.png"
                                                     alt="awards"
                                                     width={150}
-                                                    height={90}
+                                                    height={80}
                                                     className="img-fluid"
                                                 />
                                             </li>
@@ -162,7 +162,7 @@ function ModalComponent({modalshow=false}) {
                                                     src="/assets/images/a3.png"
                                                     alt="awards"
                                                     width={150}
-                                                    height={90}
+                                                    height={80}
                                                     className="img-fluid"
                                                 />
                                             </li>

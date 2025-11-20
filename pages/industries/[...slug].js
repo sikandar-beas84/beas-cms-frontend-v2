@@ -73,112 +73,121 @@ const Page = ({ industry, enrichedContents, seometadata }) => {
         {/* === ser_rea / services_sec SHOULD NOT be inside loop === */}
         <section className="section-abuts section-services">
           <Container className="py-5">
+            <div className="row">
+              <div className="col-12">
+                <div className='imageTextBlock'>
+                  <div className='ser_rea services_sec'>
+                    {enrichedContents?.map((item, index) => {
+                      const casestudyData = item?.casestudy?.data?.casestudy;
+                      const isEven = index % 2 !== 0;
+                      const slug = casestudyData?.slug;
 
-            {enrichedContents?.map((item, index) => {
-              const casestudyData = item?.casestudy?.data?.casestudy;
-              const isEven = index % 2 !== 0;
-              const slug = casestudyData?.slug;
+                      const description = item?.extra_description;
+                      if (!description) return null;
 
-              const description = item?.extra_description;
-              if (!description) return null;
+                      const short_desc = casestudyData?.short_desc;
 
-              const short_desc = casestudyData?.short_desc;
+                      const longdesc = casestudyData?.long_desc
+                        ? casestudyData.long_desc.split(",")
+                        : [];
 
-              const longdesc = casestudyData?.long_desc
-                ? casestudyData.long_desc.split(",")
-                : [];
+                      return (
 
-              return (
-                <div className="row no-gutters mb-5" key={index}>
-                  {isEven ? (
-                    <>
-                      {/* TEXT FIRST */}
-                      <div className="col-lg-6 col-12">
-                        <div className="services-text">
-                          <h2>{casestudyData?.title}</h2>
-                          <p>{short_desc}</p>
+                        <div className="row no-gutters" key={index}>
 
-                          <div className="port-tags services-tags">
-                            {longdesc.map((d, i) => (
-                              <h4 key={i}>{d}</h4>
-                            ))}
-                          </div>
+                          {isEven ? (
+                            <>
+                              {/* TEXT FIRST */}
+                              <div className="col-lg-6 col-12">
+                                <div className="services-text">
+                                  <h2>{casestudyData?.title}</h2>
+                                  <p>{short_desc}</p>
 
-                          {slug && (
-                            <Link
-                              href={{
-                                pathname: "/casestudy",
-                                query: { id: slug },
-                              }}
-                              className="services-btn proc-btn thar-three4"
-                            >
-                              Read Case Study
-                            </Link>
+                                  <div className="port-tags services-tags">
+                                    {longdesc.map((d, i) => (
+                                      <h4 key={i}>{d}</h4>
+                                    ))}
+                                  </div>
+
+                                  {slug && (
+                                    <Link
+                                      href={{
+                                        pathname: "/casestudy",
+                                        query: { id: slug },
+                                      }}
+                                      className="services-btn proc-btn thar-three4"
+                                    >
+                                      Read Case Study
+                                    </Link>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* IMAGE SECOND */}
+                              <div className="col-lg-6 col-12">
+                                <div className="mediaimg">
+                                  <Image
+                                    width={600}
+                                    height={150}
+                                    src={`${env.BACKEND_BASE_URL}${casestudyData?.image}`}
+                                    alt="image"
+                                    className="img-fluid"
+                                    loading="lazy"
+                                  />
+                                </div>
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              {/* IMAGE FIRST */}
+                              <div className="col-lg-6 col-12">
+                                <div className="mediaimg">
+                                  <Image
+                                    width={600}
+                                    height={150}
+                                    src={`${env.BACKEND_BASE_URL}${casestudyData?.image}`}
+                                    alt="image"
+                                    className="img-fluid"
+                                    loading="lazy"
+                                  />
+                                </div>
+                              </div>
+
+                              {/* TEXT SECOND */}
+                              <div className="col-lg-6 col-12">
+                                <div className="services-text">
+                                  <h2>{casestudyData?.title}</h2>
+                                  <p>{short_desc}</p>
+
+                                  <div className="port-tags services-tags">
+                                    {longdesc.map((d, i) => (
+                                      <h4 key={i}>{d}</h4>
+                                    ))}
+                                  </div>
+
+                                  {slug && (
+                                    <Link
+                                      href={{
+                                        pathname: "/casestudy",
+                                        query: { id: slug },
+                                      }}
+                                      className="services-btn proc-btn thar-three4"
+                                    >
+                                      Read Case Study
+                                    </Link>
+                                  )}
+                                </div>
+                              </div>
+                            </>
                           )}
                         </div>
-                      </div>
 
-                      {/* IMAGE SECOND */}
-                      <div className="col-lg-6 col-12">
-                        <div className="mediaimg">
-                          <Image
-                            width={600}
-                            height={150}
-                            src={`${env.BACKEND_BASE_URL}${casestudyData?.image}`}
-                            alt="image"
-                            className="img-fluid"
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      {/* IMAGE FIRST */}
-                      <div className="col-lg-6 col-12">
-                        <div className="mediaimg">
-                          <Image
-                            width={600}
-                            height={150}
-                            src={`${env.BACKEND_BASE_URL}${casestudyData?.image}`}
-                            alt="image"
-                            className="img-fluid"
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-
-                      {/* TEXT SECOND */}
-                      <div className="col-lg-6 col-12">
-                        <div className="services-text">
-                          <h2>{casestudyData?.title}</h2>
-                          <p>{short_desc}</p>
-
-                          <div className="port-tags services-tags">
-                            {longdesc.map((d, i) => (
-                              <h4 key={i}>{d}</h4>
-                            ))}
-                          </div>
-
-                          {slug && (
-                            <Link
-                              href={{
-                                pathname: "/casestudy",
-                                query: { id: slug },
-                              }}
-                              className="services-btn proc-btn thar-three4"
-                            >
-                              Read Case Study
-                            </Link>
-                          )}
-                        </div>
-                      </div>
-                    </>
-                  )}
+                      );
+                    })}
+                  </div>
                 </div>
-              );
-            })}
-
+              </div>
+            </div>
           </Container>
 
           {/* Background shapes */}

@@ -3481,7 +3481,7 @@ border-radius: 5px;}
     animation: spinZ 20s linear infinite;
     text-align: center;
   }
-    span {
+  .emblem span {
       position: absolute;
       display: inline-block;
       left: 0;
@@ -3510,3 +3510,10 @@ border-radius: 5px;}
       50%  { color: #000; }       /* Red */
       100% { color: #fff; }   /* Blue again */
     }
+
+    /* 20.11.25 */
+    .modal-ffoter ul li img{margin-right:5px;}
+    .modal-ffoter ul li{font-weight: 600;}
+    .bgg-light-blue{}
+    .bgg-bright{background: #a70606;}
+    .contact-modal .modal-body{padding:0; border-radius: 20px;}

@@ -22,6 +22,7 @@ function ModalComponent() {
                 keyboard={false}
                 dialogClassName="modal-xl"
                 centered
+                className='contact-modal'
             >
                 <Modal.Header closeButton className='mmodal-header'>
                     {/* <Modal.Title></Modal.Title> */}
@@ -29,7 +30,7 @@ function ModalComponent() {
                 <Modal.Body>
                     <Container>
                         <Row>
-                            <Col xs={12} lg={5} className='bgg-light'>
+                            <Col xs={12} lg={5} className='bgg-bright'>
                                 <div className='year-awar'>
                                     <Image
                                         src="/assets/images/awards.png"
@@ -69,19 +70,44 @@ function ModalComponent() {
                                             />
                                         </li>
                                     </ul>
-                                    </div>
+                                </div>
                             </Col>
-                            <Col xs={12} lg={7}>
+                            <Col xs={12} lg={7} className='bgg-light-blue'>
                                 <div class="about_texts"><h1>Your Journey to Growth Begins Now</h1></div>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.
                                 </p>
                                 <div className='modal-ffoter'>
-                                        <ul>
-                                            <li>Confidentiality Assured</li>
-                                            <li>Zero Spam Commitment</li>
-                                            <li>100% Quick Response</li>
-                                        </ul>
-                                    </div>
+                                    <ul>
+                                        <li>
+                                            <Image
+                                                src="/assets/images/green-check.png"
+                                                alt="awards"
+                                                width={20}
+                                                height={20}
+                                                className="img-fluid"
+                                            />
+                                            Confidentiality Assured</li>
+                                        <li>
+                                            <Image
+                                                src="/assets/images/green-check.png"
+                                                alt="awards"
+                                                width={20}
+                                                height={20}
+                                                className="img-fluid"
+                                            />
+                                            Zero Spam Commitment</li>
+                                        <li>
+                                            <Image
+                                                src="/assets/images/green-check.png"
+                                                alt="awards"
+                                                width={20}
+                                                height={20}
+                                                className="img-fluid"
+                                            />
+                                            100% Quick Response
+                                        </li>
+                                    </ul>
+                                </div>
 
                                 <div className="contact_form_box mt-4">
                                     <form className="was-validate contact-frm">
@@ -154,12 +180,12 @@ function ModalComponent() {
 
                                         </div>
                                     </form>
-                                  
-                                   
+
+
                                 </div>
                             </Col>
                         </Row>
-                       
+
                     </Container>
                 </Modal.Body>
 

@@ -15,7 +15,7 @@ const Career = ({ careers, menucareer, seometadata }) => {
     return <div>Loading...</div>;
   }
 
-  const metaTitle = seometadata?.name
+  const metaTitle = seometadata?.title
   ? seometadata?.title
   :`Careers`;
   const metaKeyword = seometadata?.keyword

@@ -18,8 +18,6 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
     return <div>Loading...</div>;
   }
 
-  
-
   const metaTitle = seometadata?.title
     ? seometadata?.title
     : `Services`;
@@ -57,8 +55,8 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
         />
         
         <div className="py-5">
-          {/* {console.log('enrichedChildren', enrichedChildren)} */}
-          { enrichedChildren?.map((item1, index1) => item1?.menu_contents?.contents.length> 0 &&(
+          
+          { enrichedChildren?.map((item1, index1) => (
             <React.Fragment key={index1}>
               <Container>
               <Row key={index1}>
@@ -91,7 +89,7 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
                               ? casestudyData.long_desc.split(",")
                               : [];
 
-                            return description ? (
+                            return (
                               <div className="row no-gutters" key={index}>
                                 {isEven ? (
                                   <>
@@ -173,7 +171,7 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
                                   </>
                                 )}
                               </div>
-                            ) : null;
+                            );
                           })}
                         </div>
 
@@ -182,13 +180,16 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
                     </Col>
                   </Row>
                 </Container>
+                { item1?.menu_contents?.contents?.length > 0 && (
+                  <>
                 <div className="shp1">
                   <img src="../assets/images/ser-bg.png" />
                 </div>
                 <div className="shp2">
                   <img src="../assets/images/ser-bg2.png" />
                 </div>
-
+                </>
+                )}
               </section>
             </React.Fragment>
           ))}

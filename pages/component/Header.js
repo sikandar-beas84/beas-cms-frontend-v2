@@ -194,7 +194,7 @@ const Header = ({ homeData }) => {
           className="img-fluid"
           onClick={() => {
             window.open(
-              "https://wa.me/9433068494?text=BEAS%20CONSULTANCY%20PT%20LTD.",
+              "https://wa.me/9433068494?text=BEAS%20CONSULTANCY%20%26%20SERVICES%20PVT.%20LTD.",
               "_blank"
             );
           }}

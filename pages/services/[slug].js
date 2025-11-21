@@ -65,6 +65,7 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
                   <Col>
                     {/* <p className='title mb-3'>{service?.name}</p> */}
                     <div className="about_texts">
+                    
                       {/* <h1>{service?.name}</h1> */}
                       <div className='ServicesPara mb-4' dangerouslySetInnerHTML={{ __html: item1?.description }} />
                     </div>
@@ -95,7 +96,7 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
                               <div className="row no-gutters" key={index}>
                                 {isEven ? (
                                   <>
-                                    <div className="col-lg-6 col-12">
+                                    <div className="col-lg-6 col-12 order-2 order-lg-1">
                                       <div className="services-text">
                                         <h2>{casestudyData?.title}</h2>
                                         <p>{short_desc}</p>
@@ -134,7 +135,7 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
                                   </>
                                 ) : (
                                   <>
-                                    <div className="col-lg-6 col-12">
+                                    <div className="col-lg-6 col-12 order-1 order-lg-2">
                                       <div className="mediaimg">
                                         <Image
                                           width={600}

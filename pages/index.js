@@ -116,7 +116,7 @@ const metaAuthor = seometadata?.author
                                     />
                                   <div className="srvc-bxtx">
                                     <h3>{item?.name}</h3>
-                                    <p className='blog-hm-desc'>{descriptionText}</p>
+                                    <p className='service-hm-desc'>{descriptionText}</p>
                                     <p>Read more...</p>
                                   </div>
                                   

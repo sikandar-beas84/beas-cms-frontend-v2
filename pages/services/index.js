@@ -62,6 +62,7 @@ const Service = ({ services, service, seometadata }) => {
             <div className="row">
               <div className="col-lg-12">
                 <div className="ser_rea services_sec">
+                  
                   {services?.map((item, index) => {
                     const isEven = index % 2 !== 0; // true for even-positioned items (1,3,5,...)
                     const description = item?.menu_contents?.description

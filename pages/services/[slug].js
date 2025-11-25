@@ -210,8 +210,29 @@ export async function getServerSideProps({ params }) {
   const response = await HomeService.menuServicePage();
   const services = response?.data?.services?.children || [];
 
-  // 2. Find service by slug
-  const service = services.find((item) => item.slug.toString() === slug);
+    let service = null;
+
+    // If slug belongs to application-solutioning sub-services
+    if (
+      slug === "application-development" ||
+      slug === "application-maintenance" ||
+      slug === "ui-ux" ||
+      slug === "professional-services"
+    ) {
+      // find the APPLICATION SOLUTIONING parent
+      const service_ = services.find(
+        (item) => item.slug.toString() === "application-solutioning"
+      );
+
+      // find the sub-child
+      service = service_?.children?.find(
+        (item) => item.slug.toString() === slug
+      );
+    } else {
+      // normal find
+      service = services.find((item) => item.slug.toString() === slug);
+    }
+
 
   if (!service) {
     return { notFound: true };

@@ -16,34 +16,6 @@ const Service = ({ services, service, seometadata }) => {
     return <div>Loading...</div>;
   }
 
-   // Step 1: Expand application-solutioning
-   let finalServices = services?.flatMap(item => {
-    if (item.slug === "application-solutioning") {
-      return item.children?.map(child => ({
-        ...child,
-        menu_contents: child.menu_contents
-      }));
-    }
-
-    return [{
-      ...item,
-      menu_contents: item.menu_contents
-    }];
-  });
-
-  // Step 2: Move specific items to the bottom
-  const bottomSlugs = ["ui-ux", "professional-services"];
-
-  finalServices = [...finalServices].sort((a, b) => {
-    const aLast = bottomSlugs.includes(a?.slug);
-    const bLast = bottomSlugs.includes(b?.slug);
-
-    if (aLast && !bLast) return 1;   // a goes down
-    if (!aLast && bLast) return -1;  // b goes down
-    return 0;
-  });
-  //////////////////////////////////////////
-
   const metaTitle = seometadata?.title
   ? seometadata?.title
   :`Service`;
@@ -90,23 +62,25 @@ const Service = ({ services, service, seometadata }) => {
             <div className="row">
               <div className="col-lg-12">
                 <div className="ser_rea services_sec">
-                {finalServices?.map((item, index) => {
-                    const isEven = index % 2 !== 0;
-
+                  {services?.map((item, index) => {
+                    const isEven = index % 2 !== 0; // true for even-positioned items (1,3,5,...)
                     const description = item?.menu_contents?.description
                       ? item?.menu_contents?.description.split(' ').slice(0, 90).join(' ') + '...'
                       : '';
 
                     return (
                       <div className="row no-gutters" key={index}>
+                        {/* For even items: text first, image second */}
                         {isEven ? (
                           <>
                             <div className="col-lg-6 col-12">
                               <div className="services-text">
                                 <h2>{item?.menu_contents?.title}</h2>
                                 <p dangerouslySetInnerHTML={{ __html: description }} />
+                               
                                 <Nav.Link
                                   href={`/services/${item?.menu_contents?.slug}`}
+                                  key={index}
                                   className="services-btn proc-btn thar-three4"
                                 >
                                   Read More
@@ -127,6 +101,7 @@ const Service = ({ services, service, seometadata }) => {
                             </div>
                           </>
                         ) : (
+                          // For odd items: image first, text second
                           <>
                             <div className="col-lg-6 col-12">
                               <div className="mediaimg">
@@ -144,8 +119,10 @@ const Service = ({ services, service, seometadata }) => {
                               <div className="services-text">
                                 <h2>{item?.menu_contents?.title}</h2>
                                 <p dangerouslySetInnerHTML={{ __html: description }} />
+                              
                                 <Nav.Link
                                   href={`/services/${item?.menu_contents?.slug}`}
+                                  key={index}
                                   className="services-btn proc-btn thar-three4"
                                 >
                                   Read More

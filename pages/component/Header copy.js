@@ -110,40 +110,13 @@ const Header = ({ homeData }) => {
                   // Special dropdown for Services
                   if (item.slug === "services") {
                     return (
-                      <NavDropdown title="Services" id="services-menu">
-
-                        {homeData?.services?.children?.map((child, i) => {
-
-                          const shouldShowSubmenu = child.slug.toLowerCase() === "application-solutioning";
-
-                          return shouldShowSubmenu ? (
-                            // Show submenu ONLY for "Application Solutioning"
-                            <NavDropdown
-                              key={i}
-                              title={child.name}
-                              id={`child-${i}`}
-                              drop="end"
-                              className="nested-dropdown"
-                            >
-                              {child.children?.map((sub, j) => (
-                                <NavDropdown.Item href={`/services/${sub.slug}`} key={j}>
-                                  {sub.name}
-                                </NavDropdown.Item>
-                              ))}
-                            </NavDropdown>
-                          ) : (
-                            // For all OTHER menus, show as normal link (NO submenu)
-                            <NavDropdown.Item
-                              key={i}
-                              href={`/services/${child.slug}`}
-                            >
-                              {child.name}
-                            </NavDropdown.Item>
-                          );
-                        })}
-
+                      <NavDropdown title="Services" id="navbarScrollingDropdown" key={index}>
+                        {homeData?.services?.children?.map((child, i) => (
+                          <NavDropdown.Item href={`/services/${child.slug}`} key={i}>
+                            {child.name}
+                          </NavDropdown.Item>
+                        ))}
                       </NavDropdown>
-
                     );
                   }
 

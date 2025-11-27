@@ -55,16 +55,15 @@ function Home({homeData, seometadata}) {
     const [showModal, setShowModal] = useState(false);
     const [show, setShow] = useState(false);
     
-    useEffect(() => {
-      // Show modal after 10 seconds (10000 ms)
-      const timer = setTimeout(() => {
-        setShowModal(true);
-        setShow(true);
-        console.log("call",showModal);
-      }, 10000);
+    // useEffect(() => {
+    //   // Show modal after 10 seconds (10000 ms)
+    //   const timer = setTimeout(() => {
+    //     setShowModal(true);
+    //     setShow(true);
+    //   }, 10000);
 
-      return () => clearTimeout(timer); // cleanup on unmount
-    }, []);
+    //   return () => clearTimeout(timer); // cleanup on unmount
+    // }, []);
 
 
   //const aboutustext = homeData?.aboutus?.description;

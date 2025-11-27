@@ -274,7 +274,7 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
         </section>
 
 
-        <section className="section-abuts section-contact">
+        {/* <section className="section-abuts section-contact">
           <div className="container">
             <div className="row">
               <div className="col-lg-12">
@@ -282,7 +282,7 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
                   <div className="about_texts contact-bg">
                     <div className="serv-head">
 
-                      {/* Heading Items */}
+
                       {faqs?.map((item, index) =>
                         item.type === "faq-heading" && (
                           <React.Fragment key={index}>
@@ -293,7 +293,7 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
                       )}
                       </div>
 
-                      {/* Find first valid accordion item */}
+                      
                       {(() => {
                         const firstAccordionIndex = faqs?.findIndex(
                           (item) => item.type !== "faq-heading"
@@ -333,7 +333,7 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
           <div className="shp2">
             <img src="assets/images/ser-bg2.png" />
           </div>
-        </section>
+        </section> */}
         
 
       </main>

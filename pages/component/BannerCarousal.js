@@ -111,7 +111,32 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
 
   const testimonialnewsettings = testimoniolnewSliderSettings(2);
 
-  const blogsettings = createSliderSettings(3);
+
+  const blogSliderSettings = (slidesToShowDefault, sliderDot = false) => ({
+    dots: sliderDot,
+    infinite: false,
+    speed: 500,
+    slidesToShow: slidesToShowDefault,
+    slidesToScroll: 1,
+    autoplay: false,
+    autoplaySpeed: 3000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: slidesToShowDefault > 3 ? 3 : slidesToShowDefault,
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+        }
+      }
+    ]
+  });
+
+  const blogsettings = blogSliderSettings(3);
 
   return (
     <>

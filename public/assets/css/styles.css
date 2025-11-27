@@ -58,16 +58,18 @@ body {
 }
 
 .dropdown-menu.show a {
-  border-bottom: 1px solid #efefef;
+  border-bottom: 1px solid #efefef !important;
   width: 100%;
-  padding: 10px 15px;
+  padding: 10px 15px !important;
   background: #fff;
 }
 
 .dropdown-menu.show a:last-child {
   border-bottom: 1px solid transparent;
 }
-
+.dropdown-item:last-child{
+  border-bottom:1px solid transparent
+}
 .main-focus-text {
   color: #fff;
 }

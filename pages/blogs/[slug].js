@@ -89,16 +89,19 @@ const Blog = ({ blog, seometadata, homeData }) => {
         if (fileInputRef.current) {
           fileInputRef.current.value = null;
         }
+        setIsChecked(false);
         //recaptchaRef.current.reset();
       } else {
         setStatus(`❌ Error: ${result.message || 'Failed to send'}`);
         setErrors(result.error); // store errors in state
+        setIsChecked(false);
       }
     } catch (err) {
       //console.error(err);
       setStatus('❌ Submission failed. Check console.');
     } finally {
       setLoading(false); // ✅ stop loader
+      setIsChecked(false);
     }
   };
 

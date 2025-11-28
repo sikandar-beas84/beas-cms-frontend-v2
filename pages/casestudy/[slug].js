@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import BreadCrumb from "../component/BreadCrumb";
 import { Container, Row, Col } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
@@ -10,7 +10,7 @@ import Link from "next/link";
 import SEO from "../../components/SEO";
 import { useRouter } from "next/router";
 import BannerCarousal from "../component/BannerCarousal";
-import ModalComponent  from '../component/ModalComponent';
+import ModalComponent from '../component/ModalComponent';
 
 const MAX_VISIBLE = 10; // show 10 numbers at a time
 
@@ -19,11 +19,21 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
+  const [showForm, setShowForm] = useState(false);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowForm(true);
+    }, 5000); // 5 seconds delay
 
+    return () => clearTimeout(timer);
+  }, []);
+  const handleClose = () => {
+    setShowForm(false); 
+  };
   const [showModal, setShowModal] = useState(false);
   const [show, setShow] = useState(false);
-  
+
   // useEffect(() => {
   //   // Show modal after 10 seconds (10000 ms)
   //   const timer = setTimeout(() => {
@@ -48,33 +58,33 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
   const end = Math.min(start + MAX_VISIBLE, totalPages);
 
   const metaTitle = seometadata?.title
-  ? seometadata?.title
-  :`Case Study`;
-const metaKeyword = seometadata?.keyword
-  ? seometadata?.keyword
-  :"case study, business solution, project success, Beas consultancy";
-const metaDesc = seometadata?.description
-  ? seometadata?.description
-  : "Learn how Beas Consultancy delivered a tailored solution and business impact";
-const metaImage = seometadata?.image
-  ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
-  : `${env.BACKEND_BASE_URL}${casestudy?.image}`;
-const metaUrl = seometadata?.url
-  ?`${env.FRONTEND_BASE_URL}casestudy/${seometadata?.url}`
-  :`${env.FRONTEND_BASE_URL}casestudy/${casestudy?.slug}`;
-const metaAuthor = seometadata?.author
-  ? seometadata?.author
-  :"BEAS Consultancy And Services Private Limited";
+    ? seometadata?.title
+    : `Case Study`;
+  const metaKeyword = seometadata?.keyword
+    ? seometadata?.keyword
+    : "case study, business solution, project success, Beas consultancy";
+  const metaDesc = seometadata?.description
+    ? seometadata?.description
+    : "Learn how Beas Consultancy delivered a tailored solution and business impact";
+  const metaImage = seometadata?.image
+    ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
+    : `${env.BACKEND_BASE_URL}${casestudy?.image}`;
+  const metaUrl = seometadata?.url
+    ? `${env.FRONTEND_BASE_URL}casestudy/${seometadata?.url}`
+    : `${env.FRONTEND_BASE_URL}casestudy/${casestudy?.slug}`;
+  const metaAuthor = seometadata?.author
+    ? seometadata?.author
+    : "BEAS Consultancy And Services Private Limited";
 
   return (
     <>
       <SEO
-        title={ metaTitle }
-        description={ metaDesc }
-        keywords={ metaKeyword }
-        image={ metaImage }
-        url={ metaUrl }
-        author={ metaAuthor }
+        title={metaTitle}
+        description={metaDesc}
+        keywords={metaKeyword}
+        image={metaImage}
+        url={metaUrl}
+        author={metaAuthor}
       />
       {showModal && <ModalComponent modalshow={show} />}
       <main>
@@ -87,31 +97,31 @@ const metaAuthor = seometadata?.author
 
         <div className="bgF2F4F7 p-relative">
           <Container fluid>
-          <div className="d-flex justify-content-between carosalArrow">
-            {/* Previous */}
-            {
-              prevProject ? (
-                <Link
-                  href={`/casestudy/${prevProject.slug}`}
-                  className="btn btn-primary"
-                >
-                  <ChevronLeft />
-                </Link>
-              ) : <Link href="#" className="btn btn-primary" ><ChevronLeft /></Link>
-            }
+            <div className="d-flex justify-content-between carosalArrow">
+              {/* Previous */}
+              {
+                prevProject ? (
+                  <Link
+                    href={`/casestudy/${prevProject.slug}`}
+                    className="btn btn-primary"
+                  >
+                    <ChevronLeft />
+                  </Link>
+                ) : <Link href="#" className="btn btn-primary" ><ChevronLeft /></Link>
+              }
 
-            {/* Next */}
-            {
-              nextProject ? (
-                <Link
-                  href={`/casestudy/${nextProject.slug}`}
-                  className="btn btn-primary"
-                >
-                  <ChevronRight />
-                </Link>
-              ) : <Link href="#" className="btn btn-primary" ><ChevronRight /></Link>
-            }
-          </div>
+              {/* Next */}
+              {
+                nextProject ? (
+                  <Link
+                    href={`/casestudy/${nextProject.slug}`}
+                    className="btn btn-primary"
+                  >
+                    <ChevronRight />
+                  </Link>
+                ) : <Link href="#" className="btn btn-primary" ><ChevronRight /></Link>
+              }
+            </div>
           </Container>
 
           <Container className="py-5">
@@ -209,7 +219,19 @@ const metaAuthor = seometadata?.author
 
           </Container>
 
-         
+          <div className={`sliding-form ${showForm ? "active" : ""}`}>
+           <button className="close-btn-submit-frm" onClick={handleClose}>×</button>
+            <h3>Interested? Feel free to connect</h3>
+            <input type="text" class="form-control" placeholder="Name" />
+            <input type="email" class="form-control" placeholder="Email" />
+            <input type="text" class="form-control" placeholder="Phone No" />
+            <textarea name="message" class="form-control" placeholder="Message" rows="5" required=""></textarea>
+            <div className="d-flex sliding-form-btn">
+            <button className="btn btn-primary">Submit</button>
+               
+            </div>
+          </div>
+
         </div>
       </main>
     </>

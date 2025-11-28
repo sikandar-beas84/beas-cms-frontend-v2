@@ -1,5 +1,5 @@
 
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import BreadCrumb from '../component/BreadCrumb'
 import { Container, Row, Col } from 'react-bootstrap'
 import Accordion from 'react-bootstrap/Accordion';
@@ -9,17 +9,17 @@ import { env } from '../../util/constants/common';
 import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
 import BannerCarousal from "../component/BannerCarousal";
-import ModalComponent  from '../component/ModalComponent';
+import ModalComponent from '../component/ModalComponent';
 
-const Casestudy = ({casestudy, menucasestudy, seometadata, homeData}) => {
+const Casestudy = ({ casestudy, menucasestudy, seometadata, homeData }) => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
-
+ 
   const [showModal, setShowModal] = useState(false);
   const [show, setShow] = useState(false);
-  
+
   // useEffect(() => {
   //   // Show modal after 10 seconds (10000 ms)
   //   const timer = setTimeout(() => {
@@ -31,88 +31,88 @@ const Casestudy = ({casestudy, menucasestudy, seometadata, homeData}) => {
   // }, []);
 
   const metaTitle = seometadata?.name
-  ? seometadata?.title
-  :`Case Study`;
+    ? seometadata?.title
+    : `Case Study`;
   const metaKeyword = seometadata?.keyword
-  ? seometadata?.keyword
-  :"case study, business solution, project success, Beas consultancy";
+    ? seometadata?.keyword
+    : "case study, business solution, project success, Beas consultancy";
   const metaDesc = seometadata?.description
-  ? seometadata?.description
-  : "Learn how Beas Consultancy delivered a tailored solution and business impact.";
+    ? seometadata?.description
+    : "Learn how Beas Consultancy delivered a tailored solution and business impact.";
   const metaImage = seometadata?.image
-  ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
-  : `${env.BACKEND_BASE_URL}${casestudy?.image}`;
+    ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
+    : `${env.BACKEND_BASE_URL}${casestudy?.image}`;
   const metaUrl = seometadata?.url
-  ?`${env.FRONTEND_BASE_URL}casestudy/${seometadata?.url}`
-  :`${env.FRONTEND_BASE_URL}casestudy/${casestudy?.slug}`;
+    ? `${env.FRONTEND_BASE_URL}casestudy/${seometadata?.url}`
+    : `${env.FRONTEND_BASE_URL}casestudy/${casestudy?.slug}`;
   const metaAuthor = seometadata?.author
-  ? seometadata?.author
-  :"BEAS Consultancy And Services Private Limited";
+    ? seometadata?.author
+    : "BEAS Consultancy And Services Private Limited";
 
   return (
     <>
-    <SEO
-        title={ metaTitle }
-        description={ metaDesc }
-        keywords={ metaKeyword }
-        image={ metaImage }
-        url={ metaUrl }
-        author={ metaAuthor }
+      <SEO
+        title={metaTitle}
+        description={metaDesc}
+        keywords={metaKeyword}
+        image={metaImage}
+        url={metaUrl}
+        author={metaAuthor}
       />
       {showModal && <ModalComponent modalshow={show} />}
-    <main>
-      <BreadCrumb pagetitle = {casestudy.title} pageslug='Casestudy' pageBanner={`assets/img/menu-content/${menucasestudy?.menu_contents?.banner}`} />
-      <div className="bgF2F4F7 p-relative">
-      <Container className="py-5">
-        <Row> 
-        <Col xs={12}>
+      <main>
+        <BreadCrumb pagetitle={casestudy.title} pageslug='Casestudy' pageBanner={`assets/img/menu-content/${menucasestudy?.menu_contents?.banner}`} />
+        <div className="bgF2F4F7 p-relative">
+          <Container className="py-5">
+            <Row>
+              <Col xs={12}>
                 <h1 className="inner-page-title-small">{casestudy?.title}</h1>
-              </Col> 
-          <Col xs={12} lg={5}>
-          
-             <div className='serviceDetailsWrap'>
-              <Image width={600} height={150} src={`${env.BACKEND_BASE_URL}${casestudy?.image}`} alt='image' className='img-fluid' loading="lazy" />
-            </div>
-            
-          </Col>
-          <Col xs={12} lg={7}>
-         
-            
-            <Accordion defaultActiveKey="0" flush>
-              <Accordion.Item eventKey="0">
-                <Accordion.Header>Project Overview / Business Need</Accordion.Header>
-                <Accordion.Body>
-                {<div dangerouslySetInnerHTML={{ __html: casestudy?.business_need }} />}
-                </Accordion.Body>
-              </Accordion.Item>
-              <Accordion.Item eventKey="1">
-                <Accordion.Header>BEAS’s Solution</Accordion.Header>
-                <Accordion.Body>
-                {<div dangerouslySetInnerHTML={{ __html: casestudy?.beas_solution }} />}
-                </Accordion.Body>
-              </Accordion.Item>
-              <Accordion.Item eventKey="2">
-                <Accordion.Header>Benefits to the customer</Accordion.Header>
-                <Accordion.Body>
-                {<div dangerouslySetInnerHTML={{ __html: casestudy?.benefits_to_the_customer }} />}
-                </Accordion.Body>
-              </Accordion.Item>
-              <Accordion.Item eventKey="3">
-                <Accordion.Header>Technology Platform</Accordion.Header>
-                <Accordion.Body>
-                <ul>
-                { casestudy?.technology_platform?.map((item, index)=>(
-                <li key={index}>{item}</li>
-                ))}
-              </ul>
-                </Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
+              </Col>
+              <Col xs={12} lg={5}>
 
-          </Col>
-          
-        </Row>
-        <Row>
+                <div className='serviceDetailsWrap'>
+                  <Image width={600} height={150} src={`${env.BACKEND_BASE_URL}${casestudy?.image}`} alt='image' className='img-fluid' loading="lazy" />
+                </div>
+
+              </Col>
+              <Col xs={12} lg={7}>
+
+
+                <Accordion defaultActiveKey="0" flush>
+                  <Accordion.Item eventKey="0">
+                    <Accordion.Header>Project Overview / Business Need</Accordion.Header>
+                    <Accordion.Body>
+                      {<div dangerouslySetInnerHTML={{ __html: casestudy?.business_need }} />}
+                    </Accordion.Body>
+                  </Accordion.Item>
+                  <Accordion.Item eventKey="1">
+                    <Accordion.Header>BEAS’s Solution</Accordion.Header>
+                    <Accordion.Body>
+                      {<div dangerouslySetInnerHTML={{ __html: casestudy?.beas_solution }} />}
+                    </Accordion.Body>
+                  </Accordion.Item>
+                  <Accordion.Item eventKey="2">
+                    <Accordion.Header>Benefits to the customer</Accordion.Header>
+                    <Accordion.Body>
+                      {<div dangerouslySetInnerHTML={{ __html: casestudy?.benefits_to_the_customer }} />}
+                    </Accordion.Body>
+                  </Accordion.Item>
+                  <Accordion.Item eventKey="3">
+                    <Accordion.Header>Technology Platform</Accordion.Header>
+                    <Accordion.Body>
+                      <ul>
+                        {casestudy?.technology_platform?.map((item, index) => (
+                          <li key={index}>{item}</li>
+                        ))}
+                      </ul>
+                    </Accordion.Body>
+                  </Accordion.Item>
+                </Accordion>
+
+              </Col>
+
+            </Row>
+            <Row>
               <Col xs={12} className="mt-5">
                 <h1 className="inner-page-title mb-2 text-center">{homeData?.portfoliohomepage?.title}</h1>
                 <p className="text-center">{homeData?.portfoliohomepage?.long_desc}</p>
@@ -121,17 +121,18 @@ const Casestudy = ({casestudy, menucasestudy, seometadata, homeData}) => {
                 <BannerCarousal page="projectsnew" projects={homeData?.projects} />
               </Col>
             </Row>
-      </Container>
-      </div>
-    </main>
+          </Container>
+          
+        </div>
+      </main>
     </>
   )
 }
 
 export default React.memo(Casestudy);
 
-export async function getServerSideProps({ query  }) {
-  const { id } = query ;
+export async function getServerSideProps({ query }) {
+  const { id } = query;
 
   const response = await HomeService.individualProjectPage(id);
   const casestudy = response.data?.casestudy || [];

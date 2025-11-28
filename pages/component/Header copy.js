@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { JSX } from "react";
 import { useEffect, useRef } from "react";
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -42,9 +42,8 @@ const Header = ({ homeData }) => {
   
   
 
-  const [showService, setServiceShow] = useState(false);
-  const [showIndustry, setIndustryShow] = useState(false);
-  const [open, setOpen] = useState(false);
+
+
 
   return (
     <>
@@ -98,14 +97,7 @@ const Header = ({ homeData }) => {
                   // Special dropdown for Industries
                   if (item.slug === "industries") {
                     return (
-                      <NavDropdown 
-                        title="Industries" 
-                        id="navbarScrollingDropdown" 
-                        key={index}
-                        show={showIndustry}
-                        onMouseEnter={() => setIndustryShow(true)}
-                        onMouseLeave={() => setIndustryShow(false)}
-                      >
+                      <NavDropdown title="Industries" id="navbarScrollingDropdown" key={index}>
                         {homeData?.industries?.children?.map((child, i) => (
                           <NavDropdown.Item href={`/industries/${child.slug}`} key={i}>
                             {child.name}
@@ -117,50 +109,14 @@ const Header = ({ homeData }) => {
 
                   // Special dropdown for Services
                   if (item.slug === "services") {
-                    
                     return (
-                      <NavDropdown
-                          title="Services"
-                          id="services-menu"
-                          show={showService}
-                          onMouseEnter={() => setServiceShow(true)}
-                          onMouseLeave={() => setServiceShow(false)}
-                        >
-
-                        {homeData?.services?.children?.map((child, i) => {
-
-                          const shouldShowSubmenu = child.slug.toLowerCase() === "application-solutioning";
-
-                          return shouldShowSubmenu ? (
-                            // Show submenu ONLY for "Application Solutioning"
-                            <NavDropdown
-                              title={child.name}
-                              id={`child-${child.slug}`}
-                              drop="end"
-                              show={open}
-                              onMouseEnter={() => setOpen(true)}
-                              onMouseLeave={() => setOpen(false)}
-                              className="nested-dropdown"
-                            >
-                              {child.children?.map((sub, j) => (
-                                <NavDropdown.Item href={`/services/${sub.slug}`} key={j}>
-                                  {sub.name}
-                                </NavDropdown.Item>
-                              ))}
-                            </NavDropdown>
-                          ) : (
-                            // For all OTHER menus, show as normal link (NO submenu)
-                            <NavDropdown.Item
-                              key={i}
-                              href={`/services/${child.slug}`}
-                            >
-                              {child.name}
-                            </NavDropdown.Item>
-                          );
-                        })}
-
+                      <NavDropdown title="Services" id="navbarScrollingDropdown" key={index}>
+                        {homeData?.services?.children?.map((child, i) => (
+                          <NavDropdown.Item href={`/services/${child.slug}`} key={i}>
+                            {child.name}
+                          </NavDropdown.Item>
+                        ))}
                       </NavDropdown>
-
                     );
                   }
 
@@ -238,7 +194,7 @@ const Header = ({ homeData }) => {
           className="img-fluid"
           onClick={() => {
             window.open(
-              "https://wa.me/9433068494?text=BEAS%20CONSULTANCY%20%26%20SERVICES%20PVT.%20LTD.",
+              "https://wa.me/9433068494?text=BEAS%20CONSULTANCY%20PT%20LTD.",
               "_blank"
             );
           }}

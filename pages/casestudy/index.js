@@ -20,15 +20,15 @@ const Casestudy = ({casestudy, menucasestudy, seometadata, homeData}) => {
   const [showModal, setShowModal] = useState(false);
   const [show, setShow] = useState(false);
   
-  useEffect(() => {
-    // Show modal after 10 seconds (10000 ms)
-    const timer = setTimeout(() => {
-      setShowModal(true);
-      setShow(true);
-    }, 10000);
+  // useEffect(() => {
+  //   // Show modal after 10 seconds (10000 ms)
+  //   const timer = setTimeout(() => {
+  //     setShowModal(true);
+  //     setShow(true);
+  //   }, 10000);
 
-    return () => clearTimeout(timer); // cleanup on unmount
-  }, []);
+  //   return () => clearTimeout(timer); // cleanup on unmount
+  // }, []);
 
   const metaTitle = seometadata?.name
   ? seometadata?.title

@@ -24,16 +24,16 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
   const [showModal, setShowModal] = useState(false);
   const [show, setShow] = useState(false);
   
-  useEffect(() => {
-    // Show modal after 10 seconds (10000 ms)
-    const timer = setTimeout(() => {
-      setShowModal(true);
-      setShow(true);
-      console.log("call",showModal);
-    }, 10000);
+  // useEffect(() => {
+  //   // Show modal after 10 seconds (10000 ms)
+  //   const timer = setTimeout(() => {
+  //     setShowModal(true);
+  //     setShow(true);
+  //     console.log("call",showModal);
+  //   }, 10000);
 
-    return () => clearTimeout(timer); // cleanup on unmount
-  }, []);
+  //   return () => clearTimeout(timer); // cleanup on unmount
+  // }, []);
 
   // find current index
   const currentIndex = projects.findIndex((p) => p.slug === currentSlug);

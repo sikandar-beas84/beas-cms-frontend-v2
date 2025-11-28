@@ -14,10 +14,10 @@ const AboutUs = ({aboutus, commonaboutus, seometadata}) => {
     }
 
     const descriptionText = aboutus?.description
-    ? aboutus?.description.split(" ").slice(0, 133).join(" ") + ""
+    ? aboutus?.description.split(" ").slice(0, 139).join(" ") + ""
     : "";
     const descriptionTextTwo = aboutus?.description
-    ? aboutus?.description.split(" ").slice(133, 400).join(" ") + ""
+    ? aboutus?.description.split(" ").slice(139, 400).join(" ") + ""
     : "";
     const [safeHTML, setHtml] = useState('');
 

@@ -18,8 +18,6 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
     return <div>Loading...</div>;
   }
 
-  
-
   const metaTitle = seometadata?.title
     ? seometadata?.title
     : `Services`;
@@ -57,8 +55,8 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
         />
         
         <div className="py-5">
-          {/* {console.log('enrichedChildren', enrichedChildren)} */}
-          { enrichedChildren?.map((item1, index1) => item1?.menu_contents?.contents.length> 0 &&(
+          
+          { enrichedChildren?.map((item1, index1) => (
             <React.Fragment key={index1}>
               <Container>
               <Row key={index1}>
@@ -92,7 +90,7 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
                               ? casestudyData.long_desc.split(",")
                               : [];
 
-                            return description ? (
+                            return (
                               <div className="row no-gutters" key={index}>
                                 {isEven ? (
                                   <>
@@ -174,7 +172,7 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
                                   </>
                                 )}
                               </div>
-                            ) : null;
+                            );
                           })}
                         </div>
 
@@ -183,13 +181,16 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
                     </Col>
                   </Row>
                 </Container>
+                { item1?.menu_contents?.contents?.length > 0 && (
+                  <>
                 <div className="shp1">
                   <img src="../assets/images/ser-bg.png" />
                 </div>
                 <div className="shp2">
                   <img src="../assets/images/ser-bg2.png" />
                 </div>
-
+                </>
+                )}
               </section>
             </React.Fragment>
           ))}
@@ -210,8 +211,29 @@ export async function getServerSideProps({ params }) {
   const response = await HomeService.menuServicePage();
   const services = response?.data?.services?.children || [];
 
-  // 2. Find service by slug
-  const service = services.find((item) => item.slug.toString() === slug);
+    let service = null;
+
+    // If slug belongs to application-solutioning sub-services
+    if (
+      slug === "application-development" ||
+      slug === "application-maintenance" ||
+      slug === "ui-ux" ||
+      slug === "professional-services"
+    ) {
+      // find the APPLICATION SOLUTIONING parent
+      const service_ = services.find(
+        (item) => item.slug.toString() === "application-solutioning"
+      );
+
+      // find the sub-child
+      service = service_?.children?.find(
+        (item) => item.slug.toString() === slug
+      );
+    } else {
+      // normal find
+      service = services.find((item) => item.slug.toString() === slug);
+    }
+
 
   if (!service) {
     return { notFound: true };

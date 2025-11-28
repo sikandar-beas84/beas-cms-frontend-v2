@@ -23,47 +23,19 @@ function Home({homeData, seometadata}) {
       return <div>Loading...</div>;
     }
 
-    // Step 1: Expand application-solutioning
-    let finalServices = homeData?.services?.children?.flatMap(item => {
-      if (item.slug === "application-solutioning") {
-        return item.children?.map(child => ({
-          ...child,
-          menu_contents: child.menu_contents
-        }));
-      }
-
-      return [{
-        ...item,
-        menu_contents: item.menu_contents
-      }];
-    });
-
-    // Step 2: Move specific items to the bottom
-    const bottomSlugs = ["ui-ux", "professional-services"];
-
-    finalServices = [...finalServices].sort((a, b) => {
-      const aLast = bottomSlugs.includes(a?.slug);
-      const bLast = bottomSlugs.includes(b?.slug);
-
-      if (aLast && !bLast) return 1;   // a goes down
-      if (!aLast && bLast) return -1;  // b goes down
-      return 0;
-    });
-
-//////////////////////////////////////////////
-
     const [showModal, setShowModal] = useState(false);
     const [show, setShow] = useState(false);
     
-    // useEffect(() => {
-    //   // Show modal after 10 seconds (10000 ms)
-    //   const timer = setTimeout(() => {
-    //     setShowModal(true);
-    //     setShow(true);
-    //   }, 10000);
+    useEffect(() => {
+      // Show modal after 10 seconds (10000 ms)
+      const timer = setTimeout(() => {
+        setShowModal(true);
+        setShow(true);
+        console.log("call",showModal);
+      }, 10000);
 
-    //   return () => clearTimeout(timer); // cleanup on unmount
-    // }, []);
+      return () => clearTimeout(timer); // cleanup on unmount
+    }, []);
 
 
   //const aboutustext = homeData?.aboutus?.description;
@@ -126,12 +98,12 @@ const metaAuthor = seometadata?.author
                   <div className="srvc-txt">
                       <div className="srvc-txt-top">
                         <div className="row no-gutters">
-                        { finalServices?.map((item, index)=>{
+                        { homeData?.services?.children?.map((item, index)=>{
                           const descriptionText = item?.description
                           
                           return (
                             
-                            <div className="col-lg-3 col-md-6 col-sm-6 col-12">
+                            <div className="col-lg-4 col-md-6 col-sm-6 col-12">
                               <Link href={`/services/${item?.slug}`}>
                               <div className="srvc-box fst-srvc-bx sevc-1 hverx">
                                   <Image 
@@ -144,7 +116,7 @@ const metaAuthor = seometadata?.author
                                     />
                                   <div className="srvc-bxtx">
                                     <h3>{item?.name}</h3>
-                                    <p className='service-hm-desc'>{descriptionText}</p>
+                                    <p className='blog-hm-desc'>{descriptionText}</p>
                                     <p>Read more...</p>
                                   </div>
                                   

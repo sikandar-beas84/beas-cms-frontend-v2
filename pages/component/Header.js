@@ -1,4 +1,4 @@
-import React, { JSX } from "react";
+import React, { useState } from "react";
 import { useEffect, useRef } from "react";
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -42,8 +42,9 @@ const Header = ({ homeData }) => {
   
   
 
-
-
+  const [showService, setServiceShow] = useState(false);
+  const [showIndustry, setIndustryShow] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <>
@@ -97,7 +98,14 @@ const Header = ({ homeData }) => {
                   // Special dropdown for Industries
                   if (item.slug === "industries") {
                     return (
-                      <NavDropdown title="Industries" id="navbarScrollingDropdown" key={index}>
+                      <NavDropdown 
+                        title="Industries" 
+                        id="navbarScrollingDropdown" 
+                        key={index}
+                        show={showIndustry}
+                        onMouseEnter={() => setIndustryShow(true)}
+                        onMouseLeave={() => setIndustryShow(false)}
+                      >
                         {homeData?.industries?.children?.map((child, i) => (
                           <NavDropdown.Item href={`/industries/${child.slug}`} key={i}>
                             {child.name}
@@ -109,8 +117,15 @@ const Header = ({ homeData }) => {
 
                   // Special dropdown for Services
                   if (item.slug === "services") {
+                    
                     return (
-                      <NavDropdown title="Services" id="services-menu">
+                      <NavDropdown
+                          title="Services"
+                          id="services-menu"
+                          show={showService}
+                          onMouseEnter={() => setServiceShow(true)}
+                          onMouseLeave={() => setServiceShow(false)}
+                        >
 
                         {homeData?.services?.children?.map((child, i) => {
 
@@ -119,10 +134,12 @@ const Header = ({ homeData }) => {
                           return shouldShowSubmenu ? (
                             // Show submenu ONLY for "Application Solutioning"
                             <NavDropdown
-                              key={i}
                               title={child.name}
-                              id={`child-${i}`}
+                              id={`child-${child.slug}`}
                               drop="end"
+                              show={open}
+                              onMouseEnter={() => setOpen(true)}
+                              onMouseLeave={() => setOpen(false)}
                               className="nested-dropdown"
                             >
                               {child.children?.map((sub, j) => (

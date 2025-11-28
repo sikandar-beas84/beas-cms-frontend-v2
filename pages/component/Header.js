@@ -17,30 +17,30 @@ const Header = ({ homeData }) => {
   const router = useRouter();
   const casestudy = Array.isArray(homeData?.projects) ? homeData.projects?.[0] : [];
   const emblemRef = useRef(null);
-
+ 
   useEffect(() => {
     if (!emblemRef.current) return;
-  
+
     const element = emblemRef.current;
     const text = element.innerText;
     element.innerHTML = "";
-  
+
     for (let i = 0; i < text.length; i++) {
       const letter = text[i];
       const span = document.createElement("span");
       span.textContent = letter;
-  
+
       const r = (360 / text.length) * i;
       const x = (Math.PI / text.length).toFixed(0) * i;
       const y = (Math.PI / text.length).toFixed(0) * i;
-  
+
       span.style.transform = `rotate(${r}deg) translate3d(${x}px, ${y}px, 0)`;
-  
+
       element.appendChild(span);
     }
   }, []);
-  
-  
+
+
 
   const [showService, setServiceShow] = useState(false);
   const [showIndustry, setIndustryShow] = useState(false);
@@ -98,9 +98,9 @@ const Header = ({ homeData }) => {
                   // Special dropdown for Industries
                   if (item.slug === "industries") {
                     return (
-                      <NavDropdown 
-                        title="Industries" 
-                        id="navbarScrollingDropdown" 
+                      <NavDropdown
+                        title="Industries"
+                        id="navbarScrollingDropdown"
                         key={index}
                         show={showIndustry}
                         onMouseEnter={() => setIndustryShow(true)}
@@ -117,15 +117,15 @@ const Header = ({ homeData }) => {
 
                   // Special dropdown for Services
                   if (item.slug === "services") {
-                    
+
                     return (
                       <NavDropdown
-                          title="Services"
-                          id="services-menu"
-                          show={showService}
-                          onMouseEnter={() => setServiceShow(true)}
-                          onMouseLeave={() => setServiceShow(false)}
-                        >
+                        title="Services"
+                        id="services-menu"
+                        show={showService}
+                        onMouseEnter={() => setServiceShow(true)}
+                        onMouseLeave={() => setServiceShow(false)}
+                      >
 
                         {homeData?.services?.children?.map((child, i) => {
 
@@ -187,7 +187,7 @@ const Header = ({ homeData }) => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-
+     
       {/* <Link href="#" className="">
         <Image
           src="/assets/images/whatsapp.png"
@@ -228,9 +228,9 @@ const Header = ({ homeData }) => {
 
 
 
-     <div className="wpp-iicon">
-      <div className="emblem" ref={emblemRef}>Connect With Us*</div>
-      <Image
+      <div className="wpp-iicon">
+        <div className="emblem" ref={emblemRef}>Connect With Us*</div>
+        <Image
           src="/assets/images/whatsapp.png"
           alt="whatsApp"
           width={40}
@@ -244,7 +244,7 @@ const Header = ({ homeData }) => {
           }}
         />
       </div>
-    
+
 
 
 

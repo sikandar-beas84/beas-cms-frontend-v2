@@ -77,7 +77,7 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
                     <Col xs={12}>
                       <div className="imageTextBlock">
                         <div className="ser_rea services_sec">
-                          <div className="row no-gutters">
+                          <div className="row no-gutters center-cols py-5">
                             {item1?.menu_contents?.contents?.map((content, index) => {
                               const casestudyData = content?.casestudy?.data?.casestudy;
 
@@ -103,7 +103,7 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
                                       />
                                     </div>
 
-                                    <h3>{casestudyData?.title}</h3>
+                                    <h3 className="port-title-case-study">{casestudyData?.title}</h3>
 
                                     <div className="blog-hm-desc p-3">{short_desc}</div>
 

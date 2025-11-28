@@ -10,6 +10,33 @@ const Footer = ({ homeData }) => {
 
   const casestudy = Array.isArray(homeData?.projects) ? homeData.projects?.[0] : [];
   
+  // Step 1: Expand application-solutioning
+  let finalServices = homeData?.services?.children?.flatMap(item => {
+    if (item.slug === "application-solutioning") {
+      return item.children?.map(child => ({
+        slug: child.slug,
+        name: child.name
+      }));
+    }
+
+    return [{
+      slug: item.slug,
+      name: item.name
+    }];
+  });
+
+  // Step 2: Move specific items to the bottom
+  const bottomSlugs = ["ui-ux", "professional-services"];
+
+  finalServices = [...finalServices].sort((a, b) => {
+    const aLast = bottomSlugs.includes(a?.slug);
+    const bLast = bottomSlugs.includes(b?.slug);
+
+    if (aLast && !bLast) return 1;   // a goes down
+    if (!aLast && bLast) return -1;  // b goes down
+    return 0;
+  });
+  //////////////////////////////////////////
 
   return (
     <>
@@ -63,23 +90,7 @@ const Footer = ({ homeData }) => {
                 <Col xs={12} md={4}>
                   <div className='footer-txt'>Our Services</div>
                   <ul className="footer-list">
-                    {homeData?.services?.children
-                      ?.flatMap(item => {
-                        if (item.slug === "application-solutioning") {
-                          // return ONLY its children
-                          return item.children?.map(child => ({
-                            slug: child.slug,
-                            name: child.name
-                          }));
-                        }
-
-                        // return normal item
-                        return [{
-                          slug: item.slug,
-                          name: item.name
-                        }];
-                      })
-                      .map((item, index) => (
+                    {finalServices.map((item, index) => (
                         <li className="footer-li" key={index}>
                           <Nav.Link href={`/services/${item.slug}`}>{item.name}</Nav.Link>
                         </li>

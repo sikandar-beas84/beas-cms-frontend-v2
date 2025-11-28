@@ -406,7 +406,7 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
                       <div className="guidtext">
                         <h5 className='blog-hm-title'>{titleText}</h5>
                         <div
-                          className="mb-0 blog-hm-desc"
+                          className="mb-0 blog-hm-desc color-black"
                           dangerouslySetInnerHTML={{ __html: short_desc }}
                         ></div>
                         <div class="d-flex justify-content-center mt-35"><div class="post-job-btn">Read More</div></div>

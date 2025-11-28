@@ -53,33 +53,104 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
           pageslug="Service"
           pageBanner={`assets/img/menu-content/${service?.menu_contents?.banner}`}
         />
-        
+
         <div className="py-5">
-          
-          { enrichedChildren?.map((item1, index1) => (
+
+          {enrichedChildren?.map((item1, index1) => (
             <React.Fragment key={index1}>
               <Container>
-              <Row key={index1}>
+                <Row key={index1}>
                   <Col>
                     {/* <p className='title mb-3'>{service?.name}</p> */}
                     <div className="about_texts">
-                    
+
                       {/* <h1>{service?.name}</h1> */}
                       <div className='ServicesPara mb-4' dangerouslySetInnerHTML={{ __html: item1?.description }} />
                     </div>
                   </Col>
                 </Row>
               </Container>
-              <section className="section-abuts section-services">
+              <section className="section-services">
                 <Container>
-                
+
+                  <Row>
+                    <Col xs={12}>
+                      <div className="imageTextBlock">
+                        <div className="ser_rea services_sec">
+                          <div className="row no-gutters">
+                            {item1?.menu_contents?.contents?.map((content, index) => {
+                              const casestudyData = content?.casestudy?.data?.casestudy;
+
+                              const isEven = index % 2 !== 0;
+                              const slug = casestudyData?.slug;
+                              const short_desc = casestudyData?.short_desc;
+
+                              const longdesc = casestudyData?.long_desc
+                                ? casestudyData.long_desc.split(",")
+                                : [];
+
+                              return (
+                                <Col xs={12} md={4} key={index}>
+                                  <div className="port-box">
+                                    <div className="port-img port-img2">
+                                      <Image
+                                        width={600}
+                                        height={150}
+                                        src={`${env.BACKEND_BASE_URL}${casestudyData?.image}`}
+                                        alt="image"
+                                        className="img-fluid"
+                                        loading="lazy"
+                                      />
+                                    </div>
+
+                                    <h3>{casestudyData?.title}</h3>
+
+                                    <div className="blog-hm-desc p-3">{short_desc}</div>
+
+                                    {/*
+                                    <div className="port-tags">
+                                      {longdesc.map((item, i) => (
+                                        <h4 key={i}>{item}</h4>
+                                      ))}
+                                    </div>
+                                    */}
+
+                                    <div className="services-btn-area">
+                                      {slug && (
+                                        <Link
+                                          href={{
+                                            pathname: "/casestudy",
+                                            query: { id: slug },
+                                          }}
+                                          className="services-btn proc-btn thar-three4"
+                                        >
+                                          Read Case Study
+                                        </Link>
+                                      )}
+                                    </div>
+                                  </div>
+                                </Col>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </div>
+                    </Col>
+
+                  </Row>
+                </Container>
+
+              </section>
+              {/* <section className="section-services">
+                <Container>
+
                   <Row>
                     <Col xs={12}>
                       <div className="imageTextBlock">
                         <div className="ser_rea services_sec">
                           {item1?.menu_contents?.contents?.map((content, index) => {
                             const casestudyData = content?.casestudy?.data?.casestudy;
-                            
+
                             const isEven = index % 2 !== 0;
                             const slug = casestudyData?.slug;
                             const description = content?.extra_description;
@@ -181,17 +252,126 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
                     </Col>
                   </Row>
                 </Container>
-                { item1?.menu_contents?.contents?.length > 0 && (
-                  <>
-                <div className="shp1">
-                  <img src="../assets/images/ser-bg.png" />
-                </div>
-                <div className="shp2">
-                  <img src="../assets/images/ser-bg2.png" />
-                </div>
-                </>
-                )}
-              </section>
+
+              </section> */}
+
+
+              {/* <section className="section-services">
+                <Container>
+
+                  <Row>
+                    <Col xs={12}>
+                      <div className="imageTextBlock">
+                        <div className="ser_rea services_sec">
+                          {item1?.menu_contents?.contents?.map((content, index) => {
+                            const casestudyData = content?.casestudy?.data?.casestudy;
+
+                            const isEven = index % 2 !== 0;
+                            const slug = casestudyData?.slug;
+                            const description = content?.extra_description;
+
+                            const short_desc = casestudyData?.short_desc;
+
+                            const longdesc = casestudyData?.long_desc
+                              ? casestudyData.long_desc.split(",")
+                              : [];
+
+                            return (
+                              <div className="row no-gutters" key={index}>
+                                {isEven ? (
+                                  <>
+                                    <div className="col-lg-6 col-12">
+                                      <div className="services-text">
+                                        <h2>{casestudyData?.title}</h2>
+                                        <p>{short_desc}</p>
+                                        <div className="port-tags services-tags">
+                                          {longdesc.map((item, i) => (
+                                            <h4 key={i}>{item}</h4>
+                                          ))}
+                                        </div>
+
+                                        {slug && (
+                                          <Link
+                                            href={{
+                                              pathname: "/casestudy",
+                                              query: { id: slug },
+                                            }}
+                                            className="services-btn proc-btn thar-three4"
+                                          >
+                                            Read Case Study
+                                          </Link>
+                                        )}
+                                      </div>
+                                    </div>
+
+                                    <div className="col-lg-6 col-12">
+                                      <div className="mediaimg">
+                                        <Image
+                                          width={600}
+                                          height={150}
+                                          src={`${env.BACKEND_BASE_URL}${casestudyData?.image}`}
+                                          alt="image"
+                                          className="img-fluid"
+                                          loading="lazy"
+                                        />
+                                      </div>
+                                    </div>
+                                  </>
+                                ) : (
+                                  <>
+                                    <div className="col-lg-6 col-12">
+                                      <div className="mediaimg">
+                                        <Image
+                                          width={600}
+                                          height={150}
+                                          src={`${env.BACKEND_BASE_URL}${casestudyData?.image}`}
+                                          alt="image"
+                                          className="img-fluid"
+                                          loading="lazy"
+                                        />
+                                      </div>
+                                    </div>
+
+                                    <div className="col-lg-6 col-12">
+                                      <div className="services-text">
+                                        <h2>{casestudyData?.title}</h2>
+                                        <p>{short_desc}</p>
+                                        <div className="port-tags services-tags">
+                                          {longdesc.map((item, i) => (
+                                            <h4 key={i}>{item}</h4>
+                                          ))}
+                                        </div>
+
+                                        {slug && (
+                                          <Link
+                                            href={{
+                                              pathname: "/casestudy",
+                                              query: { id: slug },
+                                            }}
+                                            className="services-btn proc-btn thar-three4"
+                                          >
+                                            Read Case Study
+                                          </Link>
+                                        )}
+                                      </div>
+                                    </div>
+                                  </>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+
+
+                      </div>
+                    </Col>
+                  </Row>
+                </Container>
+
+              </section> */}
+
+
+
             </React.Fragment>
           ))}
         </div>
@@ -211,28 +391,28 @@ export async function getServerSideProps({ params }) {
   const response = await HomeService.menuServicePage();
   const services = response?.data?.services?.children || [];
 
-    let service = null;
+  let service = null;
 
-    // If slug belongs to application-solutioning sub-services
-    if (
-      slug === "application-development" ||
-      slug === "application-maintenance" ||
-      slug === "ui-ux" ||
-      slug === "professional-services"
-    ) {
-      // find the APPLICATION SOLUTIONING parent
-      const service_ = services.find(
-        (item) => item.slug.toString() === "application-solutioning"
-      );
+  // If slug belongs to application-solutioning sub-services
+  if (
+    slug === "application-development" ||
+    slug === "application-maintenance" ||
+    slug === "ui-ux" ||
+    slug === "professional-services"
+  ) {
+    // find the APPLICATION SOLUTIONING parent
+    const service_ = services.find(
+      (item) => item.slug.toString() === "application-solutioning"
+    );
 
-      // find the sub-child
-      service = service_?.children?.find(
-        (item) => item.slug.toString() === slug
-      );
-    } else {
-      // normal find
-      service = services.find((item) => item.slug.toString() === slug);
-    }
+    // find the sub-child
+    service = service_?.children?.find(
+      (item) => item.slug.toString() === slug
+    );
+  } else {
+    // normal find
+    service = services.find((item) => item.slug.toString() === slug);
+  }
 
 
   if (!service) {

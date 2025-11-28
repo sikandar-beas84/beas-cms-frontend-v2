@@ -409,7 +409,7 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
                           className="mb-0 blog-hm-desc color-black"
                           dangerouslySetInnerHTML={{ __html: short_desc }}
                         ></div>
-                        <div class="d-flex justify-content-center mt-35"><div class="post-job-btn">Read More</div></div>
+                        <div className="d-flex justify-content-center mt-35"><div className="post-job-btn">Read More</div></div>
                       
                       </div>
                   </div>

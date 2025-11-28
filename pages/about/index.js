@@ -134,7 +134,7 @@ const AboutUs = ({aboutus, commonaboutus, seometadata}) => {
                                     if (item.title === "Clients" || item.title === "Experts" || item.title === "Projects" || item.title === "Years Experience") {
                                     return(
                                         <li className="meter-box">
-                                            <span class="timer count-number">{item?.short_desc}</span>
+                                            <span className="timer count-number">{item?.short_desc}</span>
                                             <p>{item?.long_desc}</p>
                                         </li>
                                     )

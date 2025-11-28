@@ -89,7 +89,7 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
                                 ? casestudyData.long_desc.split(",")
                                 : [];
 
-                              return (
+                              return slug && (
                                 <Col xs={12} md={4} key={index}>
                                   <div className="port-box">
                                     <div className="port-img port-img2">

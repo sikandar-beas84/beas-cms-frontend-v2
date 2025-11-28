@@ -178,7 +178,7 @@ const metaAuthor = seometadata?.author
             </Col>
           </Row>
         </Container>
-        <section class="section-abuts section-services">
+        <section className="section-abuts section-services">
           <Container className='my-3'>
             <Row>
               <Col className='ser_frmArea'>

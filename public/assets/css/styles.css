@@ -3882,3 +3882,18 @@ section.section-abuts.section-contact {
 .color-black{
   color: #000;
 }
+.why-inr .row > .col-lg-4:nth-child(1) .why-box,
+.why-inr .row > .col-lg-4:nth-child(2) .why-box,
+.why-inr .row > .col-lg-4:nth-child(3) .why-box {
+    border-bottom: 0;
+}
+
+.why-inr .row > .col-lg-4:nth-child(3) .why-box,
+.why-inr .row > .col-lg-4:nth-child(6) .why-box {
+    border-right: 1px solid #D9D9D9;
+}
+.services-btn-area{padding: 17px 27px 16px 27px;
+  display: flex;
+  justify-content: center;
+  background: #F2F2F2;
+  flex-wrap: wrap;}

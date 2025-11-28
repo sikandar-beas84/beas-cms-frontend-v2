@@ -113,7 +113,7 @@ const Blog = ({ blogs, seometadata, commonblog }) => {
                             <h5 className='blog-hm-title'>{item?.title}</h5>
                             <div className="blog-hm-desc" dangerouslySetInnerHTML={{ __html: item?.short_desc }}
                             ></div>
-                           <div class="d-flex justify-content-center mt-35"><div class="post-job-btn">Read More</div></div>
+                           <div className="d-flex justify-content-center mt-35"><div className="post-job-btn">Read More</div></div>
 
                           </div>
                         </div>

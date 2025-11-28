@@ -200,7 +200,7 @@ const metaAuthor = seometadata?.author
                         <React.Fragment key={index}>
                   <div className="serv-head stat-head why-head">
                     <h2>{item?.title}</h2>
-                    <p className="" dangerouslySetInnerHTML={{ __html: item?.description }} />
+                    {/* <p className="" dangerouslySetInnerHTML={{ __html: item?.description }} /> */}
                   </div>
                 </React.Fragment>
                   )
@@ -216,7 +216,7 @@ const metaAuthor = seometadata?.author
                               <Image width={90} height={90} src={`${env.BACKEND_BASE_URL}${item.image}`} alt="image" loading="lazy" />
                               </div>
                               <h3>{item.title}</h3>
-                              <p>{item.description}</p>
+                              {/* <p>{item.description}</p> */}
                           </div>
                         </div>
                         </React.Fragment>

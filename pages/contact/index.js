@@ -217,7 +217,7 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
                           {errors.message && (<p className='error_message'>{errors.message[0]}</p>)}
                         </div>
                       </div>
-                      <div className="col-lg-12 col-md-12 col-sm-12 col-12">
+                      <div className="col-4">
                         <div className="contact_form_btn">
 
                           <button type="submit" className='red-btn w-100 mt-3 post-job-btn' disabled={loading} >

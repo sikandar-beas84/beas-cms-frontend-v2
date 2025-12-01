@@ -10,7 +10,7 @@ import Link from "next/link";
 import SEO from "../../components/SEO";
 import { useRouter } from "next/router";
 import BannerCarousal from "../component/BannerCarousal";
-import ModalComponent from '../component/ModalComponent';
+import SlideQueryComponent from '../component/SlideQueryComponent';
 
 const MAX_VISIBLE = 10; // show 10 numbers at a time
 
@@ -28,22 +28,8 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
 
     return () => clearTimeout(timer);
   }, []);
-  const handleClose = () => {
-    setShowForm(false); 
-  };
-  const [showModal, setShowModal] = useState(false);
-  const [show, setShow] = useState(false);
 
-  // useEffect(() => {
-  //   // Show modal after 10 seconds (10000 ms)
-  //   const timer = setTimeout(() => {
-  //     setShowModal(true);
-  //     setShow(true);
-  //     console.log("call",showModal);
-  //   }, 10000);
 
-  //   return () => clearTimeout(timer); // cleanup on unmount
-  // }, []);
 
   // find current index
   const currentIndex = projects.findIndex((p) => p.slug === currentSlug);
@@ -86,7 +72,7 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
         url={metaUrl}
         author={metaAuthor}
       />
-      {showModal && <ModalComponent modalshow={show} />}
+      
       <main>
         <BreadCrumb
           pagetitle={casestudy.title}
@@ -219,18 +205,7 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
 
           </Container>
 
-          <div className={`sliding-form ${showForm ? "active" : ""}`}>
-           <button className="close-btn-submit-frm" onClick={handleClose}><span>×</span></button>
-            <h3>Interested? Feel free to connect</h3>
-            <input type="text" class="form-control" placeholder="Name" />
-            <input type="email" class="form-control" placeholder="Email" />
-            <input type="text" class="form-control" placeholder="Phone No" />
-            <textarea name="message" class="form-control" placeholder="Message" rows="5" required=""></textarea>
-            <div className="d-flex sliding-form-btn">
-            <button className="btn btn-primary">Submit</button>
-               
-            </div>
-          </div>
+          {showForm && <SlideQueryComponent modalshow={showForm} />}
 
         </div>
       </main>

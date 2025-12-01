@@ -124,7 +124,7 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
             </div>
           </Container>
 
-          <Container className="py-5">
+          <Container className="py-5 ccase-study-container">
             <Row>
               <Col xs={12}>
                 <h1 className="inner-page-title-small">{casestudy?.title}</h1>
@@ -145,7 +145,7 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
 
               <Col xs={12} lg={7}>
                 <Accordion defaultActiveKey="0" flush>
-                  <Accordion.Item eventKey="0">
+                  <Accordion.Item eventKey="0" className="blue-bg2">
                     <Accordion.Header>
                       Project Overview / Business Need
                     </Accordion.Header>
@@ -158,7 +158,7 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
                     </Accordion.Body>
                   </Accordion.Item>
 
-                  <Accordion.Item eventKey="1">
+                  <Accordion.Item eventKey="1" className="green-bg">
                     <Accordion.Header>BEAS’s Solution</Accordion.Header>
                     <Accordion.Body>
                       <div
@@ -169,10 +169,10 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
                     </Accordion.Body>
                   </Accordion.Item>
 
-                  <Accordion.Item eventKey="2">
+                  <Accordion.Item eventKey="2" className="yellow-bg">
                     <Accordion.Header>
                       {casestudy?.benefits_to_the_customer
-                        ? "Benefits to the customer"
+                        ? "Benefits To The Customer"
                         : "Sample Screen"}
                     </Accordion.Header>
                     <Accordion.Body>
@@ -194,7 +194,7 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
                       )}
                     </Accordion.Body>
                   </Accordion.Item>
-                  <Accordion.Item eventKey="3">
+                  <Accordion.Item eventKey="3" className="orange-bg">
                     <Accordion.Header>Technology Platform</Accordion.Header>
                     <Accordion.Body>
                       <ul>
@@ -220,7 +220,7 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
           </Container>
 
           <div className={`sliding-form ${showForm ? "active" : ""}`}>
-           <button className="close-btn-submit-frm" onClick={handleClose}>×</button>
+           <button className="close-btn-submit-frm" onClick={handleClose}><span>×</span></button>
             <h3>Interested? Feel free to connect</h3>
             <input type="text" class="form-control" placeholder="Name" />
             <input type="email" class="form-control" placeholder="Email" />

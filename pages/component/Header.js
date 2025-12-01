@@ -17,7 +17,7 @@ const Header = ({ homeData }) => {
   const router = useRouter();
   const casestudy = Array.isArray(homeData?.projects) ? homeData.projects?.[0] : [];
   const emblemRef = useRef(null);
- 
+
   useEffect(() => {
     if (!emblemRef.current) return;
 
@@ -182,12 +182,13 @@ const Header = ({ homeData }) => {
                 })}
             </Nav>
             <Form className="d-flex">
-              <Button variant="outline-primary" onClick={() => router.push('/contact')}>Request A Quote</Button>
+              
+              <Button variant="outline-primary"  onClick={() => router.push('/contact')}>Request A Quote</Button>
             </Form>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-     
+
       {/* <Link href="#" className="">
         <Image
           src="/assets/images/whatsapp.png"

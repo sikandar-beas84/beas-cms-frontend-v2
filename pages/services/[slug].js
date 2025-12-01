@@ -77,7 +77,7 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
                     <Col xs={12}>
                       <div className="imageTextBlock">
                         <div className="ser_rea services_sec">
-                          <div className="row no-gutters center-cols py-5">
+                          <div className="row no-gutters center-cols py-3">
                             {item1?.menu_contents?.contents?.map((content, index) => {
                               const casestudyData = content?.casestudy?.data?.casestudy;
 
@@ -91,7 +91,7 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
 
                               return slug && (
                                 <Col xs={12} md={4} key={index}>
-                                  <div className="port-box">
+                                  <div className="port-box mb-4">
                                     <div className="port-img port-img2">
                                       <Image
                                         width={600}
@@ -105,7 +105,7 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
 
                                     <h3 className="port-title-case-study">{casestudyData?.title}</h3>
 
-                                    <div className="blog-hm-desc p-3">{short_desc}</div>
+                                    {/* <div className="blog-hm-desc p-3">{short_desc}</div> */}
 
                                     {/*
                                     <div className="port-tags">

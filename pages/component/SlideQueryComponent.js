@@ -150,7 +150,7 @@ function SlideQueryComponent({modalshow=false}) {
                             value={formData.phone}
                             onChange={handleChange}
                             className="form-control"
-                            placeholder="Mobile Number"
+                            placeholder="Mobile No"
                             required
                         />
                     </div>
@@ -169,7 +169,7 @@ function SlideQueryComponent({modalshow=false}) {
                         name="message"
                         value={formData.message}
                         onChange={handleChange}
-                        className='form-control'
+                        className='form-control h-50'
                         placeholder='Message'
                         required
                     />

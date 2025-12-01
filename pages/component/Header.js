@@ -182,8 +182,8 @@ const Header = ({ homeData }) => {
                 })}
             </Nav>
             <Form className="d-flex">
-              
-              <Button variant="outline-primary"  onClick={() => router.push('/contact')}>Request A Quote</Button>
+
+              <Button variant="outline-primary" onClick={() => router.push('/contact')}>Request A Quote</Button>
             </Form>
           </Navbar.Collapse>
         </Container>
@@ -229,7 +229,7 @@ const Header = ({ homeData }) => {
 
 
 
-<div className="wpp-iicon">
+      {/* <div className="wpp-iicon">
   <div className="emblem" ref={emblemRef}>Connect With Us*</div>
 
   <Image
@@ -245,7 +245,42 @@ const Header = ({ homeData }) => {
       );
     }}
   />
-</div>
+</div> */}
+
+
+      <div class="wpp-iicon">
+        <div class="emblem">
+          <svg viewBox="0 0 200 200">
+            <defs>
+              <path
+                id="circlePath"
+                d="
+                  M 100, 100
+                  m -64, 0
+                  a 64,64 0 1,1 128,0
+                  a 64,64 0 1,1 -128,0
+                "
+              />
+            </defs>
+
+            <text font-size="18" fill="#000" font-weight="bold" textLength="402">
+              <textPath href="#circlePath">
+                CONNECT WITH US *  CONNECT WITH US  *
+              </textPath>
+            </text>
+          </svg>
+        </div>
+
+        <Image
+          src="/assets/images/whatsapp.png"
+          alt="WhatsApp"
+          width={40}
+          height={40}
+          className="wp-icon"
+        />
+      </div>
+
+
 
 
 

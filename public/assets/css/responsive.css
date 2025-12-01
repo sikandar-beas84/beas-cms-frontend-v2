@@ -50,7 +50,7 @@
 
 /* 1921 */
 @media (max-width: 1920.98px) {
-  .emblem {
+  /* .emblem {
     width: 8vh;
     height: 8vh;
   }
@@ -59,7 +59,7 @@
     position: relative;
     top: 57.9vh;
     left: 36px;
-}
+} */
 
   .navbar-light .nav-link {
     padding: 7px 25px 7px 0px !important;
@@ -110,16 +110,16 @@
   }
 }
 @media (max-width: 1500.98px) {
-  .wpp-iicon img {
+  /* .wpp-iicon img {
     position: relative;
     top: 58vh;
     left: 19px;
-}
+} */
 }
 
 /* 1400-1920 */
 @media (max-width: 1399.98px) {
-  .emblem {
+  /* .emblem {
     width: 15vh;
     height: 15vh;
 }
@@ -127,7 +127,7 @@
   position: relative;
   top: 59vh;
   left: 30px;
-}
+} */
   .navbar-light .nav-link {
     padding: 7px 15px 7px 0px !important;
   }
@@ -374,11 +374,11 @@
 
 /* 1200-1399 */
 @media (max-width: 1199.98px) {
-  .wpp-iicon img {
+  /* .wpp-iicon img {
     position: relative;
     top: 59vh;
     left: 25px;
-  }
+  } */
 
   .navbar-brand img {
     max-width: 163px;

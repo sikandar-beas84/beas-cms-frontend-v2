@@ -229,22 +229,23 @@ const Header = ({ homeData }) => {
 
 
 
-      <div className="wpp-iicon">
-        <div className="emblem" ref={emblemRef}>Connect With Us*</div>
-        <Image
-          src="/assets/images/whatsapp.png"
-          alt="whatsApp"
-          width={40}
-          height={40}
-          className="img-fluid"
-          onClick={() => {
-            window.open(
-              "https://wa.me/9433068494?text=BEAS%20CONSULTANCY%20%26%20SERVICES%20PVT.%20LTD.",
-              "_blank"
-            );
-          }}
-        />
-      </div>
+<div className="wpp-iicon">
+  <div className="emblem" ref={emblemRef}>Connect With Us*</div>
+
+  <Image
+    src="/assets/images/whatsapp.png"
+    alt="WhatsApp"
+    width={40}
+    height={40}
+    className="img-fluid"
+    onClick={() => {
+      window.open(
+        "https://wa.me/9433068494/?text=Hi%20BEAS%20CONSULTANCY%20AND%20SERVICES%20PVT.%20LTD.",
+        "_blank"
+      );
+    }}
+  />
+</div>
 
 
 

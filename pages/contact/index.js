@@ -274,7 +274,7 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
         </section>
 
 
-        {/* <section className="section-abuts section-contact">
+        <section className="section-abuts section-contact">
           <div className="container">
             <div className="row">
               <div className="col-lg-12">
@@ -291,36 +291,41 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
                           </React.Fragment>
                         )
                       )}
-                      </div>
+                    </div>
 
-                      
-                      {(() => {
-                        const firstAccordionIndex = faqs?.findIndex(
-                          (item) => item.type !== "faq-heading"
-                        );
 
-                        return (
-                          <Accordion
-                            defaultActiveKey={firstAccordionIndex.toString()}
-                            flush
-                          >
-                            {faqs?.map((item, index) =>
-                              item.type !== "faq-heading" ? (
+                    {(() => {
+                      let counter = 0; // manual numbering only for FAQ items
+
+                      const firstAccordionIndex = faqs?.findIndex(
+                        (item) => item.type !== "faq-heading"
+                      );
+
+                      return (
+                        <Accordion defaultActiveKey={firstAccordionIndex.toString()} flush>
+                          {faqs?.map((item, index) => {
+                            if (item.type !== "faq-heading") {
+                              counter++; // increment only for FAQ items
+
+                              return (
                                 <Accordion.Item eventKey={index.toString()} key={index}>
                                   <Accordion.Header>
-                                    {`${index + 1}. ${item.title}`}
+                                    {`${counter}. ${item.title}`}
                                   </Accordion.Header>
                                   <Accordion.Body>
                                     <p>{item.short_desc}</p>
                                   </Accordion.Body>
                                 </Accordion.Item>
-                              ) : null
-                            )}
-                          </Accordion>
-                        );
-                      })()}
+                              );
+                            }
+                            return null;
+                          })}
+                        </Accordion>
+                      );
+                    })()}
 
-                    
+
+
                   </div>
                 </div>
               </div>
@@ -333,8 +338,8 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
           <div className="shp2">
             <img src="assets/images/ser-bg2.png" />
           </div>
-        </section> */}
-        
+        </section>
+
 
       </main>
     </>

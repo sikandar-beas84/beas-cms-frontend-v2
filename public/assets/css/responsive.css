@@ -933,7 +933,7 @@
   
   /* 768-991 */
   @media (max-width: 767.98px) {
-  
+   .navbar-light .dropdown-menu.show a{font-size:13px;}
     .breadcrumbWrap,
     .section-padding,
     .meter-area {

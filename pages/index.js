@@ -114,7 +114,7 @@ const metaAuthor = seometadata?.author
             </Row>
           </Container>
             {/* service section start */}
-          <div className="service" id="what_why_panel1">
+          <div className="service mb-0" id="what_why_panel1">
             <div className="container">
                 <div className="serv-head">
                   <h2>{homeData?.servicehomepage?.title}</h2>
@@ -125,7 +125,7 @@ const metaAuthor = seometadata?.author
                 <div className="container">
                   <div className="srvc-txt">
                       <div className="srvc-txt-top">
-                        <div className="row no-gutters">
+                        <div className="row">
                         { finalServices?.map((item, index)=>{
                           const descriptionText = item?.description
                           
@@ -143,10 +143,10 @@ const metaAuthor = seometadata?.author
                                     loading="lazy"
                                     />
                                   <div className="srvc-bxtx">
-                                    <h3>{item?.name}</h3>
+                                    <h3 className='text-center'>{item?.name}</h3>
                                     <p className='service-hm-desc'>{descriptionText}</p>
                                     {/* <div class="d-flex justify-content-center"><div class="post-job-btn">Read More</div></div> */}
-                                    <p className='blue-text'><u>Read More...</u></p>
+                                    <p className='blue-text text-center'><u>Read More...</u></p>
                                   </div>
                                   
                               </div>

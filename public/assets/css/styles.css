@@ -1002,13 +1002,13 @@ a {
   border-width: 1px 1px 1px 1px;
 }
 
-.why-box:hover {
+/* .why-box:hover {
   background: #FFF;
   transform: scale(1.06);
   transition: all .4s ease-in-out;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   z-index: 99;
-}
+} */
 
 /* .why-box:hover img {
   filter: brightness(0) invert(1);

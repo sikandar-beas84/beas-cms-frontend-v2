@@ -230,16 +230,20 @@
     margin-bottom: 14px;
   }
 
-  .process-inr {
+  /* .process-inr {
     background-image: linear-gradient(to left, #302F2F 50%, transparent 50%);
     overflow: hidden;
-  }
+  } */
 
-  .tabcontent {
+  /* .tabcontent {
     position: relative;
+  } */
+
+    .tabcontent {
+      background: #302F2F;
   }
 
-  .tabcontent::before {
+  /* .tabcontent::before {
     background: #302F2F;
     content: "";
     position: absolute;
@@ -247,7 +251,7 @@
     left: 0;
     width: 100%;
     height: 100vh;
-  }
+  } */
 
   .proc-img img {
     margin-left: 23px !important;

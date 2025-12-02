@@ -302,7 +302,7 @@
   .stat-box p,
   .why-box h3,
   .port-hd-txt p {
-    font-size: 19px;
+    font-size: 18px;
     line-height: 1.5;
   }
 
@@ -1542,3 +1542,10 @@
 }
 
 /* 575 */
+
+@media (min-width: 992px) {
+  .navbar-expand-lg .navbar-nav .dropdown-menu {
+      position: absolute;
+      top: 32px;
+  }
+}

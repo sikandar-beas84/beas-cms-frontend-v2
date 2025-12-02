@@ -142,7 +142,7 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
             <div className="row">
               <div className="col-lg-8 col-md-12">
                 <div className="contact_form_heading">
-                  <h2>Are you Ready for a Better, more Productive Business?</h2>
+                  <h2>Are You Ready For A Better, More Productive Business?</h2>
                 </div>
                 <div className="contact_form_box">
                   <form className="was-validate contact-frm" onSubmit={handleSubmit}>

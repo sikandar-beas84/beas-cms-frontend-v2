@@ -4107,8 +4107,7 @@ textarea.form-control.h-150.mb-3 {
 .testimonial {
   position: relative;
   background-color: #0081D2;
-  padding: 75px 0;
-  overflow: hidden; /* ensures the before element stays inside */
+  overflow: hidden; 
 }
 
 .testimonial::before {
@@ -4127,7 +4126,7 @@ textarea.form-control.h-150.mb-3 {
 }
 
 /* keep your actual content above */
-.testimonial * {
+.testimonial {
   position: relative;
   z-index: 2;
 }

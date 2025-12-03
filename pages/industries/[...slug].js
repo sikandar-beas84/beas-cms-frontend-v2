@@ -56,7 +56,7 @@ const Page = ({ industry, enrichedContents, seometadata }) => {
           pageBanner={`assets/img/menu-content/${industry?.menu_contents?.banner}`}
         />
 
-        <Container className="py-5">
+        <Container className="pt-5">
           <Row>
             <Col>
               <div className="about_texts">
@@ -69,14 +69,11 @@ const Page = ({ industry, enrichedContents, seometadata }) => {
             </Col>
           </Row>
         </Container>
-
-        {/* === ser_rea / services_sec SHOULD NOT be inside loop === */}
-        <section className="section-abuts section-services">
-          <Container className="py-5">
-            <div className="row">
-              <div className="col-12">
+        <section>
+          <Container className="pb-5">
+       
                 <div className='imageTextBlock'>
-                  <div className='ser_rea services_sec'>
+                  <div className='row center-cols'>
                     {enrichedContents?.map((item, index) => {
                       const casestudyData = item?.casestudy?.data?.casestudy;
                       const isEven = index % 2 !== 0;
@@ -93,110 +90,66 @@ const Page = ({ industry, enrichedContents, seometadata }) => {
 
                       return (
 
-                        <div className="row no-gutters" key={index}>
-
-                          {isEven ? (
-                            <>
-                              {/* TEXT FIRST */}
-                              <div className="col-lg-6 col-12">
-                                <div className="services-text">
-                                  <h2>{casestudyData?.title}</h2>
-                                  <p>{short_desc}</p>
-
-                                  <div className="port-tags services-tags">
-                                    {longdesc.map((d, i) => (
-                                      <h4 key={i}>{d}</h4>
-                                    ))}
-                                  </div>
-
-                                  {slug && (
-                                    <Link
-                                      href={{
-                                        pathname: "/casestudy",
-                                        query: { id: slug },
-                                      }}
-                                      className="services-btn proc-btn thar-three4"
-                                    >
-                                      Read Case Study
-                                    </Link>
-                                  )}
-                                </div>
+                        slug && (
+                          <Col xs={12} md={4} key={index}>
+                            <div className="guiditem">
+                              <div className="blog-hm-img">
+                                <Image
+                                  src={`${env.BACKEND_BASE_URL}${casestudyData?.image}`}
+                                  alt="case-study"
+                                  width={400}
+                                  height={400}
+                                  priority
+                                  fetchPriority="high"
+                                  className="img-fluid"
+                                />
+                                {/* <div className="guidcal">
+                                  <strong>17</strong>
+                                  <br />
+                                  <span>Nov</span>
+                                </div> */}
                               </div>
 
-                              {/* IMAGE SECOND */}
-                              <div className="col-lg-6 col-12">
-                                <div className="mediaimg">
-                                  <Image
-                                    width={600}
-                                    height={150}
-                                    src={`${env.BACKEND_BASE_URL}${casestudyData?.image}`}
-                                    alt="image"
-                                    className="img-fluid"
-                                    loading="lazy"
-                                  />
+                              <div className="ggrey-bg">
+                                <h5 className="blog-hm-title pbb-5">
+                                  {casestudyData?.title}
+                                </h5>
+
+                                <div className="mb-0 portfilo-hm-desc color-black pbb-5">
+                                    {short_desc}
+                                </div>
+                                <div className='bbbblue-border'></div>
+                                <div className="d-flex justify-content-center mt-35">
+                                 {slug && (
+                                  <Link
+                                    href={{
+                                      pathname: "/casestudy",
+                                      query: { id: slug },
+                                    }}
+                                    className="post-job-btn"
+                                  >
+                                    Read Case Study
+                                  </Link>
+                                )}
                                 </div>
                               </div>
-                            </>
-                          ) : (
-                            <>
-                              {/* IMAGE FIRST */}
-                              <div className="col-lg-6 col-12">
-                                <div className="mediaimg">
-                                  <Image
-                                    width={600}
-                                    height={150}
-                                    src={`${env.BACKEND_BASE_URL}${casestudyData?.image}`}
-                                    alt="image"
-                                    className="img-fluid"
-                                    loading="lazy"
-                                  />
-                                </div>
-                              </div>
-
-                              {/* TEXT SECOND */}
-                              <div className="col-lg-6 col-12">
-                                <div className="services-text">
-                                  <h2>{casestudyData?.title}</h2>
-                                  <p>{short_desc}</p>
-
-                                  <div className="port-tags services-tags">
-                                    {longdesc.map((d, i) => (
-                                      <h4 key={i}>{d}</h4>
-                                    ))}
-                                  </div>
-
-                                  {slug && (
-                                    <Link
-                                      href={{
-                                        pathname: "/casestudy",
-                                        query: { id: slug },
-                                      }}
-                                      className="services-btn proc-btn thar-three4"
-                                    >
-                                      Read Case Study
-                                    </Link>
-                                  )}
-                                </div>
-                              </div>
-                            </>
-                          )}
-                        </div>
-
+                            </div>
+                          </Col>
+                        )
                       );
                     })}
                   </div>
                 </div>
-              </div>
-            </div>
+              
           </Container>
 
           {/* Background shapes */}
-          <div className="shp1">
+          {/* <div className="shp1">
             <img src="../assets/images/ser-bg.png" />
           </div>
           <div className="shp2">
             <img src="../assets/images/ser-bg2.png" />
-          </div>
+          </div> */}
         </section>
       </main>
 

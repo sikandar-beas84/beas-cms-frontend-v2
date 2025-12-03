@@ -24,7 +24,7 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowForm(true);
-    }, 5000); // 5 seconds delay
+    }, 15000); // 15 seconds delay
 
     return () => clearTimeout(timer);
   }, []);

@@ -72,75 +72,79 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
               </Container>
               <section className="section-services">
                 <Container>
-
                   <Row>
                     <Col xs={12}>
                       <div className="imageTextBlock">
-                        <div className="ser_rea services_sec">
-                          <div className="row no-gutters center-cols py-3">
-                            {item1?.menu_contents?.contents?.map((content, index) => {
-                              const casestudyData = content?.casestudy?.data?.casestudy;
+                        <div className="row center-cols py-3">
 
-                              const isEven = index % 2 !== 0;
-                              const slug = casestudyData?.slug;
-                              const short_desc = casestudyData?.short_desc;
+                          {item1?.menu_contents?.contents?.map((content, index) => {
+                            const casestudyData = content?.casestudy?.data?.casestudy;
 
-                              const longdesc = casestudyData?.long_desc
-                                ? casestudyData.long_desc.split(",")
-                                : [];
+                            const isEven = index % 2 !== 0;
+                            const slug = casestudyData?.slug;
+                            const short_desc = casestudyData?.short_desc;
 
-                              return slug && (
+                            const longdesc = casestudyData?.long_desc
+                              ? casestudyData.long_desc.split(",")
+                              : [];
+
+                            return (
+                              slug && (
                                 <Col xs={12} md={4} key={index}>
-                                  <div className="port-box mb-4">
-                                    <div className="port-img port-img2">
+                                  <div className="guiditem">
+                                    <div className="blog-hm-img">
                                       <Image
-                                        width={600}
-                                        height={150}
                                         src={`${env.BACKEND_BASE_URL}${casestudyData?.image}`}
-                                        alt="image"
+                                        alt="case-study"
+                                        width={400}
+                                        height={400}
+                                        priority
+                                        fetchPriority="high"
                                         className="img-fluid"
-                                        loading="lazy"
                                       />
+                                      {/* <div className="guidcal">
+                                        <strong>17</strong>
+                                        <br />
+                                        <span>Nov</span>
+                                      </div> */}
                                     </div>
 
-                                    <h3 className="port-title-case-study">{casestudyData?.title}</h3>
+                                    <div className="ggrey-bg">
+                                      <h5 className="blog-hm-title pbb-5">
+                                        {casestudyData?.title}
+                                      </h5>
 
-                                    {/* <div className="blog-hm-desc p-3">{short_desc}</div> */}
+                                      <div className="mb-0 portfilo-hm-desc color-black pbb-5">
+                                          {short_desc}
+                                      </div>
 
-                                    {/*
-                                    <div className="port-tags">
-                                      {longdesc.map((item, i) => (
-                                        <h4 key={i}>{item}</h4>
-                                      ))}
-                                    </div>
-                                    */}
-
-                                    <div className="services-btn-area">
-                                      {slug && (
+                                      <div className="d-flex justify-content-center mt-35">
+                                       {slug && (
                                         <Link
                                           href={{
                                             pathname: "/casestudy",
                                             query: { id: slug },
                                           }}
-                                          className="services-btn proc-btn thar-three4"
+                                          className="post-job-btn"
                                         >
                                           Read Case Study
                                         </Link>
                                       )}
+                                      </div>
                                     </div>
                                   </div>
                                 </Col>
-                              );
-                            })}
-                          </div>
+                              )
+                            );
+                          })}
+
                         </div>
                       </div>
                     </Col>
-
                   </Row>
                 </Container>
-
               </section>
+
               {/* <section className="section-services">
                 <Container>
 

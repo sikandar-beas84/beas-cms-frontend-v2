@@ -5,7 +5,7 @@
   --font-color-veriation-black: #000;
   --font-color-veriation: #000;
   --blue-color-veriation: #0081D2;
-  --light-blue-color-veriation: #F7F9FE;
+  --light-blue-color-veriation: #eff2fb;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -82,7 +82,7 @@ body {
 
 /* Footer */
 footer {
-  background-color: #F7F9FE;
+  background-color: #eff2fb;
   padding: 50px 0;
 }
 
@@ -4004,7 +4004,7 @@ textarea.form-control.h-150.mb-3 {
   }
   .yellow-bg .accordion-body{background:#fff6d7;}
   .yellow-bg .accordion-header .accordion-button:not(.collapsed){
-    background-color: #fff0bf; color:#fff;
+    background-color: #e1ad00; color:#fff; font-size:18px;
   }
   .blue-bg2 button.accordion-button {background-color: #0081d2; color:#fff;}
   .blue-bg2 .accordion-body{background: #e1f0f9;}

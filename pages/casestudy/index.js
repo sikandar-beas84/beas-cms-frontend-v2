@@ -63,7 +63,7 @@ const Casestudy = ({ casestudy, menucasestudy, seometadata, homeData }) => {
       <main>
         <BreadCrumb pagetitle={casestudy.title} pageslug='Casestudy' pageBanner={`assets/img/menu-content/${menucasestudy?.menu_contents?.banner}`} />
         <div className="bgF2F4F7 p-relative">
-          <Container className="py-5">
+          <Container className="py-5 ccase-study-container">
             <Row>
               <Col xs={12}>
                 <h1 className="inner-page-title-small">{casestudy?.title}</h1>
@@ -79,25 +79,25 @@ const Casestudy = ({ casestudy, menucasestudy, seometadata, homeData }) => {
 
 
                 <Accordion defaultActiveKey="0" flush>
-                  <Accordion.Item eventKey="0">
+                  <Accordion.Item eventKey="0" className="blue-bg2">
                     <Accordion.Header>Project Overview / Business Need</Accordion.Header>
                     <Accordion.Body>
                       {<div dangerouslySetInnerHTML={{ __html: casestudy?.business_need }} />}
                     </Accordion.Body>
                   </Accordion.Item>
-                  <Accordion.Item eventKey="1">
+                  <Accordion.Item eventKey="1" className="green-bg">
                     <Accordion.Header>BEAS’s Solution</Accordion.Header>
                     <Accordion.Body>
                       {<div dangerouslySetInnerHTML={{ __html: casestudy?.beas_solution }} />}
                     </Accordion.Body>
                   </Accordion.Item>
-                  <Accordion.Item eventKey="2">
+                  <Accordion.Item eventKey="2" className="yellow-bg">
                     <Accordion.Header>Benefits to the customer</Accordion.Header>
                     <Accordion.Body>
                       {<div dangerouslySetInnerHTML={{ __html: casestudy?.benefits_to_the_customer }} />}
                     </Accordion.Body>
                   </Accordion.Item>
-                  <Accordion.Item eventKey="3">
+                  <Accordion.Item eventKey="3" className="orange-bg">
                     <Accordion.Header>Technology Platform</Accordion.Header>
                     <Accordion.Body>
                       <ul>

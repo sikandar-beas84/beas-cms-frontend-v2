@@ -125,7 +125,7 @@ const AboutUs = ({aboutus, commonaboutus, seometadata}) => {
 
                 <section className="meter-area">
                     <div className="container">
-                    <h2>We've helped businesses increase their revenue on an average by 90% in their first year with us!</h2>
+                    <h2>We've helped businesses increase their revenues significantly in their very first year of partnering with us!</h2>
                     <div className="counter-show">
                         <div className="row">
                             <div className="all-meter">

@@ -15,13 +15,13 @@ const BreadCrumb = ({pagetitle, pageslug, pageBanner}) => {
           <Col>
            <div className='breadcrumbWrap'>
              <div className='pageTitle'>{pagetitle}</div>
-             <div className='pgNameListing'>
+             {/* <div className='pgNameListing'>
               <ul>
                 <li>Home</li>
                 {pageslug && <li>{pageslug}</li>}
                 <li>{pagetitle}</li>
               </ul>
-             </div>
+             </div> */}
            </div>
           </Col>
         </Row>

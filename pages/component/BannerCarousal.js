@@ -344,7 +344,7 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
                       className="img-fluid port-shw"
                     />
                   </div>
-                  <h3>{titleText}</h3>
+                  <h3 className='pport-image-title'>{titleText}</h3>
                   <div className='blog-hm-desc p-3'>{item?.short_desc}</div>
                   <div className="port-tags">
                     { longdesc.map((item, index)=>(

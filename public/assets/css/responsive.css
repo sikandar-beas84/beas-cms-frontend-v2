@@ -670,13 +670,17 @@
 
 /* 992-1199 */
 @media (max-width: 991.98px) {
-
-  .breadcrumbWrap,
-  .section-padding,
-  .meter-area {
+ .proc-deet{flex-direction: column;}
+ .proc-img{flex: 0 0 100%;}
+ .proc-text h2 {
+  font-size: 22px;
+  margin-bottom:0;
+ }
+ .breadcrumbWrap,
+ .section-padding,
+ .meter-area {
     padding: 30px 0;
   }
-
   .why_abt,
   .section-abuts {
     padding-bottom: 30px;

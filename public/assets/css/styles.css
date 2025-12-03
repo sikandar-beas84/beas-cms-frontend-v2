@@ -290,12 +290,16 @@ a {
 
 
 /* banner css suro */
-.banner img {
+.banner_thumb_img{
   height: calc(100vh - 137px);
   display: block;
   width: 100%;
 }
-
+.banner_thumb_img img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
 .banner_text_infos {
   position: absolute;
   z-index: 9;
@@ -1060,7 +1064,7 @@ a {
   overflow: hidden;
   height: 400px;
   background: #000;
-  margin-bottom: 12px;
+  /* margin-bottom: 12px; */
   cursor: pointer;
   border-radius: 0;
   border: 1px solid #c5c5c5;
@@ -3994,27 +3998,27 @@ textarea.form-control.h-150.mb-3 {
     padding-top:0!important;
     display: -webkit-box;
     -webkit-box-orient: vertical;}
-  .green-bg button.accordion-button {background-color: #2d9f01; color:#fff;}
-  .yellow-bg button.accordion-button {background-color: #e1ad00; color:#fff;}
-  .orange-bg button.accordion-button {background-color: #F07309; color:#fff;}
+  .green-bg button.accordion-button {background-color: #2d9f01; color:#fff;font-size:18px;}
+  .yellow-bg button.accordion-button {background-color: #e1ad00; color:#fff;font-size:18px;}
+  .orange-bg button.accordion-button {background-color: #F07309; color:#fff;font-size:18px;}
   .close-btn-submit-frm span{position:absolute;top:-11px;}
   .green-bg .accordion-body{background: #eafde3;}
   .green-bg .accordion-header .accordion-button:not(.collapsed){
-    background-color: #2d9f01; color:#fff;
+    background-color: #2d9f01; color:#fff; font-size:18px;
   }
   .yellow-bg .accordion-body{background:#fff6d7;}
   .yellow-bg .accordion-header .accordion-button:not(.collapsed){
     background-color: #e1ad00; color:#fff; font-size:18px;
   }
-  .blue-bg2 button.accordion-button {background-color: #0081d2; color:#fff;}
+  .blue-bg2 button.accordion-button {background-color: #0081d2; color:#fff;font-size:18px;}
   .blue-bg2 .accordion-body{background: #e1f0f9;}
   .blue-bg2 .accordion-header .accordion-button:not(.collapsed){
-    background-color: #0081d2; color:#fff;
+    background-color: #0081d2; color:#fff;font-size:18px;
   }
     
   .orange-bg .accordion-body{background:#ffebdb;}
   .orange-bg .accordion-header .accordion-button:not(.collapsed){
-    background-color: #F07309; color:#fff;
+    background-color: #F07309; color:#fff;font-size:18px;
   }
   .ccase-study-container .accordion-button::after {
     background-image: url(/_next/static/media/arrow-up-black.7105f236.png);
@@ -4121,7 +4125,7 @@ textarea.form-control.h-150.mb-3 {
   background-repeat: no-repeat;
   background-size: cover;       
   background-position: center;  
-  opacity: 0.15;                 
+  opacity: 0.10;                 
   z-index: 0;
 }
 
@@ -4155,4 +4159,10 @@ textarea.form-control.h-150.mb-3 {
 }
 .pbb-5{padding:0 20px;}
 .breadcrumbBg{background-size:cover;}
+.pport-image-title{ line-height: 1.4em!important;
+  height: calc(1.4em * 2)!important;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;}
 

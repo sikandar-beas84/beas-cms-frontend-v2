@@ -214,7 +214,7 @@ const metaAuthor = seometadata?.author
                         <div className="col-lg-4 col-md-6 col-sm-6 p-0">
                           <div className="why-box why-1">
                               <div className="why-img">
-                              <Image width={90} height={90} src={`${env.BACKEND_BASE_URL}${item.image}`} alt="image" loading="lazy" />
+                              <Image width={70} height={70} src={`${env.BACKEND_BASE_URL}${item.image}`} alt="image" loading="lazy" />
                               </div>
                               <h3>{item.title}</h3>
                               {/* <p>{item.description}</p> */}

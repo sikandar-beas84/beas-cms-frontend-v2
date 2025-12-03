@@ -322,8 +322,11 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
         <Slider {...settings}>
           {projects?.map((item, index) => {
 
-            const titleText = item?.title
-              ? item?.title.split(" ").slice(0, 4).join(" ") + ""
+            // const titleText = item?.title
+            //   ? item?.title.split(" ").slice(0, 4).join(" ") + ""
+            //   : "";
+              const titleText = item?.title
+              ? item?.title
               : "";
             
             const longdesc = item?.long_desc ? item.long_desc.split(",") : [];

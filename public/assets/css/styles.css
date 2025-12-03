@@ -2151,7 +2151,7 @@ img.port-shw {
   text-transform: uppercase;
   color: #fff;
   padding: 0;
-  border-radius: 0px 0px 11px 11px;
+  border-radius: 0;
 }
 
 .navbar-light .dropdown-menu.show a {

@@ -107,6 +107,7 @@
     font-size: 20px;
     font-weight: 600;
     word-wrap: break-word;
+    min-height: 100px;;
   }
 }
 @media (max-width: 1500.98px) {

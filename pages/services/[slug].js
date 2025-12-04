@@ -75,7 +75,7 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
 
                       {/* <h1>{service?.name}</h1> */}
                       <div className='ServicesPara mb-4' dangerouslySetInnerHTML={{ __html: item1?.description }} />
-                      {!visibleImages[index1] && (
+                      {!visibleImages[index1] && item1?.image && (
                         <button
                           onClick={() => handleClick(index1)}
                           className="btn btn-warning mb-3"

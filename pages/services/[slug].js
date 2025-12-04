@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, {useState} from 'react'
 import BreadCrumb from '../component/BreadCrumb';
 import Container from 'react-bootstrap/Container';
 import { Col, Row } from "react-bootstrap";
@@ -18,6 +18,13 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
     return <div>Loading...</div>;
   }
 
+  const [showImage, setShowImage] = useState(false);
+  const [showButton, setShowButton] = useState(true);
+
+  const handleChange = (()=>{
+    setShowImage(true);
+    setShowButton(false);
+  })
   const metaTitle = seometadata?.title
     ? seometadata?.title
     : `Services`;
@@ -66,7 +73,13 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
 
                       {/* <h1>{service?.name}</h1> */}
                       <div className='ServicesPara mb-4' dangerouslySetInnerHTML={{ __html: item1?.description }} />
-                      { item1?.image && 
+                      {showButton && <button
+                        onClick={handleChange}
+                        className="btn btn-warning mb-3"
+                      >
+                        Given
+                      </button> }
+                      { showImage && item1?.image && 
                                       <Image
                                         src={`${env.BACKEND_BASE_URL}${item1?.image}`}
                                         alt="case-study"

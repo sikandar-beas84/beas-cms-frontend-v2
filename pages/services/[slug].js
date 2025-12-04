@@ -18,13 +18,15 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
     return <div>Loading...</div>;
   }
 
-  const [showImage, setShowImage] = useState(false);
-  const [showButton, setShowButton] = useState(true);
+  const [visibleImages, setVisibleImages] = useState({});
 
-  const handleChange = (()=>{
-    setShowImage(true);
-    setShowButton(false);
-  })
+  const handleClick = (index) => {
+    setVisibleImages(prev => ({
+      ...prev,
+      [index]: true,   // only this item becomes visible
+    }));
+  };
+
   const metaTitle = seometadata?.title
     ? seometadata?.title
     : `Services`;
@@ -73,13 +75,15 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
 
                       {/* <h1>{service?.name}</h1> */}
                       <div className='ServicesPara mb-4' dangerouslySetInnerHTML={{ __html: item1?.description }} />
-                      {showButton && <button
-                        onClick={handleChange}
-                        className="btn btn-warning mb-3"
-                      >
-                        Given
-                      </button> }
-                      { showImage && item1?.image && 
+                      {!visibleImages[index1] && (
+                        <button
+                          onClick={() => handleClick(index1)}
+                          className="btn btn-warning mb-3"
+                        >
+                          Given
+                        </button>
+                      )}
+                      {visibleImages[index1] && item1?.image && (
                                       <Image
                                         src={`${env.BACKEND_BASE_URL}${item1?.image}`}
                                         alt="case-study"
@@ -88,7 +92,7 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
                                         priority
                                         fetchPriority="high"
                                         className="img-fluid"
-                                      /> }
+                                      /> )}
                     </div>
                   </Col>
                 </Row>

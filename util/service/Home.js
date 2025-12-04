@@ -22,6 +22,7 @@ import { env } from '../constants/common';
   HomeService.seobyslug = (slug) => postService('get-seo-by-slug', `${env.ACCESS_TOKEN}`, slug)
   HomeService.individualBlogPage = (slug) => postService('get-blog-by-slug', `${env.ACCESS_TOKEN}`,slug)
   HomeService.blogPage = () => getService('get-blogs', `${env.ACCESS_TOKEN}`)
+  HomeService.clientPage = () => getService('get-clients', `${env.ACCESS_TOKEN}`)
 
 
   

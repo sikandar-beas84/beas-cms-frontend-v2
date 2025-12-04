@@ -66,6 +66,16 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
 
                       {/* <h1>{service?.name}</h1> */}
                       <div className='ServicesPara mb-4' dangerouslySetInnerHTML={{ __html: item1?.description }} />
+                      { item1?.image && 
+                                      <Image
+                                        src={`${env.BACKEND_BASE_URL}${item1?.image}`}
+                                        alt="case-study"
+                                        width={400}
+                                        height={400}
+                                        priority
+                                        fetchPriority="high"
+                                        className="img-fluid"
+                                      /> }
                     </div>
                   </Col>
                 </Row>

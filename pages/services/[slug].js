@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, {useState} from 'react'
 import BreadCrumb from '../component/BreadCrumb';
 import Container from 'react-bootstrap/Container';
 import { Col, Row } from "react-bootstrap";
@@ -10,14 +10,27 @@ import { env } from '../../util/constants/common';
 import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
 import { postService } from "../../util/configs/FetchRequest";
+import ImageModal from '../component/ImageModal';
+import BannerCarousal from '../component/BannerCarousal';
 
-const Page = ({ service, enrichedChildren, seometadata }) => {
+const Page = ({ service, enrichedChildren, seometadata, slug, allclient }) => {
 
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
 
+  // Modal control
+  const [modalImage, setModalImage] = useState(null);
+
+  const openModal = (img) => {
+    setModalImage(img); // open modal with clicked image
+  };
+
+  const closeModal = () => {
+    setModalImage(null); // close modal
+  };
+  
   const metaTitle = seometadata?.title
     ? seometadata?.title
     : `Services`;
@@ -56,7 +69,8 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
 
         <div className="py-5">
 
-          {enrichedChildren?.map((item1, index1) => (
+          {enrichedChildren?.map((item1, index1) => {
+            return(
             <React.Fragment key={index1}>
               <Container>
                 <Row key={index1}>
@@ -65,7 +79,28 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
                     <div className="about_texts">
 
                       {/* <h1>{service?.name}</h1> */}
-                      <div className='ServicesPara mb-4' dangerouslySetInnerHTML={{ __html: item1?.description }} />
+                      <span className='ServicesPara mb-4' dangerouslySetInnerHTML={{ __html: item1?.description }} />
+                      { item1.slug === "cloud-services" && (
+                        <div>
+                        <ul style={{listStyleType:'none'}}>
+                          <li onClick={() => openModal('/assets/images/aws.webp')} style={{ color: "yellowgreen", cursor: "pointer" }}>a) Amazon Web Services (AWS)</li>
+                          <li onClick={() => openModal('/assets/images/azure.webp')} style={{ color: "yellowgreen", cursor: "pointer" }}>b) Azure Cloud</li>
+                          <li onClick={() => openModal('/assets/images/oracle_cloud.webp')} style={{ color: "yellowgreen", cursor: "pointer" }}>c) Oracle Cloud</li>
+                          <li onClick={() => openModal('/assets/images/google_cloud.webp')} style={{ color: "yellowgreen", cursor: "pointer" }}>d) Google Cloud</li>
+
+                        </ul>
+                        </div>
+                      )
+
+                      }
+                      {item1?.image && (
+                        <span
+                          onClick={() => openModal(`${env.BACKEND_BASE_URL}${item1?.image}`)}
+                          style={{ cursor: "pointer", color:'#0081d2', fontWeight:'600', textDecoration:'underline' }}
+                        >
+                          shown in the diagram.
+                        </span>
+                      )}
                     </div>
                   </Col>
                 </Row>
@@ -77,7 +112,8 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
                       <div className="imageTextBlock">
                         <div className="row center-cols py-3">
 
-                          {item1?.menu_contents?.contents?.map((content, index) => {
+                          { slug !== 'professional-services'?
+                          ( item1?.menu_contents?.contents?.map((content, index) => {
                             const casestudyData = content?.casestudy?.data?.casestudy;
 
                             const isEven = index % 2 !== 0;
@@ -136,7 +172,24 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
                                 </Col>
                               )
                             );
-                          })}
+                          })
+                          ):(
+                            <div className="Blogs">
+                            <div className="container">
+                                <div className="Blogs-head">
+                                  
+                                </div>
+                                <div className="Blogs-inr">
+                                  <div className="row">
+                                    <div className='col-12'>
+                                      <BannerCarousal page="clients" clients={allclient} />
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                          )
+                          }
 
                         </div>
                       </div>
@@ -377,7 +430,14 @@ const Page = ({ service, enrichedChildren, seometadata }) => {
 
 
             </React.Fragment>
-          ))}
+          )
+            })}
+          {/* Modal Component */}
+      <ImageModal
+        show={!!modalImage}
+        image={modalImage}
+        onClose={closeModal}
+      />
         </div>
       </main>
 
@@ -454,6 +514,11 @@ export async function getServerSideProps({ params }) {
     })
   );
 
+  const clientData = await HomeService.clientPage();
+  const allclient = clientData?.data?.clients;
+
+  console.log("allclient==",allclient);
+
   const seobyslug = await HomeService.seobyslug(slug);
   const seometadata = seobyslug?.data?.seometa;
 
@@ -461,7 +526,9 @@ export async function getServerSideProps({ params }) {
     props: {
       service,
       enrichedChildren,
-      seometadata
+      seometadata,
+      slug,
+      allclient
     },
   };
 }

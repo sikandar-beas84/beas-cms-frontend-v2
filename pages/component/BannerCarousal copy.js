@@ -64,36 +64,37 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
     ]
   });
 
-  const technologySliderSettings = {
-    modules: [Grid, Autoplay],
+  const technologySliderSettings = () => ({
     loop: true,
-    speed: 2000,
+    speed: 2500,
+  
     autoplay: {
       delay: 0,
       disableOnInteraction: false,
     },
-    spaceBetween: 12,
-    slidesPerView: 6,
-    grid: { rows: 2, fill: 'row' },
   
-    // Important for responsiveness recalculation
-    observer: true,
-    observeParents: true,
-    watchOverflow: true,
+    slidesPerView: 6,
+  
+    grid: {
+      rows: 2,
+      fill: "row",
+    },
+  
+    spaceBetween: 10,
   
     breakpoints: {
-      // 1 column x 2 rows for tiny screens
-      320: { slidesPerView: 1, grid: { rows: 2, fill: 'row' }, spaceBetween: 8 },
-      480: { slidesPerView: 2, grid: { rows: 2, fill: 'row' }, spaceBetween: 10 },
-      600: { slidesPerView: 2, grid: { rows: 2, fill: 'row' }, spaceBetween: 10 },
-      768: { slidesPerView: 3, grid: { rows: 2, fill: 'row' }, spaceBetween: 12 },
-      1024: { slidesPerView: 4, grid: { rows: 2, fill: 'row' }, spaceBetween: 14 },
-      1400: { slidesPerView: 6, grid: { rows: 2, fill: 'row' }, spaceBetween: 16 },
+      1024: {
+        slidesPerView: 4,
+        grid: { rows: 2 },
+      },
+      600: {
+        slidesPerView: 2,
+        grid: { rows: 2 },
+      },
     },
-  };
+  });
   
-  
-  //const technologysettings = technologySliderSettings();
+  const technologysettings = technologySliderSettings();
 
 
   // Default settings
@@ -423,53 +424,26 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
       )}
 
       {page == 'technology' && (
-
-        <div className="tech-slider-wrap">
-        <Swiper {...technologySliderSettings}>
-          {technologies.map((item, index) => (
-            <SwiperSlide key={index}>
-              <div className="tech-card tech-list-bx">
-              <div className="tech-list-rap">
-                {/* if logo is an <img> */}
-                {/* <img src={logo} alt={`logo-${i}`} className="tech-img" /> */}
-                <Image
+        <Swiper 
+          modules={[Autoplay, Grid]}
+          { ...technologysettings }
+        className="technology-swiper"
+      >
+        {technologies?.map((item, index) => (
+          <SwiperSlide key={index}>
+            <div className="tech-list-bx">
+              <Image
                 width={100}
                 height={100}
                 src={`${env.BACKEND_BASE_URL}assets/img/technology/${item.logo}`}
                 alt={item.name}
-                className="tech-img"
                 loading="lazy"
               />
               <h5>{item.name}</h5>
-                {/* or any card content */}
-              </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        </div>
-
-
-      //   <Swiper 
-      //     modules={[Autoplay, Grid]}
-      //     { ...technologysettings }
-      //   className="technology-swiper"
-      // >
-      //   {technologies?.map((item, index) => (
-      //     <SwiperSlide key={index}>
-      //       <div className="tech-list-bx">
-      //         <Image
-      //           width={100}
-      //           height={100}
-      //           src={`${env.BACKEND_BASE_URL}assets/img/technology/${item.logo}`}
-      //           alt={item.name}
-      //           loading="lazy"
-      //         />
-      //         <h5>{item.name}</h5>
-      //       </div>
-      //     </SwiperSlide>
-      //   ))}
-      // </Swiper>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
       
       )}
 

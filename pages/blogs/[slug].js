@@ -8,7 +8,7 @@ import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
 import { Clock, MessageCircle, User } from "react-feather";
 
-const Blog = ({ blog, seometadata, homeData }) => {
+const Blog = ({ blog, seometadata, homeData, commonblog }) => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
@@ -136,7 +136,7 @@ const Blog = ({ blog, seometadata, homeData }) => {
         author={metaAuthor}
       />
       <main>
-        <BreadCrumb pagetitle="Blog" pageBanner={`${blog?.banner}`} />
+        <BreadCrumb pagetitle="Blog" pageBanner={`${commonblog?.image}`} />
         <div className='py-5'>
           <section className="space-ptb">
             <div className="container">
@@ -344,13 +344,19 @@ export async function getServerSideProps({ params }) {
   const response = await HomeService.individualBlogPage(slug);
   const blog = response.data?.blog || [];
 
+  const commonresponse = await HomeService.commonPage();
+  const commonData = commonresponse.data?.common || [];
+  const firstBlog = commonData.filter((item) => item.slug === 'blog-section-homepage');
+  const commonblog = firstBlog?.length > 0 ? firstBlog[0] : null;
+
   const seobyslug = await HomeService.seobyslug(slug);
   const seometadata = seobyslug?.data?.seometa;
 
   return {
     props: {
       blog,
-      seometadata
+      seometadata,
+      commonblog
     }
   }
 }

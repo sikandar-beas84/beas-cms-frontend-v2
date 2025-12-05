@@ -316,9 +316,64 @@ const metaAuthor = seometadata?.author
                 </div>
                 <div className="Blogs-inr">
                   <div className="row">
-                    <div className='col-12'>
-                      <BannerCarousal page="blogs" blogs={homeData?.blogs} />
-                      </div>
+                    
+                      {/* <BannerCarousal page="blogs" blogs={homeData?.blogs} /> */}
+                      {homeData?.blogs?.map((item, index) => {
+
+                        const titleText = item?.title;
+                        const short_desc = item?.short_desc;
+                        const slug = item?.slug;
+
+                        const createdAtString = item?.created_at;
+
+                        const created_at = createdAtString ? new Date(createdAtString) : null;
+
+                        const day = created_at ? created_at.getDate() : "";
+                        const month = created_at ? created_at.getMonth() + 1 : "";
+                        const monthName = created_at
+                        ? new Intl.DateTimeFormat('en-US', { month: 'short' }).format(created_at)
+                        : "";
+                        const year = created_at ? created_at.getFullYear() : "";
+
+                        return (
+
+                          <div className='col-12 col-md-4'>
+                          <div key={index} className='test-box'>
+                            <Link
+                            href={`blogs/${slug}`}
+                            
+                          >
+                            <div className="guiditem">
+                                <div className="blog-hm-img">
+                                  <Image
+                                    src={`${env.BACKEND_BASE_URL}${item.image}`}
+                                    alt="blog"
+                                    width={400}
+                                    height={400}
+                                    priority
+                                    fetchPriority="high"
+                                    className="img-fluid port-shw"
+                                  />
+                                  <div className="guidcal">
+                                      <strong>{day}</strong> <br/><span>{monthName}</span>
+                                  </div>
+                                </div>
+                                <div className="guidtext">
+                                  <h5 className='blog-hm-title'>{titleText}</h5>
+                                  <div
+                                    className="mb-0 blog-hm-desc color-black"
+                                    dangerouslySetInnerHTML={{ __html: short_desc }}
+                                  ></div>
+                                  <div className="d-flex justify-content-center mt-35"><div className="post-job-btn">Read More</div></div>
+                                
+                                </div>
+                            </div>
+                            </Link>
+                          </div>
+                          </div>
+                        );
+                        })}
+                      
                     </div>
                 </div>
             </div>

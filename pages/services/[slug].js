@@ -83,10 +83,10 @@ const Page = ({ service, enrichedChildren, seometadata, slug, allclient }) => {
                       { item1.slug === "cloud-services" && (
                         <div>
                         <ul style={{listStyleType:'none'}}>
-                          <li onClick={() => openModal('/assets/images/aws.webp')} style={{ color: "yellowgreen", cursor: "pointer" }}>a) Amazon Web Services (AWS)</li>
-                          <li onClick={() => openModal('/assets/images/azure.webp')} style={{ color: "yellowgreen", cursor: "pointer" }}>b) Azure Cloud</li>
-                          <li onClick={() => openModal('/assets/images/oracle_cloud.webp')} style={{ color: "yellowgreen", cursor: "pointer" }}>c) Oracle Cloud</li>
-                          <li onClick={() => openModal('/assets/images/google_cloud.webp')} style={{ color: "yellowgreen", cursor: "pointer" }}>d) Google Cloud</li>
+                          <li>a) <span onClick={() => openModal('/assets/images/aws.webp')} className="bblue-llink">Amazon Web Services (AWS)</span></li>
+                          <li>b) <span onClick={() => openModal('/assets/images/azure.webp')} className="bblue-llink"> Azure Cloud</span></li>
+                          <li>c) <span onClick={() => openModal('/assets/images/oracle_cloud.webp')} className="bblue-llink"> Oracle Cloud</span></li>
+                          <li>d) <span onClick={() => openModal('/assets/images/google_cloud.webp')} className="bblue-llink"> Google Cloud</span></li>
 
                         </ul>
                         </div>
@@ -516,8 +516,6 @@ export async function getServerSideProps({ params }) {
 
   const clientData = await HomeService.clientPage();
   const allclient = clientData?.data?.clients;
-
-  console.log("allclient==",allclient);
 
   const seobyslug = await HomeService.seobyslug(slug);
   const seometadata = seobyslug?.data?.seometa;

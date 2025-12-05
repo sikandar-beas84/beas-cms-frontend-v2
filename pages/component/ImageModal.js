@@ -30,7 +30,7 @@ export default function ImageModal({ show, image, onClose }) {
         onClick={(e) => e.stopPropagation()}
       >
         <button
-          style={{ float: "right", cursor: "pointer" }}
+          style={{ float: "right", cursor: "pointer", background:"#e00701", border:"1px solid #e00701", borderRadius:"50%", color:"#fff" }}
           onClick={onClose}
         >
           ✖
@@ -39,8 +39,8 @@ export default function ImageModal({ show, image, onClose }) {
         <Image
           src={image}
           alt="modal-img"
-          width={700}
-          height={700}
+          width={1000}
+          height={1000}
           className="img-fluid"
         />
       </div>

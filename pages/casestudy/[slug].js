@@ -103,7 +103,7 @@ const parseHTMLWithEnv = (html) => {
                   >
                     <ChevronLeft />
                   </Link>
-                ) : <Link href="#" className="btn btn-primary" ><ChevronLeft /></Link>
+                ) : <Link href="#" className="btn btn-primary" style={{opacity:'0', cursor:'default'}} ><ChevronLeft /></Link>
               }
 
               {/* Next */}
@@ -115,7 +115,7 @@ const parseHTMLWithEnv = (html) => {
                   >
                     <ChevronRight />
                   </Link>
-                ) : <Link href="#" className="btn btn-primary" ><ChevronRight /></Link>
+                ) : <Link href="#" className="btn btn-primary" style={{opacity:'0', cursor:'default'}} ><ChevronRight /></Link>
               }
             </div>
           </Container>

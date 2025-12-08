@@ -1,10 +1,10 @@
 //REACT_ENV=prod
-const REACT_ENV = 'prod'
+const REACT_ENV = 'dev'
 // 
 const backend_base_url_dev = 'http://192.168.1.111:8000/'
 const frontend_base_url_dev = 'http://localhost:3000/'
 const server_url_dev = 'http://192.168.1.111/'
-const site_url_dev = 'http://localhost:3000'
+const site_url_dev = 'http://localhost:3000/'
 const backend_domain_dev = '192.168.1.111'
 const access_token_dev = 'sHetF-JwtYi-kJtsE-TeuAa-nKwqP-LshNd-aXhwV-ZalBr'
 const site_key_dev = '6Le7mo4rAAAAAHp0irf1mq-EZntqBPN-n2Xwkjcz'

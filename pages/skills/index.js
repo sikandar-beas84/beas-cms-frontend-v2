@@ -63,11 +63,11 @@ const Skills = ({ skills, seometadata }) => {
                 <div className='sill-wrap-head'>
                   <div className='skill-wrap-img'>
                    <Image
-                    src="/assets/images/s1.png"
+                    src={`${env.BACKEND_BASE_URL}assets/img/menu-content/${item?.extra_icon}`}
                     alt="skill-name" 
                     className='img-fluid'
-                    width={32}
-                    height={32}
+                    width={50}
+                    height={50}
                     loading="lazy"
 
                   />

@@ -66,8 +66,8 @@ const Skills = ({ skills, seometadata }) => {
                     src={`${env.BACKEND_BASE_URL}assets/img/menu-content/${item?.extra_icon}`}
                     alt="skill-name" 
                     className='img-fluid'
-                    width={32}
-                    height={32}
+                    width={50}
+                    height={50}
                     loading="lazy"
 
                   />

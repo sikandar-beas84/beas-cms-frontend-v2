@@ -16,8 +16,8 @@ const Service = ({ services, service, seometadata }) => {
     return <div>Loading...</div>;
   }
 
-   // Step 1: Expand application-solutioning
-   let finalServices = services?.flatMap(item => {
+  // Step 1: Expand application-solutioning
+  let finalServices = services?.flatMap(item => {
     if (item.slug === "application-solutioning") {
       return item.children?.map(child => ({
         ...child,
@@ -45,33 +45,33 @@ const Service = ({ services, service, seometadata }) => {
   //////////////////////////////////////////
 
   const metaTitle = seometadata?.title
-  ? seometadata?.title
-  :`Service`;
+    ? seometadata?.title
+    : `Service`;
   const metaKeyword = seometadata?.keyword
-  ? seometadata?.keyword
-  :"services, beas consultancy, business solutions, software development";
+    ? seometadata?.keyword
+    : "services, beas consultancy, business solutions, software development";
   const metaDesc = seometadata?.description
-  ? seometadata?.description
-  : "Explore our wide range of services tailored to your business needs.";
+    ? seometadata?.description
+    : "Explore our wide range of services tailored to your business needs.";
   const metaImage = seometadata?.image
-  ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
-  : `${env.BACKEND_BASE_URL}${service?.image}`;
+    ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
+    : `${env.BACKEND_BASE_URL}${service?.image}`;
   const metaUrl = seometadata?.url
-  ?`${env.FRONTEND_BASE_URL}services/${seometadata?.url}`
-  :`${env.FRONTEND_BASE_URL}services/${service?.slug}`;
+    ? `${env.FRONTEND_BASE_URL}services/${seometadata?.url}`
+    : `${env.FRONTEND_BASE_URL}services/${service?.slug}`;
   const metaAuthor = seometadata?.author
-  ? seometadata?.author
-  :"BEAS Consultancy And Services Private Limited";
+    ? seometadata?.author
+    : "BEAS Consultancy And Services Private Limited";
 
   return (
     <>
       <SEO
-        title={ metaTitle }
-        description={ metaDesc }
-        keywords={ metaKeyword }
-        image={ metaImage }
-        url={ metaUrl }
-        author={ metaAuthor }
+        title={metaTitle}
+        description={metaDesc}
+        keywords={metaKeyword}
+        image={metaImage}
+        url={metaUrl}
+        author={metaAuthor}
       />
       <main>
         <BreadCrumb pagetitle="Services" pageBanner={`assets/img/menu-content/${service?.menu_contents?.banner}`} />
@@ -90,7 +90,7 @@ const Service = ({ services, service, seometadata }) => {
             <div className="row">
               <div className="col-lg-12">
                 <div className="ser_rea services_sec">
-                {finalServices?.map((item, index) => {
+                  {finalServices?.map((item, index) => {
                     const isEven = index % 2 !== 0;
 
                     const description = item?.menu_contents?.description
@@ -162,8 +162,26 @@ const Service = ({ services, service, seometadata }) => {
               </div>
             </div>
           </div>
-          <div className="shp1"><img src="../assets/images/ser-bg.png" /></div>
-          <div className="shp2"><img src="../assets/images/ser-bg2.png" /></div>
+          <div className="shp1">
+            <Image
+              src="/assets/images/ser-bg.png"
+              alt="shape"
+              width={474}
+              height={73}
+              loading="lazy"
+
+            />
+          </div>
+          <div className="shp2">
+            <Image
+              src="/assets/images/ser-bg2.png"
+              alt="shape"
+              width={474}
+              height={73}
+              loading="lazy"
+
+            />
+          </div>
         </section>
       </main>
     </>

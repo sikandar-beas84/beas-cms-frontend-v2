@@ -23,34 +23,34 @@ const Indutries = ({ industries, seometadata }) => {
   };
 
   const metaTitle = seometadata?.title
-  ? seometadata?.title
-  :`Industries`;
+    ? seometadata?.title
+    : `Industries`;
   const metaKeyword = seometadata?.keyword
-  ? seometadata?.keyword
-  :"Industries, IT Services, Beas Consultancy & Services Pvt. Ltd., Software Solutions, Healthcare, Education, Retail, Manufacturing";
+    ? seometadata?.keyword
+    : "Industries, IT Services, Beas Consultancy & Services Pvt. Ltd., Software Solutions, Healthcare, Education, Retail, Manufacturing";
   const metaDesc = seometadata?.description
-  ? seometadata?.description
-  : "Explore the industries we serve with expert solutions tailored to your business needs. Discover how Beas Consultancy empowers various sectors.";
+    ? seometadata?.description
+    : "Explore the industries we serve with expert solutions tailored to your business needs. Discover how Beas Consultancy empowers various sectors.";
   const metaImage = seometadata?.image
-  ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
-  : `${env.BACKEND_BASE_URL}${industries?.image}`;
+    ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
+    : `${env.BACKEND_BASE_URL}${industries?.image}`;
   const metaUrl = seometadata?.url
-  ?`${env.FRONTEND_BASE_URL}industries/${seometadata?.url}`
-  :`${env.FRONTEND_BASE_URL}industries/${industries?.slug}`;
+    ? `${env.FRONTEND_BASE_URL}industries/${seometadata?.url}`
+    : `${env.FRONTEND_BASE_URL}industries/${industries?.slug}`;
   const metaAuthor = seometadata?.author
-  ? seometadata?.author
-  :"BEAS Consultancy And Services Private Limited";
+    ? seometadata?.author
+    : "BEAS Consultancy And Services Private Limited";
 
   return (
 
     <>
       <SEO
-        title={ metaTitle }
-        description={ metaDesc }
-        keywords={ metaKeyword }
-        image={ metaImage }
-        url={ metaUrl }
-        author={ metaAuthor }
+        title={metaTitle}
+        description={metaDesc}
+        keywords={metaKeyword}
+        image={metaImage}
+        url={metaUrl}
+        author={metaAuthor}
       />
       <main>
         <BreadCrumb pagetitle="Industries" pageBanner={`assets/img/menu-content/${industries?.menu_contents?.banner}`} />
@@ -81,7 +81,7 @@ const Indutries = ({ industries, seometadata }) => {
                                 <h2>{item?.name}</h2>
                                 <p>{stripHtml(item?.description)}</p>
                                 <Link href={`/industries/${item?.slug}`} className="services-btn proc-btn thar-three4">
-                                   Read More
+                                  Read More
                                 </Link>
                               </div>
                             </div>
@@ -117,7 +117,7 @@ const Indutries = ({ industries, seometadata }) => {
                                 <h2>{item?.name}</h2>
                                 <p>{stripHtml(item?.description)}</p>
                                 <Link href={`/industries/${item?.slug}`} className="services-btn proc-btn thar-three4">
-                                   Read More
+                                  Read More
                                 </Link>
                               </div>
                             </div>
@@ -132,8 +132,28 @@ const Indutries = ({ industries, seometadata }) => {
               </div>
             </div>
           </div>
-          <div className="shp1"><img src="../assets/images/ser-bg.png" /></div>
-          <div className="shp2"><img src="../assets/images/ser-bg2.png" /></div>
+          <div className="shp1">
+            <Image
+              src="/assets/images/ser-bg.png"
+              alt="shape"
+              width={474}
+              height={73}
+              loading="lazy"
+
+            />
+          </div>
+          <div className="shp2">
+            <Image
+              src="/assets/images/ser-bg2.png"
+              alt="shape"
+              width={474}
+              height={73}
+              loading="lazy"
+
+            />
+          </div>
+
+
         </section>
       </main>
     </>

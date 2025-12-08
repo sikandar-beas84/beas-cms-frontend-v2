@@ -62,7 +62,15 @@ const Skills = ({ skills, seometadata }) => {
               <div className='skill-wrap skill-image175'>
                 <div className='sill-wrap-head'>
                   <div className='skill-wrap-img'>
-                    <img src="/assets/images/s1.png" alt="skill-name" className='img-fluid' />
+                   <Image
+                    src="/assets/images/s1.png"
+                    alt="skill-name" 
+                    className='img-fluid'
+                    width={32}
+                    height={32}
+                    loading="lazy"
+
+                  />
                   </div>
                   <div className='skill-wrap-head-text'>{item?.extra_title}</div>
                 </div>

@@ -6,6 +6,8 @@ import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
 import Accordion from 'react-bootstrap/Accordion';
 import ModalComponent from '../component/ModalComponent';
+import Image from 'next/image';
+
 const ContactUs = ({ contactus, faqs, seometadata }) => {
 
   const router = useRouter();
@@ -237,7 +239,15 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
 
                     <div className="form_add map_add1">
                       <div className="map_location_icon">
-                        <img src="assets/images/add2.png" className="beats" />
+                        <Image
+                          src="/assets/images/add2.png"
+                          alt="address"
+                          width={40}
+                          height={40}
+                          loading="lazy"
+                          className="beats"
+                        />
+                       
                       </div>
                       <div className="map_location_icon_cont">
                         <h1>Address</h1>
@@ -247,7 +257,14 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
                     </div>
                     <div className="form_add map_add3">
                       <div className="map_location_icon">
-                        <img src="assets/images/add3.png" className="beats" />
+                      <Image
+                          src="/assets/images/add3.png"
+                          alt="email"
+                          width={40}
+                          height={40}
+                          loading="lazy"
+                          className="beats"
+                        />
                       </div>
                       <div className="map_location_icon_cont map_location_icon_cont4">
                         <h1>Email Address</h1>
@@ -257,7 +274,14 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
                     </div>
                     <div className="form_add map_add2">
                       <div className="map_location_icon">
-                        <img src="assets/images/add1.png" className="beats" />
+                        <Image
+                            src="/assets/images/add1.png"
+                            alt="mobile"
+                            width={40}
+                            height={40}
+                            loading="lazy"
+                            className="beats"
+                          />
                       </div>
                       <div className="map_location_icon_cont map_location_icon_cont2">
                         <h1>Mobile Number</h1>

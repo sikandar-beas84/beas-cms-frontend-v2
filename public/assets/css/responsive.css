@@ -977,6 +977,10 @@
 
 /* 768-991 */
 @media (max-width: 767.98px) {
+  .wpp-iicon{display:none;}
+  .bnr-txt p:nth-of-type(2){
+    display: none;
+  }
   .banner_thumb_img {
     height: auto;
     width: 100%;
@@ -1297,7 +1301,7 @@
 
   .bnr-txt p {
     margin-bottom: 15px;
-    font-size:12px;
+    font-size:10px;
   }
 
   .bnr-btn {

@@ -160,7 +160,7 @@ const Footer = ({ homeData }) => {
             <Col xs={12} lg={6}>
               <p className='mb-0'>© 2024 BEAS Consultancy & Services Pvt. Ltd. All Rights Reserved</p>
             </Col>
-            <Col xs={12} lg={6} className="text-lg-end text-start">
+            <Col xs={12} lg={6} className="text-end">
               <a href='#' className='scroll-top'><ArrowUp size={16} /></a>
             </Col>
           </Row>

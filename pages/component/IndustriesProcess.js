@@ -7,9 +7,7 @@ import Link from 'next/link';
 const IndustriesProcess = ({pageTitle, pageDesc, industryData}) => {
     const [activeIndex, setActiveIndex] = useState(0);
     const tabs = industryData;
-    //console.log("tab",tabs);
     const activeTab = tabs[activeIndex];
-    // Auto change tab every 5 seconds
     useEffect(() => {
         const interval = setInterval(() => {
             setActiveIndex((prevIndex) =>
@@ -61,8 +59,8 @@ const IndustriesProcess = ({pageTitle, pageDesc, industryData}) => {
                                             <Image
                                                 src={`${env.BACKEND_BASE_URL}assets/img/menu-content/${tabs[activeIndex]?.menu_contents?.image}`}
                                                 alt={tabs[activeIndex]?.name}
-                                                width={500}
-                                                height={350}
+                                                width={800}
+                                                height={800}
                                                 className="img-fluid"
                                                 loading="lazy"
                                             />
@@ -70,7 +68,7 @@ const IndustriesProcess = ({pageTitle, pageDesc, industryData}) => {
 
                                         <div className="proc-text">
                                             <h2>{tabs[activeIndex]?.name}</h2>
-                                            <div className="grey-txt2 blog-hm-desc blog-entertain-desc" dangerouslySetInnerHTML={{ __html: activeTab?.description }} />
+                                            <div className="grey-txt2 industries-hm-desc" dangerouslySetInnerHTML={{ __html: activeTab?.description }} />
                                             <Link href={`industries/${tabs[activeIndex]?.slug}`} className="mt-3 proc-btn thar-three4">
                                                 Read More
                                             </Link>

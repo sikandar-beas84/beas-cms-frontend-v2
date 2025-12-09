@@ -1260,12 +1260,12 @@ img.port-shw {
   font-weight: 700;
   font-size: 42px;
   line-height: 53px;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   color: #FFFFFF;
   margin-bottom: 20px;
 }
 
-.proc-text p {
+/* .proc-text p {
   font-family: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -1274,7 +1274,7 @@ img.port-shw {
   line-height: 36px;
   color: #FFFFFF;
   margin-bottom: 33px;
-}
+} */
 
 .proc-btn {
   display: flex !important;
@@ -1305,7 +1305,7 @@ img.port-shw {
 }
 
 .tabcontent {
-  padding: 6px 0px 14px 0px;
+  padding: 6px 0 0 0;
   border: 1px solid #ccc;
   width: 67.8%;
   border: none;
@@ -1622,7 +1622,7 @@ img.port-shw {
   padding: 32px 19px 31px 28px;
   position: relative;
   margin-bottom: 47px;
-  min-height: 370px;
+  min-height: 410px;
 }
 
 .quote-txt p {
@@ -3595,7 +3595,7 @@ textarea.form-control.h-150.mb-3 {
   color: black;
   font-size: 16px;
   font-weight: 400;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   line-height: 30px;
   word-wrap: break-word;
 }
@@ -3884,7 +3884,7 @@ textarea.form-control.h-150.mb-3 {
 }
 
 .proc-img {
-  flex: 0 0 40%;
+  flex: 0 0 45%;
   height: auto;
 }
 
@@ -4273,3 +4273,13 @@ textarea.form-control.h-150.mb-3 {
 }
 
 .nested-dropdown.nav-item.dropend .dropdown-menu{top:-5px;}
+.industries-hm-desc {
+  line-height: 1.4em;
+  height: calc(1.4em * 8);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  font-weight: 400;
+  font-size: 20px;
+}

@@ -2424,11 +2424,11 @@ input::placeholder {
 .contact_form_box {
   width: 100%;
   margin-top: 40px;
-  padding-right: 40px;
+  padding-right: 0;
 }
 
 .contact_inputs {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   position: relative;
 }
 
@@ -4314,3 +4314,8 @@ textarea.form-control.h-150.mb-3 {
   width: 40px;
   height: 40px;
   padding: 5px 0;}
+.contact_form_wrap_box{background: #FFFFFF;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.05);
+  border-radius: 7px;
+  padding: 20px 32px;border:1px solid #f1f1f1;}
+

@@ -1,5 +1,5 @@
 //REACT_ENV=prod
-const REACT_ENV = 'prod'
+const REACT_ENV = 'dev'
 // 
 const backend_base_url_dev = 'http://192.168.1.111:8000/'
 const frontend_base_url_dev = 'http://localhost:3000/'

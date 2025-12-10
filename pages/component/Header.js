@@ -183,7 +183,7 @@ const Header = ({ homeData }) => {
             </Nav>
             <Form className="d-flex">
              <div className="glow">
-              <Button variant="outline-primary" onClick={() => router.push('/contact')}>Request A Quote</Button>
+              <Button variant="outline-primary" onClick={() => router.push('/contact')}>Get Quote</Button>
               </div>
             </Form>
           </Navbar.Collapse>

@@ -195,19 +195,20 @@ const metaAuthor = seometadata?.author
                             {/* <input type="hidden" name="job_id" value={slug} /> */}
                             <Row>
                               <Col xs={12} lg={6}>
-                                <label>Name <span className='text-danger'><b>*</b></span></label>
+                                {/* <label>Name <span className='text-danger'><b>*</b></span></label> */}
                                 <input
                                   type='text'
                                   name="name"
                                   value={formData.name}
                                   onChange={handleChange}
                                   className='form-control mb-3'
+                                  placeholder='Name'
                                   required
                                 />
                                 {errors?.name && (<p className='error_message'>{errors.name[0]}</p>)}
                               </Col>
                               <Col xs={12} lg={6}>
-                                <label>Email <span className='text-danger'><b>*</b></span></label>
+                                {/* <label>Email <span className='text-danger'><b>*</b></span></label> */}
                                 <input
                                   type='text'
                                   name="email"
@@ -215,19 +216,22 @@ const metaAuthor = seometadata?.author
                                   onChange={handleChange}
                                   className='form-control mb-3'
                                   required
+                                  placeholder='Email'
                                 />
                                 {errors?.email && (<p className='error_message'>{errors.email[0]}</p>)}
                               </Col>
                             </Row>
                             <Row>
-                              <Col xs={12} lg={6} className="d-flex gap-2">
+                              <Col xs={12} lg={6}>
+                                <div className="d-flex gap-2">
                               <CountryCodeDropdown
                                 name="countrycode"
                                 value={formData.countrycode}
                                 onChange={handleChange}
                                 
                                 />
-                                <label>Phone No <span className='text-danger'><b>*</b></span></label>
+                               <div className='w-100'>
+                                {/* <label>Phone No <span className='text-danger'><b>*</b></span></label> */}
                                 <input
                                   type='text'
                                   name="phone"
@@ -235,12 +239,15 @@ const metaAuthor = seometadata?.author
                                   onChange={handleChange}
                                   className='form-control mb-3'
                                   required
+                                  placeholder='Mobile Number'
                                 />
+                                </div>
+                                </div>
                                 {errors?.phone && (<p className='error_message'>{errors.phone[0]}</p>)}
                               </Col>
 
                               <Col xs={12} lg={6}>
-                                <div className="mt-4 upload-btn-wrapper">
+                                <div className="upload-btn-wrapper">
                                   <button className="btn2">Upload Your CV <ArrowUp /> </button>
                                   <input
                                     type='file'

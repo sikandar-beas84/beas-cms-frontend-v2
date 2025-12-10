@@ -18,7 +18,6 @@ const Header = ({ homeData }) => {
   const casestudy = Array.isArray(homeData?.projects) ? homeData.projects?.[0] : [];
   const emblemRef = useRef(null);
 
-  console.log("homeData?.menus",homeData?.menus);
   useEffect(() => {
     if (!emblemRef.current) return;
 
@@ -46,34 +45,6 @@ const Header = ({ homeData }) => {
   const [showService, setServiceShow] = useState(false);
   const [showIndustry, setIndustryShow] = useState(false);
   const [open, setOpen] = useState(false);
-
-    // Step 1: Expand application-solutioning
-    let finalServices = homeData?.services?.children?.flatMap(item => {
-      if (item.slug === "application-solutioning") {
-        return item.children?.map(child => ({
-          slug: child.slug,
-          name: child.name
-        }));
-      }
-  
-      return [{
-        slug: item.slug,
-        name: item.name
-      }];
-    });
-  
-    // Step 2: Move specific items to the bottom
-    const bottomSlugs = ["ui-ux", "professional-services"];
-  
-    finalServices = [...finalServices].sort((a, b) => {
-      const aLast = bottomSlugs.includes(a?.slug);
-      const bLast = bottomSlugs.includes(b?.slug);
-  
-      if (aLast && !bLast) return 1;   // a goes down
-      if (!aLast && bLast) return -1;  // b goes down
-      return 0;
-    });
-    //////////////////////////////////////////
 
   return (
     <>
@@ -156,11 +127,37 @@ const Header = ({ homeData }) => {
                         onMouseLeave={() => setServiceShow(false)}
                       >
 
-                        {finalServices?.map((item, index) => (
-                          <NavDropdown.Item href={`/services/${item.slug}`} key={index}>
-                            {item.name}
-                          </NavDropdown.Item>
-                        ))}
+                        {homeData?.services?.children?.map((child, i) => {
+
+                          const shouldShowSubmenu = child.slug.toLowerCase() === "application-solutioning";
+
+                          return shouldShowSubmenu ? (
+                            // Show submenu ONLY for "Application Solutioning"
+                            <NavDropdown
+                              title={child.name}
+                              id={`child-${child.slug}`}
+                              drop="end"
+                              show={open}
+                              onMouseEnter={() => setOpen(true)}
+                              onMouseLeave={() => setOpen(false)}
+                              className="nested-dropdown"
+                            >
+                              {child.children?.map((sub, j) => (
+                                <NavDropdown.Item href={`/services/${sub.slug}`} key={j}>
+                                  {sub.name}
+                                </NavDropdown.Item>
+                              ))}
+                            </NavDropdown>
+                          ) : (
+                            // For all OTHER menus, show as normal link (NO submenu)
+                            <NavDropdown.Item
+                              key={i}
+                              href={`/services/${child.slug}`}
+                            >
+                              {child.name}
+                            </NavDropdown.Item>
+                          );
+                        })}
 
                       </NavDropdown>
 

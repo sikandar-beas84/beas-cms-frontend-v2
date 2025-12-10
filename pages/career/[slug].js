@@ -188,7 +188,7 @@ const metaAuthor = seometadata?.author
                 <Row>
                   <Col xs={12} md={8}>
                     <div className='job-details-block-card'>
-                      <h2>Apply For Job</h2>
+                      <h2>Apply For Job</h2> 
                       <Row>
                         <Col xs={12}>
                           <form className="was-validate mt-4" onSubmit={handleSubmit}>

@@ -113,66 +113,65 @@ const Page = ({ service, enrichedChildren, seometadata, slug, allclient }) => {
                         <div className="row center-cols py-3">
 
                           { slug !== 'professional-services'?
-                          ( item1?.menu_contents?.contents?.map((content, index) => {
-                            const casestudyData = content?.casestudy?.data?.casestudy;
-
-                            const isEven = index % 2 !== 0;
-                            const slug = casestudyData?.slug;
-                            const short_desc = casestudyData?.short_desc;
-
-                            const longdesc = casestudyData?.long_desc
-                              ? casestudyData.long_desc.split(",")
-                              : [];
-
-                            return (
-                              slug && (
-                                <Col xs={12} md={4} key={index}>
-                                  <div className="guiditem">
-                                    <div className="blog-hm-img">
-                                      <Image
-                                        src={`${env.BACKEND_BASE_URL}${casestudyData?.image}`}
-                                        alt="case-study"
-                                        width={400}
-                                        height={400}
-                                        priority
-                                        fetchPriority="high"
-                                        className="img-fluid"
-                                      />
-                                      {/* <div className="guidcal">
-                                        <strong>17</strong>
-                                        <br />
-                                        <span>Nov</span>
-                                      </div> */}
-                                    </div>
-
-                                    <div className="ggrey-bg">
-                                      <h5 className="blog-hm-title pbb-5">
-                                        {casestudyData?.title}
-                                      </h5>
-
-                                      <div className="mb-0 portfilo-hm-desc color-black pbb-5">
-                                          {short_desc}
+                          ( 
+                            item1?.menu_contents?.contents
+                              ?.sort((a, b) => Number(a?.extra_order) - Number(b?.extra_order))
+                              ?.map((content, index) => {
+                                const casestudyData = content?.casestudy?.data?.casestudy;
+                            
+                                const isEven = index % 2 !== 0;
+                                const slug = casestudyData?.slug;
+                                const short_desc = casestudyData?.short_desc;
+                            
+                                const longdesc = casestudyData?.long_desc
+                                  ? casestudyData.long_desc.split(",")
+                                  : [];
+                            
+                                return (
+                                  slug && (
+                                    <Col xs={12} md={4} key={index}>
+                                      <div className="guiditem">
+                                        <div className="blog-hm-img">
+                                          <Image
+                                            src={`${env.BACKEND_BASE_URL}${casestudyData?.image}`}
+                                            alt="case-study"
+                                            width={400}
+                                            height={400}
+                                            priority
+                                            fetchPriority="high"
+                                            className="img-fluid"
+                                          />
+                                        </div>
+                            
+                                        <div className="ggrey-bg">
+                                          <h5 className="blog-hm-title pbb-5">
+                                            {casestudyData?.title}
+                                          </h5>
+                            
+                                          <div className="mb-0 portfilo-hm-desc color-black pbb-5">
+                                            {short_desc}
+                                          </div>
+                            
+                                          <div className="d-flex justify-content-center mt-35">
+                                            {slug && (
+                                              <Link
+                                                href={{
+                                                  pathname: "/casestudy",
+                                                  query: { id: slug },
+                                                }}
+                                                className="post-job-btn"
+                                              >
+                                                Read Case Study
+                                              </Link>
+                                            )}
+                                          </div>
+                                        </div>
                                       </div>
-
-                                      <div className="d-flex justify-content-center mt-35">
-                                       {slug && (
-                                        <Link
-                                          href={{
-                                            pathname: "/casestudy",
-                                            query: { id: slug },
-                                          }}
-                                          className="post-job-btn"
-                                        >
-                                          Read Case Study
-                                        </Link>
-                                      )}
-                                      </div>
-                                    </div>
-                                  </div>
-                                </Col>
-                              )
-                            );
-                          })
+                                    </Col>
+                                  )
+                                );
+                              })
+                            
                           ):(
                             <div className="Blogs">
                             <div className="container">

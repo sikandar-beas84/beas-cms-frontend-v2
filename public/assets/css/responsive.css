@@ -67,6 +67,7 @@
 
   .about_imgs img {
     min-width: 100%;
+    height: 100% !important;
   }
 
   .skill-wrap-img {
@@ -145,7 +146,7 @@
 
   .why_abt,
   .section-abuts {
-    padding-bottom: 50px;
+    padding-bottom: 0px;
   }
 
   .inner-page-title {

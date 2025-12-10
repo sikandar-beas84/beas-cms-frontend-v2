@@ -69,7 +69,7 @@ const IndustriesProcess = ({pageTitle, pageDesc, industryData}) => {
                                         <div className="proc-text">
                                             <h2>{tabs[activeIndex]?.name}</h2>
                                             <div className="grey-txt2 industries-hm-desc" dangerouslySetInnerHTML={{ __html: activeTab?.description }} />
-                                            <Link href={`industries/${tabs[activeIndex]?.slug}`} className="mt-3 proc-btn thar-three4">
+                                            <Link href={`industries/${tabs[activeIndex]?.slug}`} className="mt-5 proc-btn thar-three4">
                                                 Read More
                                             </Link>
                                         </div>

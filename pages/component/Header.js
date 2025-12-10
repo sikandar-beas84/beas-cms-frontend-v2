@@ -249,7 +249,7 @@ const Header = ({ homeData }) => {
 </div> */}
 
 
-      <div class="wpp-iicon">
+      <div class="wpp-iicon" >
         <div class="emblem">
           <svg viewBox="0 0 200 200">
             <defs>
@@ -278,6 +278,12 @@ const Header = ({ homeData }) => {
           width={40}
           height={40}
           className="wp-icon"
+          onClick={() => {
+            window.open(
+              "https://wa.me/9433068494/?text=Hi%20BEAS%20CONSULTANCY%20AND%20SERVICES%20PVT.%20LTD.",
+              "_blank"
+            );
+          }}
         />
       </div>
 

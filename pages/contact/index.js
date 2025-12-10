@@ -152,12 +152,15 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
         <section className="section-padding">
           <div className="container">
             <div className="row">
-              <div className="col-lg-8 col-md-12">
-                <div className="contact_form_heading">
-                  <h2>Are You Ready For A Better, More Productive Business?</h2>
+              <div className="col-lg-8 col-md-12 contact_form_wrap_box">
+                <div className="contact_form_heading position-relative">
+                  <h2>Let's Connect</h2>
+                  
                 </div>
                 <div className="contact_form_box">
                   <form className="was-validate contact-frm" onSubmit={handleSubmit}>
+
+
                     <div className="row">
                       <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                         <div className="contact_inputs">
@@ -235,14 +238,15 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
                           {errors?.message && (<p className='error_message'>{errors.message[0]}</p>)}
                         </div>
                       </div>
-                      <Row>
-                              <Col xs={12} className='my-3'>
-                                <ReCAPTCHA
-                                  sitekey={`${env.SITE_KEY}`}
-                                  onChange={setCaptchaToken}
-                                />
-                              </Col>
-                            </Row>
+
+                      <div className='col-12'>
+                        <ReCAPTCHA
+                          sitekey={`${env.SITE_KEY}`}
+                          onChange={setCaptchaToken}
+                        />
+                      </div>
+                    
+
                       <div className="col-4">
                         <div className="contact_form_btn">
 
@@ -271,7 +275,7 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
                           loading="lazy"
                           className="beats"
                         />
-                       
+
                       </div>
                       <div className="map_location_icon_cont">
                         <h1>Address</h1>
@@ -281,7 +285,7 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
                     </div>
                     <div className="form_add map_add3">
                       <div className="map_location_icon">
-                      <Image
+                        <Image
                           src="/assets/images/add3.png"
                           alt="email"
                           width={40}
@@ -299,13 +303,13 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
                     <div className="form_add map_add2">
                       <div className="map_location_icon">
                         <Image
-                            src="/assets/images/add1.png"
-                            alt="mobile"
-                            width={40}
-                            height={40}
-                            loading="lazy"
-                            className="beats"
-                          />
+                          src="/assets/images/add1.png"
+                          alt="mobile"
+                          width={40}
+                          height={40}
+                          loading="lazy"
+                          className="beats"
+                        />
                       </div>
                       <div className="map_location_icon_cont map_location_icon_cont2">
                         <h1>Mobile Number</h1>

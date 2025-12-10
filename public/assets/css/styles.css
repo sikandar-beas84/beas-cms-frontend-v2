@@ -2424,11 +2424,11 @@ input::placeholder {
 .contact_form_box {
   width: 100%;
   margin-top: 40px;
-  padding-right: 40px;
+  padding-right: 0;
 }
 
 .contact_inputs {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   position: relative;
 }
 
@@ -3454,6 +3454,7 @@ a.services-btn {
   display: -webkit-box;
   -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
+  color:#000;
 }
 
 /* .contact-bg .serv-head{width:100%;}
@@ -4313,3 +4314,37 @@ textarea.form-control.h-150.mb-3 {
   width: 40px;
   height: 40px;
   padding: 5px 0;}
+.contact_form_wrap_box{background: #FFFFFF;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.05);
+  border-radius: 7px;
+  padding: 20px 32px;border:1px solid #f1f1f1;}
+.sliding-form.active .tel-contact{border: 1px solid #ccc;
+  padding: 6px 10px;
+  width: 90px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 6px;
+  background: #fff;
+  height: 35px;}
+.contact_form_box .tel-contact{border: 1px solid #ccc;
+  padding: 6px 10px;
+  width: 90px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 0;
+  background: #fff;
+  height: 50px;}
+.job-details-block-card .tel-contact{border: 1px solid #ccc;
+  padding: 6px 10px;
+  width: 90px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 0;
+  background: #fff;
+  height: 50px;}

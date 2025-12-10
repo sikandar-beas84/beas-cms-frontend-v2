@@ -43,6 +43,16 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
   const start = currentGroup * MAX_VISIBLE;
   const end = Math.min(start + MAX_VISIBLE, totalPages);
 
+
+  // Helper function to replace variables
+const parseHTMLWithEnv = (html) => {
+  if (!html) return "";
+
+  return html
+    .replace(/\{env\.SITE_URL\}/g, env.SITE_URL)   // replace {env.SITE_URL}
+    .replace(/\{env\.BACKEND_BASE_URL\}/g, env.BACKEND_BASE_URL); // other env vars if needed
+};
+
   const metaTitle = seometadata?.title
     ? seometadata?.title
     : `Case Study`;
@@ -144,12 +154,22 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
                     </Accordion.Body>
                   </Accordion.Item>
 
-                  <Accordion.Item eventKey="1" className="green-bg">
+                  {/* <Accordion.Item eventKey="1" className="green-bg">
                     <Accordion.Header>BEAS’s Solution</Accordion.Header>
                     <Accordion.Body>
                       <div
                         dangerouslySetInnerHTML={{
                           __html: casestudy?.beas_solution,
+                        }}
+                      />
+                    </Accordion.Body>
+                  </Accordion.Item> */}
+                  <Accordion.Item eventKey="1" className="green-bg">
+                    <Accordion.Header>BEAS’s Solution</Accordion.Header>
+                    <Accordion.Body>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: parseHTMLWithEnv(casestudy?.beas_solution),
                         }}
                       />
                     </Accordion.Body>

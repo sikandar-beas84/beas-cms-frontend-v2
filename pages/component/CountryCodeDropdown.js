@@ -103,20 +103,20 @@ export default function CountryCodeDropdown({ name, value, onChange }) {
   return (
     <div className="dropdown-container" style={{ position: "relative" }}>
       <div
-        className="dropdown-selected"
+        className="dropdown-selected tel-contact"
         onClick={() => setOpen(!open)}
-        style={{
-          border: "1px solid #ccc",
-          padding: "6px 10px",
-          width: "90px",
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          gap: "8px",
-          borderRadius: "6px",
-          background: "#fff",
-          height:'35px'
-        }}
+        // style={{
+        //   border: "1px solid #ccc",
+        //   padding: "6px 10px",
+        //   width: "90px",
+        //   cursor: "pointer",
+        //   display: "flex",
+        //   alignItems: "center",
+        //   gap: "8px",
+        //   borderRadius: "6px",
+        //   background: "#fff",
+        //   height:'35px'
+        // }}
       >
         {/* Render only if selected exists */}
         {selected && (

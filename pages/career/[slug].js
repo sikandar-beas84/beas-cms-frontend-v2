@@ -8,6 +8,8 @@ import { env } from '../../util/constants/common';
 import ReCAPTCHA from 'react-google-recaptcha';
 import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
+import CountryCodeDropdown from '../component/CountryCodeDropdown';
+
 const Page = ({ career, menucareer, contact, careerId, seometadata }) => {
 
   const router = useRouter();
@@ -25,7 +27,8 @@ const Page = ({ career, menucareer, contact, careerId, seometadata }) => {
     state: '',
     pincode: '',
     address: '',
-    resume: ''
+    resume: '',
+    countrycode: '+91'  // default India
   });
 
   const [status, setStatus] = useState('');
@@ -201,7 +204,7 @@ const metaAuthor = seometadata?.author
                                   className='form-control mb-3'
                                   required
                                 />
-                                {errors.name && (<p className='error_message'>{errors.name[0]}</p>)}
+                                {errors?.name && (<p className='error_message'>{errors.name[0]}</p>)}
                               </Col>
                               <Col xs={12} lg={6}>
                                 <label>Email <span className='text-danger'><b>*</b></span></label>
@@ -213,11 +216,17 @@ const metaAuthor = seometadata?.author
                                   className='form-control mb-3'
                                   required
                                 />
-                                {errors.email && (<p className='error_message'>{errors.email[0]}</p>)}
+                                {errors?.email && (<p className='error_message'>{errors.email[0]}</p>)}
                               </Col>
                             </Row>
                             <Row>
-                              <Col xs={12} lg={6}>
+                              <Col xs={12} lg={6} className="d-flex gap-2">
+                              <CountryCodeDropdown
+                                name="countrycode"
+                                value={formData.countrycode}
+                                onChange={handleChange}
+                                
+                                />
                                 <label>Phone No <span className='text-danger'><b>*</b></span></label>
                                 <input
                                   type='text'
@@ -227,7 +236,7 @@ const metaAuthor = seometadata?.author
                                   className='form-control mb-3'
                                   required
                                 />
-                                {errors.phone && (<p className='error_message'>{errors.phone[0]}</p>)}
+                                {errors?.phone && (<p className='error_message'>{errors.phone[0]}</p>)}
                               </Col>
 
                               <Col xs={12} lg={6}>
@@ -243,7 +252,7 @@ const metaAuthor = seometadata?.author
                                   />
                                 </div>
 
-                                {errors.resume && (<p className='error_message'>{errors.resume[0]}</p>)}
+                                {errors?.resume && (<p className='error_message'>{errors.resume[0]}</p>)}
                               </Col>
                             </Row>
                             <Row>

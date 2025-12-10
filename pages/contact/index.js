@@ -8,6 +8,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import ReCAPTCHA from 'react-google-recaptcha';
 import Image from 'next/image';
 import { Container, Row, Col } from 'react-bootstrap'
+import CountryCodeDropdown from '../component/CountryCodeDropdown';
 
 const ContactUs = ({ contactus, faqs, seometadata }) => {
 
@@ -25,7 +26,8 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
     phone: '',
     subject: '',
     message: '',
-    file: ''
+    file: '',
+    countrycode: '+91'  // default India
   });
 
   const [status, setStatus] = useState('');
@@ -73,6 +75,7 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
     for (const key in formData) {
       data.append(key, formData[key]);
     }
+    data.append('recaptcha_token', captchaToken);
     setLoading(true); // ✅ start loader
     setStatus('');    // clear previous status
     try {
@@ -167,7 +170,7 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
                             placeholder='Name'
                             required
                           />
-                          {errors.name && (<p className='error_message'>{errors.name[0]}</p>)}
+                          {errors?.name && (<p className='error_message'>{errors.name[0]}</p>)}
                         </div>
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-6 col-12">
@@ -181,11 +184,17 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
                             placeholder='Email'
                             required
                           />
-                          {errors.email && (<p className='error_message'>{errors.email[0]}</p>)}
+                          {errors?.email && (<p className='error_message'>{errors.email[0]}</p>)}
                         </div>
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-                        <div className="contact_inputs">
+                        <div className="contact_inputs d-flex gap-2">
+                        <CountryCodeDropdown
+                          name="countrycode"
+                          value={formData.countrycode}
+                          onChange={handleChange}
+                          
+                          />
                           <input
                             type='text'
                             name="phone"
@@ -195,7 +204,7 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
                             placeholder='Mobile Number'
                             required
                           />
-                          {errors.phone && (<p className='error_message'>{errors.phone[0]}</p>)}
+                          {errors?.phone && (<p className='error_message'>{errors.phone[0]}</p>)}
                         </div>
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-6 col-12">
@@ -209,7 +218,7 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
                             placeholder='Subject'
                             required
                           />
-                          {errors.subject && (<p className='error_message'>{errors.subject[0]}</p>)}
+                          {errors?.subject && (<p className='error_message'>{errors.subject[0]}</p>)}
                         </div>
                       </div>
                       <div className="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -223,7 +232,7 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
                             rows={5}
                             required
                           ></textarea>
-                          {errors.message && (<p className='error_message'>{errors.message[0]}</p>)}
+                          {errors?.message && (<p className='error_message'>{errors.message[0]}</p>)}
                         </div>
                       </div>
                       <Row>

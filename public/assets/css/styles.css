@@ -3454,6 +3454,7 @@ a.services-btn {
   display: -webkit-box;
   -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
+  color:#000;
 }
 
 /* .contact-bg .serv-head{width:100%;}

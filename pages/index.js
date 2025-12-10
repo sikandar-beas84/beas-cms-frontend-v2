@@ -168,7 +168,9 @@ const metaAuthor = seometadata?.author
             <div className="container">
                 <div className="serv-head stat-head">
                   <h2>{homeData?.aboutus?.name}</h2>
-                  <p>{aboutuspreviewText}</p>
+                  <p>{aboutuspreviewText} <Link href={`/about`} className='blue-text'>
+                                 <u>Read More...</u>
+                              </Link></p> 
                 </div>
                 <div className="stat-bod">
                   <div className="counter-show">
@@ -182,7 +184,10 @@ const metaAuthor = seometadata?.author
                               <div className="d-flexrt">
                                   <h3 className="count-number">{item?.short_desc}</h3>
                               </div>
-                              <p>{item?.title}</p>
+                              <p>{item?.title} 
+                             
+                             
+                              </p>
                             </div>
                         </div>
                       ))}

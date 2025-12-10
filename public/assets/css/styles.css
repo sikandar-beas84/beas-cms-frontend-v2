@@ -4338,3 +4338,13 @@ textarea.form-control.h-150.mb-3 {
   border-radius: 0;
   background: #fff;
   height: 50px;}
+.job-details-block-card .tel-contact{border: 1px solid #ccc;
+  padding: 6px 10px;
+  width: 90px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 0;
+  background: #fff;
+  height: 50px;}

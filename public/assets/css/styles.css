@@ -1945,12 +1945,23 @@ img.port-shw {
 }
 
 .why_abt {
+  position: relative;
   padding-bottom: 75px;
   background: url(../images/image2.png);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  z-index: 1;
 }
+
+.why_abt::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgb(255 255 255 / 68%);
+  z-index: -1;
+}
+
 
 .our_misson_boxs {
   padding-right: 30px;

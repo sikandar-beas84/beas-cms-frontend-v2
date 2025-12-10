@@ -5,8 +5,9 @@ import { env } from '../../util/constants/common';
 import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
 import Accordion from 'react-bootstrap/Accordion';
-import ModalComponent from '../component/ModalComponent';
+import ReCAPTCHA from 'react-google-recaptcha';
 import Image from 'next/image';
+import { Container, Row, Col } from 'react-bootstrap'
 
 const ContactUs = ({ contactus, faqs, seometadata }) => {
 
@@ -16,6 +17,7 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
   }
 
   const fileInputRef = useRef(null);
+  const [captchaToken, setCaptchaToken] = useState(null);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -61,6 +63,11 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!captchaToken) {
+      alert('Please verify the captcha');
+      return;
+    }
 
     const data = new FormData();
     for (const key in formData) {
@@ -219,6 +226,14 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
                           {errors.message && (<p className='error_message'>{errors.message[0]}</p>)}
                         </div>
                       </div>
+                      <Row>
+                              <Col xs={12} className='my-3'>
+                                <ReCAPTCHA
+                                  sitekey={`${env.SITE_KEY}`}
+                                  onChange={setCaptchaToken}
+                                />
+                              </Col>
+                            </Row>
                       <div className="col-4">
                         <div className="contact_form_btn">
 

@@ -319,7 +319,9 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
 
       {page == 'projectsnew' && (
         <Slider {...settings}>
-          {projects?.map((item, index) => {
+          {projects
+          ?.filter(item => item?.slug !== "bmc-car-parking")
+          ?.map((item, index) => {
 
             // const titleText = item?.title
             //   ? item?.title.split(" ").slice(0, 4).join(" ") + ""

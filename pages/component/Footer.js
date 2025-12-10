@@ -70,11 +70,7 @@ const Footer = ({ homeData }) => {
                         );
                       }
                     })}
-                    <li className='footer-li'>
-                        <Nav.Link href="/blogs">
-                          Blogs
-                        </Nav.Link>
-                    </li>
+                    
                   </ul>
                 </Col>
                 <Col xs={12} md={4}>

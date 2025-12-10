@@ -18,7 +18,6 @@ const Header = ({ homeData }) => {
   const casestudy = Array.isArray(homeData?.projects) ? homeData.projects?.[0] : [];
   const emblemRef = useRef(null);
 
-  console.log("homeData?.menus",homeData?.menus);
   useEffect(() => {
     if (!emblemRef.current) return;
 

@@ -79,7 +79,9 @@ const Blog = ({ blogs, seometadata, commonblog }) => {
               
                 const createdAtString = item?.created_at;
                 const created_at = createdAtString ? new Date(createdAtString) : null;
-                const day = created_at ? created_at.getDate() : "";
+                const day = created_at
+  ? String(created_at.getDate()).padStart(2, "0")
+  : "";
                 const month = created_at ? created_at.getMonth() + 1 : "";
                 const monthName = created_at
                 ? new Intl.DateTimeFormat('en-US', { month: 'short' }).format(created_at)

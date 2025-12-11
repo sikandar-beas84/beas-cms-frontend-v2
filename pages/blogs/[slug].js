@@ -16,7 +16,9 @@ const Blog = ({ blog, seometadata, homeData, commonblog }) => {
 
   const createdAtString = blog?.created_at;
   const created_at = createdAtString ? new Date(createdAtString) : null;
-  const day = created_at ? created_at.getDate() : "";
+  const day = created_at
+  ? String(created_at.getDate()).padStart(2, "0")
+  : "";
   const month = created_at ? created_at.getMonth() + 1 : "";
   const year = created_at ? created_at.getFullYear() : "";
 
@@ -155,7 +157,7 @@ const Blog = ({ blog, seometadata, homeData, commonblog }) => {
                           <span><User size={16} /> {blog?.author_name}</span>
                         </div>
                         <div className="blog-post-comment">
-                          <MessageCircle size={16} /> {blog.blog_contents.length}
+                          <MessageCircle size={16} /> {blog?.blog_contents?.length}
                         </div>
                       </div>
                       <div className="blog-post-image border-20">
@@ -177,7 +179,7 @@ const Blog = ({ blog, seometadata, homeData, commonblog }) => {
                       <div className="blog-post-content mt-4">
                         <div className="mt-4">
 
-                          {blog.blog_contents.map((item, index) => (
+                          {blog?.blog_contents?.map((item, index) => (
                             <div key={index} className="row media mb-3">
                               <div className="avatar-section">
                                 <Image

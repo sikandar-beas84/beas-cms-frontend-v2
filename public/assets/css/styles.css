@@ -2251,10 +2251,10 @@ img.port-shw {
 /* menu css end */
 /* Job Details */
 .job-details-block {
-  border: 1px solid #D9D9D9;
-  border-radius: 3px;
-  background: #F2F2F2;
-  padding: 15px;
+  /* border: 1px solid #D9D9D9;
+  border-radius: 3px; */
+  /* background: #F2F2F2; */
+  padding: 0 15px;
 }
 
 .job-details-inner-block {
@@ -2274,7 +2274,7 @@ img.port-shw {
 }
 
 .job-details-inner-block li {
-  font-weight: 600;
+  font-weight: 400;
   font-size: 0.938rem;
   line-height: 26px;
   text-transform: capitalize;
@@ -3394,7 +3394,7 @@ a.services-btn {
 }
 
 .blog-sidebar {
-  background-color: #e1f4ff;
+  background-color: #e9f3f9;
   padding: 30px 15px;
   margin-bottom: 20px;
   position: sticky;
@@ -4340,7 +4340,7 @@ textarea.form-control.h-150.mb-3 {
   height: 50px;}
 .job-details-block-card .tel-contact{border: 1px solid #ccc;
   padding: 6px 10px;
-  width: 90px;
+  width: 100px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -4348,3 +4348,31 @@ textarea.form-control.h-150.mb-3 {
   border-radius: 0;
   background: #fff;
   height: 50px;} 
+.job-details-list-box{display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 0;}
+.job-details-list-box li{
+  padding: 10px 20px 10px 0; list-style:none!important;
+ }
+.job-details-list-box li span{font-weight:600;}
+.bblue-bg{background:#e9f3f9; padding:15px;}
+.dropdown-selected.tel-contact {
+  position: relative;
+  padding-right: 20px; /* space for arrow */
+  cursor: pointer;
+}
+
+.dropdown-selected.tel-contact::after {
+  content: "";
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid #000;
+  border-bottom: 2px solid #000;
+  transform: translateY(-50%) rotate(45deg);
+  pointer-events: none;
+}
+

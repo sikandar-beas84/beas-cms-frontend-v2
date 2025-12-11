@@ -2,7 +2,7 @@
 import React, { useState, useRef } from 'react'
 import BreadCrumb from '../component/BreadCrumb'
 import { Container, Row, Col } from 'react-bootstrap'
-import { ArrowUp } from 'react-feather';
+import { ArrowUp, Briefcase,Flag, User, Calendar, MapPin,Award} from 'react-feather';
 import HomeService from '../../util/service/Home';
 import { env } from '../../util/constants/common';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -158,225 +158,219 @@ const metaAuthor = seometadata?.author
             <Col>
               <h1 className='inner-page-title'>Join BEAS — Drive Growth through Quality</h1>
               <div className='inner-page-text' dangerouslySetInnerHTML={{ __html: menucareer?.menu_contents?.description }} />
-              {
-                        (Array.isArray(career?.key_responsibilities) && career?.key_responsibilities.length > 0 && career?.key_responsibilities[0] !== null) ?
-                          (
-                            <div className='job-details-inner-block'>
-                              <p className='job-details-title'>Key Responsibilities</p>
-                              <div className="skill-tags">
-
-                                <ul>
-                                  {(Array.isArray(career?.key_responsibilities)
-                                    ? career?.key_responsibilities
-                                    : career?.key_responsibilities.split(',')
-                                  ).map((skill, index) => (
-                                    <li key={index}>{skill}</li>
-                                  ))}
-                                </ul>
-
-                              </div>
-                            </div>
-                          ) : null
-                      }
+             
             </Col>
           </Row>
         </Container>
+
         <section className="section-abuts section-services">
-          <Container className='my-3'>
-            <Row>
-              <Col className='ser_frmArea'>
+  <Container className="my-3">
+    <Row>
+      <Col className="ser_frmArea">
+        <Row>
+          <Col xs={12}>
+            <div className="job-details-block">
+              <div className="job-details-inner-block">
+                <p className="job-details-title">Job Details</p>
+
+                <ul className="job-details-list-box">
+                  <li>
+                    <span><Award size={16} strokeWidth={2}/> Years Of Experience: </span> {career?.experience}
+                  </li>
+                  <li>
+                    <span><MapPin size={16} strokeWidth={2}/> Location: </span> {career?.location}
+                  </li>
+                  <li>
+                    <span><Briefcase size={16} strokeWidth={2} /> Level: </span> {career?.level}
+                  </li>
+                  <li>
+                    <span><Calendar size={16} strokeWidth={2}/> Duration: </span> {career?.duration}
+                  </li>
+                  <li>
+                    <span><User size={16} strokeWidth={2}/> Vacancy: </span> {career?.vacancy}
+                  </li>
+                  <li>
+                    <span><Flag size={16} strokeWidth={2} /> Type: </span> Full Time
+                  </li>
+                </ul>
+              </div>
+
+             
+            </div>
+          </Col>
+          <hr/>
+          {/* Key Responsibilities */}
+          <Col xs={12} lg={6}>
+            {Array.isArray(career?.key_responsibilities) &&
+              career.key_responsibilities.length > 0 &&
+              career.key_responsibilities[0] !== null && (
+                <div className="job-details-inner-block">
+                  <p className="job-details-title">Key Responsibilities</p>
+                  <div className="skill-tags">
+                    <ul>
+                      {(Array.isArray(career.key_responsibilities)
+                        ? career.key_responsibilities
+                        : (career.key_responsibilities || "").split(",")
+                      ).map((skill, index) => (
+                        <li key={index}>{skill}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
+          </Col>
+
+          {/* Additional Skills */}
+          <Col xs={12} lg={6}>
+             {/* Required Skills */}
+             {Array.isArray(career?.required_skills) &&
+                career.required_skills.length > 0 &&
+                career.required_skills[0] !== null && (
+                  <div className="job-details-inner-block">
+                    <p className="job-details-title">Required Skills</p>
+                    <div className="skill-tags">
+                      <ul>
+                        {(Array.isArray(career.required_skills)
+                          ? career.required_skills
+                          : (career.required_skills || "").split(",")
+                        ).map((skill, index) => (
+                          <li key={index}>{skill}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                )}
+          </Col>
+        
+
+          {/* Apply For Job FORM */}
+          <Col xs={12} className='bblue-bg'>
+            <div className="job-details-block-card">
+              <p className="job-details-title">Apply For Job</p>
+
+              <form className="was-validate mt-4" onSubmit={handleSubmit}>
                 <Row>
-                  <Col xs={12} md={8}>
-                    <div className='job-details-block-card'>
-                      <h2>Apply For Job</h2> 
-                      <Row>
-                        <Col xs={12}>
-                          <form className="was-validate mt-4" onSubmit={handleSubmit}>
-                            {/* <input type="hidden" name="job_id" value={slug} /> */}
-                            <Row>
-                              <Col xs={12} lg={6}>
-                                {/* <label>Name <span className='text-danger'><b>*</b></span></label> */}
-                                <input
-                                  type='text'
-                                  name="name"
-                                  value={formData.name}
-                                  onChange={handleChange}
-                                  className='form-control mb-3'
-                                  placeholder='Name'
-                                  required
-                                />
-                                {errors?.name && (<p className='error_message'>{errors.name[0]}</p>)}
-                              </Col>
-                              <Col xs={12} lg={6}>
-                                {/* <label>Email <span className='text-danger'><b>*</b></span></label> */}
-                                <input
-                                  type='text'
-                                  name="email"
-                                  value={formData.email}
-                                  onChange={handleChange}
-                                  className='form-control mb-3'
-                                  required
-                                  placeholder='Email'
-                                />
-                                {errors?.email && (<p className='error_message'>{errors.email[0]}</p>)}
-                              </Col>
-                            </Row>
-                            <Row>
-                              <Col xs={12} lg={6}>
-                                <div className="d-flex gap-2">
-                              <CountryCodeDropdown
-                                name="countrycode"
-                                value={formData.countrycode}
-                                onChange={handleChange}
-                                
-                                />
-                               <div className='w-100'>
-                                {/* <label>Phone No <span className='text-danger'><b>*</b></span></label> */}
-                                <input
-                                  type='text'
-                                  name="phone"
-                                  value={formData.phone}
-                                  onChange={handleChange}
-                                  className='form-control mb-3'
-                                  required
-                                  placeholder='Mobile Number'
-                                />
-                                </div>
-                                </div>
-                                {errors?.phone && (<p className='error_message'>{errors.phone[0]}</p>)}
-                              </Col>
-
-                              <Col xs={12} lg={6}>
-                                <div className="upload-btn-wrapper">
-                                  <button className="btn2">Upload Your CV <ArrowUp /> </button>
-                                  <input
-                                    type='file'
-                                    name="resume"
-                                    onChange={handleChange}
-                                    ref={fileInputRef}
-                                    accept=".doc,.docx,.pdf,.ppt,.pptx"
-                                    className='form-control mb-3'
-                                  />
-                                </div>
-
-                                {errors?.resume && (<p className='error_message'>{errors.resume[0]}</p>)}
-                              </Col>
-                            </Row>
-                            <Row>
-                              <Col xs={12} className='my-3'>
-                                <ReCAPTCHA
-                                  sitekey={`${env.SITE_KEY}`}
-                                  onChange={setCaptchaToken}
-                                />
-                              </Col>
-                            </Row>
-                            <Row>
-                              <Col xs={12} lg={3}>
-                                <button type="submit" className='btn btn-primary-blue' disabled={loading}>
-                                  {loading ? 'Submitting...' : 'Submit'}
-                                </button>
-                              </Col>
-
-                            </Row>
-                            {loading && <div className="spinner">Loading...</div>}
-                            <Row>
-                              <Col xs={12} className='mt-3'>
-                                {status && <p>{status}</p>}
-                              </Col>
-                            </Row>
-                          </form>
-                        </Col>
-                      </Row>
-                    </div>
+                  <Col xs={12} lg={3}>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="form-control mb-1"
+                      placeholder="Name"
+                      required
+                    />
+                    {errors?.name && (
+                      <p className="error_message">{errors.name[0]}</p>
+                    )}
                   </Col>
-                  <Col xs={12} md={4}>
-                    <div className='job-details-block'>
-                      <div className='job-details-inner-block'>
-                        <p className='job-details-title'>Job Details</p>
-                        <ul>
-                          <li> <span>Years Of Experience: </span> {career?.experience}</li>
-                          <li> <span>Location: </span> {career?.location}</li>
-                          <li> <span>Level: </span> {career?.level}</li>
-                          <li> <span>Duration: </span> {career?.duration}</li>
-                          <li> <span>Vacancy: </span> {career?.vacancy}</li>
-                          <li> <span>Type: </span> Full Time</li>
-                        </ul>
+
+                  <Col xs={12} lg={3}>
+                    <input
+                      type="text"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="form-control mb-1"
+                      placeholder="Email"
+                      required
+                    />
+                    {errors?.email && (
+                      <p className="error_message">{errors.email[0]}</p>
+                    )}
+                  </Col>
+
+                  <Col xs={12} lg={4}>
+                    <div className="d-flex gap-2">
+                      <CountryCodeDropdown
+                        name="countrycode"
+                        value={formData.countrycode}
+                        onChange={handleChange}
+                      />
+
+                      <div className="w-100">
+                        <input
+                          type="text"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          className="form-control mb-1"
+                          placeholder="Mobile Number"
+                          required
+                        />
                       </div>
-                      {/* <!--/--> */}
-                      {
-                        (Array.isArray(career?.required_skills) && career?.required_skills.length > 0 && career?.required_skills[0] !== null) ?
-                          (
-                            <div className='job-details-inner-block'>
-                              <p className='job-details-title'>Required Skills</p>
-                              <div className="skill-tags">
-
-                                <ul>
-                                  {(Array.isArray(career?.required_skills)
-                                    ? career?.required_skills
-                                    : career?.required_skills.split(',')
-                                  ).map((skill, index) => (
-                                    <li key={index}>{skill}</li>
-                                  ))}
-                                </ul>
-
-                              </div>
-                            </div>
-                          ) : null
-                      }
-                      {/* <!--/--> */}
-                      {/* {
-                        (Array.isArray(career?.key_responsibilities) && career?.key_responsibilities.length > 0 && career?.key_responsibilities[0] !== null) ?
-                          (
-                            <div className='job-details-inner-block'>
-                              <p className='job-details-title'>Key Responsibilities</p>
-                              <div className="skill-tags">
-
-                                <ul>
-                                  {(Array.isArray(career?.key_responsibilities)
-                                    ? career?.key_responsibilities
-                                    : career?.key_responsibilities.split(',')
-                                  ).map((skill, index) => (
-                                    <li key={index}>{skill}</li>
-                                  ))}
-                                </ul>
-
-                              </div>
-                            </div>
-                          ) : null
-                      } */}
-                      {/* <!--/--> */}
-                      {
-                        (Array.isArray(career?.additional_skills) && career?.additional_skills.length > 0 && career?.additional_skills[0] !== null) ?
-                          (
-                            <div className='job-details-inner-block'>
-                              <p className='job-details-title'>Additional Skills</p>
-                              <div className="skill-tags">
-
-                                <ul>
-                                  {(Array.isArray(career?.additional_skills)
-                                    ? career?.additional_skills
-                                    : career?.additional_skills.split(',')
-                                  ).map((skill, index) => (
-                                    <li key={index}>{skill}</li>
-                                  ))}
-                                </ul>
-
-                              </div>
-                            </div>
-                          ) : null
-                      }
                     </div>
+
+                    {errors?.phone && (
+                      <p className="error_message">{errors.phone[0]}</p>
+                    )}
+                  </Col>
+
+                  <Col xs={12} lg={2}>
+                    <div className="upload-btn-wrapper">
+                      <button className="btn2">
+                        Upload CV <ArrowUp />
+                      </button>
+
+                      <input
+                        type="file"
+                        name="resume"
+                        onChange={handleChange}
+                        ref={fileInputRef}
+                        accept=".doc,.docx,.pdf,.ppt,.pptx"
+                        className="form-control mb-1"
+                      />
+                    </div>
+
+                    {errors?.resume && (
+                      <p className="error_message">{errors.resume[0]}</p>
+                    )}
                   </Col>
                 </Row>
 
-              </Col>
+                <Row>
+                  <Col xs={12} className="my-3">
+                    <ReCAPTCHA
+                      sitekey={`${env.SITE_KEY}`}
+                      onChange={setCaptchaToken}
+                    />
+                  </Col>
+                </Row>
 
+                <Row>
+                  <Col xs={12} lg={3}>
+                    <button
+                      type="submit"
+                      className="btn btn-primary-blue"
+                      disabled={loading}
+                    >
+                      {loading ? "Submitting..." : "Submit"}
+                    </button>
+                  </Col>
+                </Row>
 
-            </Row>
-          </Container>
-          <div className="shp1"><img src="../assets/images/ser-bg.png" /></div>
-          <div className="shp2"><img src="../assets/images/ser-bg2.png" /></div>
-        </section>
+                {loading && <div className="spinner">Loading...</div>}
+
+                <Row>
+                  <Col xs={12} className="mt-3">
+                    {status && <p>{status}</p>}
+                  </Col>
+                </Row>
+              </form>
+            </div>
+          </Col>
+        </Row>
+      </Col>
+    </Row>
+  </Container>
+
+  <div className="shp1">
+    <img src="../assets/images/ser-bg.png" />
+  </div>
+  <div className="shp2">
+    <img src="../assets/images/ser-bg2.png" />
+  </div>
+</section>
 
       </main>
     </>

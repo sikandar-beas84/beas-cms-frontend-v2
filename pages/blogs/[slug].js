@@ -281,7 +281,7 @@ const Blog = ({ blog, seometadata, homeData, commonblog }) => {
                 </div>
                 <div className="col-12 col-lg-4 mt-5 mt-lg-0">
                   <div className="blog-sidebar">
-                    <h2>Transform business with <br /> Beas Consultancy Pvt. Ltd</h2>
+                    <h2>Transform business with <br /> Beas Consultancy & Services Pvt. Ltd</h2>
                     <ul className='pb-4'>
                       <li>20 years experience</li>
                       <li>Expert team across diverse industries</li>

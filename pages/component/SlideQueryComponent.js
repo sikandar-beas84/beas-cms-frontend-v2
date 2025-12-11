@@ -1,10 +1,13 @@
 import { useState, useRef } from 'react';
 import { env } from '../../util/constants/common';
 import CountryCodeDropdown from './CountryCodeDropdown';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 function SlideQueryComponent({modalshow=false}) {
 
     const fileInputRef = useRef(null);
+    const [captchaToken, setCaptchaToken] = useState(null);
+
     const [show, setShow] = useState(modalshow);
     const [formData, setFormData] = useState({
         name: '',
@@ -61,11 +64,17 @@ function SlideQueryComponent({modalshow=false}) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
+        if (!captchaToken) {
+          alert('Please verify the captcha');
+          return;
+        }
+
         const data = new FormData();
         for (const key in formData) {
           data.append(key, formData[key]);
         }
+        data.append('recaptcha_token', captchaToken);
         data.append('subject', 'Enquiry Form Modal');
         setLoading(true); // ✅ start loader
         setStatus('');    // clear previous status
@@ -124,7 +133,7 @@ function SlideQueryComponent({modalshow=false}) {
                         placeholder='Name'
                         required
                     />
-                    {errors.name && (<p className='error_message'>{errors.name[0]}</p>)}
+                    {errors?.name && (<p className='error_message'>{errors.name[0]}</p>)}
                     
                     <input
                         type='text'
@@ -135,7 +144,7 @@ function SlideQueryComponent({modalshow=false}) {
                         placeholder='Email'
                         required
                     />
-                    {errors.email && (<p className='error_message'>{errors.email[0]}</p>)}
+                    {errors?.email && (<p className='error_message'>{errors.email[0]}</p>)}
                     <div className="d-flex gap-2">
                     <CountryCodeDropdown
                     name="countrycode"
@@ -163,7 +172,7 @@ function SlideQueryComponent({modalshow=false}) {
                         placeholder='Mobile Number'
                         required
                     /> */}
-                    {errors.phone && (<p className='error_message'>{errors.phone[0]}</p>)}
+                    {errors?.phone && (<p className='error_message'>{errors.phone[0]}</p>)}
                     <input
                         type='text'
                         name="message"
@@ -173,12 +182,30 @@ function SlideQueryComponent({modalshow=false}) {
                         placeholder='Message'
                         required
                     />
-                    {errors.message && (<p className='error_message'>{errors.message[0]}</p>)}
-                
+                    {errors?.message && (<p className='error_message'>{errors.message[0]}</p>)}
+                    <div className='col-12'>
+                        <ReCAPTCHA
+                          sitekey={`${env.SITE_KEY}`}
+                          onChange={setCaptchaToken}
+                        />
+                      </div>
                     <div className="d-flex sliding-form-btn">
-                        <button className="btn btn-primary" type='submit'>{loading ? 'Submitting...' : 'Submit'}</button>
+                    <button
+                          type="submit"
+                          className='red-btn w-100 mt-3 post-job-btn'
+                          disabled={loading}
+                        >
+                          {loading ? (
+                            <span className="d-flex align-items-center justify-content-center gap-2">
+                              <span className="loader"></span>
+                              Submitting...
+                            </span>
+                          ) : (
+                            'Submit'
+                          )}
+                        </button>
                     </div>
-                    {loading && <div className="spinner">Loading...</div>}
+                    
                     {status && <p>{status}</p>}
                 </form>
             </div>

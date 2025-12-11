@@ -341,15 +341,20 @@ const metaAuthor = seometadata?.author
                   <Col xs={12} lg={3}>
                     <button
                       type="submit"
-                      className="btn btn-primary-blue"
+                      className='red-btn w-100 mt-3 post-job-btn'
                       disabled={loading}
                     >
-                      {loading ? "Submitting..." : "Submit"}
+                      {loading ? (
+                        <span className="d-flex align-items-center justify-content-center gap-2">
+                          <span className="loader"></span>
+                          Submitting...
+                        </span>
+                      ) : (
+                        'Submit'
+                      )}
                     </button>
                   </Col>
                 </Row>
-
-                {loading && <div className="spinner">Loading...</div>}
 
                 <Row>
                   <Col xs={12} className="mt-3">

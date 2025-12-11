@@ -250,12 +250,23 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
                       <div className="col-4">
                         <div className="contact_form_btn">
 
-                          <button type="submit" className='red-btn w-100 mt-3 post-job-btn' disabled={loading} >
-                            {loading ? 'Submitting...' : 'Submit'}
-                          </button>
+                        <button
+                          type="submit"
+                          className='red-btn w-100 mt-3 post-job-btn'
+                          disabled={loading}
+                        >
+                          {loading ? (
+                            <span className="d-flex align-items-center justify-content-center gap-2">
+                              <span className="loader"></span>
+                              Submitting...
+                            </span>
+                          ) : (
+                            'Submit'
+                          )}
+                        </button>
                         </div>
                       </div>
-                      {loading && <div className="spinner">Loading...</div>}
+                      {/* {loading && <div className="spinner">Loading...</div>} */}
                       {status && <p>{status}</p>}
                     </div>
                   </form>

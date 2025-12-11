@@ -175,12 +175,6 @@ const Blog = ({ blog, seometadata, homeData, commonblog }) => {
                         ></div>
                       </div>
                       <div className="blog-post-content mt-4">
-
-
-                        <blockquote className="blockquote">
-                          <p>{blog?.quote}</p>
-                        </blockquote>
-
                         <div className="mt-4">
 
                           {blog.blog_contents.map((item, index) => (

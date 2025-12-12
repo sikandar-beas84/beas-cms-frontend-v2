@@ -38,8 +38,8 @@ const AboutUs = ({ aboutus, commonaboutus, seometadata }) => {
         ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
         : `${env.BACKEND_BASE_URL}${aboutus?.image}`;
     const metaUrl = seometadata?.url
-        ? `${env.FRONTEND_BASE_URL}about/${seometadata?.url}`
-        : `${env.FRONTEND_BASE_URL}about/${aboutus?.slug}`;
+        ? `${env.FRONTEND_BASE_URL}${seometadata?.url}`
+        : `${env.FRONTEND_BASE_URL}${aboutus?.slug}`;
     const metaAuthor = seometadata?.author
         ? seometadata?.author
         : "BEAS Consultancy And Services Private Limited";

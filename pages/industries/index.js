@@ -35,8 +35,8 @@ const Indutries = ({ industries, seometadata }) => {
     ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
     : `${env.BACKEND_BASE_URL}${industries?.image}`;
   const metaUrl = seometadata?.url
-    ? `${env.FRONTEND_BASE_URL}industries/${seometadata?.url}`
-    : `${env.FRONTEND_BASE_URL}industries/${industries?.slug}`;
+    ? `${env.FRONTEND_BASE_URL}${seometadata?.url}`
+    : `${env.FRONTEND_BASE_URL}${industries?.slug}`;
   const metaAuthor = seometadata?.author
     ? seometadata?.author
     : "BEAS Consultancy And Services Private Limited";

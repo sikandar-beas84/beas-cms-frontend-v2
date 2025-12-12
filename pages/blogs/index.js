@@ -43,8 +43,8 @@ const Blog = ({ blogs, seometadata, commonblog }) => {
     ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
     : `${env.BACKEND_BASE_URL}${commonblog?.image}`;
   const metaUrl = seometadata?.url
-    ? `${env.FRONTEND_BASE_URL}blog/${seometadata?.url}`
-    : `${env.FRONTEND_BASE_URL}blog/${commonblog?.slug}`;
+    ? `${env.FRONTEND_BASE_URL}${seometadata?.url}`
+    : `${env.FRONTEND_BASE_URL}${commonblog?.page_slug}`;
   const metaAuthor = seometadata?.author
     ? seometadata?.author
     : "BEAS Consultancy And Services Private Limited";

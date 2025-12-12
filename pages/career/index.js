@@ -28,8 +28,8 @@ const Career = ({ careers, menucareer, seometadata }) => {
   ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
   : `${env.BACKEND_BASE_URL}${menucareer?.image}`;
   const metaUrl = seometadata?.url
-  ?`${env.FRONTEND_BASE_URL}career/${seometadata?.url}`
-  :`${env.FRONTEND_BASE_URL}career/${menucareer?.slug}`;
+  ?`${env.FRONTEND_BASE_URL}${seometadata?.url}`
+  :`${env.FRONTEND_BASE_URL}${menucareer?.slug}`;
   const metaAuthor = seometadata?.author
   ? seometadata?.author
   :"BEAS Consultancy And Services Private Limited";

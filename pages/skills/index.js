@@ -27,8 +27,8 @@ const Skills = ({ skills, seometadata }) => {
   ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
   : `${env.BACKEND_BASE_URL}${skills?.image}`;
   const metaUrl = seometadata?.url
-  ?`${env.FRONTEND_BASE_URL}skills/${seometadata?.url}`
-  :`${env.FRONTEND_BASE_URL}skills/${skills?.slug}`;
+  ?`${env.FRONTEND_BASE_URL}${seometadata?.url}`
+  :`${env.FRONTEND_BASE_URL}${skills?.slug}`;
   const metaAuthor = seometadata?.author
   ? seometadata?.author
   :"BEAS Consultancy And Services Private Limited";

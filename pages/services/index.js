@@ -57,8 +57,8 @@ const Service = ({ services, service, seometadata }) => {
     ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
     : `${env.BACKEND_BASE_URL}${service?.image}`;
   const metaUrl = seometadata?.url
-    ? `${env.FRONTEND_BASE_URL}services/${seometadata?.url}`
-    : `${env.FRONTEND_BASE_URL}services/${service?.slug}`;
+    ? `${env.FRONTEND_BASE_URL}${seometadata?.url}`
+    : `${env.FRONTEND_BASE_URL}${service?.slug}`;
   const metaAuthor = seometadata?.author
     ? seometadata?.author
     : "BEAS Consultancy And Services Private Limited";

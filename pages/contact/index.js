@@ -130,8 +130,8 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
     ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
     : `${env.BACKEND_BASE_URL}${contactus?.image}`;
   const metaUrl = seometadata?.url
-    ? `${env.FRONTEND_BASE_URL}contact/${seometadata?.url}`
-    : `${env.FRONTEND_BASE_URL}contact/${contactus?.slug}`;
+    ? `${env.FRONTEND_BASE_URL}${seometadata?.url}`
+    : `${env.FRONTEND_BASE_URL}${seometadata?.page_slug}`;
   const metaAuthor = seometadata?.author
     ? seometadata?.author
     : "BEAS Consultancy And Services Private Limited";

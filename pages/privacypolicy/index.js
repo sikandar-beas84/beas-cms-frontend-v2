@@ -28,8 +28,8 @@ const PrivacyPolicy = ({ privacypolicy, seometadata }) => {
   ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
   : `${env.BACKEND_BASE_URL}${privacypolicy?.image}`;
   const metaUrl = seometadata?.url
-  ?`${env.FRONTEND_BASE_URL}privacypolicy/${seometadata?.url}`
-  :`${env.FRONTEND_BASE_URL}privacypolicy/${privacypolicy?.slug}`;
+  ?`${env.FRONTEND_BASE_URL}${seometadata?.url}`
+  :`${env.FRONTEND_BASE_URL}${privacypolicy?.slug}`;
   const metaAuthor = seometadata?.author
   ? seometadata?.author
   :"BEAS Consultancy And Services Private Limited";

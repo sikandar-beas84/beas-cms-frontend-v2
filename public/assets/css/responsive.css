@@ -63,6 +63,7 @@
 
   .navbar-light .nav-link {
     padding: 7px 25px 7px 0px !important;
+    font-size:14px;
   }
 
   .about_imgs img {
@@ -135,7 +136,7 @@
   }
 
   .navbar-brand img {
-    max-width: 200px;
+    max-width: 234px;
   }
 
   .breadcrumbWrap,

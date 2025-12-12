@@ -106,8 +106,8 @@ const Header = ({ homeData }) => {
             <Image
               src={`${env.BACKEND_BASE_URL}${homeData?.logo?.image}`}
               alt="Logo"
-              width={300}
-              height={50}
+              width={234}
+              height={35}
               priority
               fetchPriority="high"
               className="img-fluid"
@@ -192,36 +192,7 @@ const Header = ({ homeData }) => {
         </Container>
       </Navbar>
 
-      {/* <Link href="#" className="">
-        <Image
-          src="/assets/images/whatsapp.png"
-          alt="whatsApp"
-          width={60}
-          height={60}
-          priority
-          fetchPriority="high"
-          className="img-fluid fixed-social"
-        />
 
-      </Link> */}
-
-
-      {/* <div className="badge fixed-social">
-        
-        <Image
-          src="/assets/images/whatsapp.png"
-          alt="whatsApp"
-          width={50}
-          height={50}
-          className="center-icon"
-          onClick={() => {
-            window.open(
-              "https://wa.me/9433068494?text=BEAS%20CONSULTANCY%20PT%20LTD.",
-              "_blank"
-            );
-          }}
-        />
-      </div> */}
 
 
 

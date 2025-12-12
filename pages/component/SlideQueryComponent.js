@@ -183,7 +183,7 @@ function SlideQueryComponent({modalshow=false}) {
                         required
                     />
                     {errors?.message && (<p className='error_message'>{errors.message[0]}</p>)}
-                    <div className='col-12'>
+                    <div className='col-12 rreaptcha'>
                         <ReCAPTCHA
                           sitekey={`${env.SITE_KEY}`}
                           onChange={setCaptchaToken}

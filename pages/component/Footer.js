@@ -5,6 +5,7 @@ import { Mail, Map, Phone, ArrowUp } from "react-feather";
 import Nav from 'react-bootstrap/Nav';
 import { env } from '../../util/constants/common';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Footer = ({ homeData }) => {
 
@@ -70,7 +71,9 @@ const Footer = ({ homeData }) => {
                         );
                       }
                     })}
-                    
+                    <li className='footer-li'><Link href="/privacypolicy" passHref>
+                      Privacy Policy
+                    </Link></li>
                   </ul>
                 </Col>
                 <Col xs={12} md={4}>

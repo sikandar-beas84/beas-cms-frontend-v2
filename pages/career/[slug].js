@@ -134,7 +134,7 @@ const metaImage = seometadata?.image
   : `${env.BACKEND_BASE_URL}${menucareer?.image}`;
 const metaUrl = seometadata?.url
   ?`${env.FRONTEND_BASE_URL}career/${seometadata?.url}`
-  :`${env.FRONTEND_BASE_URL}career/${career?.id}`;
+  :`${env.FRONTEND_BASE_URL}career/${career?.title}`;
 const metaAuthor = seometadata?.author
   ? seometadata?.author
   :"BEAS Consultancy And Services Private Limited";

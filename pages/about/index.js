@@ -60,7 +60,7 @@ const AboutUs = ({ aboutus, commonaboutus, seometadata }) => {
 
                 <section className="section-padding">
                     <div className="container">
-                        <div className="row align-items-center">
+                        <div className="row">
                             <div className="col-lg-5 col-md-5">
                                 <div className="about_imgs">
                                     <span>

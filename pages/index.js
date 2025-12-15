@@ -54,7 +54,6 @@ function Home({homeData, seometadata}) {
 
     const [showModal, setShowModal] = useState(false);
     const [show, setShow] = useState(false);
-    
     // useEffect(() => {
     //   // Show modal after 10 seconds (10000 ms)
     //   const timer = setTimeout(() => {
@@ -144,7 +143,7 @@ const metaAuthor = seometadata?.author
                                     />
                                   <div className="srvc-bxtx">
                                     <h3 className='text-center'>{item?.name}</h3>
-                                    <p className='service-hm-desc'>{descriptionText}</p>
+                                    <p className='service-hm-desc text-center'>{descriptionText}</p>
                                     {/* <div class="d-flex justify-content-center"><div class="post-job-btn">Read More</div></div> */}
                                     <p className='blue-text text-center'><u>Read More...</u></p>
                                   </div>

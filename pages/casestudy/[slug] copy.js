@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo  } from "react";
+import React, { useEffect, useState } from "react";
 import BreadCrumb from "../component/BreadCrumb";
 import { Container, Row, Col } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
@@ -45,18 +45,13 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
 
 
   // Helper function to replace variables
-  const parseHTMLWithEnv = (html) => {
-    if (!html) return "";
-  
-    return html
-      .replace(/\{env\.SITE_URL\}/g, env.SITE_URL)
-      .replace(/\{env\.BACKEND_BASE_URL\}/g, env.BACKEND_BASE_URL);
-  };
+const parseHTMLWithEnv = (html) => {
+  if (!html) return "";
 
-  const parsedSolution = useMemo(
-    () => parseHTMLWithEnv(casestudy?.beas_solution),
-    [casestudy?.beas_solution]
-  );
+  return html
+    .replace(/\{env\.SITE_URL\}/g, env.SITE_URL)   // replace {env.SITE_URL}
+    .replace(/\{env\.BACKEND_BASE_URL\}/g, env.BACKEND_BASE_URL); // other env vars if needed
+};
 
   const metaTitle = seometadata?.title
     ? seometadata?.title
@@ -76,23 +71,6 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
   const metaAuthor = seometadata?.author
     ? seometadata?.author
     : "BEAS Consultancy And Services Private Limited";
-
-
-
-
-    const goToCaseStudy = (slug) => {
-      router.push(`/casestudy/${slug}`);
-    };
-
-    useEffect(() => {
-      if (prevProject) {
-        router.prefetch(`/casestudy/${prevProject.slug}`);
-      }
-      if (nextProject) {
-        router.prefetch(`/casestudy/${nextProject.slug}`);
-      }
-    }, [prevProject, nextProject]);
-
 
   return (
     <>
@@ -117,21 +95,28 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
           <Container fluid>
             <div className="d-flex justify-content-between carosalArrow">
               {/* Previous */}
-              <button
-                className="btn btn-primary"
-                disabled={!prevProject}
-                onClick={() => prevProject && goToCaseStudy(prevProject.slug)}
-              >
-                <ChevronLeft />
-              </button>
+              {
+                prevProject ? (
+                  <Link
+                    href={`/casestudy/${prevProject.slug}`}
+                    className="btn btn-primary"
+                  >
+                    <ChevronLeft />
+                  </Link>
+                ) : <Link href="#" className="btn btn-primary" ><ChevronLeft /></Link>
+              }
 
-              <button
-                className="btn btn-primary"
-                disabled={!nextProject}
-                onClick={() => nextProject && goToCaseStudy(nextProject.slug)}
-              >
-                <ChevronRight />
-              </button>
+              {/* Next */}
+              {
+                nextProject ? (
+                  <Link
+                    href={`/casestudy/${nextProject.slug}`}
+                    className="btn btn-primary"
+                  >
+                    <ChevronRight />
+                  </Link>
+                ) : <Link href="#" className="btn btn-primary" ><ChevronRight /></Link>
+              }
             </div>
           </Container>
 
@@ -184,7 +169,7 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
                     <Accordion.Body>
                       <div
                         dangerouslySetInnerHTML={{
-                          __html: parsedSolution ,
+                          __html: parseHTMLWithEnv(casestudy?.beas_solution),
                         }}
                       />
                     </Accordion.Body>
@@ -250,59 +235,42 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
 
 export default React.memo(Page);
 
-export async function getStaticPaths() {
-  const response = await HomeService.projectPage();
-  const projects = response.data?.projects || [];
-
-  const paths = projects.map((item) => ({
-    params: { slug: item.slug.toString() },
-  }));
-
-  return {
-    paths,
-    fallback: "blocking",
-  };
-}
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const { slug } = params;
 
   const response = await HomeService.projectPage();
   const projects = response.data?.projects || [];
 
+  const result = await HomeService.menuProjectPage();
+  const menucasestudy = result.data?.casestudy || [];
+
   const currentIndex = projects.findIndex(
-    item => item.slug.toString() === slug
+    (item) => item.slug.toString() === slug
   );
 
+  const homesection = await HomeService.homePage();
+  const homeResult = homesection.data;
+
+
   if (currentIndex === -1) {
-    return { notFound: true };
+    return {
+      notFound: true,
+    };
   }
 
-  const rawCaseStudy = projects[currentIndex];
+  const casestudy = projects[currentIndex];
 
-  const casestudy = {
-    ...rawCaseStudy,
-    beas_solution: rawCaseStudy.beas_solution
-      ?.replace(/\{env\.SITE_URL\}/g, env.SITE_URL)
-      .replace(/\{env\.BACKEND_BASE_URL\}/g, env.BACKEND_BASE_URL),
-  };
-
-  const slimProjects = projects.map(p => ({
-    slug: p.slug,
-    title: p.title,
-  }));
-
-  const seoResult = await HomeService.seobyslug(slug);
-  const seometadata = seoResult?.data?.seometa ?? null;
+  const seobyslug = await HomeService.seobyslug(slug);
+  const seometadata = seobyslug?.data?.seometa;
 
   return {
     props: {
       casestudy,
-      projects: slimProjects,
+      menucasestudy,
+      projects,
       currentSlug: slug,
-      seometadata,
+      homeData: homeResult ? homeResult : [],
+      seometadata
     },
-    revalidate: 60,
   };
 }
-
-

@@ -342,16 +342,16 @@ a {
   font-family: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
   font-style: normal;
   font-weight: 600;
-  font-size: 19px;
+  font-size: 17px;
   line-height: 20px;
   text-align: center;
   color: #FFFFFF;
-  border: 1px solid #0081D2;
+  border: 1px solid #fff;
   border-radius: 3px;
   background-color: transparent;
   width: 204px;
   text-decoration: none;
-  background: #0081D2;
+  background: transparent;
 }
 
 .thar-three {
@@ -359,10 +359,10 @@ a {
   cursor: pointer;
   display: block;
   position: relative;
-  border: 1px solid #0081D2;
+  border: 1px solid #fff;
   transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
   text-decoration: none;
-  background: #0081D2;
+  background: transparent;
 }
 
 /* .thar-three:before {

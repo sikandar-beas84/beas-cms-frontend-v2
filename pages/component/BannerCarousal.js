@@ -442,7 +442,7 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
                 className="tech-img"
                 loading="lazy"
               />
-              <h5>{item.name}</h5>
+              {/* <h5>{item.name}</h5> */}
                 {/* or any card content */}
               </div>
               </div>
@@ -452,26 +452,7 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
         </div>
 
 
-      //   <Swiper 
-      //     modules={[Autoplay, Grid]}
-      //     { ...technologysettings }
-      //   className="technology-swiper"
-      // >
-      //   {technologies?.map((item, index) => (
-      //     <SwiperSlide key={index}>
-      //       <div className="tech-list-bx">
-      //         <Image
-      //           width={100}
-      //           height={100}
-      //           src={`${env.BACKEND_BASE_URL}assets/img/technology/${item.logo}`}
-      //           alt={item.name}
-      //           loading="lazy"
-      //         />
-      //         <h5>{item.name}</h5>
-      //       </div>
-      //     </SwiperSlide>
-      //   ))}
-      // </Swiper>
+    
       
       )}
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo  } from "react";
 import BreadCrumb from "../component/BreadCrumb";
 import { Container, Row, Col } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
@@ -33,10 +33,8 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
 
   // find current index
   const currentIndex = projects.findIndex((p) => p.slug === currentSlug);
-// Looping previous and next
-const prevProject =
-  projects[(currentIndex - 1 + projects.length) % projects.length];
-const nextProject = projects[(currentIndex + 1) % projects.length];
+  const prevProject = projects[currentIndex - 1] || null;
+  const nextProject = projects[currentIndex + 1] || null;
 
   //  Pagination logic (10 at a time)
   const totalPages = projects.length;
@@ -47,13 +45,18 @@ const nextProject = projects[(currentIndex + 1) % projects.length];
 
 
   // Helper function to replace variables
-const parseHTMLWithEnv = (html) => {
-  if (!html) return "";
+  const parseHTMLWithEnv = (html) => {
+    if (!html) return "";
+  
+    return html
+      .replace(/\{env\.SITE_URL\}/g, env.SITE_URL)
+      .replace(/\{env\.BACKEND_BASE_URL\}/g, env.BACKEND_BASE_URL);
+  };
 
-  return html
-    .replace(/\{env\.SITE_URL\}/g, env.SITE_URL)   // replace {env.SITE_URL}
-    .replace(/\{env\.BACKEND_BASE_URL\}/g, env.BACKEND_BASE_URL); // other env vars if needed
-};
+  const parsedSolution = useMemo(
+    () => parseHTMLWithEnv(casestudy?.beas_solution),
+    [casestudy?.beas_solution]
+  );
 
   const metaTitle = seometadata?.title
     ? seometadata?.title
@@ -73,6 +76,23 @@ const parseHTMLWithEnv = (html) => {
   const metaAuthor = seometadata?.author
     ? seometadata?.author
     : "BEAS Consultancy And Services Private Limited";
+
+
+
+
+    const goToCaseStudy = (slug) => {
+      router.push(`/casestudy/${slug}`);
+    };
+
+    useEffect(() => {
+      if (prevProject) {
+        router.prefetch(`/casestudy/${prevProject.slug}`);
+      }
+      if (nextProject) {
+        router.prefetch(`/casestudy/${nextProject.slug}`);
+      }
+    }, [prevProject, nextProject]);
+
 
   return (
     <>
@@ -95,17 +115,24 @@ const parseHTMLWithEnv = (html) => {
 
         <div className="bgF2F4F7 p-relative">
           <Container fluid>
-          <div className="d-flex justify-content-between carosalArrow">
-            {/* Previous */}
-            <Link href={`/casestudy/${prevProject.slug}`} className="btn btn-primary">
-              <ChevronLeft />
-            </Link>
+            <div className="d-flex justify-content-between carosalArrow">
+              {/* Previous */}
+              <button
+                className="btn btn-primary"
+                disabled={!prevProject}
+                onClick={() => prevProject && goToCaseStudy(prevProject.slug)}
+              >
+                <ChevronLeft />
+              </button>
 
-            {/* Next */}
-            <Link href={`/casestudy/${nextProject.slug}`} className="btn btn-primary">
-              <ChevronRight />
-            </Link>
-          </div>
+              <button
+                className="btn btn-primary"
+                disabled={!nextProject}
+                onClick={() => nextProject && goToCaseStudy(nextProject.slug)}
+              >
+                <ChevronRight />
+              </button>
+            </div>
           </Container>
 
           <Container className="py-5 ccase-study-container">
@@ -157,7 +184,7 @@ const parseHTMLWithEnv = (html) => {
                     <Accordion.Body>
                       <div
                         dangerouslySetInnerHTML={{
-                          __html: parseHTMLWithEnv(casestudy?.beas_solution),
+                          __html: parsedSolution ,
                         }}
                       />
                     </Accordion.Body>
@@ -223,39 +250,63 @@ const parseHTMLWithEnv = (html) => {
 
 export default React.memo(Page);
 
-export async function getServerSideProps({ params }) {
+export async function getStaticPaths() {
+  const response = await HomeService.projectPage();
+  const projects = response.data?.projects || [];
+
+  const paths = projects.map((item) => ({
+    params: { slug: item.slug.toString() },
+  }));
+
+  return {
+    paths,
+    fallback: "blocking",
+  };
+}
+export async function getStaticProps({ params }) {
   const { slug } = params;
 
   const response = await HomeService.projectPage();
   const projects = response.data?.projects || [];
 
+  const currentIndex = projects.findIndex(
+    item => item.slug.toString() === slug
+  );
+
+  if (currentIndex === -1) {
+    return { notFound: true };
+  }
+
+  const rawCaseStudy = projects[currentIndex];
+
+  const casestudy = {
+    ...rawCaseStudy,
+    beas_solution: rawCaseStudy.beas_solution
+      ?.replace(/\{env\.SITE_URL\}/g, env.SITE_URL)
+      .replace(/\{env\.BACKEND_BASE_URL\}/g, env.BACKEND_BASE_URL),
+  };
+
+  const slimProjects = projects.map(p => ({
+    slug: p.slug,
+    title: p.title,
+  }));
+
   const result = await HomeService.menuProjectPage();
   const menucasestudy = result.data?.casestudy || [];
 
-  const currentIndex = projects.findIndex(
-    (item) => item.slug.toString() === slug
-  );
-
-
-
-  if (currentIndex === -1) {
-    return {
-      notFound: true,
-    };
-  }
-
-  const casestudy = projects[currentIndex];
-
-  const seobyslug = await HomeService.seobyslug(slug);
-  const seometadata = seobyslug?.data?.seometa;
+  const seoResult = await HomeService.seobyslug(slug);
+  const seometadata = seoResult?.data?.seometa ?? null;
 
   return {
     props: {
       casestudy,
-      menucasestudy,
-      projects,
+      projects: slimProjects,
       currentSlug: slug,
-      seometadata
+      seometadata,
+      menucasestudy
     },
+    revalidate: 60,
   };
 }
+
+

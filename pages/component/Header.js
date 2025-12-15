@@ -46,33 +46,33 @@ const Header = ({ homeData }) => {
   const [showIndustry, setIndustryShow] = useState(false);
   const [open, setOpen] = useState(false);
 
-    // Step 1: Expand application-solutioning
-    let finalServices = homeData?.services?.children?.flatMap(item => {
-      if (item.slug === "application-solutioning") {
-        return item.children?.map(child => ({
-          slug: child.slug,
-          name: child.name
-        }));
-      }
-  
-      return [{
-        slug: item.slug,
-        name: item.name
-      }];
-    });
-  
-    // Step 2: Move specific items to the bottom
-    const bottomSlugs = ["ui-ux", "professional-services"];
-  
-    finalServices = [...finalServices].sort((a, b) => {
-      const aLast = bottomSlugs.includes(a?.slug);
-      const bLast = bottomSlugs.includes(b?.slug);
-  
-      if (aLast && !bLast) return 1;   // a goes down
-      if (!aLast && bLast) return -1;  // b goes down
-      return 0;
-    });
-    //////////////////////////////////////////
+  // Step 1: Expand application-solutioning
+  let finalServices = homeData?.services?.children?.flatMap(item => {
+    if (item.slug === "application-solutioning") {
+      return item.children?.map(child => ({
+        slug: child.slug,
+        name: child.name
+      }));
+    }
+
+    return [{
+      slug: item.slug,
+      name: item.name
+    }];
+  });
+
+  // Step 2: Move specific items to the bottom
+  const bottomSlugs = ["ui-ux", "professional-services"];
+
+  finalServices = [...finalServices].sort((a, b) => {
+    const aLast = bottomSlugs.includes(a?.slug);
+    const bLast = bottomSlugs.includes(b?.slug);
+
+    if (aLast && !bLast) return 1;   // a goes down
+    if (!aLast && bLast) return -1;  // b goes down
+    return 0;
+  });
+  //////////////////////////////////////////
 
   return (
     <>
@@ -184,8 +184,8 @@ const Header = ({ homeData }) => {
                 })}
             </Nav>
             <Form className="d-flex">
-             <div className="glow">
-              <Button variant="outline-primary" onClick={() => router.push('/contact')}>Get Quote</Button>
+              <div className="glow">
+                <Button variant="outline-primary" onClick={() => router.push('/contact')}>Get Quote</Button>
               </div>
             </Form>
           </Navbar.Collapse>
@@ -229,20 +229,34 @@ const Header = ({ homeData }) => {
               <path
                 id="circlePath"
                 d="
-                  M 100, 100
-                  m -64, 0
-                  a 64,64 0 1,1 128,0
-                  a 64,64 0 1,1 -128,0
-                "
+        M 100, 100
+        m -64, 0
+        a 64,64 0 1,1 128,0
+        a 64,64 0 1,1 -128,0
+      "
               />
             </defs>
 
-            <text font-size="18" fill="#000" font-weight="bold" textLength="402">
+            {/* White background circle */}
+            <circle
+              cx="100"
+              cy="100"
+              r="80"
+              fill="#fff"
+            />
+
+            <text
+              fontSize="18"
+              fill="#000"
+              fontWeight="bold"
+              textLength="402"
+            >
               <textPath href="#circlePath">
-                CONNECT WITH US *  CONNECT WITH US  *
+                CONNECT WITH US * CONNECT WITH US *
               </textPath>
             </text>
           </svg>
+
         </div>
 
         <Image

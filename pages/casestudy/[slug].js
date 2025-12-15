@@ -52,7 +52,7 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
       .replace(/\{env\.SITE_URL\}/g, env.SITE_URL)
       .replace(/\{env\.BACKEND_BASE_URL\}/g, env.BACKEND_BASE_URL);
   };
-  
+
   const parsedSolution = useMemo(
     () => parseHTMLWithEnv(casestudy?.beas_solution),
     [casestudy?.beas_solution]
@@ -270,29 +270,39 @@ export async function getStaticProps({ params }) {
   const projects = response.data?.projects || [];
 
   const currentIndex = projects.findIndex(
-    (item) => item.slug.toString() === slug
+    item => item.slug.toString() === slug
   );
 
   if (currentIndex === -1) {
     return { notFound: true };
   }
 
-  const casestudy = projects[currentIndex];
+  const rawCaseStudy = projects[currentIndex];
 
-  const menucasestudy = (await HomeService.menuProjectPage()).data?.casestudy || [];
-  const homeResult = (await HomeService.homePage()).data;
-  const seometadata = (await HomeService.seobyslug(slug))?.data?.seometa;
+  const casestudy = {
+    ...rawCaseStudy,
+    beas_solution: rawCaseStudy.beas_solution
+      ?.replace(/\{env\.SITE_URL\}/g, env.SITE_URL)
+      .replace(/\{env\.BACKEND_BASE_URL\}/g, env.BACKEND_BASE_URL),
+  };
+
+  const slimProjects = projects.map(p => ({
+    slug: p.slug,
+    title: p.title,
+  }));
+
+  const seoResult = await HomeService.seobyslug(slug);
+  const seometadata = seoResult?.data?.seometa ?? null;
 
   return {
     props: {
       casestudy,
-      menucasestudy,
-      projects,
+      projects: slimProjects,
       currentSlug: slug,
-      homeData: homeResult || [],
       seometadata,
     },
-    revalidate: 60, // ISR (VERY IMPORTANT)
+    revalidate: 60,
   };
 }
+
 

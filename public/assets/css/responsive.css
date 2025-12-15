@@ -979,6 +979,8 @@
 
 /* 768-991 */
 @media (max-width: 767.98px) {
+  .quote-txt p{font-size: 14px;}
+  .quote-txt{min-height:330px;}
   .job-details-list-box li{padding: 0px 20px 0 0;}
   .job-details-list-box{gap:10px;}
   .job-details-list-box li{line-height: 16px;}

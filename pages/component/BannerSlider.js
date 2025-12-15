@@ -21,7 +21,7 @@ const BannerSlider = ({bannerSlide}) => {
         <div className='banner'>
         <div className="banner_thumb_img">
         <Image
-              src={`${env.BACKEND_BASE_URL}${item.image}`}   // use optimized format (webp/avif)
+              src={`${env.BACKEND_BASE_URL}${item?.image}`}   // use optimized format (webp/avif)
               alt="Hero Banner"
               width={1920}
               height={980}
@@ -34,13 +34,21 @@ const BannerSlider = ({bannerSlide}) => {
           <div className="banner_text_infos">
             <div className="container">
               <div className="bnr-txt">
-                <p>{item.slug}</p>
-                  <h1 className="drop_ani">{item.title}</h1>
+                <p>{item?.slug}</p>
+                  <h1 className="drop_ani">{item?.title}</h1>
                   <p>
                     {/* <div className='fw-300' dangerouslySetInnerHTML={{ __html: descriptionText }} /> */}
                     {descriptionText}
                   </p>
-                  <a href={`/industries/${item.slug}`} className="bnr-btn thar-three">CONTACT US</a>
+                { item?.order == 1 &&
+                  <a href={`services/analytics-and-ai`} className="bnr-btn thar-three">EXPLORE AI</a>
+                }
+                { item?.order == 2 &&
+                  <a href={`/contact`} className="bnr-btn thar-three">CONTACT US</a>
+                }
+                { item?.order == 3 &&
+                  <a href={`/services`} className="bnr-btn thar-three">LEARN MORE</a>
+                }
               </div>
             </div>
           </div>

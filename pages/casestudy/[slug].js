@@ -291,6 +291,9 @@ export async function getStaticProps({ params }) {
     title: p.title,
   }));
 
+  const result = await HomeService.menuProjectPage();
+  const menucasestudy = result.data?.casestudy || [];
+
   const seoResult = await HomeService.seobyslug(slug);
   const seometadata = seoResult?.data?.seometa ?? null;
 
@@ -300,6 +303,7 @@ export async function getStaticProps({ params }) {
       projects: slimProjects,
       currentSlug: slug,
       seometadata,
+      menucasestudy
     },
     revalidate: 60,
   };

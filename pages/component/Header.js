@@ -178,7 +178,7 @@ const Header = ({ homeData }) => {
                       // <Nav.Link href={`/${item.slug}/${casestudy.slug}`} key={index}>
                       //   {item.name}
                       // </Nav.Link>
-                      <Link href={`/${item.slug}`} className="nav-link">
+                      <Link href={`/${item.slug}/${casestudy.slug}`} className="nav-link">
                       {item.name}
                     </Link>
                     );

@@ -9,6 +9,7 @@ import HomeService from '../../util/service/Home';
 import { env } from '../../util/constants/common';
 import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
+import Link from "next/link";
 
 const Service = ({ services, service, seometadata }) => {
   const router = useRouter();
@@ -105,12 +106,12 @@ const Service = ({ services, service, seometadata }) => {
                               <div className="services-text">
                                 <h2>{item?.menu_contents?.title}</h2>
                                 <p dangerouslySetInnerHTML={{ __html: description }} />
-                                <Nav.Link
+                                <Link
                                   href={`/services/${item?.menu_contents?.slug}`}
                                   className="services-btn proc-btn thar-three4"
                                 >
                                   Read More
-                                </Nav.Link>
+                                </Link>
                               </div>
                             </div>
                             <div className="col-lg-6 col-12">

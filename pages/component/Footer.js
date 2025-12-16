@@ -55,7 +55,7 @@ const Footer = ({ homeData }) => {
                       if (item.slug === 'casestudy') {
                         return (
                           <li className='footer-li' key={index}>
-                            <Nav.Link href={`/${item.slug}/${casestudy.slug}`}>{item.name}</Nav.Link>
+                            <Link href={`/${item.slug}/${casestudy.slug}`} className="nav-link">{item.name}</Link>
                           </li>
                         );
                       } else {
@@ -63,15 +63,15 @@ const Footer = ({ homeData }) => {
                           //item.slug !== "service" && item.slug !== "industries" && (
                           <li className='footer-li' key={index}>
 
-                            <Nav.Link href={`/${item.slug}`}>
+                            <Link href={`/${item.slug}`} className="nav-link">
                               {item.name}
-                            </Nav.Link>
+                            </Link>
                           </li>
                           //)
                         );
                       }
                     })}
-                    <li className='footer-li'><Link href="/privacypolicy" passHref>
+                    <li className='footer-li'><Link href="/privacypolicy" passHref className='nav-link'>
                       Privacy Policy
                     </Link></li>
                   </ul>
@@ -81,7 +81,7 @@ const Footer = ({ homeData }) => {
                   <ul className='footer-list'>
                     {homeData?.industries?.children?.map((item, index) => (
                       <li className='footer-li' key={index}>
-                        <Nav.Link href={`/industries/${item.slug}`}>{item.name}</Nav.Link>
+                        <Link href={`/industries/${item.slug}`} className="nav-link">{item.name}</Link>
                       </li>
                     ))}
                   </ul>
@@ -91,7 +91,8 @@ const Footer = ({ homeData }) => {
                   <ul className="footer-list">
                     {finalServices.map((item, index) => (
                         <li className="footer-li" key={index}>
-                          <Nav.Link href={`/services/${item.slug}`}>{item.name}</Nav.Link>
+                          <Link href={`/services/${item.slug}`} className="nav-link">{item.name}</Link>
+                          
                         </li>
                       ))}
                   </ul>

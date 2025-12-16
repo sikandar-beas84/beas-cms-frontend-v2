@@ -41,13 +41,13 @@ const BannerSlider = ({ bannerSlide }) => {
                             {descriptionText}
                           </p>
                         { item?.order == 1 &&
-                  <a href={`services/analytics-and-ai`} className="bnr-btn thar-three">EXPLORE AI</a>
+                  <Link href={`services/analytics-and-ai`} className="bnr-btn thar-three">EXPLORE AI</Link>
                 }
                 { item?.order == 2 &&
-                  <a href={`/contact`} className="bnr-btn thar-three">CONTACT US</a>
+                  <Link href={`/contact`} className="bnr-btn thar-three">CONTACT US</Link>
                 }
                 { item?.order == 3 &&
-                  <a href={`/services`} className="bnr-btn thar-three">LEARN MORE</a>
+                  <Link href={`/services`} className="bnr-btn thar-three">LEARN MORE</Link>
                 }
                         </div>
                       </div>

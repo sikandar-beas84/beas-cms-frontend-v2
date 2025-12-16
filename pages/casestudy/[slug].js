@@ -90,13 +90,15 @@ const parseHTMLWithEnv = (html) => {
           pagetitle={casestudy.title}
           pageslug="Casestudy"
           pageBanner={`assets/img/menu-content/${menucasestudy?.menu_contents?.banner}`}
+          totalCasestudy={{ currentStudy: currentIndex+1, totalStudy: totalPages }}
         />
 
 
         <div className="bgF2F4F7 p-relative">
           
           <Container fluid>
-          <span>{currentIndex+1} / {totalPages}</span>
+            
+          
           <div className="d-flex justify-content-between carosalArrow">
             {/* Previous */}
             <Link href={`/casestudy/${prevProject.slug}`} className="btn btn-primary">

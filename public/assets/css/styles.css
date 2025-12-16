@@ -107,6 +107,7 @@ footer {
   line-height: 30px;
   text-transform: capitalize;
   list-style: none;
+  transition: transform .3s ease, color .3s ease;
 }
 
 .footer-list li a {
@@ -4460,5 +4461,15 @@ transform-origin: 0 0;}
 }
 .wpp-iicon{display:none;}
 
-
-
+.totalCasestudy {
+  color: #fff;
+    text-align: center;
+    margin-bottom: 0;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: #e1e1e12e;
+    padding: 5px 10px;
+    display: inline-block;
+    border-radius: 5px;
+}

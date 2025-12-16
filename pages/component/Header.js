@@ -135,9 +135,12 @@ const Header = ({ homeData }) => {
                         onMouseLeave={() => setIndustryShow(false)}
                       >
                         {homeData?.industries?.children?.map((child, i) => (
-                          <NavDropdown.Item href={`/industries/${child.slug}`} key={i}>
-                            {child.name}
-                          </NavDropdown.Item>
+                          // <NavDropdown.Item href={`/industries/${child.slug}`} key={i}>
+                          //   {child.name}
+                          // </NavDropdown.Item>
+                          <Link href={`/industries/${child.slug}`} className="dropdown-item">
+                          {child.name}
+                        </Link>
                         ))}
                       </NavDropdown>
                     );
@@ -156,9 +159,12 @@ const Header = ({ homeData }) => {
                       >
 
                         {finalServices?.map((item, index) => (
-                          <NavDropdown.Item href={`/services/${item.slug}`} key={index}>
-                            {item.name}
-                          </NavDropdown.Item>
+                          // <NavDropdown.Item href={`/services/${item.slug}`} key={index}>
+                          //   {item.name}
+                          // </NavDropdown.Item>
+                          <Link href={`/services/${item.slug}`} className="dropdown-item">
+                          {item.name}
+                        </Link>
                         ))}
 
                       </NavDropdown>
@@ -169,17 +175,23 @@ const Header = ({ homeData }) => {
                   // Special case for Case Study
                   if (item.slug === "casestudy") {
                     return (
-                      <Nav.Link href={`/${item.slug}/${casestudy.slug}`} key={index}>
-                        {item.name}
-                      </Nav.Link>
+                      // <Nav.Link href={`/${item.slug}/${casestudy.slug}`} key={index}>
+                      //   {item.name}
+                      // </Nav.Link>
+                      <Link href={`/${item.slug}/${casestudy.slug}`} className="nav-link">
+                      {item.name}
+                    </Link>
                     );
                   }
 
                   // Default menu item
                   return (
-                    <Nav.Link href={`/${item.slug}`} key={index}>
-                      {item.name}
-                    </Nav.Link>
+                    // <Nav.Link href={`/${item.slug}`} key={index}>
+                    //   {item.name}
+                    // </Nav.Link>
+                    <Link href={`/${item.slug}`} className="nav-link">
+                    {item.name}
+                  </Link>
                   );
                 })}
             </Nav>

@@ -4458,5 +4458,15 @@ transform-origin: 0 0;}
   cursor: not-allowed;
 }
 
-
-
+.totalCasestudy {
+  color: #fff;
+    text-align: center;
+    margin-bottom: 0;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: #e1e1e12e;
+    padding: 5px 10px;
+    display: inline-block;
+    border-radius: 5px;
+}

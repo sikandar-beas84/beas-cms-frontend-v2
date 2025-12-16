@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { env } from '../../util/constants/common';
-const BreadCrumb = ({pagetitle, pageslug, pageBanner}) => {
+const BreadCrumb = ({pagetitle, pageslug, pageBanner, totalCasestudy}) => {
 
   const bannerUrl = `${env.BACKEND_BASE_URL}${pageBanner}`;
   const bgStyle = {
@@ -22,6 +22,13 @@ const BreadCrumb = ({pagetitle, pageslug, pageBanner}) => {
                 <li>{pagetitle}</li>
               </ul>
              </div> */}
+             { totalCasestudy && 
+             <Row>
+              <Col xs={12} className="position-relative">
+                <p className="totalCasestudy">Case Study: <span>{totalCasestudy?.currentStudy}</span> / {totalCasestudy?.totalStudy}</p>
+              </Col>
+            </Row>
+            }
            </div>
           </Col>
         </Row>

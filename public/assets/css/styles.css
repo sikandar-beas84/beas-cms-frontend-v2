@@ -2105,6 +2105,7 @@ img.port-shw {
   letter-spacing: 0.01em;
   margin-bottom: 22px;
   color: #FFFFFF;
+  text-transform:capitalize;
 }
 
 .breadcrumbWrap .pgNameListing ul li,
@@ -4457,6 +4458,7 @@ transform-origin: 0 0;}
   opacity: 0.3;
   cursor: not-allowed;
 }
+.wpp-iicon{display:none;}
 
 
 

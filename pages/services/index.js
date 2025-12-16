@@ -145,12 +145,12 @@ const Service = ({ services, service, seometadata }) => {
                               <div className="services-text">
                                 <h2>{item?.menu_contents?.title}</h2>
                                 <p dangerouslySetInnerHTML={{ __html: description }} />
-                                <Nav.Link
+                                <Link
                                   href={`/services/${item?.menu_contents?.slug}`}
                                   className="services-btn proc-btn thar-three4"
                                 >
                                   Read More
-                                </Nav.Link>
+                                </Link>
                               </div>
                             </div>
                           </>

@@ -94,7 +94,9 @@ const parseHTMLWithEnv = (html) => {
 
 
         <div className="bgF2F4F7 p-relative">
+          
           <Container fluid>
+          <span>{currentIndex+1} / {totalPages}</span>
           <div className="d-flex justify-content-between carosalArrow">
             {/* Previous */}
             <Link href={`/casestudy/${prevProject.slug}`} className="btn btn-primary">

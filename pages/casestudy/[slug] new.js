@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo  } from "react";
+import React, { useEffect, useState } from "react";
 import BreadCrumb from "../component/BreadCrumb";
 import { Container, Row, Col } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
@@ -19,22 +19,34 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
+
   const [showForm, setShowForm] = useState(false);
 
+  // 🚀 PREFETCH NEXT & PREV (MOST IMPORTANT)
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowForm(true);
-    }, 15000); // 15 seconds delay
+    const currentIndex = projects.findIndex(p => p.slug === currentSlug);
+    if (currentIndex === -1) return;
 
-    return () => clearTimeout(timer);
-  }, []);
+    const prev = projects[(currentIndex - 1 + projects.length) % projects.length];
+    const next = projects[(currentIndex + 1) % projects.length];
+
+    router.prefetch(`/casestudy/${prev.slug}`);
+    router.prefetch(`/casestudy/${next.slug}`);
+  }, [currentSlug, projects]);
 
 
+    // delayed form
+    useEffect(() => {
+      const timer = setTimeout(() => setShowForm(true), 15000);
+      return () => clearTimeout(timer);
+    }, []);
 
-  // find current index
-  const currentIndex = projects.findIndex((p) => p.slug === currentSlug);
-  const prevProject = projects[currentIndex - 1] || null;
-  const nextProject = projects[currentIndex + 1] || null;
+    if (!casestudy) return null;
+
+    // current index
+    const currentIndex = projects.findIndex(p => p.slug === currentSlug);
+    const prevProject = projects[(currentIndex - 1 + projects.length) % projects.length];
+    const nextProject = projects[(currentIndex + 1) % projects.length];
 
   //  Pagination logic (10 at a time)
   const totalPages = projects.length;
@@ -45,18 +57,13 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
 
 
   // Helper function to replace variables
-  const parseHTMLWithEnv = (html) => {
-    if (!html) return "";
-  
-    return html
-      .replace(/\{env\.SITE_URL\}/g, env.SITE_URL)
-      .replace(/\{env\.BACKEND_BASE_URL\}/g, env.BACKEND_BASE_URL);
-  };
+const parseHTMLWithEnv = (html) => {
+  if (!html) return "";
 
-  const parsedSolution = useMemo(
-    () => parseHTMLWithEnv(casestudy?.beas_solution),
-    [casestudy?.beas_solution]
-  );
+  return html
+    .replace(/\{env\.SITE_URL\}/g, env.SITE_URL)   // replace {env.SITE_URL}
+    .replace(/\{env\.BACKEND_BASE_URL\}/g, env.BACKEND_BASE_URL); // other env vars if needed
+};
 
   const metaTitle = seometadata?.title
     ? seometadata?.title
@@ -76,23 +83,6 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
   const metaAuthor = seometadata?.author
     ? seometadata?.author
     : "BEAS Consultancy And Services Private Limited";
-
-
-
-
-    const goToCaseStudy = (slug) => {
-      router.push(`/casestudy/${slug}`);
-    };
-
-    useEffect(() => {
-      if (prevProject) {
-        router.prefetch(`/casestudy/${prevProject.slug}`);
-      }
-      if (nextProject) {
-        router.prefetch(`/casestudy/${nextProject.slug}`);
-      }
-    }, [prevProject, nextProject]);
-
 
   return (
     <>
@@ -115,24 +105,17 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
 
         <div className="bgF2F4F7 p-relative">
           <Container fluid>
-            <div className="d-flex justify-content-between carosalArrow">
-              {/* Previous */}
-              <button
-                className="btn btn-primary"
-                disabled={!prevProject}
-                onClick={() => prevProject && goToCaseStudy(prevProject.slug)}
-              >
-                <ChevronLeft />
-              </button>
+          <div className="d-flex justify-content-between carosalArrow">
+            {/* Previous */}
+            <Link href={`/casestudy/${prevProject.slug}`} prefetch={true} className="btn btn-primary">
+              <ChevronLeft />
+            </Link>
 
-              <button
-                className="btn btn-primary"
-                disabled={!nextProject}
-                onClick={() => nextProject && goToCaseStudy(nextProject.slug)}
-              >
-                <ChevronRight />
-              </button>
-            </div>
+            {/* Next */}
+            <Link href={`/casestudy/${nextProject.slug}`} prefetch={true} className="btn btn-primary">
+              <ChevronRight />
+            </Link>
+          </div>
           </Container>
 
           <Container className="py-5 ccase-study-container">
@@ -184,7 +167,7 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
                     <Accordion.Body>
                       <div
                         dangerouslySetInnerHTML={{
-                          __html: parsedSolution ,
+                          __html: parseHTMLWithEnv(casestudy?.beas_solution),
                         }}
                       />
                     </Accordion.Body>
@@ -250,63 +233,38 @@ const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seome
 
 export default React.memo(Page);
 
-export async function getStaticPaths() {
-  const response = await HomeService.projectPage();
-  const projects = response.data?.projects || [];
-
-  const paths = projects.map((item) => ({
-    params: { slug: item.slug.toString() },
-  }));
-
-  return {
-    paths,
-    fallback: "blocking",
-  };
-}
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params, res }) {
   const { slug } = params;
 
-  const response = await HomeService.projectPage();
-  const projects = response.data?.projects || [];
-
-  const currentIndex = projects.findIndex(
-    item => item.slug.toString() === slug
+  // ⚡ CDN CACHE (CRITICAL)
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=300, stale-while-revalidate=600"
   );
+
+  const [projectRes, menuRes, seoRes] = await Promise.all([
+    HomeService.projectPage(),
+    HomeService.menuProjectPage(),
+    HomeService.seobyslug(slug),
+  ]);
+
+  const projects = projectRes.data?.projects || [];
+  const menucasestudy = menuRes.data?.casestudy || [];
+  const seometadata = seoRes?.data?.seometa || null;
+
+  const currentIndex = projects.findIndex(item => item.slug === slug);
 
   if (currentIndex === -1) {
     return { notFound: true };
   }
 
-  const rawCaseStudy = projects[currentIndex];
-
-  const casestudy = {
-    ...rawCaseStudy,
-    beas_solution: rawCaseStudy.beas_solution
-      ?.replace(/\{env\.SITE_URL\}/g, env.SITE_URL)
-      .replace(/\{env\.BACKEND_BASE_URL\}/g, env.BACKEND_BASE_URL),
-  };
-
-  const slimProjects = projects.map(p => ({
-    slug: p.slug,
-    title: p.title,
-  }));
-
-  const result = await HomeService.menuProjectPage();
-  const menucasestudy = result.data?.casestudy || [];
-
-  const seoResult = await HomeService.seobyslug(slug);
-  const seometadata = seoResult?.data?.seometa ?? null;
-
   return {
     props: {
-      casestudy,
-      projects: slimProjects,
+      casestudy: projects[currentIndex],
+      menucasestudy,
+      projects,
       currentSlug: slug,
       seometadata,
-      menucasestudy
     },
-    revalidate: 60,
   };
 }
-
-

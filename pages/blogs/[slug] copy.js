@@ -333,57 +333,26 @@ const Blog = ({ blog, seometadata, homeData, commonblog }) => {
 
 export default React.memo(Blog);
 
-export async function getStaticProps({ params }) {
-  try {
-    const { slug } = params;
+export async function getServerSideProps({ params }) {
 
-    const [blogRes, commonRes, seoRes] = await Promise.all([
-      HomeService.individualBlogPage(slug),
-      HomeService.commonPage(),
-      HomeService.seobyslug(slug)
-    ]);
+  const { slug } = params;
 
-    const blog = blogRes?.data?.blog || null;
-    const commonData = commonRes?.data?.common || [];
+  const response = await HomeService.individualBlogPage(slug);
+  const blog = response.data?.blog || [];
 
-    const commonblog =
-      commonData.find(item => item.slug === 'blog-section-homepage') || null;
+  const commonresponse = await HomeService.commonPage();
+  const commonData = commonresponse.data?.common || [];
+  const firstBlog = commonData.filter((item) => item.slug === 'blog-section-homepage');
+  const commonblog = firstBlog?.length > 0 ? firstBlog[0] : null;
 
-    if (!blog) {
-      return { notFound: true };
+  const seobyslug = await HomeService.seobyslug(slug);
+  const seometadata = seobyslug?.data?.seometa;
+
+  return {
+    props: {
+      blog,
+      seometadata,
+      commonblog
     }
-
-    return {
-      props: {
-        blog,
-        commonblog,
-        seometadata: seoRes?.data?.seometa || null
-      },
-      revalidate: 600 // 🔥 ISR (10 minutes)
-    };
-  } catch (error) {
-    return {
-      notFound: true
-    };
-  }
-}
-export async function getStaticPaths() {
-  try {
-    const res = await HomeService.blogPage();
-    const blogs = res?.data?.blogs || [];
-
-    const paths = blogs.map(blog => ({
-      params: { slug: blog.slug }
-    }));
-
-    return {
-      paths,
-      fallback: 'blocking' // 🔥 Best for SEO + performance
-    };
-  } catch {
-    return {
-      paths: [],
-      fallback: 'blocking'
-    };
   }
 }

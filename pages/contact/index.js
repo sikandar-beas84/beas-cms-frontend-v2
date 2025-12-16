@@ -1,24 +1,28 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useMemo } from 'react';
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
+import Accordion from 'react-bootstrap/Accordion';
+import { Container, Row, Col } from 'react-bootstrap';
+
 import BreadCrumb from '../component/BreadCrumb';
+import CountryCodeDropdown from '../component/CountryCodeDropdown';
+import SEO from '../../components/SEO';
+
 import HomeService from '../../util/service/Home';
 import { env } from '../../util/constants/common';
-import SEO from '../../components/SEO';
-import { useRouter } from 'next/router';
-import Accordion from 'react-bootstrap/Accordion';
-import ReCAPTCHA from 'react-google-recaptcha';
-import Image from 'next/image';
-import { Container, Row, Col } from 'react-bootstrap'
-import CountryCodeDropdown from '../component/CountryCodeDropdown';
+
+// ✅ Load reCAPTCHA only on client
+const ReCAPTCHA = dynamic(() => import('react-google-recaptcha'), {
+  ssr: false
+});
 
 const ContactUs = ({ contactus, faqs, seometadata }) => {
 
-  const router = useRouter();
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
-
   const fileInputRef = useRef(null);
   const [captchaToken, setCaptchaToken] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState('');
+  const [errors, setErrors] = useState({});
 
   const [formData, setFormData] = useState({
     name: '',
@@ -26,43 +30,54 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
     phone: '',
     subject: '',
     message: '',
-    file: '',
-    countrycode: '+91'  // default India
+    file: null,
+    countrycode: '+91'
   });
 
-  const [status, setStatus] = useState('');
-  const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
+  // ---- SEO Memoization
+  const seo = useMemo(() => ({
+    title: seometadata?.title || 'Contact Us',
+    description:
+      seometadata?.description ||
+      'Reach out to Beas Consultancy. We’re here to help with your questions and business inquiries.',
+    keywords:
+      seometadata?.keyword ||
+      'Contact Beas, Contact Form, Business Inquiry, Support',
+    image: seometadata?.image
+      ? `${env.BACKEND_BASE_URL}${seometadata.image}`
+      : `${env.BACKEND_BASE_URL}${contactus?.image || ''}`,
+    url: seometadata?.url
+      ? `${env.FRONTEND_BASE_URL}${seometadata.url}`
+      : `${env.FRONTEND_BASE_URL}/contact-us`,
+    author:
+      seometadata?.author ||
+      'BEAS Consultancy And Services Private Limited'
+  }), [seometadata, contactus]);
 
+  // ---- Form Change
   const handleChange = (e) => {
     const { name, value, files } = e.target;
 
-    // ✅ Allow only numbers and special characters for phone field
-    if (name === "phone") {
+    if (name === 'phone') {
       const regex = /^[0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/? ]*$/;
-
       if (!regex.test(value)) {
-        // ❌ Invalid input — do not update formData
-        setErrors((prev) => ({
+        setErrors(prev => ({
           ...prev,
-          phone: ["Only numbers and special characters are allowed."],
+          phone: ['Only numbers and special characters are allowed.']
         }));
         return;
       } else {
-        // ✅ Valid input
-        setErrors((prev) => ({
-          ...prev,
-          phone: null,
-        }));
+        setErrors(prev => ({ ...prev, phone: null }));
       }
     }
 
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
       [name]: files ? files[0] : value
     }));
   };
 
+  // ---- Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -72,12 +87,14 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
     }
 
     const data = new FormData();
-    for (const key in formData) {
-      data.append(key, formData[key]);
-    }
+    Object.entries(formData).forEach(([key, value]) =>
+      data.append(key, value)
+    );
     data.append('recaptcha_token', captchaToken);
-    setLoading(true); // ✅ start loader
-    setStatus('');    // clear previous status
+
+    setLoading(true);
+    setStatus('');
+
     try {
       const res = await fetch(`${env.API_BASE_URL}save-customer-enquiry`, {
         method: 'POST',
@@ -87,6 +104,8 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
         body: data
       });
       const result = await res.json();
+
+      console.log("pppppp", result.error);
 
       if (res.ok) {
         setStatus('✅ Message sent successfully!');
@@ -108,293 +127,202 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
     }
   };
 
-  const isFormValid = Object.values({
-    name: formData.name,
-    email: formData.email,
-    phone: formData.phone,
-    subject: formData.subject,
-    message: formData.message,
-    file: formData.file
-  }).every((value) => value && value !== '');
-
-  const metaTitle = seometadata?.title
-    ? seometadata?.title
-    : `Contact Us`;
-  const metaKeyword = seometadata?.keyword
-    ? seometadata?.keyword
-    : "Contact Beas, Contact Form, Business Inquiry, Support";
-  const metaDesc = seometadata?.description
-    ? seometadata?.description
-    : "Reach out to Beas Consultancy. We’re here to help with your questions, suggestions, and business inquiries."
-  const metaImage = seometadata?.image
-    ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
-    : `${env.BACKEND_BASE_URL}${contactus?.image}`;
-  const metaUrl = seometadata?.url
-    ? `${env.FRONTEND_BASE_URL}${seometadata?.url}`
-    : `${env.FRONTEND_BASE_URL}${seometadata?.page_slug}`;
-  const metaAuthor = seometadata?.author
-    ? seometadata?.author
-    : "BEAS Consultancy And Services Private Limited";
+  // ---- FAQ helpers
+  const faqHeading = faqs?.find(item => item.type === 'faq-heading');
+  const faqItems = faqs?.filter(item => item.type !== 'faq-heading');
 
   return (
     <>
-      <SEO
-        title={metaTitle}
-        description={metaDesc}
-        keywords={metaKeyword}
-        image={metaImage}
-        url={metaUrl}
-        author={metaAuthor}
-      />
+      <SEO {...seo} />
+
       <main>
         <BreadCrumb pagetitle="Contact Us" pageBanner={contactus?.banner} />
 
+        {/* ===== Contact Form ===== */}
         <section className="section-padding">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-8 col-md-12 contact_form_wrap_box">
-                <div className="contact_form_heading position-relative">
+          <Container>
+            <Row>
+              <Col lg={8} md={12} className="contact_form_wrap_box">
+                <div className='contact_form_heading position-relative'>
                   <h2>Let's Connect</h2>
-                  
                 </div>
-                <div className="contact_form_box">
+                <div className='contact_form_box'>
                   <form className="was-validate contact-frm" onSubmit={handleSubmit}>
+                    <Row>
+                      <Col md={6}>
+                        <input
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          placeholder="Name"
+                          className="form-control mb-3"
+                          required
+                        />
+                        {errors?.name && (<p className='error_message'>{errors.name[0]}</p>)}
+                      </Col>
 
+                      <Col md={6}>
+                        <input
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          placeholder="Email"
+                          className="form-control mb-3"
+                          required
+                        />
+                        {errors?.email && (<p className='error_message'>{errors.email[0]}</p>)}
+                      </Col>
 
-                    <div className="row">
-                      <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-                        <div className="contact_inputs">
-                          <input
-                            type='text'
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            className='form-control mb-3'
-                            placeholder='Name'
-                            required
-                          />
-                          {errors?.name && (<p className='error_message'>{errors.name[0]}</p>)}
-                        </div>
-                      </div>
-                      <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-                        <div className="contact_inputs">
-                          <input
-                            type='text'
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            className='form-control mb-3'
-                            placeholder='Email'
-                            required
-                          />
-                          {errors?.email && (<p className='error_message'>{errors.email[0]}</p>)}
-                        </div>
-                      </div>
-                      <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-                        <div className="contact_inputs d-flex gap-2">
+                      <Col md={6} className="d-flex gap-2">
                         <CountryCodeDropdown
                           name="countrycode"
                           value={formData.countrycode}
                           onChange={handleChange}
-                          
-                          />
-                          <input
-                            type='text'
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleChange}
-                            className='form-control mb-3'
-                            placeholder='Mobile Number'
-                            required
-                          />
-                          {errors?.phone && (<p className='error_message'>{errors.phone[0]}</p>)}
-                        </div>
-                      </div>
-                      <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-                        <div className="contact_inputs">
-                          <input
-                            type='text'
-                            name="subject"
-                            value={formData.subject}
-                            onChange={handleChange}
-                            className='form-control mb-3'
-                            placeholder='Subject'
-                            required
-                          />
-                          {errors?.subject && (<p className='error_message'>{errors.subject[0]}</p>)}
-                        </div>
-                      </div>
-                      <div className="col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div className="contact_inputs">
-                          <textarea
-                            name="message"
-                            value={formData.message}
-                            onChange={handleChange}
-                            className='form-control h-150 mb-3'
-                            placeholder='Message'
-                            rows={5}
-                            required
-                          ></textarea>
-                          {errors?.message && (<p className='error_message'>{errors.message[0]}</p>)}
-                        </div>
-                      </div>
+                        />
+                        <input
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          placeholder="Mobile Number"
+                          className="form-control mb-3"
+                          required
+                        />
+                        {errors?.phone && (<p className='error_message'>{errors.phone[0]}</p>)}
+                      </Col>
 
-                      <div className='col-12'>
+                      <Col md={6}>
+                        <input
+                          name="subject"
+                          value={formData.subject}
+                          onChange={handleChange}
+                          placeholder="Subject"
+                          className="form-control mb-3"
+                          required
+                        />
+                        {errors?.subject && (<p className='error_message'>{errors.subject[0]}</p>)}
+                      </Col>
+
+                      <Col md={12}>
+                        <textarea
+                          name="message"
+                          value={formData.message}
+                          onChange={handleChange}
+                          placeholder="Message"
+                          rows={5}
+                          className="form-control mb-3"
+                          required
+                        />
+                        {errors?.message && (<p className='error_message'>{errors.message[0]}</p>)}
+                      </Col>
+
+                      <Col md={12}>
                         <ReCAPTCHA
-                          sitekey={`${env.SITE_KEY}`}
+                          sitekey={env.SITE_KEY}
                           onChange={setCaptchaToken}
                         />
-                      </div>
-                    
+                      </Col>
 
-                      <div className="col-4">
-                        <div className="contact_form_btn">
-
-                        <button
-                          type="submit"
-                          className='red-btn w-100 mt-3 post-job-btn'
-                          disabled={loading}
-                        >
-                          {loading ? (
-                            <span className="d-flex align-items-center justify-content-center gap-2">
-                              <span className="loader"></span>
-                              Submitting...
-                            </span>
-                          ) : (
-                            'Submit'
-                          )}
-                        </button>
+                      <Col md={4}>
+                        <div className='contact_form_btn'>
+                          <button
+                            type="submit"
+                            className="red-btn w-100 mt-3 post-job-btn"
+                            disabled={loading}
+                          >
+                            {loading ? 'Submitting…' : 'Submit'}
+                          </button>
                         </div>
-                      </div>
-                      {/* {loading && <div className="spinner">Loading...</div>} */}
-                      {status && <p>{status}</p>}
-                    </div>
+                      </Col>
+
+                      {status && <p className="mt-3">{status}</p>}
+                    </Row>
                   </form>
                 </div>
-              </div>
-              <div className="col-lg-4 col-md-12">
+              </Col>
+
+              {/* ===== Contact Info ===== */}
+              <Col lg={4}>
                 <div className="contact_right_box">
-                  <div className="contact_form_add_heading">
-
-                    <div className="form_add map_add1">
-                      <div className="map_location_icon">
-                        <Image
-                          src="/assets/images/add2.png"
-                          alt="address"
-                          width={40}
-                          height={40}
-                          loading="lazy"
-                          className="beats"
-                        />
-
+                  <div className='contact_form_add_heading'>
+                    {[
+                      { icon: 'add2.png', title: 'Address', text: contactus?.address },
+                      { icon: 'add3.png', title: 'Email', text: contactus?.email },
+                      { icon: 'add1.png', title: 'Mobile', text: `${contactus?.phone} ${contactus?.mobile}` }
+                    ].map((item, index) => (
+                      <div key={index} className="form_add">
+                        <div className='map_location_icon'>
+                          <Image
+                            src={`/assets/images/${item.icon}`}
+                            alt={item.title}
+                            width={40}
+                            height={40}
+                            loading="lazy"
+                          />
+                        </div>
+                        <div className='map_location_icon_cont'>
+                          <h1>{item.title}</h1>
+                          <h3>{item.text}</h3>
+                        </div>
                       </div>
-                      <div className="map_location_icon_cont">
-                        <h1>Address</h1>
-                        <h3>{contactus?.address}</h3>
-                      </div>
-                      <div className="clearfix"></div>
-                    </div>
-                    <div className="form_add map_add3">
-                      <div className="map_location_icon">
-                        <Image
-                          src="/assets/images/add3.png"
-                          alt="email"
-                          width={40}
-                          height={40}
-                          loading="lazy"
-                          className="beats"
-                        />
-                      </div>
-                      <div className="map_location_icon_cont map_location_icon_cont4">
-                        <h1>Email Address</h1>
-                        <h3> <a href="#">{contactus?.email}</a></h3>
-                      </div>
-                      <div className="clearfix"></div>
-                    </div>
-                    <div className="form_add map_add2">
-                      <div className="map_location_icon">
-                        <Image
-                          src="/assets/images/add1.png"
-                          alt="mobile"
-                          width={40}
-                          height={40}
-                          loading="lazy"
-                          className="beats"
-                        />
-                      </div>
-                      <div className="map_location_icon_cont map_location_icon_cont2">
-                        <h1>Mobile Number</h1>
-                        <h3> <a href="#">{contactus?.phone}</a>  <br /> <a href="#">{contactus?.mobile}</a></h3>
-                      </div>
-                      <div className="clearfix"></div>
-                    </div>
-
+                    ))}
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
+              </Col>
+            </Row>
+          </Container>
         </section>
 
-
+        {/* ===== FAQ ===== */}
         <section className="section-abuts section-contact">
-          <div className="container">
+          <Container>
             <div className="row">
               <div className="col-lg-12">
                 <div className="ser_rea">
                   <div className="about_texts contact-bg">
                     <div className="serv-head">
 
-
-                      {faqs?.map((item, index) =>
-                        item.type === "faq-heading" && (
-                          <React.Fragment key={index}>
-                            <h2>{item?.title}</h2>
-                            <p className="mb-4">{item?.long_desc}</p>
-                          </React.Fragment>
-                        )
+                      {faqHeading && (
+                        <>
+                          <h2>{faqHeading.title}</h2>
+                          <p>{faqHeading.long_desc}</p>
+                        </>
                       )}
                     </div>
+                      {(() => {
+                        let counter = 0; // manual numbering only for FAQ items
 
+                        const firstAccordionIndex = faqs?.findIndex(
+                          (item) => item.type !== "faq-heading"
+                        );
 
-                    {(() => {
-                      let counter = 0; // manual numbering only for FAQ items
+                        return (
+                          <Accordion defaultActiveKey={firstAccordionIndex.toString()} flush>
+                            {faqs?.map((item, index) => {
+                              if (item.type !== "faq-heading") {
+                                counter++; // increment only for FAQ items
 
-                      const firstAccordionIndex = faqs?.findIndex(
-                        (item) => item.type !== "faq-heading"
-                      );
-
-                      return (
-                        <Accordion defaultActiveKey={firstAccordionIndex.toString()} flush>
-                          {faqs?.map((item, index) => {
-                            if (item.type !== "faq-heading") {
-                              counter++; // increment only for FAQ items
-
-                              return (
-                                <Accordion.Item eventKey={index.toString()} key={index}>
-                                  <Accordion.Header>
-                                    {`${counter}. ${item.title}`}
-                                  </Accordion.Header>
-                                  <Accordion.Body>
-                                    <p>{item.short_desc}</p>
-                                  </Accordion.Body>
-                                </Accordion.Item>
-                              );
-                            }
-                            return null;
-                          })}
-                        </Accordion>
-                      );
-                    })()}
-
-
-
+                                return (
+                                  <Accordion.Item eventKey={index.toString()} key={index}>
+                                    <Accordion.Header>
+                                      {`${counter}. ${item.title}`}
+                                    </Accordion.Header>
+                                    <Accordion.Body>
+                                      <p>{item.short_desc}</p>
+                                    </Accordion.Body>
+                                  </Accordion.Item>
+                                );
+                              }
+                              return null;
+                            })}
+                          </Accordion>
+                        );
+                      })()}
+                    
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-
+          </Container>
           <div className="shp1">
             <img src="assets/images/ser-bg.png" />
           </div>
@@ -402,34 +330,29 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
             <img src="assets/images/ser-bg2.png" />
           </div>
         </section>
-
-
       </main>
     </>
-  )
-}
+  );
+};
 
-export default React.memo(ContactUs);
+export default ContactUs;
+export async function getStaticProps() {
+  try {
+    const [contactRes, faqRes, seoRes] = await Promise.all([
+      HomeService.contactPage(),
+      HomeService.faqPage(),
+      HomeService.seobyslug('contact')
+    ]);
 
-export async function getServerSideProps(context) {
-
-  const url = context.req.url;
-  const lastSegment = url.split("/").filter(Boolean).pop();
-
-  const res = await HomeService.contactPage();
-  const contactus = res.data?.contact || {}
-
-  const faqres = await HomeService.faqPage();
-  const faqs = faqres.data?.faqs || {}
-
-  const seobyslug = await HomeService.seobyslug(lastSegment);
-  const seometadata = seobyslug?.data?.seometa;
-
-  return {
-    props: {
-      contactus,
-      faqs,
-      seometadata
-    }
+    return {
+      props: {
+        contactus: contactRes?.data?.contact || {},
+        faqs: faqRes?.data?.faqs || [],
+        seometadata: seoRes?.data?.seometa || null
+      },
+      revalidate: 600 // 10 minutes
+    };
+  } catch {
+    return { notFound: true };
   }
 }

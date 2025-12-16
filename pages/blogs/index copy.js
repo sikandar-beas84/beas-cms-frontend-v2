@@ -172,32 +172,27 @@ const Blog = ({ blogs, seometadata, commonblog }) => {
 
 export default React.memo(Blog);
 
-export async function getStaticProps() {
-  try {
-    const [blogRes, commonRes, seoRes] = await Promise.all([
-      HomeService.blogPage(),
-      HomeService.commonPage(),
-      HomeService.seobyslug('blog')
-    ]);
+export async function getServerSideProps(context) {
 
-    const blogs = blogRes?.data?.blogs || [];
-    const commonData = commonRes?.data?.common || [];
+  const url = context.req.url;
+  const lastSegment = url.split("/").filter(Boolean).pop();
 
-    const commonblog =
-      commonData.find(item => item.slug === 'blog-section-homepage') || null;
+  const response = await HomeService.blogPage();
+  const blogs = response.data?.blogs || [];
 
-    return {
-      props: {
-        blogs,
-        commonblog,
-        seometadata: seoRes?.data?.seometa || null
-      },
-      revalidate: 600 // 🔥 ISR: refresh every 10 minutes
-    };
-  } catch (error) {
-    return {
-      notFound: true
-    };
+  const commonresponse = await HomeService.commonPage();
+  const commonData = commonresponse.data?.common || [];
+  const firstBlog = commonData.filter((item) => item.slug === 'blog-section-homepage');
+  const commonblog = firstBlog?.length > 0 ? firstBlog[0] : null;
+
+  const seobyslug = await HomeService.seobyslug(lastSegment);
+  const seometadata = seobyslug?.data?.seometa;
+
+  return {
+    props: {
+      blogs,
+      seometadata,
+      commonblog
+    }
   }
 }
-

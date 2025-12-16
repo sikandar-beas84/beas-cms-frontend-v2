@@ -384,64 +384,39 @@ const metaAuthor = seometadata?.author
 
 export default React.memo(Page);
 
-export async function getStaticProps({ params }) {
-  try {
-    const { slug } = params;
+export async function getServerSideProps({ params }) {
+  const { slug } = params;
 
-    const [menuRes, careerRes, contactRes, seoRes] = await Promise.all([
-      HomeService.menuCareerPage(),
-      HomeService.careerPage(),
-      HomeService.contactPage(),
-      HomeService.seobyslug('career')
-    ]);
+  const res = await HomeService.menuCareerPage();
+  const menucareer = res.data?.career || [];
 
-    const menucareer = menuRes?.data?.career || [];
-    const careers = careerRes?.data?.careers || [];
-    const contact = contactRes?.data?.contact || null;
+  const response = await HomeService.careerPage();
+  const careers = response.data?.careers || [];
 
-    // Find career by slug
-    const career = careers.find(
-      item => item.title?.toString() === slug
-    );
+  const result = await HomeService.contactPage();
+  const contact = result.data?.contact || [];
+  // Find index of current project by matching the ID (slug)
 
-    if (!career) {
-      return { notFound: true };
-    }
+  const career = careers.find((item) => item.title.toString() === slug);
+  const careerId = career?.id;
 
+
+  if (!career) {
     return {
-      props: {
-        career,
-        careerId: career.id,
-        menucareer,
-        contact,
-        seometadata: seoRes?.data?.seometa || null
-      },
-      revalidate: 600 //  ISR (10 minutes)
-    };
-  } catch {
-    return { notFound: true };
-  }
-}
-export async function getStaticPaths() {
-  try {
-    const res = await HomeService.careerPage();
-    const careers = res?.data?.careers || [];
-
-    const paths = careers.map(career => ({
-      params: {
-        slug: career.title?.toString()
-      }
-    }));
-
-    return {
-      paths,
-      fallback: 'blocking' //  Best for SEO + performance
-    };
-  } catch {
-    return {
-      paths: [],
-      fallback: 'blocking'
+      notFound: true, // 👈 Triggers 404 page
     };
   }
-}
 
+  const seobyslug = await HomeService.seobyslug('career');
+  const seometadata = seobyslug?.data?.seometa;
+
+  return {
+    props: {
+      career,
+      menucareer,
+      contact,
+      careerId,
+      seometadata
+    },
+  };
+}

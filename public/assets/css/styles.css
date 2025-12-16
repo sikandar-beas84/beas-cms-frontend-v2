@@ -4393,4 +4393,70 @@ textarea.form-control.h-150.mb-3 {
 .rreaptcha{transform: scale(0.80);
 transform-origin: 0 0;}
 .navbar-brand{margin-top: -10px;}
+/* 16.12.25 */
+.technology-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.technology-viewport {
+  overflow: hidden;
+}
+
+.technology-slider {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+
+.technology-page {
+  min-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 46px;
+  align-items: flex-start;
+}
+
+.technology-page > div {
+  flex: 0 0 calc(100% / 6);
+  display: flex;
+  justify-content: center;
+  border:1px solid #e0e0e0;
+  box-shadow: 0 3px 9px rgba(0,0,0,.04);
+  padding:15px;
+}
+
+/* arrows */
+.tech-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #0d6efd;
+  color: #fff;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  z-index: 2;
+  border-radius:50%;
+  width:40px;
+  height:40px;
+}
+
+.tech-prev {
+  left:42%;
+  top:100%;
+  margin-top:45px;
+}
+
+.tech-next {
+  right:50%;
+  top:100%;
+  margin-top:45px;
+}
+
+.tech-arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+
 

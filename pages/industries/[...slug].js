@@ -163,7 +163,8 @@ export default React.memo(Page);
 export async function getServerSideProps({ params }) {
   const { slug } = params; // slug is now an array
 
-  const [menuRes, seoRes] = await Promise.all([
+  const [homeres, menuRes, seoRes] = await Promise.all([
+    HomeService.homePage(),
     HomeService.menuIndustryPage(),
     HomeService.seobyslug(slug),
   ]);
@@ -208,7 +209,8 @@ export async function getServerSideProps({ params }) {
     props: {
       industry,
       enrichedContents,
-      seometadata
+      seometadata,
+      homeData: homeres?.data || null
     },
   };
 }

@@ -94,7 +94,8 @@ const Skills = ({ skills, seometadata }) => {
 export default Skills;
 export async function getStaticProps() {
   try {
-    const [skillsRes, seoRes] = await Promise.all([
+    const [homeres, skillsRes, seoRes] = await Promise.all([
+      HomeService.homePage(),
       HomeService.menuSkillPage(),
       HomeService.seobyslug('skills')
     ]);
@@ -102,7 +103,8 @@ export async function getStaticProps() {
     return {
       props: {
         skills: skillsRes?.data?.skills || null,
-        seometadata: seoRes?.data?.seometa || null
+        seometadata: seoRes?.data?.seometa || null,
+        homeData: homeres?.data || null
       },
       revalidate: 600 // 10 minutes
     };

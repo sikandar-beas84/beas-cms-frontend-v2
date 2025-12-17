@@ -195,14 +195,15 @@ export async function getStaticProps() {
   try {
     const [serviceRes, seoRes] = await Promise.all([
       HomeService.homePage(),
-      HomeService.seobyslug('contact')
+      HomeService.seobyslug('services')
     ]);
 
     return {
       props: {
         services : serviceRes.data?.services?.children || [],
         service : serviceRes.data?.services || [],
-        seometadata: seoRes?.data?.seometa || null
+        seometadata: seoRes?.data?.seometa || null,
+        homeData: serviceRes?.data || null
       },
       revalidate: 60 // 10 minutes
     };

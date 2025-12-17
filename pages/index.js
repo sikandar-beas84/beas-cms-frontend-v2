@@ -432,7 +432,7 @@ export async function getStaticProps() {
   try {
       const [homeRes, seoRes] = await Promise.all([
           HomeService.homePage(),
-          HomeService.seobyslug('about-us')
+          HomeService.seobyslug('')
       ]);
 
       return {

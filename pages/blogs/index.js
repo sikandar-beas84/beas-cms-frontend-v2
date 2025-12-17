@@ -174,7 +174,8 @@ export default React.memo(Blog);
 
 export async function getStaticProps() {
   try {
-    const [blogRes, commonRes, seoRes] = await Promise.all([
+    const [homeres, blogRes, commonRes, seoRes] = await Promise.all([
+      HomeService.homePage(),
       HomeService.blogPage(),
       HomeService.commonPage(),
       HomeService.seobyslug('blog')
@@ -190,7 +191,8 @@ export async function getStaticProps() {
       props: {
         blogs,
         commonblog,
-        seometadata: seoRes?.data?.seometa || null
+        seometadata: seoRes?.data?.seometa || null,
+        homeData: homeres?.data || null
       },
       revalidate: 600 // 🔥 ISR: refresh every 10 minutes
     };

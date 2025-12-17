@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import React from "react";
 
 const ITEMS_PER_ROW = 5;
 const ROWS_VISIBLE = 2;
@@ -9,17 +8,11 @@ const ITEMS_PER_PAGE = ITEMS_PER_ROW * ROWS_VISIBLE;
 const AUTO_SCROLL_DELAY = 5000; // 5 seconds
 
 export default function TechnologySlider({ children }) {
-  // ✅ Normalize children safely
-  const items = React.Children.toArray(children);
-
   const [page, setPage] = useState(0);
 
-  // ✅ Guard: no items → render nothing
-  if (items.length === 0) return null;
-
   const pages = [];
-  for (let i = 0; i < items.length; i += ITEMS_PER_PAGE) {
-    pages.push(items.slice(i, i + ITEMS_PER_PAGE));
+  for (let i = 0; i < children.length; i += ITEMS_PER_PAGE) {
+    pages.push(children.slice(i, i + ITEMS_PER_PAGE));
   }
 
   const maxPage = pages.length - 1;

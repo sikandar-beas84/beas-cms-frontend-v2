@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { env } from '../../util/constants/common';
 import Link from 'next/link';
 
-const IndustriesProcess = ({pageTitle, pageDesc, industryData=[]}) => {
+const IndustriesProcess = ({pageTitle, pageDesc, industryData}) => {
     const [activeIndex, setActiveIndex] = useState(0);
     const tabs = industryData;
     const activeTab = tabs[activeIndex];

@@ -191,23 +191,22 @@ const Service = ({ services, service, seometadata }) => {
 
 export default React.memo(Service);
 
-export async function getServerSideProps(context) {
+export async function getStaticProps() {
+  try {
+    const [serviceRes, seoRes] = await Promise.all([
+      HomeService.homePage(),
+      HomeService.seobyslug('contact')
+    ]);
 
-  const url = context.req.url;
-  const lastSegment = url.split("/").filter(Boolean).pop();
-
-  const res = await HomeService.homePage()
-  const services = res.data?.services?.children || []
-  const service = res.data?.services || []
-
-  const seobyslug = await HomeService.seobyslug(lastSegment);
-  const seometadata = seobyslug?.data?.seometa;
-
-  return {
-    props: {
-      services,
-      service,
-      seometadata
-    }
+    return {
+      props: {
+        services : serviceRes.data?.services?.children || [],
+        service : serviceRes.data?.services || [],
+        seometadata: seoRes?.data?.seometa || null
+      },
+      revalidate: 60 // 10 minutes
+    };
+  } catch {
+    return { notFound: true };
   }
 }

@@ -227,41 +227,39 @@ const parseHTMLWithEnv = (html) => {
 
 export default React.memo(Page);
 
-export async function getServerSideProps({ params, res }) {
+export async function getServerSideProps({ params }) {
   const { slug } = params;
 
-  // ⚡ CDN CACHE (CRITICAL)
-  res.setHeader(
-    "Cache-Control",
-    "public, s-maxage=300, stale-while-revalidate=600"
+  const response = await HomeService.projectPage();
+  const projects = response.data?.projects || [];
+
+  const result = await HomeService.menuProjectPage();
+  const menucasestudy = result.data?.casestudy || [];
+
+  const currentIndex = projects.findIndex(
+    (item) => item.slug.toString() === slug
   );
 
-  const [homeRes, projectRes, menuRes, seoRes] = await Promise.all([
-    HomeService.homePage(),
-    HomeService.projectPage(),
-    HomeService.menuProjectPage(),
-    HomeService.seobyslug(slug),
-  ]);
 
-  const homeData = homeRes.data || [];
-  const projects = projectRes.data?.projects || [];
-  const menucasestudy = menuRes.data?.casestudy || [];
-  const seometadata = seoRes?.data?.seometa || null;
-
-  const currentIndex = projects.findIndex(item => item.slug === slug);
 
   if (currentIndex === -1) {
-    return { notFound: true };
+    return {
+      notFound: true,
+    };
   }
+
+  const casestudy = projects[currentIndex];
+
+  const seobyslug = await HomeService.seobyslug(slug);
+  const seometadata = seobyslug?.data?.seometa;
 
   return {
     props: {
-      homeData,
-      casestudy: projects[currentIndex],
+      casestudy,
       menucasestudy,
       projects,
       currentSlug: slug,
-      seometadata,
+      seometadata
     },
   };
 }

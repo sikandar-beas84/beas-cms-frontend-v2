@@ -1,4 +1,4 @@
-import React, { JSX } from "react";
+import React, { useState } from "react";
 import { useEffect, useRef } from "react";
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -20,30 +20,59 @@ const Header = ({ homeData }) => {
 
   useEffect(() => {
     if (!emblemRef.current) return;
-  
+
     const element = emblemRef.current;
     const text = element.innerText;
     element.innerHTML = "";
-  
+
     for (let i = 0; i < text.length; i++) {
       const letter = text[i];
       const span = document.createElement("span");
       span.textContent = letter;
-  
+
       const r = (360 / text.length) * i;
       const x = (Math.PI / text.length).toFixed(0) * i;
       const y = (Math.PI / text.length).toFixed(0) * i;
-  
+
       span.style.transform = `rotate(${r}deg) translate3d(${x}px, ${y}px, 0)`;
-  
+
       element.appendChild(span);
     }
   }, []);
-  
-  
 
 
 
+  const [showService, setServiceShow] = useState(false);
+  const [showIndustry, setIndustryShow] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  // Step 1: Expand application-solutioning
+  let finalServices = homeData?.services?.children?.flatMap(item => {
+    if (item.slug === "application-solutioning") {
+      return item.children?.map(child => ({
+        slug: child.slug,
+        name: child.name
+      }));
+    }
+
+    return [{
+      slug: item.slug,
+      name: item.name
+    }];
+  });
+
+  // Step 2: Move specific items to the bottom
+  const bottomSlugs = ["ui-ux", "professional-services"];
+
+  finalServices = [...finalServices].sort((a, b) => {
+    const aLast = bottomSlugs.includes(a?.slug);
+    const bLast = bottomSlugs.includes(b?.slug);
+
+    if (aLast && !bLast) return 1;   // a goes down
+    if (!aLast && bLast) return -1;  // b goes down
+    return 0;
+  });
+  //////////////////////////////////////////
 
   return (
     <>
@@ -77,8 +106,8 @@ const Header = ({ homeData }) => {
             <Image
               src={`${env.BACKEND_BASE_URL}${homeData?.logo?.image}`}
               alt="Logo"
-              width={300}
-              height={50}
+              width={234}
+              height={35}
               priority
               fetchPriority="high"
               className="img-fluid"
@@ -97,11 +126,21 @@ const Header = ({ homeData }) => {
                   // Special dropdown for Industries
                   if (item.slug === "industries") {
                     return (
-                      <NavDropdown title="Industries" id="navbarScrollingDropdown" key={index}>
+                      <NavDropdown
+                        title="Industries"
+                        id="navbarScrollingDropdown"
+                        key={index}
+                        show={showIndustry}
+                        onMouseEnter={() => setIndustryShow(true)}
+                        onMouseLeave={() => setIndustryShow(false)}
+                      >
                         {homeData?.industries?.children?.map((child, i) => (
-                          <NavDropdown.Item href={`/industries/${child.slug}`} key={i}>
-                            {child.name}
-                          </NavDropdown.Item>
+                          // <NavDropdown.Item href={`/industries/${child.slug}`} key={i}>
+                          //   {child.name}
+                          // </NavDropdown.Item>
+                          <Link href={`/industries/${child.slug}`} className="dropdown-item">
+                          {child.name}
+                        </Link>
                         ))}
                       </NavDropdown>
                     );
@@ -109,98 +148,146 @@ const Header = ({ homeData }) => {
 
                   // Special dropdown for Services
                   if (item.slug === "services") {
+
                     return (
-                      <NavDropdown title="Services" id="navbarScrollingDropdown" key={index}>
-                        {homeData?.services?.children?.map((child, i) => (
-                          <NavDropdown.Item href={`/services/${child.slug}`} key={i}>
-                            {child.name}
-                          </NavDropdown.Item>
+                      <NavDropdown
+                        title="Services"
+                        id="services-menu"
+                        show={showService}
+                        onMouseEnter={() => setServiceShow(true)}
+                        onMouseLeave={() => setServiceShow(false)}
+                      >
+
+                        {finalServices?.map((item, index) => (
+                          // <NavDropdown.Item href={`/services/${item.slug}`} key={index}>
+                          //   {item.name}
+                          // </NavDropdown.Item>
+                          <Link href={`/services/${item.slug}`} className="dropdown-item">
+                          {item.name}
+                        </Link>
                         ))}
+
                       </NavDropdown>
+
                     );
                   }
 
                   // Special case for Case Study
                   if (item.slug === "casestudy") {
                     return (
-                      <Nav.Link href={`/${item.slug}/${casestudy.slug}`} key={index}>
-                        {item.name}
-                      </Nav.Link>
+                      // <Nav.Link href={`/${item.slug}/${casestudy.slug}`} key={index}>
+                      //   {item.name}
+                      // </Nav.Link>
+                      <Link href={`/${item.slug}/${casestudy.slug}`} className="nav-link">
+                      {item.name}
+                    </Link>
                     );
                   }
 
                   // Default menu item
                   return (
-                    <Nav.Link href={`/${item.slug}`} key={index}>
-                      {item.name}
-                    </Nav.Link>
+                    // <Nav.Link href={`/${item.slug}`} key={index}>
+                    //   {item.name}
+                    // </Nav.Link>
+                    <Link href={`/${item.slug}`} className="nav-link">
+                    {item.name}
+                  </Link>
                   );
                 })}
             </Nav>
             <Form className="d-flex">
-              <Button variant="outline-primary" onClick={() => router.push('/contact')}>Request A Quote</Button>
+              <div className="glow">
+                <Button variant="outline-primary" onClick={() => router.push('/contact')}>Get Quote</Button>
+              </div>
             </Form>
           </Navbar.Collapse>
         </Container>
       </Navbar>
 
-      {/* <Link href="#" className="">
+
+
+
+
+
+
+
+
+
+
+
+      {/* <div className="wpp-iicon">
+  <div className="emblem" ref={emblemRef}>Connect With Us*</div>
+
+  <Image
+    src="/assets/images/whatsapp.png"
+    alt="WhatsApp"
+    width={40}
+    height={40}
+    className="img-fluid"
+    onClick={() => {
+      window.open(
+        "https://wa.me/9433068494/?text=Hi%20BEAS%20CONSULTANCY%20AND%20SERVICES%20PVT.%20LTD.",
+        "_blank"
+      );
+    }}
+  />
+</div> */}
+
+
+      <div class="wpp-iicon" >
+        <div class="emblem">
+          <svg viewBox="0 0 200 200">
+            <defs>
+              <path
+                id="circlePath"
+                d="
+        M 100, 100
+        m -64, 0
+        a 64,64 0 1,1 128,0
+        a 64,64 0 1,1 -128,0
+      "
+              />
+            </defs>
+
+            {/* White background circle */}
+            <circle
+              cx="100"
+              cy="100"
+              r="80"
+              fill="#fff"
+            />
+
+            <text
+              fontSize="18"
+              fill="#000"
+              fontWeight="bold"
+              textLength="402"
+            >
+              <textPath href="#circlePath">
+                CONNECT WITH US * CONNECT WITH US *
+              </textPath>
+            </text>
+          </svg>
+
+        </div>
+
         <Image
           src="/assets/images/whatsapp.png"
-          alt="whatsApp"
-          width={60}
-          height={60}
-          priority
-          fetchPriority="high"
-          className="img-fluid fixed-social"
-        />
-
-      </Link> */}
-
-
-      {/* <div className="badge fixed-social">
-        
-        <Image
-          src="/assets/images/whatsapp.png"
-          alt="whatsApp"
-          width={50}
-          height={50}
-          className="center-icon"
-          onClick={() => {
-            window.open(
-              "https://wa.me/9433068494?text=BEAS%20CONSULTANCY%20PT%20LTD.",
-              "_blank"
-            );
-          }}
-        />
-      </div> */}
-
-
-
-
-
-
-
-
-
-
-     <div className="wpp-iicon">
-      <div className="emblem" ref={emblemRef}>Connect With Us*</div>
-      <Image
-          src="/assets/images/whatsapp.png"
-          alt="whatsApp"
+          alt="WhatsApp"
           width={40}
           height={40}
-          className="img-fluid"
+          className="wp-icon"
           onClick={() => {
             window.open(
-              "https://wa.me/9433068494?text=BEAS%20CONSULTANCY%20PT%20LTD.",
+              "https://wa.me/9433068494/?text=Hi%20BEAS%20CONSULTANCY%20AND%20SERVICES%20PVT.%20LTD.",
               "_blank"
             );
           }}
         />
       </div>
-    
+
+
+
 
 
 

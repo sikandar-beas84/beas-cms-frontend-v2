@@ -86,25 +86,25 @@ const Career = ({ careers, menucareer, seometadata }) => {
 
 export default React.memo(Career);
 
-export async function getStaticProps() {
-  try {
-    const [menuRes, careerRes, seoRes] = await Promise.all([
-      HomeService.menuCareerPage(),
-      HomeService.careerPage(),
-      HomeService.seobyslug('career')
-    ]);
+export async function getServerSideProps(context) {
 
-    return {
-      props: {
-        menucareer: menuRes?.data?.career || [],
-        careers: careerRes?.data?.careers || [],
-        seometadata: seoRes?.data?.seometa || null
-      },
-      revalidate: 1 //  ISR: regenerate every 10 minutes
-    };
-  } catch {
-    return {
-      notFound: true
-    };
+  const url = context.req.url;
+  const lastSegment = url.split("/").filter(Boolean).pop();
+
+  const res = await HomeService.menuCareerPage();
+  const menucareer = res.data?.career || [];
+
+  const res1 = await HomeService.careerPage();
+  const careers = res1.data?.careers || [];
+
+  const seobyslug = await HomeService.seobyslug(lastSegment);
+  const seometadata = seobyslug?.data?.seometa;
+
+  return {
+    props: {
+      menucareer,
+      careers,
+      seometadata
+    }
   }
 }

@@ -134,22 +134,17 @@ export default React.memo(Casestudy);
 export async function getServerSideProps({ query }) {
   const { id } = query;
 
-  const [homeRes, projectRes, menuProject, seoRes] = await Promise.all([
-    HomeService.homePage(),
-    HomeService.individualProjectPage(id),
-    HomeService.menuProjectPage(),
-    HomeService.seobyslug(id),
-  ]);
+  const response = await HomeService.individualProjectPage(id);
+  const casestudy = response.data?.casestudy || [];
 
-  const homeData = homeRes.data || [];
-  const casestudy = projectRes.data?.casestudy || [];
-  const menucasestudy = menuProject.data?.casestudy || [];
-  const seometadata = seoRes?.data?.seometa || null;
+  const result = await HomeService.menuProjectPage();
+  const menucasestudy = result.data?.casestudy || [];
 
+  const seobyslug = await HomeService.seobyslug(id);
+  const seometadata = seobyslug?.data?.seometa;
 
   return {
     props: {
-      homeData,
       casestudy,
       menucasestudy,
       seometadata

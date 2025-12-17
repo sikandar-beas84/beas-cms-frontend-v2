@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import { Col, Row } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import { Mail, Map, Phone, ArrowUp } from "react-feather";
@@ -11,32 +11,36 @@ const Footer = ({ homeData }) => {
 
   const casestudy = Array.isArray(homeData?.projects) ? homeData.projects?.[0] : [];
   
-  // Step 1: Expand application-solutioning
-  let finalServices = homeData?.services?.children?.flatMap(item => {
-    if (item.slug === "application-solutioning") {
-      return item.children?.map(child => ({
-        slug: child.slug,
-        name: child.name
-      }));
-    }
-
-    return [{
-      slug: item.slug,
-      name: item.name
-    }];
-  });
-
-  // Step 2: Move specific items to the bottom
-  const bottomSlugs = ["ui-ux", "professional-services"];
-
-  finalServices = [...finalServices].sort((a, b) => {
-    const aLast = bottomSlugs.includes(a?.slug);
-    const bLast = bottomSlugs.includes(b?.slug);
-
-    if (aLast && !bLast) return 1;   // a goes down
-    if (!aLast && bLast) return -1;  // b goes down
-    return 0;
-  });
+  const finalServices = useMemo(() => {
+    const children = homeData?.services?.children;
+  
+    if (!Array.isArray(children)) return [];
+  
+    const expanded = children.flatMap(item => {
+      if (item.slug === "application-solutioning") {
+        return item.children?.map(child => ({
+          slug: child.slug,
+          name: child.name,
+        })) || [];
+      }
+  
+      return [{
+        slug: item.slug,
+        name: item.name,
+      }];
+    });
+  
+    const bottomSlugs = ["ui-ux", "professional-services"];
+  
+    return expanded.sort((a, b) => {
+      const aLast = bottomSlugs.includes(a.slug);
+      const bLast = bottomSlugs.includes(b.slug);
+  
+      if (aLast && !bLast) return 1;
+      if (!aLast && bLast) return -1;
+      return 0;
+    });
+  }, [homeData]);
   //////////////////////////////////////////
 
   return (
@@ -136,7 +140,7 @@ const Footer = ({ homeData }) => {
             <Col xs={12} lg={4}>
               <div className='social-icon-section'>
                 <ul>
-                    { homeData.socials.map((item,index)=>(
+                    { homeData?.socials.map((item,index)=>(
                   <li key={index}>
                     <a
                       href={item?.url}

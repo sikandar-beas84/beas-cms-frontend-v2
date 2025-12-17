@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo  } from "react";
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -46,32 +46,37 @@ const Header = ({ homeData }) => {
   const [showIndustry, setIndustryShow] = useState(false);
   const [open, setOpen] = useState(false);
 
-  // Step 1: Expand application-solutioning
-  let finalServices = homeData?.services?.children?.flatMap(item => {
-    if (item.slug === "application-solutioning") {
-      return item.children?.map(child => ({
-        slug: child.slug,
-        name: child.name
-      }));
-    }
-
-    return [{
-      slug: item.slug,
-      name: item.name
-    }];
-  });
-
-  // Step 2: Move specific items to the bottom
-  const bottomSlugs = ["ui-ux", "professional-services"];
-
-  finalServices = [...finalServices].sort((a, b) => {
-    const aLast = bottomSlugs.includes(a?.slug);
-    const bLast = bottomSlugs.includes(b?.slug);
-
-    if (aLast && !bLast) return 1;   // a goes down
-    if (!aLast && bLast) return -1;  // b goes down
-    return 0;
-  });
+  const finalServices = useMemo(() => {
+    const children = homeData?.services?.children;
+  
+    if (!Array.isArray(children)) return [];
+  
+    const expanded = children.flatMap(item => {
+      if (item.slug === "application-solutioning") {
+        return item.children?.map(child => ({
+          slug: child.slug,
+          name: child.name,
+        })) || [];
+      }
+  
+      return [{
+        slug: item.slug,
+        name: item.name,
+      }];
+    });
+  
+    const bottomSlugs = ["ui-ux", "professional-services"];
+  
+    return expanded.sort((a, b) => {
+      const aLast = bottomSlugs.includes(a.slug);
+      const bLast = bottomSlugs.includes(b.slug);
+  
+      if (aLast && !bLast) return 1;
+      if (!aLast && bLast) return -1;
+      return 0;
+    });
+  }, [homeData]);
+  
   //////////////////////////////////////////
 
   return (

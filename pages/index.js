@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import Link from 'next/link'
 import Container from 'react-bootstrap/Container';
 import { Col, Row } from "react-bootstrap";
@@ -23,32 +23,30 @@ function Home({ homeData, seometadata }) {
     return <div>Loading...</div>;
   }
 
-  // Step 1: Expand application-solutioning
-  let finalServices = homeData?.services?.children?.flatMap(item => {
-    if (item.slug === "application-solutioning") {
-      return item.children?.map(child => ({
-        ...child,
-        menu_contents: child.menu_contents
-      }));
-    }
+const finalServices = useMemo(() => {
+  const services = homeData?.services?.children;
 
-    return [{
-      ...item,
-      menu_contents: item.menu_contents
-    }];
+  if (!Array.isArray(services)) return [];
+
+  const expandedServices = services.flatMap((item) => {
+    if (item.slug === "application-solutioning") {
+      return Array.isArray(item.children) ? item.children : [];
+    }
+    return [item];
   });
 
-  // Step 2: Move specific items to the bottom
-  const bottomSlugs = ["ui-ux", "professional-services"];
+  const bottomSlugs = new Set(["ui-ux", "professional-services"]);
 
-  finalServices = [...finalServices].sort((a, b) => {
-    const aLast = bottomSlugs.includes(a?.slug);
-    const bLast = bottomSlugs.includes(b?.slug);
+  return expandedServices.sort((a, b) => {
+    const aLast = bottomSlugs.has(a.slug);
+    const bLast = bottomSlugs.has(b.slug);
 
-    if (aLast && !bLast) return 1;   // a goes down
-    if (!aLast && bLast) return -1;  // b goes down
+    if (aLast && !bLast) return 1;
+    if (!aLast && bLast) return -1;
     return 0;
   });
+}, [homeData]);
+
 
   //////////////////////////////////////////////
 
@@ -430,13 +428,21 @@ function Home({ homeData, seometadata }) {
 
 export default React.memo(Home);
 
-export async function getServerSideProps() {
-  const seobyslug = await HomeService.seobyslug();
-  const seometadata = seobyslug?.data?.seometa;
+export async function getStaticProps() {
+  try {
+      const [homeRes, seoRes] = await Promise.all([
+          HomeService.homePage(),
+          HomeService.seobyslug('about-us')
+      ]);
 
-  return {
-    props: {
-      seometadata
-    },
-  };
+      return {
+          props: {
+              homeData: homeRes?.data || null,
+              seometadata: seoRes?.data?.seometa || null
+          },
+          
+      };
+  } catch (error) {
+      return { notFound: true };
+  }
 }

@@ -448,19 +448,11 @@ const Page = ({ service, enrichedChildren, seometadata, slug, allclient }) => {
 export default React.memo(Page);
 
 export async function getServerSideProps({ params }) {
-  try {
   const { slug } = params;
 
   // 1. Load menu tree
-  const [menuRes, clientRes, seoRes] = await Promise.all([
-    HomeService.menuServicePage(),
-    HomeService.clientPage(),
-    HomeService.seobyslug(slug),
-  ]);
-
-  const services = menuRes?.data?.services?.children || [];
-  const allclient = clientRes?.data?.clients || [];
-  const seometadata = seoRes?.data?.seometa || null;
+  const response = await HomeService.menuServicePage();
+  const services = response?.data?.services?.children || [];
 
   let service = null;
 
@@ -521,6 +513,11 @@ export async function getServerSideProps({ params }) {
     })
   );
 
+  const clientData = await HomeService.clientPage();
+  const allclient = clientData?.data?.clients;
+
+  const seobyslug = await HomeService.seobyslug(slug);
+  const seometadata = seobyslug?.data?.seometa;
 
   return {
     props: {
@@ -531,7 +528,4 @@ export async function getServerSideProps({ params }) {
       allclient
     },
   };
-} catch {
-  return { notFound: true };
-}
 }

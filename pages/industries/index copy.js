@@ -162,21 +162,21 @@ const Indutries = ({ industries, seometadata }) => {
 
 export default React.memo(Indutries);
 
-export async function getStaticProps() {
-  try {
-    const [industryRes, seoRes] = await Promise.all([
-      HomeService.menuIndustryPage(),
-      HomeService.seobyslug('blogs')
-    ]);
+export async function getServerSideProps(context) {
 
-    return {
-      props: {
-        industries : industryRes.data?.industries || [],
-        seometadata: seoRes?.data?.seometa || null
-      },
-      revalidate: 60 // 10 minutes
-    };
-  } catch {
-    return { notFound: true };
+  const url = context.req.url;
+  const lastSegment = url.split("/").filter(Boolean).pop();
+
+  const res = await HomeService.menuIndustryPage()
+  const industries = res.data?.industries || []
+
+  const seobyslug = await HomeService.seobyslug(lastSegment);
+  const seometadata = seobyslug?.data?.seometa;
+
+  return {
+    props: {
+      industries,
+      seometadata
+    }
   }
 }

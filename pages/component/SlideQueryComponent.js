@@ -103,7 +103,7 @@ function SlideQueryComponent({modalshow=false}) {
                 setStatus('');
             }, 2000);
           } else {
-            setStatus(`❌ Error: ${result.message || 'Failed to send'}`);
+            setStatus(``);
             setErrors(result.error);
           }
         } catch (err) {

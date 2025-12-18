@@ -136,7 +136,7 @@ export default function CountryCodeDropdown({ name, value, onChange }) {
             position: "absolute",
             top: "45px",
             left: 0,
-            width: "90px",
+            width: "100px",
             background: "#fff",
             border: "1px solid #ccc",
             borderRadius: "6px",

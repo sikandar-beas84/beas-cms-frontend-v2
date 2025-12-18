@@ -88,7 +88,8 @@ export default React.memo(Career);
 
 export async function getStaticProps() {
   try {
-    const [menuRes, careerRes, seoRes] = await Promise.all([
+    const [homeres, menuRes, careerRes, seoRes] = await Promise.all([
+      HomeService.homePage(),
       HomeService.menuCareerPage(),
       HomeService.careerPage(),
       HomeService.seobyslug('career')
@@ -98,7 +99,8 @@ export async function getStaticProps() {
       props: {
         menucareer: menuRes?.data?.career || [],
         careers: careerRes?.data?.careers || [],
-        seometadata: seoRes?.data?.seometa || null
+        seometadata: seoRes?.data?.seometa || null,
+        homeData: homeres?.data || null
       },
       revalidate: 1 //  ISR: regenerate every 10 minutes
     };

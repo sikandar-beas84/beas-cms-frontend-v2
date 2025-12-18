@@ -164,7 +164,8 @@ export default React.memo(Indutries);
 
 export async function getStaticProps() {
   try {
-    const [industryRes, seoRes] = await Promise.all([
+    const [homeres, industryRes, seoRes] = await Promise.all([
+      HomeService.homePage(),
       HomeService.menuIndustryPage(),
       HomeService.seobyslug('blogs')
     ]);
@@ -172,7 +173,8 @@ export async function getStaticProps() {
     return {
       props: {
         industries : industryRes.data?.industries || [],
-        seometadata: seoRes?.data?.seometa || null
+        seometadata: seoRes?.data?.seometa || null,
+        homeData: homeres?.data || null
       },
       revalidate: 60 // 10 minutes
     };

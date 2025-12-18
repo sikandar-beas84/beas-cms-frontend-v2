@@ -162,7 +162,7 @@ const Footer = ({ homeData }) => {
 
           <Row className="d-flex justify-content-between align-items-center">
             <Col xs={12} lg={6}>
-              <p className='mb-0'>© 2024 BEAS Consultancy & Services Pvt. Ltd. All Rights Reserved</p>
+              <p className='mb-0'>© 2025 BEAS Consultancy & Services Pvt. Ltd. All Rights Reserved</p>
             </Col>
             <Col xs={12} lg={6} className="text-end">
               <a href='#' className='scroll-top'><ArrowUp size={16} /></a>

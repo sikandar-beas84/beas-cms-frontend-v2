@@ -69,22 +69,26 @@ const PrivacyPolicy = ({ privacypolicy, seometadata }) => {
 
 export default React.memo(PrivacyPolicy);
 
-export async function getServerSideProps(context) {
+export async function getStaticProps() {
+  try {
+    const [homeres, commonRes, seoRes] = await Promise.all([
+      HomeService.homePage(),
+      HomeService.commonPage(),
+      HomeService.seobyslug('privacypolicy')
+    ]);
 
-  const url = context.req.url;
-  const lastSegment = url.split("/").filter(Boolean).pop();
+    const privacypolicies = commonRes.data?.common || [];
+    const privacypolicy = privacypolicies.find((temp) => temp.slug === 'privacypolicy');
 
-  const result = await HomeService.commonPage();
-  const privacypolicies = result.data?.common || [];
-  const privacypolicy = privacypolicies.find((temp) => temp.slug === 'privacypolicy');
-
-  const seobyslug = await HomeService.seobyslug(lastSegment);
-  const seometadata = seobyslug?.data?.seometa;
-
-  return {
-    props: {
-      privacypolicy,
-      seometadata
-    }
+    return {
+      props: {
+        privacypolicy : privacypolicy || [],
+        seometadata: seoRes?.data?.seometa || null,
+        homeData: homeres?.data || null
+      },
+      revalidate: 60 // 10 minutes
+    };
+  } catch {
+    return { notFound: true };
   }
 }

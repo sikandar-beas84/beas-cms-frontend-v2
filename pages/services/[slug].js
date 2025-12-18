@@ -452,7 +452,8 @@ export async function getServerSideProps({ params }) {
   const { slug } = params;
 
   // 1. Load menu tree
-  const [menuRes, clientRes, seoRes] = await Promise.all([
+  const [homeres, menuRes, clientRes, seoRes] = await Promise.all([
+    HomeService.homePage(),
     HomeService.menuServicePage(),
     HomeService.clientPage(),
     HomeService.seobyslug(slug),
@@ -528,7 +529,8 @@ export async function getServerSideProps({ params }) {
       enrichedChildren,
       seometadata,
       slug,
-      allclient
+      allclient,
+      homeData: homeres?.data || null
     },
   };
 } catch {

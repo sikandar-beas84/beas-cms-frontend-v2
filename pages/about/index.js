@@ -190,7 +190,8 @@ const AboutUs = ({ aboutus, commonaboutus, seometadata }) => {
 export default AboutUs;
 export async function getStaticProps() {
     try {
-        const [aboutRes, commonRes, seoRes] = await Promise.all([
+        const [homeres, aboutRes, commonRes, seoRes] = await Promise.all([
+            HomeService.homePage(),
             HomeService.menuAboutusPage(),
             HomeService.commonaboutusPage(),
             HomeService.seobyslug('about-us')
@@ -198,6 +199,7 @@ export async function getStaticProps() {
 
         return {
             props: {
+                homeData: homeres?.data || null,
                 aboutus: aboutRes?.data?.aboutus || null,
                 commonaboutus: commonRes?.data?.commonaboutus || [],
                 seometadata: seoRes?.data?.seometa || null

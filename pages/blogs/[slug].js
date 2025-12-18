@@ -7,6 +7,7 @@ import { env } from '../../util/constants/common';
 import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
 import { Clock, MessageCircle, User } from "react-feather";
+import Link from 'next/link';
 
 const Blog = ({ blog, seometadata, homeData, commonblog }) => {
   const router = useRouter();
@@ -289,7 +290,11 @@ const Blog = ({ blog, seometadata, homeData, commonblog }) => {
                       <li>Innovative approach with cutting-edge technologies</li>
                      </ul>
                     <div className='d-flex justify-content-center'>
-                      <a className="post-job-btn" href="#">Connect with us</a>
+                      {/* <a className="post-job-btn" href="#">Connect with us</a> */}
+                      <Link
+                        href={`/contact`}
+                        className="post-job-btn"
+                      >Connect with us</Link>
                     </div>
                   </div>
 
@@ -337,10 +342,11 @@ export async function getStaticProps({ params }) {
   try {
     const { slug } = params;
 
-    const [blogRes, commonRes, seoRes] = await Promise.all([
+    const [blogRes, commonRes, seoRes, homeres] = await Promise.all([
       HomeService.individualBlogPage(slug),
       HomeService.commonPage(),
-      HomeService.seobyslug(slug)
+      HomeService.seobyslug(slug),
+      HomeService.homePage(),
     ]);
 
     const blog = blogRes?.data?.blog || null;
@@ -357,7 +363,8 @@ export async function getStaticProps({ params }) {
       props: {
         blog,
         commonblog,
-        seometadata: seoRes?.data?.seometa || null
+        seometadata: seoRes?.data?.seometa || null,
+        homeData: homeres?.data || null,
       },
       revalidate: 600 // 🔥 ISR (10 minutes)
     };

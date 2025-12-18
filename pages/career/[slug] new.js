@@ -109,12 +109,12 @@ const Page = ({ career, menucareer, contact, careerId, seometadata }) => {
         }
         //recaptchaRef.current.reset();
       } else {
-        setStatus(``);
+        setStatus(`❌ Error: ${result.message || 'Failed to send'}`);
         setErrors(result.error); // store errors in state
       }
     } catch (err) {
       //console.error(err);
-      setStatus('❌ Submission failed.');
+      setStatus('❌ Submission failed. Check console.');
     } finally {
       setLoading(false); // ✅ stop loader
     }
@@ -384,42 +384,66 @@ const metaAuthor = seometadata?.author
 
 export default React.memo(Page);
 
-export async function getServerSideProps({ params }) {
-  const { slug } = params;
+export async function getStaticProps({ params }) {
+  try {
+    const { slug } = params;
 
-  const res = await HomeService.menuCareerPage();
-  const menucareer = res.data?.career || [];
+    const [homeres, menuRes, careerRes, contactRes, seoRes] = await Promise.all([
+      HomeService.homePage(),
+      HomeService.menuCareerPage(),
+      HomeService.careerPage(),
+      HomeService.contactPage(),
+      HomeService.seobyslug('career')
+    ]);
 
-  const response = await HomeService.careerPage();
-  const careers = response.data?.careers || [];
+    const menucareer = menuRes?.data?.career || [];
+    const careers = careerRes?.data?.careers || [];
+    const contact = contactRes?.data?.contact || null;
 
-  const result = await HomeService.contactPage();
-  const contact = result.data?.contact || [];
+    // Find career by slug
+    const career = careers.find(
+      item => item.title?.toString() === slug
+    );
 
-  const homeres = await HomeService.homePage();
-  // Find index of current project by matching the ID (slug)
+    if (!career) {
+      return { notFound: true };
+    }
 
-  const career = careers.find((item) => item.title.toString() === slug);
-  const careerId = career?.id;
-
-
-  if (!career) {
     return {
-      notFound: true, // 👈 Triggers 404 page
+      props: {
+        career,
+        careerId: career.id,
+        menucareer,
+        contact,
+        seometadata: seoRes?.data?.seometa || null,
+        homeData: homeres?.data || null
+      },
+      revalidate: 600 //  ISR (10 minutes)
+    };
+  } catch {
+    return { notFound: true };
+  }
+}
+export async function getStaticPaths() {
+  try {
+    const res = await HomeService.careerPage();
+    const careers = res?.data?.careers || [];
+
+    const paths = careers.map(career => ({
+      params: {
+        slug: career.title?.toString()
+      }
+    }));
+
+    return {
+      paths,
+      fallback: 'blocking' //  Best for SEO + performance
+    };
+  } catch {
+    return {
+      paths: [],
+      fallback: 'blocking'
     };
   }
-
-  const seobyslug = await HomeService.seobyslug('career');
-  const seometadata = seobyslug?.data?.seometa;
-
-  return {
-    props: {
-      career,
-      menucareer,
-      contact,
-      careerId,
-      seometadata,
-      homeData: homeres?.data || null
-    },
-  };
 }
+

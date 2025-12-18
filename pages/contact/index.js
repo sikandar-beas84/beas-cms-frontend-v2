@@ -338,7 +338,8 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
 export default ContactUs;
 export async function getStaticProps() {
   try {
-    const [contactRes, faqRes, seoRes] = await Promise.all([
+    const [homeres, contactRes, faqRes, seoRes] = await Promise.all([
+      HomeService.homePage(),
       HomeService.contactPage(),
       HomeService.faqPage(),
       HomeService.seobyslug('contact')
@@ -348,7 +349,8 @@ export async function getStaticProps() {
       props: {
         contactus: contactRes?.data?.contact || {},
         faqs: faqRes?.data?.faqs || [],
-        seometadata: seoRes?.data?.seometa || null
+        seometadata: seoRes?.data?.seometa || null,
+        homeData: homeres?.data || null
       },
       revalidate: 600 // 10 minutes
     };

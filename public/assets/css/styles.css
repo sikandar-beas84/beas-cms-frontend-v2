@@ -82,7 +82,8 @@ body {
 
 /* Footer */
 footer {
-  background-color: #c6d1f3;
+  /* background-color: #c6d1f3; */
+  background-color: #051229;
   padding: 50px 0;
 }
 
@@ -101,7 +102,7 @@ footer {
 .footer-list li {
   margin: 0;
   padding: 0;
-  color: #000;
+  color: #fff;
   font-style: normal;
   font-weight: 400;
   line-height: 30px;
@@ -121,15 +122,16 @@ footer {
   font-size: 1.25rem;
   line-height: 30px;
   text-transform: capitalize;
+  color:#fff;
 }
 
-.get-in-touch-block {
+/* .get-in-touch-block {
   padding: 25px;
   margin-top: 50px;
   background: #e0e7fd;
   box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.06);
   border-radius: 24px;
-}
+} */
 
 .get-in-touch-block li {
   display: flex;
@@ -142,12 +144,12 @@ footer {
 .get-in-touch-block svg {
   flex-shrink: 0;
   margin-top: 7px;
-  color: #8b8b8b;
+  color: #fff;
 }
 
 .scroll-top {
   padding: 15px 20px;
-  background: #302F2F;
+  background: #0081d2;
   border-radius: 4px;
   color: #fff;
   font-size: 1rem;
@@ -227,11 +229,13 @@ a {
 
 .award-section ul li {
   margin: 0;
-  padding: 0;
+  padding: 10px;
+  background: #fff;
+  border-radius: 5px;
 }
 
 .bg-light-blue {
-  background-color:#c6d1f3;
+  background-color:#051229;
 }
 
 .job-experience-txt {
@@ -282,7 +286,8 @@ a {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  height: 100%;
+  /* height: 100%; */
+  margin-top:20px;
 }
 
 .skill-image175 {
@@ -882,7 +887,7 @@ a {
   background: #FFFFFF;
   border: 1px solid #C2C2C2;
   border-radius: 14px;
-  padding: 74px 21px 67px 21px;
+  padding: 20px 21px 20px 21px;
   transform: translateY(0);
   transition: all .95s;
 }
@@ -3612,7 +3617,7 @@ textarea.form-control.h-150.mb-3 {
 }
 
 .award-section img {
-  height: 66px;
+  height: 70px;
   width: unset;
 }
 
@@ -3622,7 +3627,7 @@ textarea.form-control.h-150.mb-3 {
 }
 
 .footer-list li a {
-  color: black;
+  color: #dbdbdb;
   font-size: 16px;
   font-weight: 400;
   /* text-transform: capitalize; */
@@ -3631,7 +3636,7 @@ textarea.form-control.h-150.mb-3 {
 }
 
 .get-in-touch-block li {
-  color: black;
+  color: #fff;
   font-size: 16px;
   font-weight: 400;
   /* text-transform: capitalize; */
@@ -4473,3 +4478,9 @@ transform-origin: 0 0;}
     display: inline-block;
     border-radius: 5px;
 }
+.white-color{color: #fff;
+  font-size: 14px; display:flex; justify-content:center;}
+.award-section{display:flex; justify-content:center; padding: 15px 0;
+  border-top: 1px solid #ffffff1f;
+  border-bottom: 1px solid #ffffff1f;
+  margin-top: 20px;}

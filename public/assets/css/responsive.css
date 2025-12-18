@@ -313,7 +313,7 @@
   .stat-box p,
   .why-box h3,
   .port-hd-txt p {
-    font-size: 17px;
+    font-size: 20px;
     line-height: 1.5;
   }
 
@@ -354,7 +354,7 @@
   }
 
   footer {
-    padding: 45px 0;
+    padding: 45px 0 0 0;
   }
 
   .why {
@@ -638,7 +638,7 @@
   }
 
   footer {
-    padding: 40px 0;
+    padding: 40px 0 0 0;
   }
 
 
@@ -942,7 +942,7 @@
   }
 
   footer {
-    padding: 35px 0;
+    padding: 35px 0 0 0;
   }
 
   .why {
@@ -1317,7 +1317,7 @@
   }
 
   footer {
-    padding: 30px 0;
+    padding: 30px 0 0 0;
   }
 
   .why {
@@ -1589,7 +1589,7 @@
   }
 
   footer {
-    padding: 25px 0;
+    padding: 25px 0 0 0;
   }
 
   .why {

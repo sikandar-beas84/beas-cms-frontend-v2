@@ -105,7 +105,6 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
       });
       const result = await res.json();
 
-      console.log("pppppp", result.error);
 
       if (res.ok) {
         setStatus('✅ Message sent successfully!');
@@ -116,7 +115,7 @@ const ContactUs = ({ contactus, faqs, seometadata }) => {
           fileInputRef.current.value = null;
         }
       } else {
-        setStatus(`❌ Error: ${result.message || 'Failed to send'}`);
+        setStatus(``);
         setErrors(result.error);
       }
     } catch (err) {

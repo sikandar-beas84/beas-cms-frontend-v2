@@ -298,7 +298,7 @@ const BannerCarousal = ({ page, technologiya, clients, projects, testimonials, b
                   <div className="tester-img">
                     <Image
                       src={`${env.BACKEND_BASE_URL}assets/img/testimonial/${item.profile_photo_path}`}
-                      alt="Hero Banner"
+                      alt="image"
                       width={50}
                       height={50}
                       priority

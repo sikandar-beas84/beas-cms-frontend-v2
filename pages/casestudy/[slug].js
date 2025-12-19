@@ -6,73 +6,108 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "react-feather";
 import HomeService from "../../util/service/Home";
 import { env } from "../../util/constants/common";
-import Link from "next/link";
 import SEO from "../../components/SEO";
 import { useRouter } from "next/router";
 import BannerCarousal from "../component/BannerCarousal";
-import SlideQueryComponent from '../component/SlideQueryComponent';
+import SlideQueryComponent from "../component/SlideQueryComponent";
 
-const MAX_VISIBLE = 10; // show 10 numbers at a time
+const MAX_VISIBLE = 10;
 
-const Page = ({ casestudy, menucasestudy, projects, currentSlug, homeData, seometadata }) => {
+const Page = ({
+  casestudy,
+  menucasestudy,
+  projects,
+  currentSlug,
+  homeData,
+  seometadata,
+}) => {
   const router = useRouter();
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
+
+  if (router.isFallback) return <div>Loading...</div>;
+
+  /* ----------------------------------
+     SPA STATE
+  ---------------------------------- */
+  const initialIndex = projects.findIndex(
+    (p) => p.slug === currentSlug
+  );
+
+  const [activeIndex, setActiveIndex] = useState(initialIndex);
+  const activeCaseStudy = projects[activeIndex];
+
+  /* ----------------------------------
+     Delayed Form
+  ---------------------------------- */
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowForm(true);
-    }, 15000); // 15 seconds delay
-
+    const timer = setTimeout(() => setShowForm(true), 15000);
     return () => clearTimeout(timer);
   }, []);
 
+  /* ----------------------------------
+     Sync URL → STATE (on refresh)
+  ---------------------------------- */
+  useEffect(() => {
+    const idx = projects.findIndex(
+      (p) => p.slug === router.query.slug
+    );
+    if (idx !== -1 && idx !== activeIndex) {
+      setActiveIndex(idx);
+    }
+  }, [router.query.slug]);
 
+  /* ----------------------------------
+     Next / Prev Logic
+  ---------------------------------- */
+  const prevIndex =
+    (activeIndex - 1 + projects.length) % projects.length;
+  const nextIndex =
+    (activeIndex + 1) % projects.length;
 
-  // find current index
-  const currentIndex = projects.findIndex((p) => p.slug === currentSlug);
-// Looping previous and next
-const prevProject =
-  projects[(currentIndex - 1 + projects.length) % projects.length];
-const nextProject = projects[(currentIndex + 1) % projects.length];
+  const changeCaseStudy = (index) => {
+    const project = projects[index];
 
-  //  Pagination logic (10 at a time)
-  const totalPages = projects.length;
-  const currentPage = currentIndex + 1;
-  const currentGroup = Math.floor((currentPage - 1) / MAX_VISIBLE);
-  const start = currentGroup * MAX_VISIBLE;
-  const end = Math.min(start + MAX_VISIBLE, totalPages);
+    router.push(
+      `/casestudy/${project.slug}`,
+      undefined,
+      { shallow: true }
+    );
 
+    setActiveIndex(index);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
-  // Helper function to replace variables
-const parseHTMLWithEnv = (html) => {
-  if (!html) return "";
+  /* ----------------------------------
+     Helper
+  ---------------------------------- */
+  const parseHTMLWithEnv = (html) => {
+    if (!html) return "";
+    return html
+      .replace(/\{env\.SITE_URL\}/g, env.SITE_URL)
+      .replace(
+        /\{env\.BACKEND_BASE_URL\}/g,
+        env.BACKEND_BASE_URL
+      );
+  };
 
-  return html
-    .replace(/\{env\.SITE_URL\}/g, env.SITE_URL)   // replace {env.SITE_URL}
-    .replace(/\{env\.BACKEND_BASE_URL\}/g, env.BACKEND_BASE_URL); // other env vars if needed
-};
-
-  const metaTitle = seometadata?.title
-    ? seometadata?.title
-    : `Case Study`;
-  const metaKeyword = seometadata?.keyword
-    ? seometadata?.keyword
-    : "case study, business solution, project success, Beas consultancy";
-  const metaDesc = seometadata?.description
-    ? seometadata?.description
-    : "Learn how Beas Consultancy delivered a tailored solution and business impact";
+  /* ----------------------------------
+     SEO
+  ---------------------------------- */
+  const metaTitle = seometadata?.title || activeCaseStudy?.title;
+  const metaKeyword =
+    seometadata?.keyword ||
+    "case study, business solution, project success";
+  const metaDesc =
+    seometadata?.description ||
+    "Learn how BEAS delivered business impact";
   const metaImage = seometadata?.image
-    ? `${env.BACKEND_BASE_URL}${seometadata?.image}`
-    : `${env.BACKEND_BASE_URL}${casestudy?.image}`;
-  const metaUrl = seometadata?.url
-    ? `${env.FRONTEND_BASE_URL}casestudy/${seometadata?.url}`
-    : `${env.FRONTEND_BASE_URL}casestudy/${casestudy?.slug}`;
-  const metaAuthor = seometadata?.author
-    ? seometadata?.author
-    : "BEAS Consultancy And Services Private Limited";
+    ? `${env.BACKEND_BASE_URL}${seometadata.image}`
+    : `${env.BACKEND_BASE_URL}${activeCaseStudy?.image}`;
+  const metaUrl = `${env.FRONTEND_BASE_URL}casestudy/${activeCaseStudy?.slug}`;
+  const metaAuthor =
+    seometadata?.author ||
+    "BEAS Consultancy And Services Private Limited";
 
   return (
     <>
@@ -84,51 +119,54 @@ const parseHTMLWithEnv = (html) => {
         url={metaUrl}
         author={metaAuthor}
       />
-      
+
       <main>
         <BreadCrumb
-          pagetitle={casestudy.title}
+          pagetitle={activeCaseStudy?.title}
           pageslug="Casestudy"
           pageBanner={`assets/img/menu-content/${menucasestudy?.menu_contents?.banner}`}
-          totalCasestudy={{ currentStudy: currentIndex+1, totalStudy: totalPages }}
+          totalCasestudy={{
+            currentStudy: activeIndex + 1,
+            totalStudy: projects.length,
+          }}
         />
 
-
         <div className="bgF2F4F7 p-relative">
-          
           <Container fluid>
-            
-          
-          <div className="d-flex justify-content-between carosalArrow">
-            {/* Previous */}
-            <Link href={`/casestudy/${prevProject.slug}`} className="btn btn-primary">
-              <ChevronLeft />
-            </Link>
+            <div className="d-flex justify-content-between carosalArrow">
+              <button
+                className="btn btn-primary"
+                onClick={() => changeCaseStudy(prevIndex)}
+              >
+                <ChevronLeft />
+              </button>
 
-            {/* Next */}
-            <Link href={`/casestudy/${nextProject.slug}`} className="btn btn-primary">
-              <ChevronRight />
-            </Link>
-          </div>
+              <button
+                className="btn btn-primary"
+                onClick={() => changeCaseStudy(nextIndex)}
+              >
+                <ChevronRight />
+              </button>
+            </div>
           </Container>
 
           <Container className="pb-5 ccase-study-container">
             <Row>
               <Col xs={12}>
-                <h1 className="inner-page-title-small">{casestudy?.title}</h1>
+                <h1 className="inner-page-title-small">
+                  {activeCaseStudy?.title}
+                </h1>
               </Col>
-              <Col xs={12} lg={5}>
-                <div className="serviceDetailsWrap">
-                  <Image
-                    width={600}
-                    height={150}
-                    src={`${env.BACKEND_BASE_URL}${casestudy?.image}`}
-                    alt="image"
-                    className="img-fluid"
-                    loading="lazy"
-                  />
-                </div>
 
+              <Col xs={12} lg={5}>
+                <Image
+                  width={600}
+                  height={150}
+                  src={`${env.BACKEND_BASE_URL}${activeCaseStudy?.image}`}
+                  alt="image"
+                  className="img-fluid"
+                  loading="lazy"
+                />
               </Col>
 
               <Col xs={12} lg={7}>
@@ -140,28 +178,23 @@ const parseHTMLWithEnv = (html) => {
                     <Accordion.Body>
                       <div
                         dangerouslySetInnerHTML={{
-                          __html: casestudy?.business_need,
+                          __html:
+                            activeCaseStudy?.business_need,
                         }}
                       />
                     </Accordion.Body>
                   </Accordion.Item>
 
-                  {/* <Accordion.Item eventKey="1" className="green-bg">
-                    <Accordion.Header>BEAS’s Solution</Accordion.Header>
-                    <Accordion.Body>
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: casestudy?.beas_solution,
-                        }}
-                      />
-                    </Accordion.Body>
-                  </Accordion.Item> */}
                   <Accordion.Item eventKey="1" className="green-bg">
-                    <Accordion.Header>BEAS’s Solution</Accordion.Header>
+                    <Accordion.Header>
+                      BEAS’s Solution
+                    </Accordion.Header>
                     <Accordion.Body>
                       <div
                         dangerouslySetInnerHTML={{
-                          __html: parseHTMLWithEnv(casestudy?.beas_solution),
+                          __html: parseHTMLWithEnv(
+                            activeCaseStudy?.beas_solution
+                          ),
                         }}
                       />
                     </Accordion.Body>
@@ -169,56 +202,68 @@ const parseHTMLWithEnv = (html) => {
 
                   <Accordion.Item eventKey="2" className="yellow-bg">
                     <Accordion.Header>
-                      {casestudy?.benefits_to_the_customer
+                      {activeCaseStudy?.benefits_to_the_customer
                         ? "Benefits To The Customer"
                         : "Sample Screen"}
                     </Accordion.Header>
                     <Accordion.Body>
-                      {casestudy?.benefits_to_the_customer ? (
+                      {activeCaseStudy?.benefits_to_the_customer ? (
                         <div
                           dangerouslySetInnerHTML={{
-                            __html: casestudy.benefits_to_the_customer,
+                            __html:
+                              activeCaseStudy?.benefits_to_the_customer,
                           }}
                         />
                       ) : (
                         <Image
                           width={550}
                           height={50}
-                          src={`${env.BACKEND_BASE_URL}${casestudy?.samplescreen}`}
+                          src={`${env.BACKEND_BASE_URL}${activeCaseStudy?.samplescreen}`}
                           alt="image"
                           className="img-fluid"
-                          loading="lazy"
                         />
                       )}
                     </Accordion.Body>
                   </Accordion.Item>
+
                   <Accordion.Item eventKey="3" className="orange-bg">
-                    <Accordion.Header>Technology Platform</Accordion.Header>
+                    <Accordion.Header>
+                      Technology Platform
+                    </Accordion.Header>
                     <Accordion.Body>
                       <ul>
-                        {casestudy?.technology_platform?.map((item, index) => (
-                          <li key={index}>{item}</li>
-                        ))}
+                        {activeCaseStudy?.technology_platform?.map(
+                          (item, index) => (
+                            <li key={index}>{item}</li>
+                          )
+                        )}
                       </ul>
                     </Accordion.Body>
                   </Accordion.Item>
                 </Accordion>
               </Col>
             </Row>
+
             <Row>
-              <Col xs={12} className="mt-5">
-                <h1 className="inner-page-title mb-2 text-center">{homeData?.portfoliohomepage?.title}</h1>
-                <p className="text-center">{homeData?.portfoliohomepage?.long_desc}</p>
+              <Col xs={12} className="mt-5 text-center">
+                <h1 className="inner-page-title mb-2">
+                  {homeData?.portfoliohomepage?.title}
+                </h1>
+                <p>{homeData?.portfoliohomepage?.long_desc}</p>
               </Col>
+
               <Col xs={12} className="my-3">
-                <BannerCarousal page="projectsnew" projects={homeData?.projects} />
+                <BannerCarousal
+                  page="projectsnew"
+                  projects={homeData?.projects}
+                />
               </Col>
             </Row>
-
           </Container>
 
-          {showForm && <SlideQueryComponent modalshow={showForm} />}
-
+          {showForm && (
+            <SlideQueryComponent modalshow={showForm} />
+          )}
         </div>
       </main>
     </>
@@ -226,6 +271,10 @@ const parseHTMLWithEnv = (html) => {
 };
 
 export default React.memo(Page);
+
+/* ======================================
+   SERVER SIDE PROPS (UNCHANGED)
+====================================== */
 
 export async function getServerSideProps({ params }) {
   const { slug } = params;
@@ -243,18 +292,14 @@ export async function getServerSideProps({ params }) {
     (item) => item.slug.toString() === slug
   );
 
-
-
   if (currentIndex === -1) {
-    return {
-      notFound: true,
-    };
+    return { notFound: true };
   }
 
   const casestudy = projects[currentIndex];
 
-  const seobyslug = await HomeService.seobyslug('casestudies');
-  const seometadata = seobyslug?.data?.seometa;
+  const seobyslug = await HomeService.seobyslug("casestudies");
+  const seometadata = seobyslug?.data?.seometa || null;
 
   return {
     props: {
@@ -263,7 +308,7 @@ export async function getServerSideProps({ params }) {
       projects,
       currentSlug: slug,
       seometadata,
-      homeData
+      homeData,
     },
   };
 }

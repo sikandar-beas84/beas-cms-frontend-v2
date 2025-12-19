@@ -309,13 +309,14 @@
   .port-box h3,
   .bnr-txt p,
   .serv-head p,
-  .srvc-bxtx h3,
   .stat-box p,
   .why-box h3,
   .port-hd-txt p {
     font-size: 20px;
     line-height: 1.5;
   }
+  .srvc-bxtx h3{ font-size: 17px;
+    line-height: 1.5;}
 
   /* Paragraph Large (18px) */
   .about_texts p,

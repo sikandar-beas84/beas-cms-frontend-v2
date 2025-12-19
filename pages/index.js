@@ -91,6 +91,7 @@ const finalServices = useMemo(() => {
   //seo end
   return (
     <>
+    {console.log('homeData?.technologies', homeData?.technologies)}
       <SEO
         title={metaTitle}
         description={metaDesc}
@@ -303,18 +304,19 @@ const finalServices = useMemo(() => {
                     <div className='technology-box pb-5'>
                       <TechnologySlider>
                         {[...(homeData?.technologies || [])]
-                          .sort((a, b) => a.name.localeCompare(b.name))
+                           .sort((a, b) => Number(a.order) - Number(b.order))
                           .map((item, i) => (
-                            <div key={i}>
+                            <div key={i} className='technology-wrap'>
                               <Image
                                 width={100}
                                 height={100}
                                 src={`${env.BACKEND_BASE_URL}assets/img/technology/${item.logo}`}
                                 alt={item.name}
-                                title={item.name}
                                 className="tech-img"
                                 loading="lazy"
                               />
+                              <div dangerouslySetInnerHTML={{ __html: item.description }} className='mb-0 technology-name'></div>
+                              
                             </div>
                           ))}
                       </TechnologySlider>

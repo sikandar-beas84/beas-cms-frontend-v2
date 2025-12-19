@@ -30,7 +30,7 @@ const Casestudy = ({ casestudy, menucasestudy, seometadata, homeData }) => {
   //   return () => clearTimeout(timer); // cleanup on unmount
   // }, []);
 
-  const metaTitle = seometadata?.name
+  const metaTitle = seometadata?.title
     ? seometadata?.title
     : `Case Study`;
   const metaKeyword = seometadata?.keyword

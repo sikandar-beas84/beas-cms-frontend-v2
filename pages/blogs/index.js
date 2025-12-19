@@ -30,7 +30,7 @@ const Blog = ({ blogs, seometadata, commonblog }) => {
 
 
 
-  const metaTitle = seometadata?.name
+  const metaTitle = seometadata?.title
     ? seometadata?.title
     : `Blog`;
   const metaKeyword = seometadata?.keyword

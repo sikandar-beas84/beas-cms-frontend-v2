@@ -253,7 +253,7 @@ export async function getServerSideProps({ params }) {
 
   const casestudy = projects[currentIndex];
 
-  const seobyslug = await HomeService.seobyslug(slug);
+  const seobyslug = await HomeService.seobyslug('casestudies');
   const seometadata = seobyslug?.data?.seometa;
 
   return {

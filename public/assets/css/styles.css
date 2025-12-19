@@ -3489,7 +3489,7 @@ a.services-btn {
 }
 
 .port-img2 {
-  height: 340px;
+  height: 290px;
 }
 
 .avatar-section {
@@ -4494,6 +4494,19 @@ transform-origin: 0 0;}
   margin-top: 20px;}
 .technology-name{position:absolute;bottom:-10px;}
 .technology-wrap{position:relative;}
+
+.port-badge{
+    position: absolute;
+    background: #0081d2;
+    z-index: 99;
+    right: 5px;
+    padding: 0px 10px !important;
+    top: 5px;
+    border-radius: 10px;
+    color: #fff !important;
+    font-size: 13px !important;
+    box-shadow: 2px 4px 5px #00000066;
+}
 .slick-next
 {
     right: -35px;

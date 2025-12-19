@@ -30,7 +30,7 @@ const Blog = ({ blogs, seometadata, commonblog }) => {
 
 
 
-  const metaTitle = seometadata?.name
+  const metaTitle = seometadata?.title
     ? seometadata?.title
     : `Blog`;
   const metaKeyword = seometadata?.keyword
@@ -178,7 +178,7 @@ export async function getStaticProps() {
       HomeService.homePage(),
       HomeService.blogPage(),
       HomeService.commonPage(),
-      HomeService.seobyslug('blog')
+      HomeService.seobyslug('blogs')
     ]);
 
     const blogs = blogRes?.data?.blogs || [];

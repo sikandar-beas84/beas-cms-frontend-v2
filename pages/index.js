@@ -91,7 +91,6 @@ const finalServices = useMemo(() => {
   //seo end
   return (
     <>
-    {console.log('homeData?.technologies', homeData?.technologies)}
       <SEO
         title={metaTitle}
         description={metaDesc}

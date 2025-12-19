@@ -345,7 +345,7 @@ export async function getStaticProps({ params }) {
     const [blogRes, commonRes, seoRes, homeres] = await Promise.all([
       HomeService.individualBlogPage(slug),
       HomeService.commonPage(),
-      HomeService.seobyslug(slug),
+      HomeService.seobyslug('blogs'),
       HomeService.homePage(),
     ]);
 

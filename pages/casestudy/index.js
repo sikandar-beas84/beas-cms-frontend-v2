@@ -138,7 +138,7 @@ export async function getServerSideProps({ query }) {
     HomeService.homePage(),
     HomeService.individualProjectPage(id),
     HomeService.menuProjectPage(),
-    HomeService.seobyslug(id),
+    HomeService.seobyslug('casestudies'),
   ]);
 
   const homeData = homeRes.data || [];

@@ -178,7 +178,7 @@ export async function getStaticProps() {
       HomeService.homePage(),
       HomeService.blogPage(),
       HomeService.commonPage(),
-      HomeService.seobyslug('blog')
+      HomeService.seobyslug('blogs')
     ]);
 
     const blogs = blogRes?.data?.blogs || [];

@@ -163,15 +163,8 @@ export default React.memo(Page);
 export async function getServerSideProps({ params }) {
   const { slug } = params; // slug is now an array
 
-  const [homeres, menuRes, seoRes] = await Promise.all([
-    HomeService.homePage(),
-    HomeService.menuIndustryPage(),
-    HomeService.seobyslug(slug),
-  ]);
-
-  const industries = menuRes.data?.industries?.children || [];
-  const seometadata = seoRes?.data?.seometa || null;
-
+  const response = await HomeService.menuIndustryPage(); // Load menu tree
+  const industries = response.data?.industries?.children || [];
 
   let industry = null;
   let currentLevel = industries;
@@ -205,12 +198,14 @@ export async function getServerSideProps({ params }) {
     })
   );
 
+  const seobyslug = await HomeService.seobyslug(slug);
+  const seometadata = seobyslug?.data?.seometa;
+
   return {
     props: {
       industry,
       enrichedContents,
-      seometadata,
-      homeData: homeres?.data || null
+      seometadata
     },
   };
 }

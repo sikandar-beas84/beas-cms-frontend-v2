@@ -1126,7 +1126,7 @@ img.port-shw {
 }
 
 .port-tags {
-  padding: 17px 27px 16px 27px;
+  padding: 17px 12px 16px 12px;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -4506,4 +4506,12 @@ transform-origin: 0 0;}
     color: #fff !important;
     font-size: 13px !important;
     box-shadow: 2px 4px 5px #00000066;
+}
+.slick-next
+{
+    right: -35px;
+}
+
+.slick-prev {
+  left: -45px !important;
 }

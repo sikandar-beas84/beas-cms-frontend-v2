@@ -14,12 +14,12 @@ import { ServiceProvider } from "../util/context/servicecontext";
 import { HomeProvider, useHome } from "../util/context/homecontext";
 
 function Layout({ children }) {
-  const { homeData } = useHome();
+  const { homeData, loading  } = useHome();
 
   return (
     <>
       <section className="top-bg">
-        <Header homeData={homeData} />
+        <Header homeData={homeData} loading ={loading } />
       </section>
 
       {children}

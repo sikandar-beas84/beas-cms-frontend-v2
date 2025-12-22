@@ -5,14 +5,19 @@ const HomeContext = createContext();
 
 export const HomeProvider = ({ children }) => {
   const [homeData, setHomeData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let mounted = true;
     const fetchHome = async () => {
       try {
         const res = await HomeService.homePage();
-        setHomeData(res?.data || null);
+        if (mounted) setHomeData(res?.data || {});
       } catch (err) {
         console.error("Home data fetch failed", err);
+        if (mounted) setHomeData({});
+      }finally {
+        if (mounted) setLoading(false);
       }
     };
 
@@ -20,7 +25,7 @@ export const HomeProvider = ({ children }) => {
   }, []);
 
   return (
-    <HomeContext.Provider value={{ homeData }}>
+    <HomeContext.Provider value={{ homeData, loading  }}>
       {children}
     </HomeContext.Provider>
   );

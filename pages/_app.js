@@ -9,8 +9,12 @@ import "@flaticon/flaticon-uicons/css/all/all.css";
 import Header from './component/Header';
 import Footer from './component/Footer';
 
-export default function MyApp({ Component, pageProps }) {
-  const { homeData } = pageProps;
+import { IndustryProvider } from "../util/context/industrycontext";
+import { ServiceProvider } from "../util/context/servicecontext";
+import { HomeProvider, useHome } from "../util/context/homecontext";
+
+function Layout({ children }) {
+  const { homeData } = useHome();
 
   return (
     <>
@@ -18,19 +22,23 @@ export default function MyApp({ Component, pageProps }) {
         <Header homeData={homeData} />
       </section>
 
-      <Component {...pageProps} />
+      {children}
 
       <Footer homeData={homeData} />
     </>
   );
 }
-export async function getStaticProps() {
-  const res = await HomeService.homePage();
 
-  return {
-    props: {
-      homeData: res?.data || null,
-    },
-    revalidate: 60,
-  };
+export default function MyApp({ Component, pageProps }) {
+  return (
+    <HomeProvider>
+      <IndustryProvider>
+        <ServiceProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ServiceProvider>
+      </IndustryProvider>
+    </HomeProvider>
+  );
 }

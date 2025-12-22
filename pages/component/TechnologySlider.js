@@ -6,7 +6,7 @@ import React from "react";
 const ITEMS_PER_ROW = 5;
 const ROWS_VISIBLE = 2;
 const ITEMS_PER_PAGE = ITEMS_PER_ROW * ROWS_VISIBLE;
-const AUTO_SCROLL_DELAY = 15000; // 5 seconds
+const AUTO_SCROLL_DELAY = 7000; // 5 seconds
 
 export default function TechnologySlider({ children }) {
   const items = React.Children.toArray(children);

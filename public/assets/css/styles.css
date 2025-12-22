@@ -4091,7 +4091,7 @@ textarea.form-control.h-150.mb-3 {
 /* Floating widget */
 .wpp-iicon {
   position: fixed;
-  bottom: 25px;
+  bottom: 5px;
   left: -4px;
   width: 125px;    
   height: 125px;   
@@ -4208,7 +4208,7 @@ textarea.form-control.h-150.mb-3 {
   right: 0;
 }
 .pbb-5{padding:0 20px;}
-.breadcrumbBg{background-size:cover;}
+.breadcrumbBg{background-size:cover;min-height: 284px;}
 .pport-image-title{ line-height: 1.4em!important;
   height: calc(1.4em * 2)!important;
   overflow: hidden;

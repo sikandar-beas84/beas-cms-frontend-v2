@@ -281,13 +281,17 @@
   } */
 
   /* Hero Title (64px) */
-  .breadcrumbWrap .pageTitle,
-  .bnr-txt h1 {
+  .breadcrumbWrap .pageTitle{
     font-size: 32px;
     line-height: 1.25;
     font-weight: 700;
   }
 
+  .bnr-txt h1 {
+    font-size: 50px;
+    line-height: 1.25;
+    font-weight: 700;
+  }
   /* Section Title (48px) */
   .contact_form_heading h2,
   .serv-head h2,
